@@ -1,0 +1,48 @@
+{
+  "page": 2,
+  "limit": 3,
+  "pages": 3,
+  "total": 9,
+  "_links": {
+    "self": {
+      "href": "\/api\/category?page=2&limit=3"
+    },
+    "first": {
+      "href": "\/api\/category?page=1&limit=3"
+    },
+    "last": {
+      "href": "\/api\/category?page=3&limit=3"
+    },
+    "next": {
+      "href": "\/api\/category?page=3&limit=3"
+    },
+    "previous": {
+      "href": "\/api\/category?page=1&limit=3"
+    }
+  },
+  "_embedded": {
+    "categories": [
+      {
+        "category": {
+          "name": "Open",
+          "id": 4,
+          "colorHex": "4B6FE0"
+        }
+      },
+      {
+        "category": {
+          "name": "Tourism",
+          "id": 5,
+          "colorHex": "EBA600"
+        }
+      },
+      {
+        "category": {
+          "name": "Entertainment",
+          "id": 6,
+          "colorHex": "00B7AE"
+        }
+      }
+    ]
+  }
+}

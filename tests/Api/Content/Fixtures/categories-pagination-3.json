@@ -1,0 +1,45 @@
+{
+  "page": 3,
+  "limit": 3,
+  "pages": 3,
+  "total": 9,
+  "_links": {
+    "self": {
+      "href": "\/api\/category?page=3&limit=3"
+    },
+    "first": {
+      "href": "\/api\/category?page=1&limit=3"
+    },
+    "last": {
+      "href": "\/api\/category?page=3&limit=3"
+    },
+    "previous": {
+      "href": "\/api\/category?page=2&limit=3"
+    }
+  },
+  "_embedded": {
+    "categories": [
+      {
+        "category": {
+          "name": "Eating & drinking",
+          "id": 7,
+          "colorHex": "0BA100"
+        }
+      },
+      {
+        "category": {
+          "name": "Retail",
+          "id": 8,
+          "colorHex": "4331CB"
+        }
+      },
+      {
+        "category": {
+          "name": "Arts, Culture & Education",
+          "id": 9,
+          "colorHex": "5E4360"
+        }
+      }
+    ]
+  }
+}
