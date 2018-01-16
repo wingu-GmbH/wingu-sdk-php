@@ -18,7 +18,7 @@ final class CountryTest extends TestCase
         new Country('ro', '');
     }
 
-    public function testInstantiatingWithCountryCodeLenghtLowerThan2ThrowsException(): void
+    public function testInstantiatingWithCountryCodeLengthLowerThan2ThrowsException(): void
     {
         $this->expectException(AssertInvalidArgumentException::class);
         $this->expectExceptionMessage('Value "a" has to be 2 exactly characters long, but length is 1.');

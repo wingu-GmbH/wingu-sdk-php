@@ -4,9 +4,6 @@ declare(strict_types = 1);
 
 namespace Wingu\Engine\SDK\Api\Paginator;
 
-use Wingu\Engine\SDK\Api\Paginator\Link;
-use Wingu\Engine\SDK\Api\Paginator\PageInfo;
-
 final class PaginatedResponseIterator implements \Iterator, \Countable
 {
     private $currentPagePosition;
