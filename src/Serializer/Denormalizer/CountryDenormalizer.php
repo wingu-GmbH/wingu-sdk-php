@@ -2,7 +2,7 @@
 
 declare(strict_types = 1);
 
-namespace Wingu\Engine\SDK\Serializer\Normalizer;
+namespace Wingu\Engine\SDK\Serializer\Denormalizer;
 
 use Symfony\Component\Serializer\Exception\InvalidArgumentException;
 use Symfony\Component\Serializer\Exception\UnexpectedValueException;

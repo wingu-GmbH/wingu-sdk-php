@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "6a1643c6739641a602b9740f4742d127",
+    "content-hash": "e720b0a8bb8113ec84e9e5ed083d2904",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -630,6 +630,60 @@
                 "response"
             ],
             "time": "2016-08-06T14:39:51+00:00"
+        },
+        {
+            "name": "speicher210/business-hours",
+            "version": "2.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Speicher210/business-hours.git",
+                "reference": "f8479821532991927d7ff9ea1b659f76153a2587"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Speicher210/business-hours/zipball/f8479821532991927d7ff9ea1b659f76153a2587",
+                "reference": "f8479821532991927d7ff9ea1b659f76153a2587",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.1"
+            },
+            "require-dev": {
+                "phpstan/phpstan": "^0.9",
+                "phpunit/phpunit": "^6.5",
+                "squizlabs/php_codesniffer": "^3.2"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Speicher210\\BusinessHours\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Dragos Protung",
+                    "email": "dragos@protung.ro",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Cezary Stępkowski",
+                    "email": "cezary.stepkowski@speicher210.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "DateTime and business hours (opening, closing times) calculations",
+            "homepage": "https://github.com/Speicher210/business-hours",
+            "keywords": [
+                "business",
+                "closing",
+                "opening",
+                "speicher210"
+            ],
+            "time": "2017-12-13T11:43:35+00:00"
         },
         {
             "name": "symfony/inflector",
