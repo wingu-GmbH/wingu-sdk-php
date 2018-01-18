@@ -42,12 +42,13 @@ final class SymfonySerializerHydrator implements Hydrator
 
     public function hydrateResponse(ResponseInterface $response, string $class)
     {
-        if (\strpos($response->getHeaderLine('Content-Type'), 'application/json') !== 0) {
+        $contentType = $response->getHeaderLine('Content-Type');
+        if ($contentType !== 'application/json' && \strpos($contentType, 'application/json+') !== 0) {
             throw new HydrationException(
                 \sprintf(
                     'The %s cannot hydrate response with Content-Type: %s',
                     __CLASS__,
-                    $response->getHeaderLine('Content-Type')
+                    $contentType
                 )
             );
         }
