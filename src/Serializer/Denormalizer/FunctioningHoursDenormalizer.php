@@ -24,10 +24,14 @@ final class FunctioningHoursDenormalizer implements DenormalizerInterface
             return null;
         }
 
+        if (!isset($data['days'], $data['timezone'])) {
+            throw new NotNormalizableValueException('Invalid functioning hours data.');
+        }
+
         $days = [];
         foreach ($data['days'] as $day) {
             if (!isset($day['dayOfWeek'], $day['intervals'])) {
-                throw new NotNormalizableValueException('Invalid functioning hours.');
+                throw new NotNormalizableValueException('Invalid functioning hours data.');
             }
 
             $days[] = [
@@ -41,7 +45,7 @@ final class FunctioningHoursDenormalizer implements DenormalizerInterface
         try {
             return BusinessHoursBuilder::fromAssociativeArray($data);
         } catch (\Exception $e) {
-            throw new NotNormalizableValueException('The provided data is not valid.', 0, $e);
+            throw new NotNormalizableValueException('Invalid functioning hours data.', 0, $e);
         }
     }
 
