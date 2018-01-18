@@ -57,8 +57,6 @@ final class GeofenceTest extends ApiTest
         );
 
         self::assertEquals($expected, $actual);
-
-        self::markTestIncomplete('Denormalize a full geofence. Including content, packs, cards, etc.');
     }
 
     public function testMyGeofenceReturnsPrivateGeofence(): void
@@ -116,7 +114,5 @@ final class GeofenceTest extends ApiTest
         );
 
         self::assertEquals($expected, $actual);
-
-        self::markTestIncomplete('Denormalize a full geofence. Including content, packs, cards, etc.');
     }
 }

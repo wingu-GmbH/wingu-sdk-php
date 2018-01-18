@@ -45,8 +45,6 @@ final class NfcTest extends ApiTest
         );
 
         self::assertEquals($expected, $actual);
-
-        self::markTestIncomplete('Denormalize a full nfc. Including content, packs, cards, etc.');
     }
 
     public function testMyNfcReturnsPrivateNfc(): void
@@ -93,8 +91,6 @@ final class NfcTest extends ApiTest
         );
 
         self::assertEquals($expected, $actual);
-
-        self::markTestIncomplete('Denormalize a full nfc. Including content, packs, cards, etc.');
     }
 
     public function testPayloadReturnsNfcId(): void

@@ -45,8 +45,6 @@ final class QrCodeTest extends ApiTest
         );
 
         self::assertEquals($expected, $actual);
-
-        self::markTestIncomplete('Denormalize a full qr code. Including content, packs, cards, etc.');
     }
 
     public function testMyQrCodeReturnsPrivateQrCode(): void
@@ -93,8 +91,6 @@ final class QrCodeTest extends ApiTest
         );
 
         self::assertEquals($expected, $actual);
-
-        self::markTestIncomplete('Denormalize a full qr code. Including content, packs, cards, etc.');
     }
 
     public function testPayloadReturnsQrCodeId(): void

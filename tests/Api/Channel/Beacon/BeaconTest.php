@@ -47,8 +47,6 @@ final class BeaconTest extends ApiTest
         );
 
         self::assertEquals($expected, $actual);
-
-        self::markTestIncomplete('Denormalize a full beacon. Including content, packs, cards, etc.');
     }
 
     public function testMyBeaconReturnsPrivateBeacon(): void
@@ -97,8 +95,6 @@ final class BeaconTest extends ApiTest
         );
 
         self::assertEquals($expected, $actual);
-
-        self::markTestIncomplete('Denormalize a full beacon. Including content, packs, cards, etc.');
     }
 
     public function testEddystoneReturnsBeaconId(): void
