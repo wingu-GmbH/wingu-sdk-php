@@ -48,17 +48,74 @@ final class ChannelTest extends ApiTest
 
     public function testMyChannelReturnsPrivateGeofence(): void
     {
-        self::markTestIncomplete('Not implemented');
+        $configurationMock = new Configuration();
+        $requestFactory = new GuzzleMessageFactory();
+        $hydrator = new SymfonySerializerHydrator();
+
+        $httpClient = new MockClient();
+        $httpClient->addResponse(
+            new Response(
+                200,
+                ['Content-Type' => 'application/json'],
+                \file_get_contents(__DIR__ . '/Fixtures/full_private_geofence.json')
+            )
+        );
+
+        $winguApi = new Channel($configurationMock, $httpClient, $requestFactory, $hydrator);
+
+        $actual = $winguApi->myChannel('0a0b190a-0000-4000-a000-000000000001');
+        $expected = $this->getExpectedPrivateGeofence();
+
+        self::assertEquals($expected, $actual);
     }
 
     public function testMyChannelReturnsPrivateNfc(): void
     {
-        self::markTestIncomplete('Not implemented');
+        $configurationMock = new Configuration();
+        $requestFactory = new GuzzleMessageFactory();
+        $hydrator = new SymfonySerializerHydrator();
+
+        $httpClient = new MockClient();
+        $httpClient->addResponse(
+            new Response(
+                200,
+                ['Content-Type' => 'application/json'],
+                \file_get_contents(__DIR__ . '/Fixtures/full_private_nfc.json')
+            )
+        );
+
+        $winguApi = new Channel($configurationMock, $httpClient, $requestFactory, $hydrator);
+
+        $actual = $winguApi->myChannel('44da7d7e-0000-4000-a000-000000000001');
+        $expected = $this->getExpectedPrivateNfc();
+
+        self::assertEquals($expected, $actual);
     }
 
+    /**
+     * @group ttt
+     */
     public function testMyChannelReturnsPrivateQrCode(): void
     {
-        self::markTestIncomplete('Not implemented');
+        $configurationMock = new Configuration();
+        $requestFactory = new GuzzleMessageFactory();
+        $hydrator = new SymfonySerializerHydrator();
+
+        $httpClient = new MockClient();
+        $httpClient->addResponse(
+            new Response(
+                200,
+                ['Content-Type' => 'application/json'],
+                \file_get_contents(__DIR__ . '/Fixtures/full_private_qrcode.json')
+            )
+        );
+
+        $winguApi = new Channel($configurationMock, $httpClient, $requestFactory, $hydrator);
+
+        $actual = $winguApi->myChannel('9a8798c6-0000-4000-a000-000000000001');
+        $expected = $this->getExpectedPrivateQrCode();
+
+        self::assertEquals($expected, $actual);
     }
 
     public function testMyChannelsReturnsResult(): void
@@ -86,13 +143,61 @@ final class ChannelTest extends ApiTest
             $this->getExpectedPrivateGeofence()
         ];
 
-        self::assertCount(1, $actual);
+        self::assertCount(4, $actual);
         self::assertEquals($expected, \iterator_to_array($actual));
     }
 
+    /**
+     * @group ttt
+     */
     public function testMyChannelsReturnsResultAndFetchesNextPages(): void
     {
-        self::markTestIncomplete('Not implemented.');
+        $configurationMock = new Configuration();
+        $requestFactory = new GuzzleMessageFactory();
+        $hydrator = new SymfonySerializerHydrator();
+
+        $httpClient = new MockClient();
+        $httpClient->addResponse(
+            new Response(
+                200,
+                ['Content-Type' => 'application/json'],
+                \file_get_contents(__DIR__ . '/Fixtures/full_private_channels_paginated_1.json')
+            )
+        );
+        $httpClient->addResponse(
+            new Response(
+                200,
+                ['Content-Type' => 'application/json'],
+                \file_get_contents(__DIR__ . '/Fixtures/full_private_channels_paginated_2.json')
+            )
+        );
+        $httpClient->addResponse(
+            new Response(
+                200,
+                ['Content-Type' => 'application/json'],
+                \file_get_contents(__DIR__ . '/Fixtures/full_private_channels_paginated_3.json')
+            )
+        );
+        $httpClient->addResponse(
+            new Response(
+                200,
+                ['Content-Type' => 'application/json'],
+                \file_get_contents(__DIR__ . '/Fixtures/full_private_channels_paginated_4.json')
+            )
+        );
+
+        $channelApi = new Channel($configurationMock, $httpClient, $requestFactory, $hydrator);
+        $actual = $channelApi->myChannels();
+
+        $expected = [
+            $this->getExpectedPrivateBeacon(),
+            $this->getExpectedPrivateNfc(),
+            $this->getExpectedPrivateQrCode(),
+            $this->getExpectedPrivateGeofence()
+        ];
+
+        self::assertCount(4, $actual);
+        self::assertEquals($expected, \iterator_to_array($actual));
     }
 
     private function getExpectedPrivateBeacon(): PrivateBeacon

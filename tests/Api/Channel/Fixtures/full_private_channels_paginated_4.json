@@ -1,0 +1,123 @@
+{
+  "page": 4,
+  "limit": 1,
+  "pages": 4,
+  "total": 4,
+  "_links": {
+    "self": {
+      "href": "/api/channel/my?page=4&limit=1"
+    },
+    "first": {
+      "href": "/api/channel/my?page=1&limit=1"
+    },
+    "last": {
+      "href": "/api/channel/my?page=4&limit=1"
+    },
+    "previous": {
+      "href": "/api/channel/my?page=3&limit=1"
+    }
+  },
+  "_embedded": {
+    "channels": [
+      {
+        "geofence": {
+          "id": "0a0b190a-0000-4000-a000-000000000001",
+          "active": true,
+          "content": null,
+          "name": "Fence 1",
+          "published": true,
+          "functioningHours": {
+            "days": [
+              {
+                "dayOfWeek": 1,
+                "intervals": [
+                  {
+                    "start": {
+                      "hours": 0,
+                      "minutes": 0
+                    },
+                    "end": {
+                      "hours": 24,
+                      "minutes": 0
+                    }
+                  }
+                ]
+              },
+              {
+                "dayOfWeek": 3,
+                "intervals": [
+                  {
+                    "start": {
+                      "hours": 8,
+                      "minutes": 0
+                    },
+                    "end": {
+                      "hours": 12,
+                      "minutes": 0
+                    }
+                  },
+                  {
+                    "start": {
+                      "hours": 13,
+                      "minutes": 0
+                    },
+                    "end": {
+                      "hours": 18,
+                      "minutes": 0
+                    }
+                  }
+                ]
+              },
+              {
+                "dayOfWeek": 5,
+                "intervals": [
+                  {
+                    "start": {
+                      "hours": 0,
+                      "minutes": 0
+                    },
+                    "end": {
+                      "hours": 24,
+                      "minutes": 0
+                    }
+                  }
+                ]
+              }
+            ],
+            "timezone": "Europe/Berlin"
+          },
+          "functioningHoursNextEvent": "2018-01-18T08:00:00+0100",
+          "inFunctioningHours": true,
+          "note": null,
+          "boundaries": {
+            "type": "Polygon",
+            "coordinates": [
+              [
+                [
+                  9.723595,
+                  53.661423
+                ],
+                [
+                  9.723595,
+                  53.662321315284
+                ],
+                [
+                  9.7251110338049,
+                  53.66232130571
+                ],
+                [
+                  9.7251110338049,
+                  53.661422990426
+                ],
+                [
+                  9.723595,
+                  53.661423
+                ]
+              ]
+            ]
+          }
+        }
+      }
+    ]
+  }
+}

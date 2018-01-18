@@ -6,11 +6,11 @@ namespace Wingu\Engine\SDK\Model\Channel\Nfc;
 
 use Speicher210\BusinessHours\BusinessHoursInterface;
 use Wingu\Engine\SDK\Assertion;
-use Wingu\Engine\SDK\Model\Channel\Channel;
 use Wingu\Engine\SDK\Model\Channel\ChannelTrait;
+use Wingu\Engine\SDK\Model\Channel\PrivateChannel;
 use Wingu\Engine\SDK\Model\Channel\PrivateChannelTrait;
 
-final class PrivateNfc implements Channel
+final class PrivateNfc implements PrivateChannel
 {
     use ChannelTrait;
     use PrivateChannelTrait;

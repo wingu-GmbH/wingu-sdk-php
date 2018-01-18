@@ -1,0 +1,100 @@
+{
+  "page": 2,
+  "limit": 1,
+  "pages": 4,
+  "total": 4,
+  "_links": {
+    "self": {
+      "href": "/api/channel/my?page=2&limit=1"
+    },
+    "first": {
+      "href": "/api/channel/my?page=1&limit=1"
+    },
+    "last": {
+      "href": "/api/channel/my?page=4&limit=1"
+    },
+    "previous": {
+      "href": "/api/channel/my?page=1&limit=1"
+    },
+    "next": {
+      "href": "/api/channel/my?page=3&limit=1"
+    }
+  },
+  "_embedded": {
+    "channels": [
+      {
+        "nfc": {
+          "id": "44da7d7e-0000-4000-a000-000000000001",
+          "active": true,
+          "content": null,
+          "name": "NFC 1",
+          "published": true,
+          "functioningHours": {
+            "days": [
+              {
+                "dayOfWeek": 1,
+                "intervals": [
+                  {
+                    "start": {
+                      "hours": 0,
+                      "minutes": 0
+                    },
+                    "end": {
+                      "hours": 24,
+                      "minutes": 0
+                    }
+                  }
+                ]
+              },
+              {
+                "dayOfWeek": 3,
+                "intervals": [
+                  {
+                    "start": {
+                      "hours": 8,
+                      "minutes": 0
+                    },
+                    "end": {
+                      "hours": 12,
+                      "minutes": 0
+                    }
+                  },
+                  {
+                    "start": {
+                      "hours": 13,
+                      "minutes": 0
+                    },
+                    "end": {
+                      "hours": 18,
+                      "minutes": 0
+                    }
+                  }
+                ]
+              },
+              {
+                "dayOfWeek": 5,
+                "intervals": [
+                  {
+                    "start": {
+                      "hours": 0,
+                      "minutes": 0
+                    },
+                    "end": {
+                      "hours": 24,
+                      "minutes": 0
+                    }
+                  }
+                ]
+              }
+            ],
+            "timezone": "Europe/Berlin"
+          },
+          "functioningHoursNextEvent": "2018-01-18T08:00:00+0100",
+          "inFunctioningHours": false,
+          "note": null,
+          "payload": "https://wingu-sdk-test.de/nfc/d465179f-c30a-423c-a06b-5ce63f6f75ff"
+        }
+      }
+    ]
+  }
+}
