@@ -27,4 +27,15 @@ final class Beacon extends Api
 
         return $this->hydrator->hydrateResponse($response, PrivateBeaconModel::class);
     }
+
+    public function eddystone(string $url): string
+    {
+        $request = $this->createGetRequest('/api/channel/beacon/eddystone.json', ['url' => $url]);
+
+        $response = $this->handleRequest($request);
+
+        $data = $this->decodeResponseBody($response);
+
+        return $data['id'];
+    }
 }

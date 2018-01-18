@@ -2,7 +2,7 @@
 
 declare(strict_types = 1);
 
-namespace Wingu\Engine\SDK\Tests\Api\Channel\Beacon;
+namespace Wingu\Engine\SDK\Tests\Api\Channel\QrCode;
 
 use GuzzleHttp\Psr7\Response;
 use Http\Message\MessageFactory\GuzzleMessageFactory;
@@ -11,16 +11,16 @@ use Speicher210\BusinessHours\BusinessHours;
 use Speicher210\BusinessHours\Day\AllDay;
 use Speicher210\BusinessHours\Day\Day;
 use Speicher210\BusinessHours\Day\Time\TimeInterval;
-use Wingu\Engine\SDK\Api\Channel\Beacon\Beacon;
+use Wingu\Engine\SDK\Api\Channel\QrCode\QrCode;
 use Wingu\Engine\SDK\Api\Configuration;
 use Wingu\Engine\SDK\Hydrator\SymfonySerializerHydrator;
-use Wingu\Engine\SDK\Model\Channel\Beacon\PrivateBeacon;
-use Wingu\Engine\SDK\Model\Channel\Beacon\PublicBeacon;
+use Wingu\Engine\SDK\Model\Channel\QrCode\PrivateQrCode;
+use Wingu\Engine\SDK\Model\Channel\QrCode\PublicQrCode;
 use Wingu\Engine\SDK\Tests\Api\ApiTest;
 
-final class BeaconTest extends ApiTest
+final class QrCodeTest extends ApiTest
 {
-    public function testBeaconReturnsPublicBeacon(): void
+    public function testQrCodeReturnsPublicQrCode(): void
     {
         $configurationMock = new Configuration();
         $requestFactory = new GuzzleMessageFactory();
@@ -31,27 +31,25 @@ final class BeaconTest extends ApiTest
             new Response(
                 200,
                 ['Content-Type' => 'application/json'],
-                \file_get_contents(__DIR__ . '/Fixtures/full_public_beacon.json')
+                \file_get_contents(__DIR__ . '/Fixtures/full_public_qrcode.json')
             )
         );
 
-        $winguApi = new Beacon($configurationMock, $httpClient, $requestFactory, $hydrator);
-        $actual = $winguApi->beacon('02a554ab-34bc-48b7-87ad-754037b8b09b');
+        $winguApi = new QrCode($configurationMock, $httpClient, $requestFactory, $hydrator);
+        $actual = $winguApi->qrCode('9a8798c6-0000-4000-a000-000000000001');
 
-        $expected = new PublicBeacon(
-            '02a554ab-34bc-48b7-87ad-754037b8b09b',
-            'Beacon 1',
-            '3f104004-b288-4501-80c2-4ac30a02355b',
-            1,
-            2
+        $expected = new PublicQrCode(
+            '9a8798c6-0000-4000-a000-000000000001',
+            'QR 1',
+            'https://wingu-sdk-test.de/qrcode/7a4b84eb-ae3f-4246-8a67-d16fbdd82595'
         );
 
         self::assertEquals($expected, $actual);
 
-        self::markTestIncomplete('Denormalize a full beacon. Including content, packs, cards, etc.');
+        self::markTestIncomplete('Denormalize a full qr code. Including content, packs, cards, etc.');
     }
 
-    public function testMyBeaconReturnsPrivateBeacon(): void
+    public function testMyQrCodeReturnsPrivateQrCode(): void
     {
         $configurationMock = new Configuration();
         $requestFactory = new GuzzleMessageFactory();
@@ -62,12 +60,12 @@ final class BeaconTest extends ApiTest
             new Response(
                 200,
                 ['Content-Type' => 'application/json'],
-                \file_get_contents(__DIR__ . '/Fixtures/full_private_beacon.json')
+                \file_get_contents(__DIR__ . '/Fixtures/full_private_qrcode.json')
             )
         );
 
-        $winguApi = new Beacon($configurationMock, $httpClient, $requestFactory, $hydrator);
-        $actual = $winguApi->myBeacon('9616c673-b24f-4445-872c-4851e1790731');
+        $winguApi = new QrCode($configurationMock, $httpClient, $requestFactory, $hydrator);
+        $actual = $winguApi->myQrCode('9a8798c6-0000-4000-a000-000000000002');
 
         $expectedFunctioningHours = new BusinessHours(
             [
@@ -83,25 +81,23 @@ final class BeaconTest extends ApiTest
             ],
             new \DateTimeZone('Europe/Berlin')
         );
-        $expected = new PrivateBeacon(
-            '9616c673-b24f-4445-872c-4851e1790731',
-            'Funny Dog',
+        $expected = new PrivateQrCode(
+            '9a8798c6-0000-4000-a000-000000000002',
+            'Funny Cat',
             true,
             false,
             'My note',
             false,
             $expectedFunctioningHours,
-            '3f104004-b288-4501-80c2-4ac30a02355b',
-            1,
-            3
+            'https://wingu-sdk-test.de/qrcode/7a4b84eb-ae3f-4246-8a67-d16fbdd82595'
         );
 
         self::assertEquals($expected, $actual);
 
-        self::markTestIncomplete('Denormalize a full beacon. Including content, packs, cards, etc.');
+        self::markTestIncomplete('Denormalize a full qr code. Including content, packs, cards, etc.');
     }
 
-    public function testEddystoneReturnsBeaconId(): void
+    public function testPayloadReturnsQrCodeId(): void
     {
         $configurationMock = new Configuration();
         $requestFactory = new GuzzleMessageFactory();
@@ -112,13 +108,13 @@ final class BeaconTest extends ApiTest
             new Response(
                 200,
                 ['Content-Type' => 'application/json'],
-                '{"id":"8c798a67-0000-4000-a000-000000000017"}'
+                '{"id":"9a8798c6-0000-4000-a000-000000000004"}'
             )
         );
 
-        $winguApi = new Beacon($configurationMock, $httpClient, $requestFactory, $hydrator);
-        $actual = $winguApi->eddystone('https://wingu-sdk-test.de/78d9c5a7-18e2-4039-bd58-e8c608c3290a');
+        $winguApi = new QrCode($configurationMock, $httpClient, $requestFactory, $hydrator);
+        $actual = $winguApi->payload('https://wingu-sdk-test.de/qrcode/7a4b84eb-ae3f-4246-8a67-d16fbdd82595');
 
-        self::assertSame('8c798a67-0000-4000-a000-000000000017', $actual);
+        self::assertSame('9a8798c6-0000-4000-a000-000000000004', $actual);
     }
 }
