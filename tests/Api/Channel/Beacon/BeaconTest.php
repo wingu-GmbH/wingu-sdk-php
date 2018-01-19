@@ -16,6 +16,11 @@ use Wingu\Engine\SDK\Api\Configuration;
 use Wingu\Engine\SDK\Hydrator\SymfonySerializerHydrator;
 use Wingu\Engine\SDK\Model\Channel\Beacon\PrivateBeacon;
 use Wingu\Engine\SDK\Model\Channel\Beacon\PublicBeacon;
+use Wingu\Engine\SDK\Model\Content\Category;
+use Wingu\Engine\SDK\Model\Content\Deck;
+use Wingu\Engine\SDK\Model\Content\Locale;
+use Wingu\Engine\SDK\Model\Content\Pack;
+use Wingu\Engine\SDK\Model\Content\PublicContent;
 use Wingu\Engine\SDK\Tests\Api\ApiTest;
 
 final class BeaconTest extends ApiTest
@@ -43,7 +48,16 @@ final class BeaconTest extends ApiTest
             'Beacon 1',
             '3f104004-b288-4501-80c2-4ac30a02355b',
             1,
-            2
+            2,
+            new PublicContent(
+                '12d1da34-0000-4000-a000-000000000019',
+                new Category(6, 'Entertainment', '00B7AE'),
+                new Pack(
+                    '71400bb6-c593-43f6-809f-5fafc4445c9b',
+                    new Deck('ea45b0c8-0000-4000-a000-000000000019', 'Deck title', 'Deck description'),
+                    new Locale('English', 'en')
+                )
+            )
         );
 
         self::assertEquals($expected, $actual);

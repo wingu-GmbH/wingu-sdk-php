@@ -7,13 +7,16 @@ namespace Wingu\Engine\SDK\Model\Channel\Beacon;
 use Wingu\Engine\SDK\Assertion;
 use Wingu\Engine\SDK\Model\Channel\Channel;
 use Wingu\Engine\SDK\Model\Channel\ChannelTrait;
+use Wingu\Engine\SDK\Model\Content\PublicContent;
 
 final class PublicBeacon implements Channel
 {
     use ChannelTrait;
     use BeaconTrait;
 
-    public function __construct(string $id, string $name, string $uuid, int $major, int $minor)
+    private $content;
+
+    public function __construct(string $id, string $name, string $uuid, int $major, int $minor, ?PublicContent $content)
     {
         Assertion::uuid($id);
         Assertion::notEmpty($name);
@@ -26,5 +29,12 @@ final class PublicBeacon implements Channel
         $this->uuid = $uuid;
         $this->major = $major;
         $this->minor = $minor;
+
+        $this->content = $content;
+    }
+
+    public function content(): PublicContent
+    {
+        return $this->content;
     }
 }
