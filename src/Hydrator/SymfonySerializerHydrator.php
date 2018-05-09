@@ -9,6 +9,8 @@ use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\Normalizer\ArrayDenormalizer;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\Serializer;
+use Wingu\Engine\SDK\Model\Card\Card;
+use Wingu\Engine\SDK\Model\Card\CardCollection;
 use Wingu\Engine\SDK\Model\Content\Pack;
 use Wingu\Engine\SDK\Model\Content\PackCollection;
 use Wingu\Engine\SDK\Serializer\Denormalizer\ArrayObjectDenormalizer;
@@ -26,6 +28,7 @@ final class SymfonySerializerHydrator implements Hydrator
             [
                 new ArrayDenormalizer(),
                 new ArrayObjectDenormalizer(PackCollection::class, Pack::class),
+                new ArrayObjectDenormalizer(CardCollection::class, Card::class),
                 new PrivateChannelDenormalizer(),
                 new CountryDenormalizer(),
                 new FunctioningHoursDenormalizer(),

@@ -7,7 +7,33 @@
         "id": "ea45b0c8-0000-4000-a000-000000000001",
         "title": "Deck 1 title",
         "description": "Deck description 1",
-        "cards": [],
+        "cards": [
+          {
+            "position": {
+              "sort": 0
+            },
+            "id": "ffa221a0-8a76-40dd-a6db-72be1aa61ec4",
+            "component": {
+              "id": "2c8f6279-a477-4fbd-b79a-d9a04f1fc5cd",
+              "updatedAt": "2018-05-08T13:24:18+0000",
+              "colorHex": "04b1f0",
+              "type": "wave",
+              "discriminator": "separator"
+            }
+          },
+          {
+            "position": {
+              "sort": 1
+            },
+            "id": "c00512e8-83f2-453e-adaa-8785936cb881",
+            "component": {
+              "id": "3f8f5693-92f9-4b08-bf58-eac899186f12",
+              "updatedAt": "2018-05-08T13:24:18+0000",
+              "title": "Rate me !",
+              "discriminator": "rating"
+            }
+          }
+        ],
         "legalNote": "Legal note 1"
       },
       "locale": {

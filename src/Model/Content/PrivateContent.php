@@ -25,6 +25,9 @@ final class PrivateContent implements Content
         return $this->id;
     }
 
+    /**
+     * @return PackCollection|Pack[]
+     */
     public function packs(): PackCollection
     {
         return $this->packs;

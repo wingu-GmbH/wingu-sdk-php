@@ -10,6 +10,9 @@ use Http\Mock\Client as MockClient;
 use Wingu\Engine\SDK\Api\Configuration;
 use Wingu\Engine\SDK\Api\Content\Content;
 use Wingu\Engine\SDK\Hydrator\SymfonySerializerHydrator;
+use Wingu\Engine\SDK\Model\Card\Card;
+use Wingu\Engine\SDK\Model\Card\CardCollection;
+use Wingu\Engine\SDK\Model\Card\Position;
 use Wingu\Engine\SDK\Model\Content\Deck;
 use Wingu\Engine\SDK\Model\Content\Locale;
 use Wingu\Engine\SDK\Model\Content\Pack;
@@ -43,12 +46,22 @@ final class ContentTest extends ApiTest
                 [
                     new Pack(
                         'd6b3b449-1d6b-45d3-94f4-6c736249f474',
-                        new Deck('ea45b0c8-0000-4000-a000-000000000001', 'Deck 1 title', 'Deck description 1'),
+                        new Deck(
+                            'ea45b0c8-0000-4000-a000-000000000001',
+                            'Deck 1 title',
+                            'Deck description 1',
+                            new CardCollection(
+                                [
+                                    new Card('ffa221a0-8a76-40dd-a6db-72be1aa61ec4', new Position(0)),
+                                    new Card('c00512e8-83f2-453e-adaa-8785936cb881', new Position(1))
+                                ]
+                            )
+                        ),
                         new Locale('English', 'en')
                     ),
                     new Pack(
                         '3564fd0e-b183-4fe8-9f93-ac9f175e447f',
-                        new Deck('ea45b0c8-0000-4000-a000-000000000002', 'Deck 2 title', 'Deck description 2'),
+                        new Deck('ea45b0c8-0000-4000-a000-000000000002', 'Deck 2 title', 'Deck description 2', new CardCollection()),
                         new Locale('German', 'de')
                     )
                 ]
