@@ -33,7 +33,7 @@ final class Channel extends Api
         );
     }
 
-    private function getEmbeddedPage(string $href)
+    private function getEmbeddedPage(string $href): array
     {
         $request = $this->createGetRequest($href);
 
@@ -41,7 +41,7 @@ final class Channel extends Api
 
         $data = $this->decodeResponseBody($response);
 
-        $embedded = array_map(
+        $embedded = \array_map(
             function ($data) {
                 $discriminator = \key($data);
                 $data = \reset($data);

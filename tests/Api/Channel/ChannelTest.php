@@ -92,9 +92,6 @@ final class ChannelTest extends ApiTest
         self::assertEquals($expected, $actual);
     }
 
-    /**
-     * @group ttt
-     */
     public function testMyChannelReturnsPrivateQrCode(): void
     {
         $configurationMock = new Configuration();
@@ -147,9 +144,6 @@ final class ChannelTest extends ApiTest
         self::assertEquals($expected, \iterator_to_array($actual));
     }
 
-    /**
-     * @group ttt
-     */
     public function testMyChannelsReturnsResultAndFetchesNextPages(): void
     {
         $configurationMock = new Configuration();
