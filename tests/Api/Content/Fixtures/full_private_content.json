@@ -1,0 +1,35 @@
+{
+  "id": "12d1da34-0000-4000-a000-000000000001",
+  "packs": [
+    {
+      "id": "d6b3b449-1d6b-45d3-94f4-6c736249f474",
+      "deck": {
+        "id": "ea45b0c8-0000-4000-a000-000000000001",
+        "title": "Deck 1 title",
+        "description": "Deck description 1",
+        "cards": [],
+        "legalNote": "Legal note 1"
+      },
+      "locale": {
+        "name": "English",
+        "code": "en"
+      },
+      "createdAt": "2018-05-08T13:24:18+0000"
+    },
+    {
+      "id": "3564fd0e-b183-4fe8-9f93-ac9f175e447f",
+      "deck": {
+        "id": "ea45b0c8-0000-4000-a000-000000000002",
+        "title": "Deck 2 title",
+        "description": "Deck description 2",
+        "cards": [],
+        "legalNote": "Legal note 2"
+      },
+      "locale": {
+        "name": "German",
+        "code": "de"
+      },
+      "createdAt": "2018-05-09T10:08:21+0000"
+    }
+  ]
+}

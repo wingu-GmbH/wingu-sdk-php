@@ -9,6 +9,9 @@ use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\Normalizer\ArrayDenormalizer;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\Serializer;
+use Wingu\Engine\SDK\Model\Content\Pack;
+use Wingu\Engine\SDK\Model\Content\PackCollection;
+use Wingu\Engine\SDK\Serializer\Denormalizer\ArrayObjectDenormalizer;
 use Wingu\Engine\SDK\Serializer\Denormalizer\CountryDenormalizer;
 use Wingu\Engine\SDK\Serializer\Denormalizer\FunctioningHoursDenormalizer;
 use Wingu\Engine\SDK\Serializer\Denormalizer\PrivateChannelDenormalizer;
@@ -22,6 +25,7 @@ final class SymfonySerializerHydrator implements Hydrator
         $this->serializer = new Serializer(
             [
                 new ArrayDenormalizer(),
+                new ArrayObjectDenormalizer(PackCollection::class, Pack::class),
                 new PrivateChannelDenormalizer(),
                 new CountryDenormalizer(),
                 new FunctioningHoursDenormalizer(),

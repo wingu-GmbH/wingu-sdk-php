@@ -9,6 +9,7 @@ use Http\Message\RequestFactory;
 use Wingu\Engine\SDK\Api\Channel\Beacon\Beacon;
 use Wingu\Engine\SDK\Api\Channel\Channel;
 use Wingu\Engine\SDK\Api\Content\Category;
+use Wingu\Engine\SDK\Api\Content\Content;
 use Wingu\Engine\SDK\Api\Wingu\Wingu;
 use Wingu\Engine\SDK\Hydrator\Hydrator;
 
@@ -44,6 +45,11 @@ final class WinguApi
     public function beacon(): Beacon
     {
         return $this->getService(Beacon::class);
+    }
+
+    public function content(): Content
+    {
+        return $this->getService(Content::class);
     }
 
     public function category(): Category
