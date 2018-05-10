@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Wingu\Engine\SDK\Tests\Api;
 
@@ -13,7 +13,7 @@ use Wingu\Engine\SDK\Hydrator\Hydrator;
 
 final class WinguApiTest extends TestCase
 {
-    public function testFetchingSameServicesReturnsSameInstance(): void
+    public function testFetchingSameServicesReturnsSameInstance() : void
     {
         $winguApi = new WinguApi(
             new Configuration(),

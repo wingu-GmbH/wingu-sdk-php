@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Wingu\Engine\SDK\Tests\Api\Content;
 
@@ -17,11 +17,11 @@ use Wingu\Engine\SDK\Tests\Api\ApiTest;
 
 final class CategoryTest extends ApiTest
 {
-    public function testCategoriesThrowsExceptionWhenResponseIsNot200(): void
+    public function testCategoriesThrowsExceptionWhenResponseIsNot200() : void
     {
         $configurationMock = new Configuration();
-        $requestFactory = new GuzzleMessageFactory();
-        $hydrator = $this->createMock(Hydrator::class);
+        $requestFactory    = new GuzzleMessageFactory();
+        $hydrator          = $this->createMock(Hydrator::class);
 
         $httpClient = new MockClient();
         $httpClient->addResponse(
@@ -36,11 +36,11 @@ final class CategoryTest extends ApiTest
         $winguApi->categories();
     }
 
-    public function testCategoriesReturnsResult(): void
+    public function testCategoriesReturnsResult() : void
     {
         $configurationMock = new Configuration();
-        $requestFactory = new GuzzleMessageFactory();
-        $hydrator = new SymfonySerializerHydrator();
+        $requestFactory    = new GuzzleMessageFactory();
+        $hydrator          = new SymfonySerializerHydrator();
 
         $httpClient = new MockClient();
         $httpClient->addResponse(
@@ -52,7 +52,7 @@ final class CategoryTest extends ApiTest
         );
 
         $winguApi = new Category($configurationMock, $httpClient, $requestFactory, $hydrator);
-        $actual = $winguApi->categories();
+        $actual   = $winguApi->categories();
 
         $expected = [
             new CategoryModel(2, 'Sport', 'F47E00'),
@@ -63,11 +63,11 @@ final class CategoryTest extends ApiTest
         self::assertEquals($expected, \iterator_to_array($actual));
     }
 
-    public function testCategoriesReturnsResultAndFetchesNextPages(): void
+    public function testCategoriesReturnsResultAndFetchesNextPages() : void
     {
         $configurationMock = new Configuration();
-        $requestFactory = new GuzzleMessageFactory();
-        $hydrator = new SymfonySerializerHydrator();
+        $requestFactory    = new GuzzleMessageFactory();
+        $hydrator          = new SymfonySerializerHydrator();
 
         $httpClient = new MockClient();
         $httpClient->addResponse(
@@ -93,7 +93,7 @@ final class CategoryTest extends ApiTest
         );
 
         $winguApi = new Category($configurationMock, $httpClient, $requestFactory, $hydrator);
-        $actual = $winguApi->categories();
+        $actual   = $winguApi->categories();
 
         $expected = [
             new CategoryModel(1, 'Health and Wellness', 'F91E57'),

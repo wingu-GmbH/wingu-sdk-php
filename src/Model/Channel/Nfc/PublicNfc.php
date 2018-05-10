@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Wingu\Engine\SDK\Model\Channel\Nfc;
 
@@ -18,7 +18,7 @@ final class PublicNfc implements Channel
         Assertion::uuid($id);
         Assertion::notEmpty($name);
 
-        $this->id = $id;
+        $this->id   = $id;
         $this->name = $name;
 
         $this->payload = $payload;

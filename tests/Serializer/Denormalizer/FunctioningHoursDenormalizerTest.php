@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Wingu\Engine\SDK\Tests\Serializer\Denormalizer;
 
@@ -11,15 +11,15 @@ use Wingu\Engine\SDK\Serializer\Denormalizer\FunctioningHoursDenormalizer;
 
 final class FunctioningHoursDenormalizerTest extends TestCase
 {
-    public function testDenormalizeReturnsNullWhenDataIsNull(): void
+    public function testDenormalizeReturnsNullWhenDataIsNull() : void
     {
         $denormalizer = new FunctioningHoursDenormalizer();
-        $actual = $denormalizer->denormalize(null, BusinessHoursInterface::class);
+        $actual       = $denormalizer->denormalize(null, BusinessHoursInterface::class);
 
         self::assertNull($actual);
     }
 
-    public function testDenormalizeReturnsBusinessHours(): void
+    public function testDenormalizeReturnsBusinessHours() : void
     {
         $data = [
             'days' => [
@@ -30,64 +30,64 @@ final class FunctioningHoursDenormalizerTest extends TestCase
                             'start' => [
                                 'hours' => 1,
                                 'minutes' => 0,
-                                'seconds' => 0
+                                'seconds' => 0,
                             ],
                             'end' => [
                                 'hours' => 2,
                                 'minutes' => 0,
-                                'seconds' => 0
-                            ]
-                        ]
-                    ]
-                ]
+                                'seconds' => 0,
+                            ],
+                        ],
+                    ],
+                ],
             ],
-            'timezone' => 'Europe/Berlin'
+            'timezone' => 'Europe/Berlin',
         ];
 
         $denormalizer = new FunctioningHoursDenormalizer();
-        $actual = $denormalizer->denormalize($data, BusinessHoursInterface::class);
+        $actual       = $denormalizer->denormalize($data, BusinessHoursInterface::class);
 
         self::assertInstanceOf(BusinessHoursInterface::class, $actual);
     }
 
-    public static function dataProviderInvalidDataForDenormalizer(): array
+    public static function dataProviderInvalidDataForDenormalizer() : array
     {
         return [
             [
-                ['timezone' => []]
+                ['timezone' => []],
             ],
             [
-                ['days' => []]
+                ['days' => []],
             ],
             [
-                ['days' => [], 'timezone' => '']
-            ],
-            [
-                [
-                    'days' => [
-                        ['dayOfWeek' => 1]
-                    ],
-                    'timezone' => ''
-                ]
+                ['days' => [], 'timezone' => ''],
             ],
             [
                 [
                     'days' => [
-                        ['intervals' => []]
+                        ['dayOfWeek' => 1],
                     ],
-                    'timezone' => ''
-                ]
+                    'timezone' => '',
+                ],
+            ],
+            [
+                [
+                    'days' => [
+                        ['intervals' => []],
+                    ],
+                    'timezone' => '',
+                ],
             ],
             [
                 [
                     'days' => [
                         [
                             'dayOfWeek' => 1,
-                            'intervals' => []
-                        ]
+                            'intervals' => [],
+                        ],
                     ],
-                    'timezone' => ''
-                ]
+                    'timezone' => '',
+                ],
             ],
             [
                 [
@@ -99,20 +99,20 @@ final class FunctioningHoursDenormalizerTest extends TestCase
                                     'start' => [
                                         'hours' => 1,
                                         'minutes' => 0,
-                                        'seconds' => 0
+                                        'seconds' => 0,
                                     ],
                                     'end' => [
                                         'hours' => 0,
                                         'minutes' => 0,
-                                        'seconds' => 0
-                                    ]
-                                ]
-                            ]
-                        ]
+                                        'seconds' => 0,
+                                    ],
+                                ],
+                            ],
+                        ],
                     ],
-                    'timezone' => 'Europe/Berlin'
-                ]
-            ]
+                    'timezone' => 'Europe/Berlin',
+                ],
+            ],
         ];
     }
 
@@ -120,7 +120,7 @@ final class FunctioningHoursDenormalizerTest extends TestCase
      * @dataProvider dataProviderInvalidDataForDenormalizer
      * @param array $data
      */
-    public function testDenormalizeThrowsExceptionWhenDataIsNotValid(array $data): void
+    public function testDenormalizeThrowsExceptionWhenDataIsNotValid(array $data) : void
     {
         $denormalizer = new FunctioningHoursDenormalizer();
 
@@ -129,7 +129,7 @@ final class FunctioningHoursDenormalizerTest extends TestCase
         $denormalizer->denormalize($data, BusinessHoursInterface::class);
     }
 
-    public function testSupportsReturnsTrueWhenTypeIsValidAndDataIsNull(): void
+    public function testSupportsReturnsTrueWhenTypeIsValidAndDataIsNull() : void
     {
         $denormalizer = new FunctioningHoursDenormalizer();
 

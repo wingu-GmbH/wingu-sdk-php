@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Wingu\Engine\SDK\Tests\Hydrator;
 
@@ -12,8 +12,7 @@ use Wingu\Engine\SDK\Hydrator\SymfonySerializerHydrator;
 
 final class SymfonySerializerHydratorTest extends TestCase
 {
-
-    public function testHydrateResponseThrowsExceptionWhenContentTypeIsNotJson(): void
+    public function testHydrateResponseThrowsExceptionWhenContentTypeIsNotJson() : void
     {
         $response = $this->createMock(ResponseInterface::class);
         $response
@@ -28,20 +27,19 @@ final class SymfonySerializerHydratorTest extends TestCase
         $hydrator->hydrateResponse($response, \stdClass::class);
     }
 
-    public static function dataProviderTestHydrateResponseValidatesContentTypes(): array
+    public static function dataProviderTestHydrateResponseValidatesContentTypes() : array
     {
         return [
             ['application/json'],
-            ['application/json+custom']
+            ['application/json+custom'],
         ];
     }
 
     /**
      * @dataProvider dataProviderTestHydrateResponseValidatesContentTypes
      *
-     * @param string $contentType
      */
-    public function testHydrateResponseValidatesContentTypes(string $contentType): void
+    public function testHydrateResponseValidatesContentTypes(string $contentType) : void
     {
         $response = $this->createMock(ResponseInterface::class);
         $response
@@ -61,7 +59,7 @@ final class SymfonySerializerHydratorTest extends TestCase
             ->willReturn($responseBody);
 
         $hydrator = new SymfonySerializerHydrator();
-        $actual = $hydrator->hydrateResponse($response, \stdClass::class);
+        $actual   = $hydrator->hydrateResponse($response, \stdClass::class);
 
         self::assertEquals(new \stdClass(), $actual);
     }

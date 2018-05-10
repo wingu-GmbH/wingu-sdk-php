@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Wingu\Engine\SDK\Api;
 
@@ -13,12 +13,16 @@ use Wingu\Engine\SDK\Hydrator\Hydrator;
 
 abstract class Api
 {
+    /** @var Configuration */
     protected $configuration;
 
+    /** @var HttpClient */
     protected $httpClient;
 
+    /** @var RequestFactory */
     protected $requestFactory;
 
+    /** @var Hydrator */
     protected $hydrator;
 
     public function __construct(
@@ -27,13 +31,13 @@ abstract class Api
         RequestFactory $requestFactory,
         Hydrator $hydrator
     ) {
-        $this->configuration = $configuration;
-        $this->httpClient = $httpClient;
+        $this->configuration  = $configuration;
+        $this->httpClient     = $httpClient;
         $this->requestFactory = $requestFactory;
-        $this->hydrator = $hydrator;
+        $this->hydrator       = $hydrator;
     }
 
-    protected function handleRequest(RequestInterface $request): ResponseInterface
+    protected function handleRequest(RequestInterface $request) : ResponseInterface
     {
         $response = $this->httpClient->sendRequest($request);
 
@@ -59,7 +63,8 @@ abstract class Api
         }
     }
 
-    protected function createGetRequest(string $path, array $queryParameters = []): RequestInterface
+    /** @param mixed[] $queryParameters */
+    protected function createGetRequest(string $path, array $queryParameters = []) : RequestInterface
     {
         $uri = $this->configuration->backendUrl() . $path . '?' . \http_build_query($queryParameters);
 
@@ -67,17 +72,18 @@ abstract class Api
             'GET',
             $uri,
             [
-                $this->configuration->apiKeyHeader() => $this->configuration->apiKey()
+                $this->configuration->apiKeyHeader() => $this->configuration->apiKey(),
             ]
         );
 
         return $request;
     }
 
-    protected function decodeResponseBody(ResponseInterface $response): array
+    /** @return mixed[] */
+    protected function decodeResponseBody(ResponseInterface $response) : array
     {
         $data = \json_decode($response->getBody()->getContents(), true);
-        if (\json_last_error() !== JSON_ERROR_NONE) {
+        if (\json_last_error() !== \JSON_ERROR_NONE) {
             throw new Exception(\json_last_error_msg());
         }
 

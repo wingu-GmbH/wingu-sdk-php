@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Wingu\Engine\SDK\Tests\Api\Channel\Geofence;
 
@@ -21,11 +21,11 @@ use Wingu\Engine\SDK\Tests\Api\ApiTest;
 
 final class GeofenceApiTest extends ApiTest
 {
-    public function testGeofenceReturnsPublicGeofence(): void
+    public function testGeofenceReturnsPublicGeofence() : void
     {
         $configurationMock = new Configuration();
-        $requestFactory = new GuzzleMessageFactory();
-        $hydrator = new SymfonySerializerHydrator();
+        $requestFactory    = new GuzzleMessageFactory();
+        $hydrator          = new SymfonySerializerHydrator();
 
         $httpClient = new MockClient();
         $httpClient->addResponse(
@@ -37,7 +37,7 @@ final class GeofenceApiTest extends ApiTest
         );
 
         $winguApi = new GeofenceApi($configurationMock, $httpClient, $requestFactory, $hydrator);
-        $actual = $winguApi->geofence('0a0b190a-0000-4000-a000-000000000001');
+        $actual   = $winguApi->geofence('0a0b190a-0000-4000-a000-000000000001');
 
         $expected = new PublicGeofence(
             '0a0b190a-0000-4000-a000-000000000001',
@@ -50,8 +50,8 @@ final class GeofenceApiTest extends ApiTest
                         [9.723595, 53.662321315284],
                         [9.7251110338049, 53.66232130571],
                         [9.7251110338049, 53.661422990426],
-                        [9.723595, 53.661423]
-                    ]
+                        [9.723595, 53.661423],
+                    ],
                 ]
             )
         );
@@ -59,11 +59,11 @@ final class GeofenceApiTest extends ApiTest
         self::assertEquals($expected, $actual);
     }
 
-    public function testMyGeofenceReturnsPrivateGeofence(): void
+    public function testMyGeofenceReturnsPrivateGeofence() : void
     {
         $configurationMock = new Configuration();
-        $requestFactory = new GuzzleMessageFactory();
-        $hydrator = new SymfonySerializerHydrator();
+        $requestFactory    = new GuzzleMessageFactory();
+        $hydrator          = new SymfonySerializerHydrator();
 
         $httpClient = new MockClient();
         $httpClient->addResponse(
@@ -75,7 +75,7 @@ final class GeofenceApiTest extends ApiTest
         );
 
         $winguApi = new GeofenceApi($configurationMock, $httpClient, $requestFactory, $hydrator);
-        $actual = $winguApi->myGeofence('0a0b190a-0000-4000-a000-000000000001');
+        $actual   = $winguApi->myGeofence('0a0b190a-0000-4000-a000-000000000001');
 
         $expectedFunctioningHours = new BusinessHours(
             [
@@ -84,14 +84,14 @@ final class GeofenceApiTest extends ApiTest
                     Day::WEEK_DAY_WEDNESDAY,
                     [
                         TimeInterval::fromString('08:00', '12:00'),
-                        TimeInterval::fromString('13:00', '18:00')
+                        TimeInterval::fromString('13:00', '18:00'),
                     ]
                 ),
-                new AllDay(Day::WEEK_DAY_FRIDAY)
+                new AllDay(Day::WEEK_DAY_FRIDAY),
             ],
             new \DateTimeZone('Europe/Berlin')
         );
-        $expected = new PrivateGeofence(
+        $expected                 = new PrivateGeofence(
             '0a0b190a-0000-4000-a000-000000000001',
             'Funny Rabbit',
             true,
@@ -107,8 +107,8 @@ final class GeofenceApiTest extends ApiTest
                         [9.723595, 53.662321315284],
                         [9.7251110338049, 53.66232130571],
                         [9.7251110338049, 53.661422990426],
-                        [9.723595, 53.661423]
-                    ]
+                        [9.723595, 53.661423],
+                    ],
                 ]
             )
         );

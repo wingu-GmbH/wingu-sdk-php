@@ -1,27 +1,29 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Wingu\Engine\SDK\Model\Card;
 
 final class Card
 {
+    /** @var string */
     private $id;
 
+    /** @var Position */
     private $position;
 
     public function __construct(string $id, Position $position)
     {
-        $this->id = $id;
+        $this->id       = $id;
         $this->position = $position;
     }
 
-    public function id(): string
+    public function id() : string
     {
         return $this->id;
     }
 
-    public function position(): Position
+    public function position() : Position
     {
         return $this->position;
     }

@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Wingu\Engine\SDK\Model\Content;
 
@@ -20,22 +20,22 @@ final class Category
         Assertion::notEmpty($name);
         Assertion::length($colorHex, 6);
 
-        $this->id = $id;
-        $this->name = $name;
+        $this->id       = $id;
+        $this->name     = $name;
         $this->colorHex = $colorHex;
     }
 
-    public function id(): int
+    public function id() : int
     {
         return $this->id;
     }
 
-    public function name(): string
+    public function name() : string
     {
         return $this->name;
     }
 
-    public function colorHex(): string
+    public function colorHex() : string
     {
         return $this->colorHex;
     }

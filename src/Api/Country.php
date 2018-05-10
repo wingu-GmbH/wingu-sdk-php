@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Wingu\Engine\SDK\Api;
 
@@ -11,7 +11,7 @@ final class Country extends Api
     /**
      * @return CountryModel[]
      */
-    public function countries(): array
+    public function countries() : array
     {
         $request = $this->createGetRequest('/api/country.json');
 

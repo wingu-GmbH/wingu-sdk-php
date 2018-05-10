@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Wingu\Engine\SDK\Serializer\Denormalizer;
 
@@ -11,18 +11,18 @@ use Symfony\Component\Serializer\SerializerInterface;
 
 final class ArrayObjectDenormalizer implements DenormalizerInterface, SerializerAwareInterface
 {
-    /**
-     * @var DenormalizerInterface
-     */
+    /** @var DenormalizerInterface */
     private $serializer;
 
+    /** @var string */
     private $supportedClass;
 
+    /** @var string */
     private $className;
 
     public function __construct(string $supportedClass, string $className)
     {
-        if (!\in_array(\ArrayObject::class, \class_parents($supportedClass), true)) {
+        if (! \in_array(\ArrayObject::class, \class_parents($supportedClass), true)) {
             throw new \LogicException(\sprintf(
                 'Class %s does not extend %s class',
                 $supportedClass,
@@ -30,7 +30,7 @@ final class ArrayObjectDenormalizer implements DenormalizerInterface, Serializer
             ));
         }
         $this->supportedClass = $supportedClass;
-        $this->className = $className;
+        $this->className      = $className;
     }
 
     /**
@@ -38,7 +38,7 @@ final class ArrayObjectDenormalizer implements DenormalizerInterface, Serializer
      */
     public function denormalize($data, $class, $format = null, array $context = [])
     {
-        if (!\is_array($data)) {
+        if (! \is_array($data)) {
             throw new InvalidArgumentException(\sprintf('Data expected to be an array, %s given.', \gettype($data)));
         }
 
@@ -50,7 +50,7 @@ final class ArrayObjectDenormalizer implements DenormalizerInterface, Serializer
     /**
      * {@inheritdoc}
      */
-    public function supportsDenormalization($data, $type, $format = null): bool
+    public function supportsDenormalization($data, $type, $format = null) : bool
     {
         return $type === $this->supportedClass;
     }
@@ -58,9 +58,9 @@ final class ArrayObjectDenormalizer implements DenormalizerInterface, Serializer
     /**
      * {@inheritdoc}
      */
-    public function setSerializer(SerializerInterface $serializer): void
+    public function setSerializer(SerializerInterface $serializer) : void
     {
-        if (!$serializer instanceof DenormalizerInterface) {
+        if (! $serializer instanceof DenormalizerInterface) {
             throw new InvalidArgumentException(
                 \sprintf('Expected a serializer that also implements %s.', DenormalizerInterface::class)
             );

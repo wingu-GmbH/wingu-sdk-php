@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Wingu\Engine\SDK\Model\Wingu\Ping;
 
@@ -8,6 +8,7 @@ use Wingu\Engine\SDK\Assertion;
 
 final class Cloudinary
 {
+    /** @var string */
     private $cloudName;
 
     public function __construct(string $cloudName)
@@ -17,7 +18,7 @@ final class Cloudinary
         $this->cloudName = $cloudName;
     }
 
-    public function cloudName(): string
+    public function cloudName() : string
     {
         return $this->cloudName;
     }

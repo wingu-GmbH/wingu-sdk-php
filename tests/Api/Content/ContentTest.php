@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Wingu\Engine\SDK\Tests\Api\Content;
 
@@ -20,11 +20,11 @@ use Wingu\Engine\SDK\Tests\Api\ApiTest;
 
 final class ContentTest extends ApiTest
 {
-    public function testMyContentReturnsPrivateContent(): void
+    public function testMyContentReturnsPrivateContent() : void
     {
         $configurationMock = new Configuration();
-        $requestFactory = new GuzzleMessageFactory();
-        $hydrator = new SymfonySerializerHydrator();
+        $requestFactory    = new GuzzleMessageFactory();
+        $hydrator          = new SymfonySerializerHydrator();
 
         $httpClient = new MockClient();
         $httpClient->addResponse(
@@ -36,7 +36,7 @@ final class ContentTest extends ApiTest
         );
 
         $winguApi = new Content($configurationMock, $httpClient, $requestFactory, $hydrator);
-        $actual = $winguApi->myContent('12d1da34-0000-4000-a000-000000000001');
+        $actual   = $winguApi->myContent('12d1da34-0000-4000-a000-000000000001');
 
         $expected = new PrivateContent(
             '12d1da34-0000-4000-a000-000000000001',
@@ -49,7 +49,7 @@ final class ContentTest extends ApiTest
                         'Deck description 1',
                         [
                             new Card('ffa221a0-8a76-40dd-a6db-72be1aa61ec4', new Position(0)),
-                            new Card('c00512e8-83f2-453e-adaa-8785936cb881', new Position(1))
+                            new Card('c00512e8-83f2-453e-adaa-8785936cb881', new Position(1)),
                         ]
                     ),
                     new Locale('English', 'en')
@@ -58,7 +58,7 @@ final class ContentTest extends ApiTest
                     '3564fd0e-b183-4fe8-9f93-ac9f175e447f',
                     new Deck('ea45b0c8-0000-4000-a000-000000000002', 'Deck 2 title', 'Deck description 2', []),
                     new Locale('German', 'de')
-                )
+                ),
             ]
         );
 

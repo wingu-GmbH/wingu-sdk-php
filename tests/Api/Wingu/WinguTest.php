@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Wingu\Engine\SDK\Tests\Api\Wingu;
 
@@ -19,11 +19,11 @@ use Wingu\Engine\SDK\Tests\Api\ApiTest;
 
 final class WinguTest extends ApiTest
 {
-    public function testPingThrowsExceptionWhenResponseIsNot200(): void
+    public function testPingThrowsExceptionWhenResponseIsNot200() : void
     {
         $configurationMock = new Configuration();
-        $requestFactory = new GuzzleMessageFactory();
-        $hydrator = $this->createMock(Hydrator::class);
+        $requestFactory    = new GuzzleMessageFactory();
+        $hydrator          = $this->createMock(Hydrator::class);
 
         $httpClient = new MockClient();
         $httpClient->addResponse(
@@ -38,11 +38,11 @@ final class WinguTest extends ApiTest
         $winguApi->ping();
     }
 
-    public function testPingReturnsResult(): void
+    public function testPingReturnsResult() : void
     {
         $configurationMock = new Configuration();
-        $requestFactory = new GuzzleMessageFactory();
-        $hydrator = new SymfonySerializerHydrator();
+        $requestFactory    = new GuzzleMessageFactory();
+        $hydrator          = new SymfonySerializerHydrator();
 
         $httpClient = new MockClient();
         $httpClient->addResponse(
@@ -54,7 +54,7 @@ final class WinguTest extends ApiTest
         );
 
         $winguApi = new Wingu($configurationMock, $httpClient, $requestFactory, $hydrator);
-        $actual = $winguApi->ping();
+        $actual   = $winguApi->ping();
 
         $expected = new Ping(
             new Cloudinary('abcdefgh'),

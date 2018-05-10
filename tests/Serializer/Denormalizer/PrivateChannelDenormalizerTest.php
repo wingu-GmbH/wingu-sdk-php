@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Wingu\Engine\SDK\Tests\Serializer\Denormalizer;
 
@@ -17,9 +17,9 @@ use Wingu\Engine\SDK\Serializer\Denormalizer\PrivateChannelDenormalizer;
 
 final class PrivateChannelDenormalizerTest extends TestCase
 {
-    public function testSettingSerializerThrowsExceptionIfItDoesNotImplementDenormalizerInterface(): void
+    public function testSettingSerializerThrowsExceptionIfItDoesNotImplementDenormalizerInterface() : void
     {
-        $denormalizer = new PrivateChannelDenormalizer();
+        $denormalizer   = new PrivateChannelDenormalizer();
         $serializerMock = $this->createMock(SerializerInterface::class);
 
         $this->expectException(InvalidArgumentException::class);
@@ -27,7 +27,7 @@ final class PrivateChannelDenormalizerTest extends TestCase
         $denormalizer->setSerializer($serializerMock);
     }
 
-    public static function dataProviderTestDenormalizeCallsSerializerDenormalizeWithCorrectType(): array
+    public static function dataProviderTestDenormalizeCallsSerializerDenormalizeWithCorrectType() : array
     {
         return [
             ['beacon', PrivateBeacon::class],
@@ -40,10 +40,8 @@ final class PrivateChannelDenormalizerTest extends TestCase
     /**
      * @dataProvider dataProviderTestDenormalizeCallsSerializerDenormalizeWithCorrectType
      *
-     * @param string $discriminator
-     * @param string $class
      */
-    public function testDenormalizeCallsSerializerDenormalizeWithCorrectType(string $discriminator, string $class): void
+    public function testDenormalizeCallsSerializerDenormalizeWithCorrectType(string $discriminator, string $class) : void
     {
         $data = ['discriminator' => $discriminator];
 

@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Wingu\Engine\SDK\Api\Content;
 
@@ -11,7 +11,7 @@ use Wingu\Engine\SDK\Model\Content\Category as CategoryModel;
 
 final class Category extends Api
 {
-    public function categories(): PaginatedResponseIterator
+    public function categories() : PaginatedResponseIterator
     {
         $page = $this->getEmbeddedPage('/api/category.json');
 
@@ -24,7 +24,7 @@ final class Category extends Api
         );
     }
 
-    private function getEmbeddedPage(string $href): array
+    private function getEmbeddedPage(string $href) : array
     {
         $request = $this->createGetRequest($href);
 

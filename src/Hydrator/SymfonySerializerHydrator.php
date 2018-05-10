@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Wingu\Engine\SDK\Hydrator;
 
@@ -26,7 +26,7 @@ final class SymfonySerializerHydrator implements Hydrator
                 new PrivateChannelDenormalizer(),
                 new CountryDenormalizer(),
                 new FunctioningHoursDenormalizer(),
-                new ObjectDenormalizer(null, null, null, new PhpDocExtractor())
+                new ObjectDenormalizer(null, null, null, new PhpDocExtractor()),
             ],
             [new JsonEncoder()]
         );
@@ -36,7 +36,7 @@ final class SymfonySerializerHydrator implements Hydrator
     {
         try {
             return $this->serializer->denormalize($data, $class);
-        } catch (\Exception $exception) {
+        } catch (\Throwable $exception) {
             throw new HydrationException('Could not hydrate response.', 0, $exception);
         }
     }
@@ -61,7 +61,7 @@ final class SymfonySerializerHydrator implements Hydrator
                     $class,
                     'json'
                 );
-        } catch (\Exception $exception) {
+        } catch (\Throwable $exception) {
             throw new HydrationException('Could not hydrate response.', 0, $exception);
         }
     }

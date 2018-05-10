@@ -1,20 +1,24 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Wingu\Engine\SDK\Api\Paginator;
 
 final class PaginatedResponseIterator implements \Iterator, \Countable
 {
+    /** @var int */
     private $currentPagePosition;
 
+    /** @var PageInfo */
     private $pageInfo;
 
+    /** @var array */
     private $embedded;
 
+    /** @var callable */
     private $dataFetcher;
 
-    public function __construct(PageInfo $pageInfo, $embedded, callable $dataFetcher)
+    public function __construct(PageInfo $pageInfo, array $embedded, callable $dataFetcher)
     {
         $this->currentPagePosition = 0;
 
@@ -39,9 +43,11 @@ final class PaginatedResponseIterator implements \Iterator, \Countable
     {
         $this->currentPagePosition++;
 
-        if ($this->currentPagePosition === $this->pageInfo->limit() && $this->pageInfo->hasNextPage()) {
-            $this->fetchEmbedded($this->pageInfo->links()->next());
+        if ($this->currentPagePosition !== $this->pageInfo->limit() || ! $this->pageInfo->hasNextPage()) {
+            return;
         }
+
+        $this->fetchEmbedded($this->pageInfo->links()->next());
     }
 
     /**
@@ -66,9 +72,11 @@ final class PaginatedResponseIterator implements \Iterator, \Countable
     public function rewind()
     {
         $this->currentPagePosition = 0;
-        if ($this->pageInfo->page() !== 1) {
-            $this->fetchEmbedded($this->pageInfo->links()->first());
+        if ($this->pageInfo->page() === 1) {
+            return;
         }
+
+        $this->fetchEmbedded($this->pageInfo->links()->first());
     }
 
     /**
@@ -79,11 +87,11 @@ final class PaginatedResponseIterator implements \Iterator, \Countable
         return $this->pageInfo->total();
     }
 
-    private function fetchEmbedded(Link $link)
+    private function fetchEmbedded(Link $link) : void
     {
-        $data = \call_user_func($this->dataFetcher, $link->href());
-        $this->pageInfo = $data['pageInfo'];
-        $this->embedded = $data['embedded'];
+        $data                      = \call_user_func($this->dataFetcher, $link->href());
+        $this->pageInfo            = $data['pageInfo'];
+        $this->embedded            = $data['embedded'];
         $this->currentPagePosition = 0;
     }
 }

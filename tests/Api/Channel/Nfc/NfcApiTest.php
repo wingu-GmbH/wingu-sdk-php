@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Wingu\Engine\SDK\Tests\Api\Channel\Nfc;
 
@@ -20,11 +20,11 @@ use Wingu\Engine\SDK\Tests\Api\ApiTest;
 
 final class NfcApiTest extends ApiTest
 {
-    public function testNfcReturnsPublicNfc(): void
+    public function testNfcReturnsPublicNfc() : void
     {
         $configurationMock = new Configuration();
-        $requestFactory = new GuzzleMessageFactory();
-        $hydrator = new SymfonySerializerHydrator();
+        $requestFactory    = new GuzzleMessageFactory();
+        $hydrator          = new SymfonySerializerHydrator();
 
         $httpClient = new MockClient();
         $httpClient->addResponse(
@@ -36,7 +36,7 @@ final class NfcApiTest extends ApiTest
         );
 
         $winguApi = new NfcApi($configurationMock, $httpClient, $requestFactory, $hydrator);
-        $actual = $winguApi->nfc('9a8798c6-0000-4000-a000-000000000001');
+        $actual   = $winguApi->nfc('9a8798c6-0000-4000-a000-000000000001');
 
         $expected = new PublicNfc(
             '9a8798c6-0000-4000-a000-000000000001',
@@ -47,11 +47,11 @@ final class NfcApiTest extends ApiTest
         self::assertEquals($expected, $actual);
     }
 
-    public function testMyNfcReturnsPrivateNfc(): void
+    public function testMyNfcReturnsPrivateNfc() : void
     {
         $configurationMock = new Configuration();
-        $requestFactory = new GuzzleMessageFactory();
-        $hydrator = new SymfonySerializerHydrator();
+        $requestFactory    = new GuzzleMessageFactory();
+        $hydrator          = new SymfonySerializerHydrator();
 
         $httpClient = new MockClient();
         $httpClient->addResponse(
@@ -63,7 +63,7 @@ final class NfcApiTest extends ApiTest
         );
 
         $winguApi = new NfcApi($configurationMock, $httpClient, $requestFactory, $hydrator);
-        $actual = $winguApi->myNfc('9a8798c6-0000-4000-a000-000000000002');
+        $actual   = $winguApi->myNfc('9a8798c6-0000-4000-a000-000000000002');
 
         $expectedFunctioningHours = new BusinessHours(
             [
@@ -72,14 +72,14 @@ final class NfcApiTest extends ApiTest
                     Day::WEEK_DAY_WEDNESDAY,
                     [
                         TimeInterval::fromString('08:00', '12:00'),
-                        TimeInterval::fromString('13:00', '18:00')
+                        TimeInterval::fromString('13:00', '18:00'),
                     ]
                 ),
-                new AllDay(Day::WEEK_DAY_FRIDAY)
+                new AllDay(Day::WEEK_DAY_FRIDAY),
             ],
             new \DateTimeZone('Europe/Berlin')
         );
-        $expected = new PrivateNfc(
+        $expected                 = new PrivateNfc(
             '9a8798c6-0000-4000-a000-000000000002',
             'Funny Mouse',
             true,
@@ -93,11 +93,11 @@ final class NfcApiTest extends ApiTest
         self::assertEquals($expected, $actual);
     }
 
-    public function testPayloadReturnsNfcId(): void
+    public function testPayloadReturnsNfcId() : void
     {
         $configurationMock = new Configuration();
-        $requestFactory = new GuzzleMessageFactory();
-        $hydrator = new SymfonySerializerHydrator();
+        $requestFactory    = new GuzzleMessageFactory();
+        $hydrator          = new SymfonySerializerHydrator();
 
         $httpClient = new MockClient();
         $httpClient->addResponse(
@@ -109,7 +109,7 @@ final class NfcApiTest extends ApiTest
         );
 
         $winguApi = new NfcApi($configurationMock, $httpClient, $requestFactory, $hydrator);
-        $actual = $winguApi->payload('https://wingu-sdk-test.de/nfc/7a4b84eb-ae3f-4246-8a67-d16fbdd82595');
+        $actual   = $winguApi->payload('https://wingu-sdk-test.de/nfc/7a4b84eb-ae3f-4246-8a67-d16fbdd82595');
 
         self::assertSame('9a8798c6-0000-4000-a000-000000000004', $actual);
     }

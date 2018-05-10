@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Wingu\Engine\SDK\Tests\Model;
 
@@ -10,7 +10,7 @@ use Wingu\Engine\SDK\Model\Country;
 
 final class CountryTest extends TestCase
 {
-    public function testInstantiatingWithEmptyNameThrowsException(): void
+    public function testInstantiatingWithEmptyNameThrowsException() : void
     {
         $this->expectException(AssertInvalidArgumentException::class);
         $this->expectExceptionMessage('Value "" is empty, but non empty value was expected.');
@@ -18,7 +18,7 @@ final class CountryTest extends TestCase
         new Country('ro', '');
     }
 
-    public function testInstantiatingWithCountryCodeLengthLowerThan2ThrowsException(): void
+    public function testInstantiatingWithCountryCodeLengthLowerThan2ThrowsException() : void
     {
         $this->expectException(AssertInvalidArgumentException::class);
         $this->expectExceptionMessage('Value "a" has to be 2 exactly characters long, but length is 1.');
@@ -26,7 +26,7 @@ final class CountryTest extends TestCase
         new Country('a', 'country');
     }
 
-    public function testInstantiatingWithCountryCodeLengthBiggerThan2ThrowsException(): void
+    public function testInstantiatingWithCountryCodeLengthBiggerThan2ThrowsException() : void
     {
         $this->expectException(AssertInvalidArgumentException::class);
         $this->expectExceptionMessage('Value "abc" has to be 2 exactly characters long, but length is 3.');
@@ -34,7 +34,7 @@ final class CountryTest extends TestCase
         new Country('abc', 'country');
     }
 
-    public function testCountryIso31661Alpha2IsCapitalized(): void
+    public function testCountryIso31661Alpha2IsCapitalized() : void
     {
         $country = new Country('aa', 'country');
         self::assertSame('AA', $country->iso31661Alpha2());
