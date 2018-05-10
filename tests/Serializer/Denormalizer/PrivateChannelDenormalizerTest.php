@@ -27,6 +27,7 @@ final class PrivateChannelDenormalizerTest extends TestCase
         $denormalizer->setSerializer($serializerMock);
     }
 
+    /** @return mixed[] */
     public static function dataProviderTestDenormalizeCallsSerializerDenormalizeWithCorrectType() : array
     {
         return [

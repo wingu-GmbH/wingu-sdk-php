@@ -8,7 +8,10 @@ use Psr\Http\Message\ResponseInterface;
 
 interface Hydrator
 {
-    /** @return mixed */
+    /**
+     * @param mixed[] $data
+     * @return mixed
+     */
     public function hydrateData(array $data, string $class);
 
     /** @return mixed */

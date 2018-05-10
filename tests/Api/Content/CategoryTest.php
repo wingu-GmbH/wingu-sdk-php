@@ -9,7 +9,7 @@ use Http\Message\MessageFactory\GuzzleMessageFactory;
 use Http\Mock\Client as MockClient;
 use Wingu\Engine\SDK\Api\Configuration;
 use Wingu\Engine\SDK\Api\Content\Category;
-use Wingu\Engine\SDK\Api\Exception;
+use Wingu\Engine\SDK\Api\Generic;
 use Wingu\Engine\SDK\Hydrator\Hydrator;
 use Wingu\Engine\SDK\Hydrator\SymfonySerializerHydrator;
 use Wingu\Engine\SDK\Model\Content\Category as CategoryModel;
@@ -30,7 +30,7 @@ final class CategoryTest extends ApiTest
 
         $winguApi = new Category($configurationMock, $httpClient, $requestFactory, $hydrator);
 
-        $this->expectException(Exception::class);
+        $this->expectException(Generic::class);
         $this->expectExceptionMessage('Remote server error.');
 
         $winguApi->categories();

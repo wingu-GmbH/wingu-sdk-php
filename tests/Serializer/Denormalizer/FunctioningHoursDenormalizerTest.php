@@ -50,6 +50,7 @@ final class FunctioningHoursDenormalizerTest extends TestCase
         self::assertInstanceOf(BusinessHoursInterface::class, $actual);
     }
 
+    /** @return mixed[] */
     public static function dataProviderInvalidDataForDenormalizer() : array
     {
         return [
@@ -118,7 +119,7 @@ final class FunctioningHoursDenormalizerTest extends TestCase
 
     /**
      * @dataProvider dataProviderInvalidDataForDenormalizer
-     * @param array $data
+     * @param mixed[] $data
      */
     public function testDenormalizeThrowsExceptionWhenDataIsNotValid(array $data) : void
     {

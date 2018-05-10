@@ -6,9 +6,9 @@ namespace Wingu\Engine\SDK\Api\Exception;
 
 use Psr\Http\Message\ResponseInterface;
 use Throwable;
-use Wingu\Engine\SDK\Api\Exception;
+use Wingu\Engine\SDK\Api\Generic;
 
-class HttpClient extends Exception
+class HttpClient extends Generic
 {
     /** @var ResponseInterface */
     private $response;

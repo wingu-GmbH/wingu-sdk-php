@@ -12,10 +12,10 @@ use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 final class FunctioningHoursDenormalizer implements DenormalizerInterface
 {
     /**
-     * @param mixed  $data    Data to restore
-     * @param string $class   The expected class to instantiate
-     * @param string $format  Format the given data was extracted from
-     * @param string[]  $context Options available to the denormalizer
+     * @param mixed    $data    Data to restore
+     * @param string   $class   The expected class to instantiate
+     * @param string   $format  Format the given data was extracted from
+     * @param string[] $context Options available to the denormalizer
      * @return mixed
      */
     public function denormalize($data, $class, $format = null, array $context = [])

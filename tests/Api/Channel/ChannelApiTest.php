@@ -238,7 +238,7 @@ final class ChannelApiTest extends ApiTest
         );
     }
 
-    private function getExpectedPrivateGeofence()
+    private function getExpectedPrivateGeofence() : PrivateGeofence
     {
         return new PrivateGeofence(
             '0a0b190a-0000-4000-a000-000000000001',

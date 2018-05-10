@@ -6,6 +6,6 @@ namespace Wingu\Engine\SDK\Hydrator;
 
 use Wingu\Engine\SDK\Exception;
 
-final class HydrationException extends \RuntimeException implements Exception
+final class Hydration extends \RuntimeException implements Exception
 {
 }

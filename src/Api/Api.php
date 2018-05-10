@@ -8,7 +8,6 @@ use Http\Client\HttpClient;
 use Http\Message\RequestFactory;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
-use Wingu\Engine\SDK\Api\Exception as ApiException;
 use Wingu\Engine\SDK\Hydrator\Hydrator;
 
 abstract class Api
@@ -49,17 +48,17 @@ abstract class Api
 
         switch ($statusCode) {
             case 400:
-                throw new ApiException\HttpClient\BadRequest('Bad request.', $response);
+                throw new Exception\HttpClient\BadRequest('Bad request.', $response);
             case 401:
-                throw new ApiException\HttpClient\Unauthorized('Your credentials are incorrect.', $response);
+                throw new Exception\HttpClient\Unauthorized('Your credentials are incorrect.', $response);
             case 403:
-                throw new ApiException\HttpClient\Forbidden('You are not allowed to perform this action.', $response);
+                throw new Exception\HttpClient\Forbidden('You are not allowed to perform this action.', $response);
             case 404:
-                throw new ApiException\HttpClient\NotFound('Resource not found.', $response);
+                throw new Exception\HttpClient\NotFound('Resource not found.', $response);
             case 500:
-                throw new ApiException\HttpClient\InternalServerError('Remote server error.', $response);
+                throw new Exception\HttpClient\InternalServerError('Remote server error.', $response);
             default:
-                throw new ApiException\HttpClient('Unknown response.', $response);
+                throw new Exception\HttpClient('Unknown response.', $response);
         }
     }
 
@@ -84,7 +83,7 @@ abstract class Api
     {
         $data = \json_decode($response->getBody()->getContents(), true);
         if (\json_last_error() !== \JSON_ERROR_NONE) {
-            throw new Exception(\json_last_error_msg());
+            throw new Generic(\json_last_error_msg());
         }
 
         return $data;

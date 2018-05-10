@@ -6,8 +6,10 @@ namespace Wingu\Engine\SDK\Model\Channel\Geofence;
 
 final class Boundaries
 {
+    /** @var string */
     private $type;
 
+    /** @var mixed[] */
     private $coordinates;
 
     public function __construct(string $type, array $coordinates)
@@ -21,6 +23,7 @@ final class Boundaries
         return $this->type;
     }
 
+    /** @return mixed[] */
     public function coordinates() : array
     {
         return $this->coordinates;

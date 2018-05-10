@@ -7,6 +7,6 @@ namespace Wingu\Engine\SDK\Exception;
 use Assert\InvalidArgumentException;
 use Wingu\Engine\SDK\Exception;
 
-final class AssertInvalidArgumentException extends InvalidArgumentException implements Exception
+final class AssertInvalidArgument extends InvalidArgumentException implements Exception
 {
 }

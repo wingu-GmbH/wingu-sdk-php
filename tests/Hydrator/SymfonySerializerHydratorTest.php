@@ -7,7 +7,7 @@ namespace Wingu\Engine\SDK\Tests\Hydrator;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\StreamInterface;
-use Wingu\Engine\SDK\Hydrator\HydrationException;
+use Wingu\Engine\SDK\Hydrator\Hydration;
 use Wingu\Engine\SDK\Hydrator\SymfonySerializerHydrator;
 
 final class SymfonySerializerHydratorTest extends TestCase
@@ -23,10 +23,11 @@ final class SymfonySerializerHydratorTest extends TestCase
 
         $hydrator = new SymfonySerializerHydrator();
 
-        $this->expectException(HydrationException::class);
+        $this->expectException(Hydration::class);
         $hydrator->hydrateResponse($response, \stdClass::class);
     }
 
+    /** @return string[] */
     public static function dataProviderTestHydrateResponseValidatesContentTypes() : array
     {
         return [

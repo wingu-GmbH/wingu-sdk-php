@@ -27,7 +27,7 @@ final class WinguApi
     /** @var Hydrator */
     private $hydrator;
 
-    /** @var array */
+    /** @var mixed[] */
     private $services = [];
 
     public function __construct(
@@ -67,6 +67,7 @@ final class WinguApi
         return $this->getService(Wingu::class);
     }
 
+    /** @return mixed */
     private function getService(string $class)
     {
         if (! isset($this->services[$class])) {

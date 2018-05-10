@@ -18,6 +18,7 @@ use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 
 final class ObjectDenormalizer extends ObjectNormalizer
 {
+    /** @var null|PropertyTypeExtractorInterface */
     private $typeExtractor;
 
     public function __construct(?ClassMetadataFactoryInterface $classMetadataFactory = null, ?NameConverterInterface $nameConverter = null, ?PropertyAccessorInterface $propertyAccessor = null, ?PropertyTypeExtractorInterface $propertyTypeExtractor = null)
@@ -30,7 +31,7 @@ final class ObjectDenormalizer extends ObjectNormalizer
     protected function instantiateObject(array &$data, $class, array &$context, \ReflectionClass $reflectionClass, $allowedAttributes, ?string $format = null)
     {
         $object = $this->extractObjectToPopulate($class, $context, static::OBJECT_TO_POPULATE);
-        if (null !== $object) {
+        if ($object !== null) {
             unset($context[static::OBJECT_TO_POPULATE]);
 
             return $object;
@@ -99,7 +100,8 @@ final class ObjectDenormalizer extends ObjectNormalizer
 
     private function validateAndDenormalize(string $currentClass, string $attribute, $data, ?string $format, array $context)
     {
-        if (null === $this->typeExtractor || null === $types = $this->typeExtractor->getTypes($currentClass, $attribute)) {
+        $types = $this->typeExtractor->getTypes($currentClass, $attribute);
+        if ($this->typeExtractor === null || $types === null) {
             return $data;
         }
 
@@ -109,12 +111,13 @@ final class ObjectDenormalizer extends ObjectNormalizer
                 return null;
             }
 
-            if ($type->isCollection() && ($collectionValueType = $type->getCollectionValueType()) !== null && $collectionValueType->getBuiltinType() === Type::BUILTIN_TYPE_OBJECT) {
+            $collectionValueType = $type->getCollectionValueType();
+            if (($collectionValueType !== null) && $type->isCollection() && $collectionValueType->getBuiltinType() === Type::BUILTIN_TYPE_OBJECT) {
                 $builtinType = Type::BUILTIN_TYPE_OBJECT;
                 $class       = $collectionValueType->getClassName() . '[]';
 
                 $collectionKeyType = $type->getCollectionKeyType();
-                if (null !== $collectionKeyType) {
+                if ($collectionKeyType !== null) {
                     $context['key_type'] = $collectionKeyType;
                 }
             } else {
