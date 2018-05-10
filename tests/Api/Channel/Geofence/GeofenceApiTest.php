@@ -11,7 +11,7 @@ use Speicher210\BusinessHours\BusinessHours;
 use Speicher210\BusinessHours\Day\AllDay;
 use Speicher210\BusinessHours\Day\Day;
 use Speicher210\BusinessHours\Day\Time\TimeInterval;
-use Wingu\Engine\SDK\Api\Channel\Geofence\Geofence;
+use Wingu\Engine\SDK\Api\Channel\Geofence\GeofenceApi;
 use Wingu\Engine\SDK\Api\Configuration;
 use Wingu\Engine\SDK\Hydrator\SymfonySerializerHydrator;
 use Wingu\Engine\SDK\Model\Channel\Geofence\Boundaries;
@@ -19,7 +19,7 @@ use Wingu\Engine\SDK\Model\Channel\Geofence\PrivateGeofence;
 use Wingu\Engine\SDK\Model\Channel\Geofence\PublicGeofence;
 use Wingu\Engine\SDK\Tests\Api\ApiTest;
 
-final class GeofenceTest extends ApiTest
+final class GeofenceApiTest extends ApiTest
 {
     public function testGeofenceReturnsPublicGeofence(): void
     {
@@ -36,7 +36,7 @@ final class GeofenceTest extends ApiTest
             )
         );
 
-        $winguApi = new Geofence($configurationMock, $httpClient, $requestFactory, $hydrator);
+        $winguApi = new GeofenceApi($configurationMock, $httpClient, $requestFactory, $hydrator);
         $actual = $winguApi->geofence('0a0b190a-0000-4000-a000-000000000001');
 
         $expected = new PublicGeofence(
@@ -74,7 +74,7 @@ final class GeofenceTest extends ApiTest
             )
         );
 
-        $winguApi = new Geofence($configurationMock, $httpClient, $requestFactory, $hydrator);
+        $winguApi = new GeofenceApi($configurationMock, $httpClient, $requestFactory, $hydrator);
         $actual = $winguApi->myGeofence('0a0b190a-0000-4000-a000-000000000001');
 
         $expectedFunctioningHours = new BusinessHours(

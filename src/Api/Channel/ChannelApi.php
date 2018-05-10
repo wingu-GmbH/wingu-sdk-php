@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Wingu\Engine\SDK\Api\Channel;
 
@@ -9,9 +9,9 @@ use Wingu\Engine\SDK\Api\Paginator\PageInfo;
 use Wingu\Engine\SDK\Api\Paginator\PaginatedResponseIterator;
 use Wingu\Engine\SDK\Model\Channel\PrivateChannel;
 
-final class Channel extends Api
+final class ChannelApi extends Api
 {
-    public function myChannel(string $id): PrivateChannel
+    public function myChannel(string $id) : PrivateChannel
     {
         $request = $this->createGetRequest('/api/channel/my/' . $id . '.json');
 
@@ -20,7 +20,7 @@ final class Channel extends Api
         return $this->hydrator->hydrateResponse($response, PrivateChannel::class);
     }
 
-    public function myChannels(): PaginatedResponseIterator
+    public function myChannels() : PaginatedResponseIterator
     {
         $page = $this->getEmbeddedPage('/api/channel/my.json');
 
@@ -33,7 +33,10 @@ final class Channel extends Api
         );
     }
 
-    private function getEmbeddedPage(string $href): array
+    /**
+     * @return mixed[]
+     */
+    private function getEmbeddedPage(string $href) : array
     {
         $request = $this->createGetRequest($href);
 
@@ -43,8 +46,8 @@ final class Channel extends Api
 
         $embedded = \array_map(
             function ($data) {
-                $discriminator = \key($data);
-                $data = \reset($data);
+                $discriminator         = \key($data);
+                $data                  = \reset($data);
                 $data['discriminator'] = $discriminator;
 
                 return $data;

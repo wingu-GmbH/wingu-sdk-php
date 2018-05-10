@@ -11,7 +11,7 @@ use Speicher210\BusinessHours\BusinessHours;
 use Speicher210\BusinessHours\Day\AllDay;
 use Speicher210\BusinessHours\Day\Day;
 use Speicher210\BusinessHours\Day\Time\TimeInterval;
-use Wingu\Engine\SDK\Api\Channel\Channel;
+use Wingu\Engine\SDK\Api\Channel\ChannelApi;
 use Wingu\Engine\SDK\Api\Configuration;
 use Wingu\Engine\SDK\Hydrator\SymfonySerializerHydrator;
 use Wingu\Engine\SDK\Model\Channel\Beacon\PrivateBeacon;
@@ -21,7 +21,7 @@ use Wingu\Engine\SDK\Model\Channel\Nfc\PrivateNfc;
 use Wingu\Engine\SDK\Model\Channel\QrCode\PrivateQrCode;
 use Wingu\Engine\SDK\Tests\Api\ApiTest;
 
-final class ChannelTest extends ApiTest
+final class ChannelApiTest extends ApiTest
 {
     public function testMyChannelReturnsPrivateBeacon(): void
     {
@@ -38,7 +38,7 @@ final class ChannelTest extends ApiTest
             )
         );
 
-        $winguApi = new Channel($configurationMock, $httpClient, $requestFactory, $hydrator);
+        $winguApi = new ChannelApi($configurationMock, $httpClient, $requestFactory, $hydrator);
 
         $actual = $winguApi->myChannel('8c798a67-0000-4000-a000-000000000001');
         $expected = $this->getExpectedPrivateBeacon();
@@ -61,7 +61,7 @@ final class ChannelTest extends ApiTest
             )
         );
 
-        $winguApi = new Channel($configurationMock, $httpClient, $requestFactory, $hydrator);
+        $winguApi = new ChannelApi($configurationMock, $httpClient, $requestFactory, $hydrator);
 
         $actual = $winguApi->myChannel('0a0b190a-0000-4000-a000-000000000001');
         $expected = $this->getExpectedPrivateGeofence();
@@ -84,7 +84,7 @@ final class ChannelTest extends ApiTest
             )
         );
 
-        $winguApi = new Channel($configurationMock, $httpClient, $requestFactory, $hydrator);
+        $winguApi = new ChannelApi($configurationMock, $httpClient, $requestFactory, $hydrator);
 
         $actual = $winguApi->myChannel('44da7d7e-0000-4000-a000-000000000001');
         $expected = $this->getExpectedPrivateNfc();
@@ -107,7 +107,7 @@ final class ChannelTest extends ApiTest
             )
         );
 
-        $winguApi = new Channel($configurationMock, $httpClient, $requestFactory, $hydrator);
+        $winguApi = new ChannelApi($configurationMock, $httpClient, $requestFactory, $hydrator);
 
         $actual = $winguApi->myChannel('9a8798c6-0000-4000-a000-000000000001');
         $expected = $this->getExpectedPrivateQrCode();
@@ -130,7 +130,7 @@ final class ChannelTest extends ApiTest
             )
         );
 
-        $channelApi = new Channel($configurationMock, $httpClient, $requestFactory, $hydrator);
+        $channelApi = new ChannelApi($configurationMock, $httpClient, $requestFactory, $hydrator);
         $actual = $channelApi->myChannels();
 
         $expected = [
@@ -180,7 +180,7 @@ final class ChannelTest extends ApiTest
             )
         );
 
-        $channelApi = new Channel($configurationMock, $httpClient, $requestFactory, $hydrator);
+        $channelApi = new ChannelApi($configurationMock, $httpClient, $requestFactory, $hydrator);
         $actual = $channelApi->myChannels();
 
         $expected = [

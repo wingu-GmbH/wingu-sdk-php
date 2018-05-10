@@ -11,14 +11,14 @@ use Speicher210\BusinessHours\BusinessHours;
 use Speicher210\BusinessHours\Day\AllDay;
 use Speicher210\BusinessHours\Day\Day;
 use Speicher210\BusinessHours\Day\Time\TimeInterval;
-use Wingu\Engine\SDK\Api\Channel\Nfc\Nfc;
+use Wingu\Engine\SDK\Api\Channel\Nfc\NfcApi;
 use Wingu\Engine\SDK\Api\Configuration;
 use Wingu\Engine\SDK\Hydrator\SymfonySerializerHydrator;
 use Wingu\Engine\SDK\Model\Channel\Nfc\PrivateNfc;
 use Wingu\Engine\SDK\Model\Channel\Nfc\PublicNfc;
 use Wingu\Engine\SDK\Tests\Api\ApiTest;
 
-final class NfcTest extends ApiTest
+final class NfcApiTest extends ApiTest
 {
     public function testNfcReturnsPublicNfc(): void
     {
@@ -35,7 +35,7 @@ final class NfcTest extends ApiTest
             )
         );
 
-        $winguApi = new Nfc($configurationMock, $httpClient, $requestFactory, $hydrator);
+        $winguApi = new NfcApi($configurationMock, $httpClient, $requestFactory, $hydrator);
         $actual = $winguApi->nfc('9a8798c6-0000-4000-a000-000000000001');
 
         $expected = new PublicNfc(
@@ -62,7 +62,7 @@ final class NfcTest extends ApiTest
             )
         );
 
-        $winguApi = new Nfc($configurationMock, $httpClient, $requestFactory, $hydrator);
+        $winguApi = new NfcApi($configurationMock, $httpClient, $requestFactory, $hydrator);
         $actual = $winguApi->myNfc('9a8798c6-0000-4000-a000-000000000002');
 
         $expectedFunctioningHours = new BusinessHours(
@@ -108,7 +108,7 @@ final class NfcTest extends ApiTest
             )
         );
 
-        $winguApi = new Nfc($configurationMock, $httpClient, $requestFactory, $hydrator);
+        $winguApi = new NfcApi($configurationMock, $httpClient, $requestFactory, $hydrator);
         $actual = $winguApi->payload('https://wingu-sdk-test.de/nfc/7a4b84eb-ae3f-4246-8a67-d16fbdd82595');
 
         self::assertSame('9a8798c6-0000-4000-a000-000000000004', $actual);

@@ -6,8 +6,8 @@ namespace Wingu\Engine\SDK\Api;
 
 use Http\Client\HttpClient;
 use Http\Message\RequestFactory;
-use Wingu\Engine\SDK\Api\Channel\Beacon\Beacon;
-use Wingu\Engine\SDK\Api\Channel\Channel;
+use Wingu\Engine\SDK\Api\Channel\Beacon\BeaconApi;
+use Wingu\Engine\SDK\Api\Channel\ChannelApi;
 use Wingu\Engine\SDK\Api\Content\Category;
 use Wingu\Engine\SDK\Api\Content\Content;
 use Wingu\Engine\SDK\Api\Wingu\Wingu;
@@ -37,14 +37,14 @@ final class WinguApi
         $this->hydrator = $hydrator;
     }
 
-    public function channel(): Channel
+    public function channel(): ChannelApi
     {
-        return $this->getService(Channel::class);
+        return $this->getService(ChannelApi::class);
     }
 
-    public function beacon(): Beacon
+    public function beacon(): BeaconApi
     {
-        return $this->getService(Beacon::class);
+        return $this->getService(BeaconApi::class);
     }
 
     public function content(): Content

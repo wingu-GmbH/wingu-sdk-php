@@ -11,7 +11,7 @@ use Speicher210\BusinessHours\BusinessHours;
 use Speicher210\BusinessHours\Day\AllDay;
 use Speicher210\BusinessHours\Day\Day;
 use Speicher210\BusinessHours\Day\Time\TimeInterval;
-use Wingu\Engine\SDK\Api\Channel\Beacon\Beacon;
+use Wingu\Engine\SDK\Api\Channel\Beacon\BeaconApi;
 use Wingu\Engine\SDK\Api\Configuration;
 use Wingu\Engine\SDK\Hydrator\SymfonySerializerHydrator;
 use Wingu\Engine\SDK\Model\Card\Card;
@@ -25,7 +25,7 @@ use Wingu\Engine\SDK\Model\Content\Pack;
 use Wingu\Engine\SDK\Model\Content\PublicContent;
 use Wingu\Engine\SDK\Tests\Api\ApiTest;
 
-final class BeaconTest extends ApiTest
+final class BeaconApiTest extends ApiTest
 {
     public function testBeaconReturnsPublicBeacon(): void
     {
@@ -42,7 +42,7 @@ final class BeaconTest extends ApiTest
             )
         );
 
-        $winguApi = new Beacon($configurationMock, $httpClient, $requestFactory, $hydrator);
+        $winguApi = new BeaconApi($configurationMock, $httpClient, $requestFactory, $hydrator);
         $actual = $winguApi->beacon('02a554ab-34bc-48b7-87ad-754037b8b09b');
 
         $expected = new PublicBeacon(
@@ -100,7 +100,7 @@ final class BeaconTest extends ApiTest
             )
         );
 
-        $winguApi = new Beacon($configurationMock, $httpClient, $requestFactory, $hydrator);
+        $winguApi = new BeaconApi($configurationMock, $httpClient, $requestFactory, $hydrator);
         $actual = $winguApi->myBeacon('9616c673-b24f-4445-872c-4851e1790731');
 
         $expectedFunctioningHours = new BusinessHours(
@@ -148,7 +148,7 @@ final class BeaconTest extends ApiTest
             )
         );
 
-        $winguApi = new Beacon($configurationMock, $httpClient, $requestFactory, $hydrator);
+        $winguApi = new BeaconApi($configurationMock, $httpClient, $requestFactory, $hydrator);
         $actual = $winguApi->eddystone('https://wingu-sdk-test.de/78d9c5a7-18e2-4039-bd58-e8c608c3290a');
 
         self::assertSame('8c798a67-0000-4000-a000-000000000017', $actual);
