@@ -6,7 +6,6 @@ namespace Wingu\Engine\SDK\Model\Content;
 
 use Wingu\Engine\SDK\Assertion;
 use Wingu\Engine\SDK\Model\Card\Card;
-use Wingu\Engine\SDK\Model\Card\CardCollection;
 
 final class Deck
 {
@@ -16,9 +15,10 @@ final class Deck
 
     private $description;
 
+    /** @var Card[] */
     private $cards;
 
-    public function __construct(string $id, string $title, ?string $description, CardCollection $cards)
+    public function __construct(string $id, string $title, ?string $description, array $cards)
     {
         Assertion::uuid($id);
         Assertion::notEmpty($title);
@@ -45,9 +45,9 @@ final class Deck
     }
 
     /**
-     * @return CardCollection|Card[]
+     * @return Card[]
      */
-    public function cards(): CardCollection
+    public function cards(): array
     {
         return $this->cards;
     }

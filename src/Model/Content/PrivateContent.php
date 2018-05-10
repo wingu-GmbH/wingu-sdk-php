@@ -10,9 +10,10 @@ final class PrivateContent implements Content
 {
     private $id;
 
+    /** @var Pack[] */
     private $packs;
 
-    public function __construct(string $id, PackCollection $packs)
+    public function __construct(string $id, array $packs)
     {
         Assertion::uuid($id);
 
@@ -26,9 +27,9 @@ final class PrivateContent implements Content
     }
 
     /**
-     * @return PackCollection|Pack[]
+     * @return Pack[]
      */
-    public function packs(): PackCollection
+    public function packs(): array
     {
         return $this->packs;
     }

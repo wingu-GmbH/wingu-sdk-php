@@ -5,17 +5,13 @@ declare(strict_types = 1);
 namespace Wingu\Engine\SDK\Hydrator;
 
 use Psr\Http\Message\ResponseInterface;
+use Symfony\Component\PropertyInfo\Extractor\PhpDocExtractor;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\Normalizer\ArrayDenormalizer;
-use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\Serializer;
-use Wingu\Engine\SDK\Model\Card\Card;
-use Wingu\Engine\SDK\Model\Card\CardCollection;
-use Wingu\Engine\SDK\Model\Content\Pack;
-use Wingu\Engine\SDK\Model\Content\PackCollection;
-use Wingu\Engine\SDK\Serializer\Denormalizer\ArrayObjectDenormalizer;
 use Wingu\Engine\SDK\Serializer\Denormalizer\CountryDenormalizer;
 use Wingu\Engine\SDK\Serializer\Denormalizer\FunctioningHoursDenormalizer;
+use Wingu\Engine\SDK\Serializer\Denormalizer\ObjectDenormalizer;
 use Wingu\Engine\SDK\Serializer\Denormalizer\PrivateChannelDenormalizer;
 
 final class SymfonySerializerHydrator implements Hydrator
@@ -27,12 +23,10 @@ final class SymfonySerializerHydrator implements Hydrator
         $this->serializer = new Serializer(
             [
                 new ArrayDenormalizer(),
-                new ArrayObjectDenormalizer(PackCollection::class, Pack::class),
-                new ArrayObjectDenormalizer(CardCollection::class, Card::class),
                 new PrivateChannelDenormalizer(),
                 new CountryDenormalizer(),
                 new FunctioningHoursDenormalizer(),
-                new ObjectNormalizer()
+                new ObjectDenormalizer(null, null, null, new PhpDocExtractor())
             ],
             [new JsonEncoder()]
         );
