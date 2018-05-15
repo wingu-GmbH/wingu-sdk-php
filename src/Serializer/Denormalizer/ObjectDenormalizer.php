@@ -28,6 +28,11 @@ final class ObjectDenormalizer extends ObjectNormalizer
         parent::__construct($classMetadataFactory, $nameConverter, $propertyAccessor, $propertyTypeExtractor);
     }
 
+    /** @param mixed[] $data
+     * @param mixed   $class
+     * @param mixed[] $context
+     * @return mixed
+     */
     protected function instantiateObject(array &$data, $class, array &$context, \ReflectionClass $reflectionClass, $allowedAttributes, ?string $format = null)
     {
         $object = $this->extractObjectToPopulate($class, $context, static::OBJECT_TO_POPULATE);
@@ -98,6 +103,10 @@ final class ObjectDenormalizer extends ObjectNormalizer
         return new $class();
     }
 
+    /** @param mixed[] $context
+     * @param mixed   $data
+     * @return mixed
+     */
     private function validateAndDenormalize(string $currentClass, string $attribute, $data, ?string $format, array $context)
     {
         $types = $this->typeExtractor->getTypes($currentClass, $attribute);

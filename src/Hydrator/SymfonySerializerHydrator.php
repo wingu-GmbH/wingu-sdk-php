@@ -33,6 +33,9 @@ final class SymfonySerializerHydrator implements Hydrator
         );
     }
 
+    /** @param mixed[] $data
+     * @return mixed
+     */
     public function hydrateData(array $data, string $class)
     {
         try {
@@ -42,6 +45,7 @@ final class SymfonySerializerHydrator implements Hydrator
         }
     }
 
+    /** @return mixed */
     public function hydrateResponse(ResponseInterface $response, string $class)
     {
         $contentType = $response->getHeaderLine('Content-Type');

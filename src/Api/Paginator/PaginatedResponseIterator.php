@@ -12,12 +12,13 @@ final class PaginatedResponseIterator implements \Iterator, \Countable
     /** @var PageInfo */
     private $pageInfo;
 
-    /** @var array */
+    /** @var mixed[] */
     private $embedded;
 
     /** @var callable */
     private $dataFetcher;
 
+    /** @param mixed[] $embedded */
     public function __construct(PageInfo $pageInfo, array $embedded, callable $dataFetcher)
     {
         $this->currentPagePosition = 0;
