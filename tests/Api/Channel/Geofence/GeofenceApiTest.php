@@ -91,7 +91,8 @@ final class GeofenceApiTest extends ApiTest
             ],
             new \DateTimeZone('Europe/Berlin')
         );
-        $expected                 = new PrivateGeofence(
+
+        $expected = new PrivateGeofence(
             '0a0b190a-0000-4000-a000-000000000001',
             'Funny Rabbit',
             true,

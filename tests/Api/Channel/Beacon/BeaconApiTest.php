@@ -117,7 +117,8 @@ final class BeaconApiTest extends ApiTest
             ],
             new \DateTimeZone('Europe/Berlin')
         );
-        $expected                 = new PrivateBeacon(
+
+        $expected = new PrivateBeacon(
             '9616c673-b24f-4445-872c-4851e1790731',
             'Funny Dog',
             true,

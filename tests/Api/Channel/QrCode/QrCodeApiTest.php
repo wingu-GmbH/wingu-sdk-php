@@ -79,7 +79,8 @@ final class QrCodeApiTest extends ApiTest
             ],
             new \DateTimeZone('Europe/Berlin')
         );
-        $expected                 = new PrivateQrCode(
+
+        $expected = new PrivateQrCode(
             '9a8798c6-0000-4000-a000-000000000002',
             'Funny Cat',
             true,

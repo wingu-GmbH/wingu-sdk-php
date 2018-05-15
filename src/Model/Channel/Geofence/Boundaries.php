@@ -9,10 +9,10 @@ final class Boundaries
     /** @var string */
     private $type;
 
-    /** @var mixed */
+    /** @var mixed[] */
     private $coordinates;
 
-    /** @param mixed $coordinates */
+    /** @param mixed[] $coordinates */
     public function __construct(string $type, array $coordinates)
     {
         $this->type        = $type;
@@ -24,7 +24,7 @@ final class Boundaries
         return $this->type;
     }
 
-    /** @return mixed */
+    /** @return mixed[] */
     public function coordinates() : array
     {
         return $this->coordinates;

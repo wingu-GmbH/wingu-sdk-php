@@ -21,20 +21,31 @@ final class ObjectDenormalizer extends ObjectNormalizer
     /** @var null|PropertyTypeExtractorInterface */
     private $typeExtractor;
 
-    public function __construct(?ClassMetadataFactoryInterface $classMetadataFactory = null, ?NameConverterInterface $nameConverter = null, ?PropertyAccessorInterface $propertyAccessor = null, ?PropertyTypeExtractorInterface $propertyTypeExtractor = null)
-    {
+    /**
+     * {@inheritdoc}
+     */
+    public function __construct(
+        ?ClassMetadataFactoryInterface $classMetadataFactory = null,
+        ?NameConverterInterface $nameConverter = null,
+        ?PropertyAccessorInterface $propertyAccessor = null,
+        ?PropertyTypeExtractorInterface $propertyTypeExtractor = null
+    ) {
         $this->typeExtractor = $propertyTypeExtractor;
 
         parent::__construct($classMetadataFactory, $nameConverter, $propertyAccessor, $propertyTypeExtractor);
     }
 
-    /** @param mixed[] $data
-     * @param mixed   $class
-     * @param mixed[] $context
-     * @return mixed
+    /**
+     * {@inheritdoc}
      */
-    protected function instantiateObject(array &$data, $class, array &$context, \ReflectionClass $reflectionClass, $allowedAttributes, ?string $format = null)
-    {
+    protected function instantiateObject(
+        array &$data,
+        $class,
+        array &$context,
+        \ReflectionClass $reflectionClass,
+        $allowedAttributes,
+        ?string $format = null
+    ) {
         $object = $this->extractObjectToPopulate($class, $context, static::OBJECT_TO_POPULATE);
         if ($object !== null) {
             unset($context[static::OBJECT_TO_POPULATE]);
@@ -56,7 +67,13 @@ final class ObjectDenormalizer extends ObjectNormalizer
                 if ($constructorParameter->isVariadic()) {
                     if ($allowed && ! $ignored && (isset($data[$key]) || \array_key_exists($key, $data))) {
                         if (! \is_array($data[$paramName])) {
-                            throw new RuntimeException(\sprintf('Cannot create an instance of %s from serialized data because the variadic parameter %s can only accept an array.', $class, $constructorParameter->name));
+                            throw new RuntimeException(
+                                \sprintf(
+                                    'Cannot create an instance of %s from serialized data because the variadic parameter %s can only accept an array.',
+                                    $class,
+                                    $constructorParameter->name
+                                )
+                            );
                         }
 
                         $params = \array_merge($params, $data[$paramName]);
@@ -66,15 +83,36 @@ final class ObjectDenormalizer extends ObjectNormalizer
                     try {
                         if ($constructorParameter->getClass() !== null) {
                             if (! $this->serializer instanceof DenormalizerInterface) {
-                                throw new LogicException(\sprintf('Cannot create an instance of %s from serialized data because the serializer inject in "%s" is not a denormalizer', $constructorParameter->getClass(), static::class));
+                                throw new LogicException(
+                                    \sprintf(
+                                        'Cannot create an instance of %s from serialized data because the serializer inject in "%s" is not a denormalizer',
+                                        $constructorParameter->getClass(),
+                                        static::class
+                                    )
+                                );
                             }
                             $parameterClass = $constructorParameter->getClass()->getName();
-                            $parameterData  = $this->serializer->denormalize($parameterData, $parameterClass, $format, $this->createChildContext($context, $paramName));
+                            $parameterData  = $this->serializer->denormalize(
+                                $parameterData,
+                                $parameterClass,
+                                $format,
+                                $this->createChildContext($context, $paramName)
+                            );
                         } else {
-                            $parameterData = $this->validateAndDenormalize($class, $paramName, $data[$key], $format, $context);
+                            $parameterData = $this->validateAndDenormalize(
+                                $class,
+                                $paramName,
+                                $data[$key],
+                                $format,
+                                $context
+                            );
                         }
                     } catch (\ReflectionException $e) {
-                        throw new RuntimeException(\sprintf('Could not determine the class of the parameter "%s".', $key), 0, $e);
+                        throw new RuntimeException(
+                            \sprintf('Could not determine the class of the parameter "%s".', $key),
+                            0,
+                            $e
+                        );
                     }
 
                     // Don't run set for a parameter passed to the constructor
@@ -103,14 +141,24 @@ final class ObjectDenormalizer extends ObjectNormalizer
         return new $class();
     }
 
-    /** @param mixed[] $context
+    /**
+     * @param mixed[] $context
      * @param mixed   $data
      * @return mixed
      */
-    private function validateAndDenormalize(string $currentClass, string $attribute, $data, ?string $format, array $context)
-    {
+    private function validateAndDenormalize(
+        string $currentClass,
+        string $attribute,
+        $data,
+        ?string $format,
+        array $context
+    ) {
+        if ($this->typeExtractor === null) {
+            return $data;
+        }
+
         $types = $this->typeExtractor->getTypes($currentClass, $attribute);
-        if ($this->typeExtractor === null || $types === null) {
+        if ($types === null) {
             return $data;
         }
 
@@ -120,25 +168,33 @@ final class ObjectDenormalizer extends ObjectNormalizer
                 return null;
             }
 
-            $collectionValueType = $type->getCollectionValueType();
-            if (($collectionValueType !== null) && $type->isCollection() && $collectionValueType->getBuiltinType() === Type::BUILTIN_TYPE_OBJECT) {
-                $builtinType = Type::BUILTIN_TYPE_OBJECT;
-                $class       = $collectionValueType->getClassName() . '[]';
+            $builtinType = $type->getBuiltinType();
+            $class       = $type->getClassName();
 
-                $collectionKeyType = $type->getCollectionKeyType();
-                if ($collectionKeyType !== null) {
-                    $context['key_type'] = $collectionKeyType;
+            if ($type->isCollection()) {
+                $collectionValueType = $type->getCollectionValueType();
+                if ($collectionValueType !== null && $collectionValueType->getBuiltinType() === Type::BUILTIN_TYPE_OBJECT) {
+                    $builtinType       = Type::BUILTIN_TYPE_OBJECT;
+                    $class             = $collectionValueType->getClassName() . '[]';
+                    $collectionKeyType = $type->getCollectionKeyType();
+
+                    if ($collectionKeyType !== null) {
+                        $context['key_type'] = $collectionKeyType;
+                    }
                 }
-            } else {
-                $builtinType = $type->getBuiltinType();
-                $class       = $type->getClassName();
             }
 
             $expectedTypes[Type::BUILTIN_TYPE_OBJECT === $builtinType && $class ? $class : $builtinType] = true;
 
             if ($builtinType === Type::BUILTIN_TYPE_OBJECT) {
                 if (! $this->serializer instanceof DenormalizerInterface) {
-                    throw new LogicException(\sprintf('Cannot denormalize attribute "%s" for class "%s" because injected serializer is not a denormalizer', $attribute, $class));
+                    throw new LogicException(
+                        \sprintf(
+                            'Cannot denormalize attribute "%s" for class "%s" because injected serializer is not a denormalizer',
+                            $attribute,
+                            $class
+                        )
+                    );
                 }
 
                 $childContext = $this->createChildContext($context, $attribute);
@@ -150,7 +206,7 @@ final class ObjectDenormalizer extends ObjectNormalizer
             // JSON only has a Number type corresponding to both int and float PHP types.
             // PHP's json_encode, JavaScript's JSON.stringify, Go's json.Marshal as well as most other JSON encoders convert
             // floating-point numbers like 12.0 to 12 (the decimal part is dropped when possible).
-            // PHP's json_decode automatically converts Numbers without a decimal part to integers.
+            // PHP's json_decode automatically converts Numbers without a decimal part to integers.     Boundaries
             // To circumvent this behavior, integers are converted to floats when denormalizing JSON based formats and when
             // a float is expected.
             if ($builtinType === Type::BUILTIN_TYPE_FLOAT && \is_int($data) && \strpos($format, JsonEncoder::FORMAT) !== false) {
@@ -166,6 +222,14 @@ final class ObjectDenormalizer extends ObjectNormalizer
             return $data;
         }
 
-        throw new NotNormalizableValueException(\sprintf('The type of the "%s" attribute for class "%s" must be one of "%s" ("%s" given).', $attribute, $currentClass, \implode('", "', \array_keys($expectedTypes)), \gettype($data)));
+        throw new NotNormalizableValueException(
+            \sprintf(
+                'The type of the "%s" attribute for class "%s" must be one of "%s" ("%s" given).',
+                $attribute,
+                $currentClass,
+                \implode('", "', \array_keys($expectedTypes)),
+                \gettype($data)
+            )
+        );
     }
 }

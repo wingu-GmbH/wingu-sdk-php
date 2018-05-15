@@ -79,7 +79,8 @@ final class NfcApiTest extends ApiTest
             ],
             new \DateTimeZone('Europe/Berlin')
         );
-        $expected                 = new PrivateNfc(
+
+        $expected = new PrivateNfc(
             '9a8798c6-0000-4000-a000-000000000002',
             'Funny Mouse',
             true,
