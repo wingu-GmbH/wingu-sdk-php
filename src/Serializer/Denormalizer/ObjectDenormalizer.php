@@ -184,7 +184,11 @@ final class ObjectDenormalizer extends ObjectNormalizer
                 }
             }
 
-            $expectedTypes[Type::BUILTIN_TYPE_OBJECT === $builtinType && $class ? $class : $builtinType] = true;
+            if ($class === null) {
+                return null;
+            }
+
+            $expectedTypes[Type::BUILTIN_TYPE_OBJECT === $builtinType && (bool) $class ? $class : $builtinType] = true;
 
             if ($builtinType === Type::BUILTIN_TYPE_OBJECT) {
                 if (! $this->serializer instanceof DenormalizerInterface) {

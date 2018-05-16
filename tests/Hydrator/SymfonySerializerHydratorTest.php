@@ -27,7 +27,7 @@ final class SymfonySerializerHydratorTest extends TestCase
         $hydrator->hydrateResponse($response, \stdClass::class);
     }
 
-    /** @return string[] */
+    /** @return mixed[] */
     public static function dataProviderTestHydrateResponseValidatesContentTypes() : array
     {
         return [

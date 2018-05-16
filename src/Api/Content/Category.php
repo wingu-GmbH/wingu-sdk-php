@@ -24,6 +24,7 @@ final class Category extends Api
         );
     }
 
+    /** @return mixed[] */
     private function getEmbeddedPage(string $href) : array
     {
         $request = $this->createGetRequest($href);

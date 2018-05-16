@@ -48,6 +48,10 @@ final class PaginatedResponseIterator implements \Iterator, \Countable
             return;
         }
 
+        if ($this->pageInfo->links()->next() === null) {
+            return;
+        }
+
         $this->fetchEmbedded($this->pageInfo->links()->next());
     }
 

@@ -8,10 +8,13 @@ use Wingu\Engine\SDK\Assertion;
 
 final class Category
 {
+    /** @var int */
     private $id;
 
+    /** @var string */
     private $name;
 
+    /** @var string */
     private $colorHex;
 
     public function __construct(int $id, string $name, string $colorHex)

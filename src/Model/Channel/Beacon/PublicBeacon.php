@@ -34,7 +34,7 @@ final class PublicBeacon implements Channel
         $this->content = $content;
     }
 
-    public function content() : PublicContent
+    public function content() : ?PublicContent
     {
         return $this->content;
     }
