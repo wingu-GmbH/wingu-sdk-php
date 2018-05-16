@@ -184,11 +184,7 @@ final class ObjectDenormalizer extends ObjectNormalizer
                 }
             }
 
-            if ($class === null) {
-                return null;
-            }
-
-            $expectedTypes[Type::BUILTIN_TYPE_OBJECT === $builtinType ? $class : $builtinType] = true;
+            $expectedTypes[Type::BUILTIN_TYPE_OBJECT === $builtinType && $class !== null ? $class : $builtinType] = true;
 
             if ($builtinType === Type::BUILTIN_TYPE_OBJECT) {
                 if (! $this->serializer instanceof DenormalizerInterface) {
@@ -201,6 +197,9 @@ final class ObjectDenormalizer extends ObjectNormalizer
                     );
                 }
 
+                if ($class === null) {
+                    return null;
+                }
                 $childContext = $this->createChildContext($context, $attribute);
                 if ($this->serializer->supportsDenormalization($data, $class, $format)) {
                     return $this->serializer->denormalize($data, $class, $format, $childContext);
