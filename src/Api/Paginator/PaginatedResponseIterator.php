@@ -44,11 +44,7 @@ final class PaginatedResponseIterator implements \Iterator, \Countable
     {
         $this->currentPagePosition++;
 
-        if ($this->currentPagePosition !== $this->pageInfo->limit() || ! $this->pageInfo->hasNextPage()) {
-            return;
-        }
-
-        if ($this->pageInfo->links()->next() === null) {
+        if ($this->currentPagePosition !== $this->pageInfo->limit() || $this->pageInfo->links()->next() === null) {
             return;
         }
 

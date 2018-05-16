@@ -38,7 +38,6 @@ final class SymfonySerializerHydratorTest extends TestCase
 
     /**
      * @dataProvider dataProviderTestHydrateResponseValidatesContentTypes
-     *
      */
     public function testHydrateResponseValidatesContentTypes(string $contentType) : void
     {

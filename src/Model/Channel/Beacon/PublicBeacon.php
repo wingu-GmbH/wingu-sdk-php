@@ -14,10 +14,10 @@ final class PublicBeacon implements Channel
     use ChannelTrait;
     use BeaconTrait;
 
-    /** @var null|PublicContent */
+    /** @var PublicContent */
     private $content;
 
-    public function __construct(string $id, string $name, string $uuid, int $major, int $minor, ?PublicContent $content)
+    public function __construct(string $id, string $name, string $uuid, int $major, int $minor, PublicContent $content)
     {
         Assertion::uuid($id);
         Assertion::notEmpty($name);
@@ -34,7 +34,7 @@ final class PublicBeacon implements Channel
         $this->content = $content;
     }
 
-    public function content() : ?PublicContent
+    public function content() : PublicContent
     {
         return $this->content;
     }
