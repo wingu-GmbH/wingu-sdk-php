@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Wingu\Engine\SDK\Model\Channel\Beacon;
 
@@ -34,18 +34,18 @@ final class PrivateBeacon implements PrivateChannel
         Assertion::between($major, 1, 65535);
         Assertion::between($minor, 1, 65535);
 
-        $this->id = $id;
-        $this->name = $name;
-        $this->uuid = $uuid;
+        $this->id    = $id;
+        $this->name  = $name;
+        $this->uuid  = $uuid;
         $this->major = $major;
         $this->minor = $minor;
 
-        $this->active = $active;
+        $this->active    = $active;
         $this->published = $published;
 
         $this->note = $note;
 
         $this->inFunctioningHours = $inFunctioningHours;
-        $this->functioningHours = $functioningHours;
+        $this->functioningHours   = $functioningHours;
     }
 }

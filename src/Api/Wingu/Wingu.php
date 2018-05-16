@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Wingu\Engine\SDK\Api\Wingu;
 
@@ -9,7 +9,7 @@ use Wingu\Engine\SDK\Model\Wingu\Ping\Ping;
 
 final class Wingu extends Api
 {
-    public function ping(): Ping
+    public function ping() : Ping
     {
         $request = $this->createGetRequest('/api/wingu/ping.json');
 

@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Wingu\Engine\SDK\Hydrator;
 
@@ -16,6 +16,7 @@ use Wingu\Engine\SDK\Serializer\Denormalizer\PrivateChannelDenormalizer;
 
 final class SymfonySerializerHydrator implements Hydrator
 {
+    /** @var Serializer */
     private $serializer;
 
     public function __construct()
@@ -26,26 +27,30 @@ final class SymfonySerializerHydrator implements Hydrator
                 new PrivateChannelDenormalizer(),
                 new CountryDenormalizer(),
                 new FunctioningHoursDenormalizer(),
-                new ObjectDenormalizer(null, null, null, new PhpDocExtractor())
+                new ObjectDenormalizer(null, null, null, new PhpDocExtractor()),
             ],
             [new JsonEncoder()]
         );
     }
 
+    /** @param mixed[] $data
+     * @return mixed
+     */
     public function hydrateData(array $data, string $class)
     {
         try {
             return $this->serializer->denormalize($data, $class);
-        } catch (\Exception $exception) {
-            throw new HydrationException('Could not hydrate response.', 0, $exception);
+        } catch (\Throwable $exception) {
+            throw new Hydration('Could not hydrate response.', 0, $exception);
         }
     }
 
+    /** @return mixed */
     public function hydrateResponse(ResponseInterface $response, string $class)
     {
         $contentType = $response->getHeaderLine('Content-Type');
         if ($contentType !== 'application/json' && \strpos($contentType, 'application/json+') !== 0) {
-            throw new HydrationException(
+            throw new Hydration(
                 \sprintf(
                     'The %s cannot hydrate response with Content-Type: %s',
                     __CLASS__,
@@ -61,8 +66,8 @@ final class SymfonySerializerHydrator implements Hydrator
                     $class,
                     'json'
                 );
-        } catch (\Exception $exception) {
-            throw new HydrationException('Could not hydrate response.', 0, $exception);
+        } catch (\Throwable $exception) {
+            throw new Hydration('Could not hydrate response.', 0, $exception);
         }
     }
 }

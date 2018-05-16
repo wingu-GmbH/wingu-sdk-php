@@ -1,19 +1,18 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Wingu\Engine\SDK\Tests\Hydrator;
 
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\StreamInterface;
-use Wingu\Engine\SDK\Hydrator\HydrationException;
+use Wingu\Engine\SDK\Hydrator\Hydration;
 use Wingu\Engine\SDK\Hydrator\SymfonySerializerHydrator;
 
 final class SymfonySerializerHydratorTest extends TestCase
 {
-
-    public function testHydrateResponseThrowsExceptionWhenContentTypeIsNotJson(): void
+    public function testHydrateResponseThrowsExceptionWhenContentTypeIsNotJson() : void
     {
         $response = $this->createMock(ResponseInterface::class);
         $response
@@ -24,24 +23,23 @@ final class SymfonySerializerHydratorTest extends TestCase
 
         $hydrator = new SymfonySerializerHydrator();
 
-        $this->expectException(HydrationException::class);
+        $this->expectException(Hydration::class);
         $hydrator->hydrateResponse($response, \stdClass::class);
     }
 
-    public static function dataProviderTestHydrateResponseValidatesContentTypes(): array
+    /** @return mixed[] */
+    public static function dataProviderTestHydrateResponseValidatesContentTypes() : array
     {
         return [
             ['application/json'],
-            ['application/json+custom']
+            ['application/json+custom'],
         ];
     }
 
     /**
      * @dataProvider dataProviderTestHydrateResponseValidatesContentTypes
-     *
-     * @param string $contentType
      */
-    public function testHydrateResponseValidatesContentTypes(string $contentType): void
+    public function testHydrateResponseValidatesContentTypes(string $contentType) : void
     {
         $response = $this->createMock(ResponseInterface::class);
         $response
@@ -61,7 +59,7 @@ final class SymfonySerializerHydratorTest extends TestCase
             ->willReturn($responseBody);
 
         $hydrator = new SymfonySerializerHydrator();
-        $actual = $hydrator->hydrateResponse($response, \stdClass::class);
+        $actual   = $hydrator->hydrateResponse($response, \stdClass::class);
 
         self::assertEquals(new \stdClass(), $actual);
     }

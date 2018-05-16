@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Wingu\Engine\SDK\Api\Content;
 
@@ -9,7 +9,7 @@ use Wingu\Engine\SDK\Model\Content\PrivateContent;
 
 final class Content extends Api
 {
-    public function myContent(string $id): PrivateContent
+    public function myContent(string $id) : PrivateContent
     {
         $request = $this->createGetRequest('/api/content/my/' . $id . '.json');
 

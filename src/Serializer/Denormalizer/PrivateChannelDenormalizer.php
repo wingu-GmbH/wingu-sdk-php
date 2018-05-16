@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Wingu\Engine\SDK\Serializer\Denormalizer;
 
@@ -17,9 +17,7 @@ use Wingu\Engine\SDK\Model\Channel\QrCode\PrivateQrCode;
 
 final class PrivateChannelDenormalizer implements DenormalizerInterface, SerializerAwareInterface
 {
-    /**
-     * @var DenormalizerInterface
-     */
+    /** @var DenormalizerInterface */
     private $serializer;
 
     /**
@@ -44,7 +42,7 @@ final class PrivateChannelDenormalizer implements DenormalizerInterface, Seriali
     /**
      * {@inheritdoc}
      */
-    public function supportsDenormalization($data, $type, $format = null): bool
+    public function supportsDenormalization($data, $type, $format = null) : bool
     {
         return $type === PrivateChannel::class;
     }
@@ -54,7 +52,7 @@ final class PrivateChannelDenormalizer implements DenormalizerInterface, Seriali
      */
     public function setSerializer(SerializerInterface $serializer)
     {
-        if (!$serializer instanceof DenormalizerInterface) {
+        if (! $serializer instanceof DenormalizerInterface) {
             throw new InvalidArgumentException(
                 \sprintf('Expected a serializer that also implements %s.', DenormalizerInterface::class)
             );

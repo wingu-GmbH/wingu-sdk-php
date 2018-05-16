@@ -1,25 +1,26 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Wingu\Engine\SDK\Api\Exception;
 
 use Psr\Http\Message\ResponseInterface;
 use Throwable;
-use Wingu\Engine\SDK\Api\Exception;
+use Wingu\Engine\SDK\Api\Generic;
 
-class HttpClient extends Exception
+class HttpClient extends Generic
 {
+    /** @var ResponseInterface */
     private $response;
 
-    public function __construct(string $message, ResponseInterface $response, Throwable $previous = null)
+    public function __construct(string $message, ResponseInterface $response, ?Throwable $previous = null)
     {
         $this->response = $response;
 
         parent::__construct($message, $response->getStatusCode(), $previous);
     }
 
-    public function response(): ResponseInterface
+    public function response() : ResponseInterface
     {
         return $this->response;
     }

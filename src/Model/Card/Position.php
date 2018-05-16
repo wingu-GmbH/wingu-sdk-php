@@ -1,11 +1,12 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Wingu\Engine\SDK\Model\Card;
 
 final class Position
 {
+    /** @var int */
     private $sort;
 
     public function __construct(int $sort)
@@ -13,7 +14,7 @@ final class Position
         $this->sort = $sort;
     }
 
-    public function sort(): int
+    public function sort() : int
     {
         return $this->sort;
     }

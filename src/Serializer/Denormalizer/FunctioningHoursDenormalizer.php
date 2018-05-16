@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Wingu\Engine\SDK\Serializer\Denormalizer;
 
@@ -12,10 +12,10 @@ use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 final class FunctioningHoursDenormalizer implements DenormalizerInterface
 {
     /**
-     * @param mixed $data Data to restore
-     * @param string $class The expected class to instantiate
-     * @param string $format Format the given data was extracted from
-     * @param array $context Options available to the denormalizer
+     * @param mixed    $data    Data to restore
+     * @param string   $class   The expected class to instantiate
+     * @param string   $format  Format the given data was extracted from
+     * @param string[] $context Options available to the denormalizer
      * @return mixed
      */
     public function denormalize($data, $class, $format = null, array $context = [])
@@ -24,19 +24,19 @@ final class FunctioningHoursDenormalizer implements DenormalizerInterface
             return null;
         }
 
-        if (!isset($data['days'], $data['timezone'])) {
+        if (! isset($data['days'], $data['timezone'])) {
             throw new NotNormalizableValueException('Invalid functioning hours data.');
         }
 
         $days = [];
         foreach ($data['days'] as $day) {
-            if (!isset($day['dayOfWeek'], $day['intervals'])) {
+            if (! isset($day['dayOfWeek'], $day['intervals'])) {
                 throw new NotNormalizableValueException('Invalid functioning hours data.');
             }
 
             $days[] = [
                 'dayOfWeek' => $day['dayOfWeek'],
-                'openingIntervals' => $day['intervals']
+                'openingIntervals' => $day['intervals'],
             ];
         }
 
@@ -44,7 +44,7 @@ final class FunctioningHoursDenormalizer implements DenormalizerInterface
 
         try {
             return BusinessHoursBuilder::fromAssociativeArray($data);
-        } catch (\Exception $e) {
+        } catch (\Throwable $e) {
             throw new NotNormalizableValueException('Invalid functioning hours data.', 0, $e);
         }
     }
@@ -52,7 +52,7 @@ final class FunctioningHoursDenormalizer implements DenormalizerInterface
     /**
      * {@inheritdoc}
      */
-    public function supportsDenormalization($data, $type, $format = null): bool
+    public function supportsDenormalization($data, $type, $format = null) : bool
     {
         if ($type !== BusinessHoursInterface::class) {
             return false;

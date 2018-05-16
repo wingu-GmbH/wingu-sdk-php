@@ -1,37 +1,31 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Wingu\Engine\SDK\Model\Channel\Beacon;
 
 trait BeaconTrait
 {
-    /**
-     * @var string
-     */
+    /** @var string */
     private $uuid;
 
-    /**
-     * @var int
-     */
+    /** @var int */
     private $major;
 
-    /**
-     * @var int
-     */
+    /** @var int */
     private $minor;
 
-    public function uuid(): string
+    public function uuid() : string
     {
         return $this->uuid;
     }
 
-    public function major(): int
+    public function major() : int
     {
         return $this->major;
     }
 
-    public function minor(): int
+    public function minor() : int
     {
         return $this->minor;
     }

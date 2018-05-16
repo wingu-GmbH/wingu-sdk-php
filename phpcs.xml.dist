@@ -1,12 +1,15 @@
 <?xml version="1.0"?>
 <ruleset name="wingu php sdk coding standard">
     <!-- display progress -->
-    <arg value="p" />
-    <arg name="colors" />
+    <arg value="p"/>
+    <arg name="colors"/>
 
     <!-- inherit rules from: -->
-    <rule ref="PSR2" />
-    <rule ref="Generic.Arrays.DisallowLongArraySyntax" />
+    <rule ref="Doctrine">
+        <exclude name="SlevomatCodingStandard.Namespaces.ReferenceUsedNamesOnly"/>
+    </rule>
+    <rule ref="SlevomatCodingStandard.Namespaces.FullyQualifiedGlobalConstants"/>
+    <rule ref="SlevomatCodingStandard.Namespaces.FullyQualifiedGlobalFunctions"/>
     <rule ref="Generic.Files.LineLength">
         <properties>
             <property name="absoluteLineLimit" value="0" />

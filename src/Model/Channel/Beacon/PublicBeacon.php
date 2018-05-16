@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Wingu\Engine\SDK\Model\Channel\Beacon;
 
@@ -14,9 +14,10 @@ final class PublicBeacon implements Channel
     use ChannelTrait;
     use BeaconTrait;
 
+    /** @var PublicContent */
     private $content;
 
-    public function __construct(string $id, string $name, string $uuid, int $major, int $minor, ?PublicContent $content)
+    public function __construct(string $id, string $name, string $uuid, int $major, int $minor, PublicContent $content)
     {
         Assertion::uuid($id);
         Assertion::notEmpty($name);
@@ -24,16 +25,16 @@ final class PublicBeacon implements Channel
         Assertion::between($major, 1, 65535);
         Assertion::between($minor, 1, 65535);
 
-        $this->id = $id;
-        $this->name = $name;
-        $this->uuid = $uuid;
+        $this->id    = $id;
+        $this->name  = $name;
+        $this->uuid  = $uuid;
         $this->major = $major;
         $this->minor = $minor;
 
         $this->content = $content;
     }
 
-    public function content(): PublicContent
+    public function content() : PublicContent
     {
         return $this->content;
     }

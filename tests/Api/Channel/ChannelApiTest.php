@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Wingu\Engine\SDK\Tests\Api\Channel;
 
@@ -11,7 +11,7 @@ use Speicher210\BusinessHours\BusinessHours;
 use Speicher210\BusinessHours\Day\AllDay;
 use Speicher210\BusinessHours\Day\Day;
 use Speicher210\BusinessHours\Day\Time\TimeInterval;
-use Wingu\Engine\SDK\Api\Channel\Channel;
+use Wingu\Engine\SDK\Api\Channel\ChannelApi;
 use Wingu\Engine\SDK\Api\Configuration;
 use Wingu\Engine\SDK\Hydrator\SymfonySerializerHydrator;
 use Wingu\Engine\SDK\Model\Channel\Beacon\PrivateBeacon;
@@ -21,13 +21,13 @@ use Wingu\Engine\SDK\Model\Channel\Nfc\PrivateNfc;
 use Wingu\Engine\SDK\Model\Channel\QrCode\PrivateQrCode;
 use Wingu\Engine\SDK\Tests\Api\ApiTest;
 
-final class ChannelTest extends ApiTest
+final class ChannelApiTest extends ApiTest
 {
-    public function testMyChannelReturnsPrivateBeacon(): void
+    public function testMyChannelReturnsPrivateBeacon() : void
     {
         $configurationMock = new Configuration();
-        $requestFactory = new GuzzleMessageFactory();
-        $hydrator = new SymfonySerializerHydrator();
+        $requestFactory    = new GuzzleMessageFactory();
+        $hydrator          = new SymfonySerializerHydrator();
 
         $httpClient = new MockClient();
         $httpClient->addResponse(
@@ -38,19 +38,19 @@ final class ChannelTest extends ApiTest
             )
         );
 
-        $winguApi = new Channel($configurationMock, $httpClient, $requestFactory, $hydrator);
+        $winguApi = new ChannelApi($configurationMock, $httpClient, $requestFactory, $hydrator);
 
-        $actual = $winguApi->myChannel('8c798a67-0000-4000-a000-000000000001');
+        $actual   = $winguApi->myChannel('8c798a67-0000-4000-a000-000000000001');
         $expected = $this->getExpectedPrivateBeacon();
 
         self::assertEquals($expected, $actual);
     }
 
-    public function testMyChannelReturnsPrivateGeofence(): void
+    public function testMyChannelReturnsPrivateGeofence() : void
     {
         $configurationMock = new Configuration();
-        $requestFactory = new GuzzleMessageFactory();
-        $hydrator = new SymfonySerializerHydrator();
+        $requestFactory    = new GuzzleMessageFactory();
+        $hydrator          = new SymfonySerializerHydrator();
 
         $httpClient = new MockClient();
         $httpClient->addResponse(
@@ -61,19 +61,19 @@ final class ChannelTest extends ApiTest
             )
         );
 
-        $winguApi = new Channel($configurationMock, $httpClient, $requestFactory, $hydrator);
+        $winguApi = new ChannelApi($configurationMock, $httpClient, $requestFactory, $hydrator);
 
-        $actual = $winguApi->myChannel('0a0b190a-0000-4000-a000-000000000001');
+        $actual   = $winguApi->myChannel('0a0b190a-0000-4000-a000-000000000001');
         $expected = $this->getExpectedPrivateGeofence();
 
         self::assertEquals($expected, $actual);
     }
 
-    public function testMyChannelReturnsPrivateNfc(): void
+    public function testMyChannelReturnsPrivateNfc() : void
     {
         $configurationMock = new Configuration();
-        $requestFactory = new GuzzleMessageFactory();
-        $hydrator = new SymfonySerializerHydrator();
+        $requestFactory    = new GuzzleMessageFactory();
+        $hydrator          = new SymfonySerializerHydrator();
 
         $httpClient = new MockClient();
         $httpClient->addResponse(
@@ -84,19 +84,19 @@ final class ChannelTest extends ApiTest
             )
         );
 
-        $winguApi = new Channel($configurationMock, $httpClient, $requestFactory, $hydrator);
+        $winguApi = new ChannelApi($configurationMock, $httpClient, $requestFactory, $hydrator);
 
-        $actual = $winguApi->myChannel('44da7d7e-0000-4000-a000-000000000001');
+        $actual   = $winguApi->myChannel('44da7d7e-0000-4000-a000-000000000001');
         $expected = $this->getExpectedPrivateNfc();
 
         self::assertEquals($expected, $actual);
     }
 
-    public function testMyChannelReturnsPrivateQrCode(): void
+    public function testMyChannelReturnsPrivateQrCode() : void
     {
         $configurationMock = new Configuration();
-        $requestFactory = new GuzzleMessageFactory();
-        $hydrator = new SymfonySerializerHydrator();
+        $requestFactory    = new GuzzleMessageFactory();
+        $hydrator          = new SymfonySerializerHydrator();
 
         $httpClient = new MockClient();
         $httpClient->addResponse(
@@ -107,19 +107,19 @@ final class ChannelTest extends ApiTest
             )
         );
 
-        $winguApi = new Channel($configurationMock, $httpClient, $requestFactory, $hydrator);
+        $winguApi = new ChannelApi($configurationMock, $httpClient, $requestFactory, $hydrator);
 
-        $actual = $winguApi->myChannel('9a8798c6-0000-4000-a000-000000000001');
+        $actual   = $winguApi->myChannel('9a8798c6-0000-4000-a000-000000000001');
         $expected = $this->getExpectedPrivateQrCode();
 
         self::assertEquals($expected, $actual);
     }
 
-    public function testMyChannelsReturnsResult(): void
+    public function testMyChannelsReturnsResult() : void
     {
         $configurationMock = new Configuration();
-        $requestFactory = new GuzzleMessageFactory();
-        $hydrator = new SymfonySerializerHydrator();
+        $requestFactory    = new GuzzleMessageFactory();
+        $hydrator          = new SymfonySerializerHydrator();
 
         $httpClient = new MockClient();
         $httpClient->addResponse(
@@ -130,25 +130,25 @@ final class ChannelTest extends ApiTest
             )
         );
 
-        $channelApi = new Channel($configurationMock, $httpClient, $requestFactory, $hydrator);
-        $actual = $channelApi->myChannels();
+        $channelApi = new ChannelApi($configurationMock, $httpClient, $requestFactory, $hydrator);
+        $actual     = $channelApi->myChannels();
 
         $expected = [
             $this->getExpectedPrivateBeacon(),
             $this->getExpectedPrivateNfc(),
             $this->getExpectedPrivateQrCode(),
-            $this->getExpectedPrivateGeofence()
+            $this->getExpectedPrivateGeofence(),
         ];
 
         self::assertCount(4, $actual);
         self::assertEquals($expected, \iterator_to_array($actual));
     }
 
-    public function testMyChannelsReturnsResultAndFetchesNextPages(): void
+    public function testMyChannelsReturnsResultAndFetchesNextPages() : void
     {
         $configurationMock = new Configuration();
-        $requestFactory = new GuzzleMessageFactory();
-        $hydrator = new SymfonySerializerHydrator();
+        $requestFactory    = new GuzzleMessageFactory();
+        $hydrator          = new SymfonySerializerHydrator();
 
         $httpClient = new MockClient();
         $httpClient->addResponse(
@@ -180,21 +180,21 @@ final class ChannelTest extends ApiTest
             )
         );
 
-        $channelApi = new Channel($configurationMock, $httpClient, $requestFactory, $hydrator);
-        $actual = $channelApi->myChannels();
+        $channelApi = new ChannelApi($configurationMock, $httpClient, $requestFactory, $hydrator);
+        $actual     = $channelApi->myChannels();
 
         $expected = [
             $this->getExpectedPrivateBeacon(),
             $this->getExpectedPrivateNfc(),
             $this->getExpectedPrivateQrCode(),
-            $this->getExpectedPrivateGeofence()
+            $this->getExpectedPrivateGeofence(),
         ];
 
         self::assertCount(4, $actual);
         self::assertEquals($expected, \iterator_to_array($actual));
     }
 
-    private function getExpectedPrivateBeacon(): PrivateBeacon
+    private function getExpectedPrivateBeacon() : PrivateBeacon
     {
         return new PrivateBeacon(
             '8c798a67-0000-4000-a000-000000000001',
@@ -210,7 +210,7 @@ final class ChannelTest extends ApiTest
         );
     }
 
-    private function getExpectedPrivateNfc(): PrivateNfc
+    private function getExpectedPrivateNfc() : PrivateNfc
     {
         return new PrivateNfc(
             '44da7d7e-0000-4000-a000-000000000001',
@@ -224,7 +224,7 @@ final class ChannelTest extends ApiTest
         );
     }
 
-    private function getExpectedPrivateQrCode(): PrivateQrCode
+    private function getExpectedPrivateQrCode() : PrivateQrCode
     {
         return new PrivateQrCode(
             '9a8798c6-0000-4000-a000-000000000001',
@@ -238,7 +238,7 @@ final class ChannelTest extends ApiTest
         );
     }
 
-    private function getExpectedPrivateGeofence()
+    private function getExpectedPrivateGeofence() : PrivateGeofence
     {
         return new PrivateGeofence(
             '0a0b190a-0000-4000-a000-000000000001',
@@ -256,14 +256,14 @@ final class ChannelTest extends ApiTest
                         [9.723595, 53.662321315284],
                         [9.7251110338049, 53.66232130571],
                         [9.7251110338049, 53.661422990426],
-                        [9.723595, 53.661423]
-                    ]
+                        [9.723595, 53.661423],
+                    ],
                 ]
             )
         );
     }
 
-    private function getExpectedFunctioningHours(): BusinessHours
+    private function getExpectedFunctioningHours() : BusinessHours
     {
         return new BusinessHours(
             [
@@ -272,10 +272,10 @@ final class ChannelTest extends ApiTest
                     Day::WEEK_DAY_WEDNESDAY,
                     [
                         TimeInterval::fromString('08:00', '12:00'),
-                        TimeInterval::fromString('13:00', '18:00')
+                        TimeInterval::fromString('13:00', '18:00'),
                     ]
                 ),
-                new AllDay(Day::WEEK_DAY_FRIDAY)
+                new AllDay(Day::WEEK_DAY_FRIDAY),
             ],
             new \DateTimeZone('Europe/Berlin')
         );

@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Wingu\Engine\SDK\Tests\Api;
 
@@ -9,25 +9,25 @@ use Http\Message\MessageFactory\GuzzleMessageFactory;
 use Http\Mock\Client as MockClient;
 use Wingu\Engine\SDK\Api\Configuration;
 use Wingu\Engine\SDK\Api\Country;
-use Wingu\Engine\SDK\Api\Exception;
+use Wingu\Engine\SDK\Api\Generic;
 use Wingu\Engine\SDK\Hydrator\SymfonySerializerHydrator;
 use Wingu\Engine\SDK\Model\Country as CountryModel;
 
 final class CountryTest extends ApiTest
 {
-    public function testCountriesThrowsExceptionWhenResponseIsNot200(): void
+    public function testCountriesThrowsExceptionWhenResponseIsNot200() : void
     {
         $countryApi = $this->createCountryService(
             new Response(500, ['Content-Type' => 'application/json'], '{"code": 500, "errors": []}')
         );
 
-        $this->expectException(Exception::class);
+        $this->expectException(Generic::class);
         $this->expectExceptionMessage('Remote server error.');
 
         $countryApi->countries();
     }
 
-    public function testPingReturnsResult(): void
+    public function testPingReturnsResult() : void
     {
         $countryApi = $this->createCountryService(
             new Response(
@@ -36,21 +36,21 @@ final class CountryTest extends ApiTest
                 '[{"iso_3166_1_alpha_2":"DE","name":"Germany"},{"iso_3166_1_alpha_2":"PL","name":"Poland"},{"iso_3166_1_alpha_2":"RO","name":"Romania"}]'
             )
         );
-        $actual = $countryApi->countries();
+        $actual     = $countryApi->countries();
 
         $expected = [
             new CountryModel('DE', 'Germany'),
             new CountryModel('PL', 'Poland'),
-            new CountryModel('RO', 'Romania')
+            new CountryModel('RO', 'Romania'),
         ];
         self::assertEquals($expected, $actual);
     }
 
-    private function createCountryService(Response ...$httpClientResponses): Country
+    private function createCountryService(Response ...$httpClientResponses) : Country
     {
         $configurationMock = new Configuration();
-        $requestFactory = new GuzzleMessageFactory();
-        $hydrator = new SymfonySerializerHydrator();
+        $requestFactory    = new GuzzleMessageFactory();
+        $hydrator          = new SymfonySerializerHydrator();
 
         $httpClient = new MockClient();
         foreach ($httpClientResponses as $httpClientResponse) {

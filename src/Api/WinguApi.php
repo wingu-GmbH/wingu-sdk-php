@@ -1,13 +1,13 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Wingu\Engine\SDK\Api;
 
 use Http\Client\HttpClient;
 use Http\Message\RequestFactory;
-use Wingu\Engine\SDK\Api\Channel\Beacon\Beacon;
-use Wingu\Engine\SDK\Api\Channel\Channel;
+use Wingu\Engine\SDK\Api\Channel\Beacon\BeaconApi;
+use Wingu\Engine\SDK\Api\Channel\ChannelApi;
 use Wingu\Engine\SDK\Api\Content\Category;
 use Wingu\Engine\SDK\Api\Content\Content;
 use Wingu\Engine\SDK\Api\Wingu\Wingu;
@@ -15,14 +15,19 @@ use Wingu\Engine\SDK\Hydrator\Hydrator;
 
 final class WinguApi
 {
+    /** @var Configuration */
     private $configuration;
 
+    /** @var HttpClient */
     private $httpClient;
 
+    /** @var RequestFactory */
     private $requestFactory;
 
+    /** @var Hydrator */
     private $hydrator;
 
+    /** @var mixed[] */
     private $services = [];
 
     public function __construct(
@@ -31,40 +36,41 @@ final class WinguApi
         RequestFactory $requestFactory,
         Hydrator $hydrator
     ) {
-        $this->configuration = $configuration;
-        $this->httpClient = $httpClient;
+        $this->configuration  = $configuration;
+        $this->httpClient     = $httpClient;
         $this->requestFactory = $requestFactory;
-        $this->hydrator = $hydrator;
+        $this->hydrator       = $hydrator;
     }
 
-    public function channel(): Channel
+    public function channel() : ChannelApi
     {
-        return $this->getService(Channel::class);
+        return $this->getService(ChannelApi::class);
     }
 
-    public function beacon(): Beacon
+    public function beacon() : BeaconApi
     {
-        return $this->getService(Beacon::class);
+        return $this->getService(BeaconApi::class);
     }
 
-    public function content(): Content
+    public function content() : Content
     {
         return $this->getService(Content::class);
     }
 
-    public function category(): Category
+    public function category() : Category
     {
         return $this->getService(Category::class);
     }
 
-    public function wingu(): Wingu
+    public function wingu() : Wingu
     {
         return $this->getService(Wingu::class);
     }
 
+    /** @return mixed */
     private function getService(string $class)
     {
-        if (!isset($this->services[$class])) {
+        if (! isset($this->services[$class])) {
             $this->services[$class] = new $class(
                 $this->configuration,
                 $this->httpClient,

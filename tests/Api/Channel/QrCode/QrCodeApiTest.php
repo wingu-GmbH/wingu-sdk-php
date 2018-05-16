@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Wingu\Engine\SDK\Tests\Api\Channel\QrCode;
 
@@ -11,20 +11,20 @@ use Speicher210\BusinessHours\BusinessHours;
 use Speicher210\BusinessHours\Day\AllDay;
 use Speicher210\BusinessHours\Day\Day;
 use Speicher210\BusinessHours\Day\Time\TimeInterval;
-use Wingu\Engine\SDK\Api\Channel\QrCode\QrCode;
+use Wingu\Engine\SDK\Api\Channel\QrCode\QrCodeApi;
 use Wingu\Engine\SDK\Api\Configuration;
 use Wingu\Engine\SDK\Hydrator\SymfonySerializerHydrator;
 use Wingu\Engine\SDK\Model\Channel\QrCode\PrivateQrCode;
 use Wingu\Engine\SDK\Model\Channel\QrCode\PublicQrCode;
 use Wingu\Engine\SDK\Tests\Api\ApiTest;
 
-final class QrCodeTest extends ApiTest
+final class QrCodeApiTest extends ApiTest
 {
-    public function testQrCodeReturnsPublicQrCode(): void
+    public function testQrCodeReturnsPublicQrCode() : void
     {
         $configurationMock = new Configuration();
-        $requestFactory = new GuzzleMessageFactory();
-        $hydrator = new SymfonySerializerHydrator();
+        $requestFactory    = new GuzzleMessageFactory();
+        $hydrator          = new SymfonySerializerHydrator();
 
         $httpClient = new MockClient();
         $httpClient->addResponse(
@@ -35,8 +35,8 @@ final class QrCodeTest extends ApiTest
             )
         );
 
-        $winguApi = new QrCode($configurationMock, $httpClient, $requestFactory, $hydrator);
-        $actual = $winguApi->qrCode('9a8798c6-0000-4000-a000-000000000001');
+        $winguApi = new QrCodeApi($configurationMock, $httpClient, $requestFactory, $hydrator);
+        $actual   = $winguApi->qrCode('9a8798c6-0000-4000-a000-000000000001');
 
         $expected = new PublicQrCode(
             '9a8798c6-0000-4000-a000-000000000001',
@@ -47,11 +47,11 @@ final class QrCodeTest extends ApiTest
         self::assertEquals($expected, $actual);
     }
 
-    public function testMyQrCodeReturnsPrivateQrCode(): void
+    public function testMyQrCodeReturnsPrivateQrCode() : void
     {
         $configurationMock = new Configuration();
-        $requestFactory = new GuzzleMessageFactory();
-        $hydrator = new SymfonySerializerHydrator();
+        $requestFactory    = new GuzzleMessageFactory();
+        $hydrator          = new SymfonySerializerHydrator();
 
         $httpClient = new MockClient();
         $httpClient->addResponse(
@@ -62,8 +62,8 @@ final class QrCodeTest extends ApiTest
             )
         );
 
-        $winguApi = new QrCode($configurationMock, $httpClient, $requestFactory, $hydrator);
-        $actual = $winguApi->myQrCode('9a8798c6-0000-4000-a000-000000000002');
+        $winguApi = new QrCodeApi($configurationMock, $httpClient, $requestFactory, $hydrator);
+        $actual   = $winguApi->myQrCode('9a8798c6-0000-4000-a000-000000000002');
 
         $expectedFunctioningHours = new BusinessHours(
             [
@@ -72,13 +72,14 @@ final class QrCodeTest extends ApiTest
                     Day::WEEK_DAY_WEDNESDAY,
                     [
                         TimeInterval::fromString('08:00', '12:00'),
-                        TimeInterval::fromString('13:00', '18:00')
+                        TimeInterval::fromString('13:00', '18:00'),
                     ]
                 ),
-                new AllDay(Day::WEEK_DAY_FRIDAY)
+                new AllDay(Day::WEEK_DAY_FRIDAY),
             ],
             new \DateTimeZone('Europe/Berlin')
         );
+
         $expected = new PrivateQrCode(
             '9a8798c6-0000-4000-a000-000000000002',
             'Funny Cat',
@@ -93,11 +94,11 @@ final class QrCodeTest extends ApiTest
         self::assertEquals($expected, $actual);
     }
 
-    public function testPayloadReturnsQrCodeId(): void
+    public function testPayloadReturnsQrCodeId() : void
     {
         $configurationMock = new Configuration();
-        $requestFactory = new GuzzleMessageFactory();
-        $hydrator = new SymfonySerializerHydrator();
+        $requestFactory    = new GuzzleMessageFactory();
+        $hydrator          = new SymfonySerializerHydrator();
 
         $httpClient = new MockClient();
         $httpClient->addResponse(
@@ -108,8 +109,8 @@ final class QrCodeTest extends ApiTest
             )
         );
 
-        $winguApi = new QrCode($configurationMock, $httpClient, $requestFactory, $hydrator);
-        $actual = $winguApi->payload('https://wingu-sdk-test.de/qrcode/7a4b84eb-ae3f-4246-8a67-d16fbdd82595');
+        $winguApi = new QrCodeApi($configurationMock, $httpClient, $requestFactory, $hydrator);
+        $actual   = $winguApi->payload('https://wingu-sdk-test.de/qrcode/7a4b84eb-ae3f-4246-8a67-d16fbdd82595');
 
         self::assertSame('9a8798c6-0000-4000-a000-000000000004', $actual);
     }

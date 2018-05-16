@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Wingu\Engine\SDK\Model\Channel;
 
@@ -8,9 +8,7 @@ use Speicher210\BusinessHours\BusinessHoursInterface;
 
 trait PrivateChannelTrait
 {
-    /**
-     * @var string|null
-     */
+    /** @var string|null */
     private $note;
 
     /**
@@ -34,32 +32,30 @@ trait PrivateChannelTrait
      */
     private $functioningHours;
 
-    /**
-     * @var bool
-     */
+    /** @var bool */
     private $inFunctioningHours;
 
-    public function note(): ?string
+    public function note() : ?string
     {
         return $this->note;
     }
 
-    public function isActive(): bool
+    public function isActive() : bool
     {
         return $this->active;
     }
 
-    public function isPublished(): bool
+    public function isPublished() : bool
     {
         return $this->published;
     }
 
-    public function functioningHours(): ?BusinessHoursInterface
+    public function functioningHours() : ?BusinessHoursInterface
     {
         return $this->functioningHours;
     }
 
-    public function isInFunctioningHours(): bool
+    public function isInFunctioningHours() : bool
     {
         return $this->inFunctioningHours;
     }
