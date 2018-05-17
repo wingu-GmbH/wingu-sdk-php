@@ -24,7 +24,6 @@ final class WinguApiTest extends TestCase
 
         self::assertSame($winguApi->beacon(), $winguApi->beacon());
         self::assertSame($winguApi->channel(), $winguApi->channel());
-        self::assertSame($winguApi->category(), $winguApi->category());
         self::assertSame($winguApi->wingu(), $winguApi->wingu());
     }
 }

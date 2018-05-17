@@ -2,11 +2,6 @@
   "id": "0a0b190a-0000-4000-a000-000000000001",
   "content": {
     "id": "12d1da34-0000-4000-a000-000000000019",
-    "category": {
-      "name": "Entertainment",
-      "id": 6,
-      "colorHex": "00B7AE"
-    },
     "pack": {
       "id": "71400bb6-c593-43f6-809f-5fafc4445c9b",
       "deck": {

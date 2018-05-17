@@ -11,29 +11,20 @@ final class PublicContent implements Content
     /** @var string */
     private $id;
 
-    /** @var Category */
-    private $category;
-
     /** @var Pack */
     private $pack;
 
-    public function __construct(string $id, Category $category, Pack $pack)
+    public function __construct(string $id, Pack $pack)
     {
         Assertion::uuid($id);
 
-        $this->id       = $id;
-        $this->category = $category;
-        $this->pack     = $pack;
+        $this->id   = $id;
+        $this->pack = $pack;
     }
 
     public function id() : string
     {
         return $this->id;
-    }
-
-    public function category() : Category
-    {
-        return $this->category;
     }
 
     public function pack() : Pack

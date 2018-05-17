@@ -18,7 +18,6 @@ use Wingu\Engine\SDK\Model\Card\Card;
 use Wingu\Engine\SDK\Model\Card\Position;
 use Wingu\Engine\SDK\Model\Channel\Beacon\PrivateBeacon;
 use Wingu\Engine\SDK\Model\Channel\Beacon\PublicBeacon;
-use Wingu\Engine\SDK\Model\Content\Category;
 use Wingu\Engine\SDK\Model\Content\Deck;
 use Wingu\Engine\SDK\Model\Content\Locale;
 use Wingu\Engine\SDK\Model\Content\Pack;
@@ -53,7 +52,6 @@ final class BeaconApiTest extends ApiTest
             2,
             new PublicContent(
                 '12d1da34-0000-4000-a000-000000000019',
-                new Category(6, 'Entertainment', '00B7AE'),
                 new Pack(
                     '71400bb6-c593-43f6-809f-5fafc4445c9b',
                     new Deck(
