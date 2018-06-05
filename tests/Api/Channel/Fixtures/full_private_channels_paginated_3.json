@@ -26,7 +26,10 @@
         "qrcode": {
           "id": "9a8798c6-0000-4000-a000-000000000001",
           "active": true,
-          "content": null,
+          "content": {
+            "id": "12d1da34-0000-4000-a000-000000000009",
+            "title": "Deck 3 title"
+          },
           "name": "QR 1",
           "published": true,
           "functioningHours": {

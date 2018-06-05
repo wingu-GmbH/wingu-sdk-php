@@ -90,9 +90,10 @@ final class PaginatedResponseIterator implements \Iterator, \Countable
 
     private function fetchEmbedded(Link $link) : void
     {
+        /** @var EmbeddedPage $data */
         $data                      = \call_user_func($this->dataFetcher, $link->href());
-        $this->pageInfo            = $data['pageInfo'];
-        $this->embedded            = $data['embedded'];
+        $this->pageInfo            = $data->pageInfo();
+        $this->embedded            = $data->embedded();
         $this->currentPagePosition = 0;
     }
 }

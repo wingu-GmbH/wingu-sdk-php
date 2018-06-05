@@ -8,11 +8,14 @@ use Psr\Http\Message\ResponseInterface;
 use Symfony\Component\PropertyInfo\Extractor\PhpDocExtractor;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\Normalizer\ArrayDenormalizer;
+use Symfony\Component\Serializer\Normalizer\DateTimeNormalizer;
 use Symfony\Component\Serializer\Serializer;
+use Wingu\Engine\SDK\Serializer\Denormalizer\ComponentDenormalizer;
 use Wingu\Engine\SDK\Serializer\Denormalizer\CountryDenormalizer;
 use Wingu\Engine\SDK\Serializer\Denormalizer\FunctioningHoursDenormalizer;
 use Wingu\Engine\SDK\Serializer\Denormalizer\ObjectDenormalizer;
 use Wingu\Engine\SDK\Serializer\Denormalizer\PrivateChannelDenormalizer;
+use Wingu\Engine\SDK\Serializer\Denormalizer\PrivateContentDenormalizer;
 
 final class SymfonySerializerHydrator implements Hydrator
 {
@@ -23,6 +26,9 @@ final class SymfonySerializerHydrator implements Hydrator
     {
         $this->serializer = new Serializer(
             [
+                new ComponentDenormalizer(),
+                new PrivateContentDenormalizer(),
+                new DateTimeNormalizer(),
                 new ArrayDenormalizer(),
                 new PrivateChannelDenormalizer(),
                 new CountryDenormalizer(),

@@ -23,7 +23,10 @@
         "geofence": {
           "id": "0a0b190a-0000-4000-a000-000000000001",
           "active": true,
-          "content": null,
+          "content": {
+            "id": "12d1da34-0000-4000-a000-000000000007",
+            "title": "Deck 4 title"
+          },
           "name": "Fence 1",
           "published": true,
           "functioningHours": {

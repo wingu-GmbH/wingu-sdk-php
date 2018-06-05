@@ -9,6 +9,7 @@ use Wingu\Engine\SDK\Assertion;
 use Wingu\Engine\SDK\Model\Channel\ChannelTrait;
 use Wingu\Engine\SDK\Model\Channel\PrivateChannel;
 use Wingu\Engine\SDK\Model\Channel\PrivateChannelTrait;
+use Wingu\Engine\SDK\Model\Content\Content;
 
 final class PrivateBeacon implements PrivateChannel
 {
@@ -20,13 +21,15 @@ final class PrivateBeacon implements PrivateChannel
         string $id,
         string $name,
         bool $active,
+        ?Content $content,
         bool $published,
         ?string $note,
         bool $inFunctioningHours,
         ?BusinessHoursInterface $functioningHours,
         string $uuid,
         int $major,
-        int $minor
+        int $minor,
+        BeaconLocation $location
     ) {
         Assertion::uuid($id);
         Assertion::notEmpty($name);
@@ -40,6 +43,8 @@ final class PrivateBeacon implements PrivateChannel
         $this->major = $major;
         $this->minor = $minor;
 
+        $this->content = $content;
+
         $this->active    = $active;
         $this->published = $published;
 
@@ -47,5 +52,7 @@ final class PrivateBeacon implements PrivateChannel
 
         $this->inFunctioningHours = $inFunctioningHours;
         $this->functioningHours   = $functioningHours;
+
+        $this->location = $location;
     }
 }

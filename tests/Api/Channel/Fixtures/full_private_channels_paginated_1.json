@@ -23,7 +23,10 @@
         "beacon": {
           "id": "8c798a67-0000-4000-a000-000000000001",
           "active": true,
-          "content": null,
+          "content": {
+            "id": "12d1da34-0000-4000-a000-000000000003",
+            "title": "Deck 1 title"
+          },
           "name": "Beacon 1100",
           "published": true,
           "functioningHours": {

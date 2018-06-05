@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Wingu\Engine\SDK\Model\Channel;
 
 use Speicher210\BusinessHours\BusinessHoursInterface;
+use Wingu\Engine\SDK\Model\Content\Content;
 
 trait PrivateChannelTrait
 {
@@ -17,6 +18,9 @@ trait PrivateChannelTrait
      * @var bool
      */
     private $active;
+
+    /** @var Content|null */
+    private $content;
 
     /**
      * The flag if the channel is published.
@@ -43,6 +47,11 @@ trait PrivateChannelTrait
     public function isActive() : bool
     {
         return $this->active;
+    }
+
+    public function content() : ?Content
+    {
+        return $this->content;
     }
 
     public function isPublished() : bool

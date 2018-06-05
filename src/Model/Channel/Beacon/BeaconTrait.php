@@ -15,6 +15,9 @@ trait BeaconTrait
     /** @var int */
     private $minor;
 
+    /** @var BeaconLocation */
+    private $location;
+
     public function uuid() : string
     {
         return $this->uuid;
@@ -28,5 +31,10 @@ trait BeaconTrait
     public function minor() : int
     {
         return $this->minor;
+    }
+
+    public function location() : BeaconLocation
+    {
+        return $this->location;
     }
 }

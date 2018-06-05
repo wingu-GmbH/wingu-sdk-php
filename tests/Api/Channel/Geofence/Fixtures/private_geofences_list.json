@@ -1,0 +1,173 @@
+{
+  "page": 1,
+  "limit": 10,
+  "pages": 1,
+  "total": 2,
+  "_links": {
+    "self": {
+      "href": "/api/channel/geofence/my?page=1&limit=10"
+    },
+    "first": {
+      "href": "/api/channel/geofence/my?page=1&limit=10"
+    },
+    "last": {
+      "href": "/api/channel/geofence/my?page=1&limit=10"
+    }
+  },
+  "_embedded": {
+    "geofences": [
+      {
+        "geofence": {
+          "id": "0a0b190a-0000-4000-a000-000000000001",
+          "active": true,
+          "content": null,
+          "name": "Fence 1",
+          "published": true,
+          "functioningHours": null,
+          "functioningHoursNextEvent": null,
+          "inFunctioningHours": true,
+          "note": null,
+          "boundaries": {
+            "type": "Polygon",
+            "coordinates": [
+              [
+                [
+                  9.912364,
+                  53.436167
+                ],
+                [
+                  9.912364,
+                  53.436616157642
+                ],
+                [
+                  9.9131179849328,
+                  53.436616155268
+                ],
+                [
+                  9.9131179849328,
+                  53.436166997626
+                ],
+                [
+                  9.912364,
+                  53.436167
+                ]
+              ]
+            ]
+          }
+        }
+      },
+      {
+        "geofence": {
+          "id": "0a0b190a-0000-4000-a000-000000000002",
+          "active": true,
+          "content": {
+            "title": "Deck 3 title",
+            "id": "12d1da34-0000-4000-a000-000000000003"
+          },
+          "name": "Fence 2",
+          "published": true,
+          "functioningHours": {
+            "days": [
+              {
+                "dayOfWeek": 1,
+                "intervals": [
+                  {
+                    "start": {
+                      "hours": 0,
+                      "minutes": 0,
+                      "seconds": 0
+                    },
+                    "end": {
+                      "hours": 24,
+                      "minutes": 0,
+                      "seconds": 0
+                    }
+                  }
+                ],
+                "allDay": true
+              },
+              {
+                "dayOfWeek": 3,
+                "intervals": [
+                  {
+                    "start": {
+                      "hours": 8,
+                      "minutes": 0,
+                      "seconds": 0
+                    },
+                    "end": {
+                      "hours": 12,
+                      "minutes": 0,
+                      "seconds": 0
+                    }
+                  },
+                  {
+                    "start": {
+                      "hours": 13,
+                      "minutes": 0,
+                      "seconds": 0
+                    },
+                    "end": {
+                      "hours": 18,
+                      "minutes": 0,
+                      "seconds": 0
+                    }
+                  }
+                ]
+              },
+              {
+                "dayOfWeek": 5,
+                "intervals": [
+                  {
+                    "start": {
+                      "hours": 0,
+                      "minutes": 0,
+                      "seconds": 0
+                    },
+                    "end": {
+                      "hours": 24,
+                      "minutes": 0,
+                      "seconds": 0
+                    }
+                  }
+                ],
+                "allDay": true
+              }
+            ],
+            "timezone": "Europe\/Berlin"
+          },
+          "functioningHoursNextEvent": null,
+          "inFunctioningHours": true,
+          "note": "My note",
+          "boundaries": {
+            "type": "Polygon",
+            "coordinates": [
+              [
+                [
+                  10.253525,
+                  53.638102
+                ],
+                [
+                  10.253525,
+                  53.639000315284
+                ],
+                [
+                  10.255040195514,
+                  53.639000305719
+                ],
+                [
+                  10.255040195514,
+                  53.638101990435
+                ],
+                [
+                  10.253525,
+                  53.638102
+                ]
+              ]
+            ]
+          }
+        }
+      }
+    ]
+  }
+}

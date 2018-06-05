@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Wingu\Engine\SDK\Api\Channel;
 
 use Wingu\Engine\SDK\Api\Api;
+use Wingu\Engine\SDK\Api\Paginator\EmbeddedPage;
 use Wingu\Engine\SDK\Api\Paginator\PageInfo;
 use Wingu\Engine\SDK\Api\Paginator\PaginatedResponseIterator;
 use Wingu\Engine\SDK\Model\Channel\PrivateChannel;
@@ -25,18 +26,15 @@ final class ChannelApi extends Api
         $page = $this->getEmbeddedPage('/api/channel/my.json');
 
         return new PaginatedResponseIterator(
-            $page['pageInfo'],
-            $page['embedded'],
+            $page->pageInfo(),
+            $page->embedded(),
             function (string $href) {
                 return $this->getEmbeddedPage($href);
             }
         );
     }
 
-    /**
-     * @return mixed[]
-     */
-    private function getEmbeddedPage(string $href) : array
+    private function getEmbeddedPage(string $href) : EmbeddedPage
     {
         $request = $this->createGetRequest($href);
 
@@ -61,6 +59,6 @@ final class ChannelApi extends Api
             PrivateChannel::class . '[]'
         );
 
-        return ['pageInfo' => $pageInfo, 'embedded' => $embedded];
+        return new EmbeddedPage($pageInfo, $embedded);
     }
 }

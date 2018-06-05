@@ -1,35 +1,66 @@
 {
-  "id": "9a8798c6-0000-4000-a000-000000000001",
+  "id": "44da7d7e-0000-4000-a000-000000000011",
   "content": {
-    "id": "12d1da34-0000-4000-a000-000000000019",
+    "id": "12d1da34-0000-4000-a000-000000000018",
     "pack": {
-      "id": "71400bb6-c593-43f6-809f-5fafc4445c9b",
+      "id": "1d3da8e7-9407-42c1-8bf5-94b661c00355",
       "deck": {
-        "id": "ea45b0c8-0000-4000-a000-000000000019",
-        "title": "Deck title",
-        "description": "Deck description",
+        "id": "ea45b0c8-0000-4000-a000-000000000018",
+        "title": "Deck 18 title",
+        "description": "Deck description 18",
         "cards": [
           {
             "position": {
               "sort": 0
             },
-            "id": "d6ac7466-c37f-4f0c-af09-cbcebffcbd3a",
+            "id": "d5c5ae8e-6b94-41ca-b0c6-6d1bfa3bf88d",
             "component": {
-              "id": "4af239c3-a927-473e-98ca-c1eda5936f0e",
-              "updatedAt": "2017-12-08T11:06:10+0000",
-              "content": "# Welcome!\n_Welcome in our coffee._\n## Website\nCheck out our [website](http:\/\/wingu.de)!  \n### Congratulations!\nYou won a **free** coffee! You can choose between:  \n1.  Gold  \n2.  Space Gray\n3.  Silver.\n\nIf you prefer you can even choose from an unordered list:\n\n*   Gold\n*   Space Gray\n*   Silver",
-              "type": "markdown",
-              "discriminator": "cms"
+              "id": "132fb6f2-4eb6-4c03-8282-746142f67c96",
+              "updatedAt": "2018-05-18T08:22:46+0000",
+              "background": {
+                "color": "a3b0eb"
+              },
+              "text": {
+                "text": "wingu brand 18",
+                "alignment": "left",
+                "color": "04b1f0"
+              },
+              "image": {
+                "image": {
+                  "metadata": {
+                    "format": "jpg",
+                    "width": 30,
+                    "height": 30
+                  },
+                  "cloudinaryId": "sample",
+                  "type": "cloudinary"
+                },
+                "alignment": "left"
+              },
+              "discriminator": "brand_bar"
             }
           },
           {
             "position": {
               "sort": 1
             },
-            "id": "8be641f3-987d-4955-b127-dd1fe441bdc3",
+            "id": "c1e1ded1-0242-4213-ba90-fe0b347a9b4d",
             "component": {
-              "id": "5f94ef45-035f-4a4e-9598-c03957a9c7b3",
-              "updatedAt": "2017-12-08T11:06:10+0000",
+              "id": "f29da3c4-908d-46d5-92d1-425421ddc6ff",
+              "updatedAt": "2018-05-18T08:22:46+0000",
+              "content": "# Welcome!\n_Welcome in our coffee._\n## Website\nCheck out our [website](https://www.wingu.de)!  \n### Congratulations!\nYou won a **free** coffee! You can choose between:  \n1.  Gold  \n2.  Space Gray\n3.  Silver.\n\nIf you prefer you can even choose from an unordered list:\n\n*   Gold\n*   Space Gray\n*   Silver",
+              "type": "markdown",
+              "discriminator": "cms"
+            }
+          },
+          {
+            "position": {
+              "sort": 2
+            },
+            "id": "c8be4856-e342-4851-9204-407b267c233d",
+            "component": {
+              "id": "e27b2eaf-92f9-4624-9847-8b4d0d3afec5",
+              "updatedAt": "2018-05-18T08:22:46+0000",
               "type": "youtube",
               "payload": "zfQdPcO--DA",
               "description": "Video description",
@@ -38,16 +69,16 @@
           },
           {
             "position": {
-              "sort": 2
+              "sort": 3
             },
-            "id": "9f569272-0a16-4d2d-8fb3-8ebf9b42f294",
+            "id": "d10aca92-339b-46f2-9648-f4d6d9a2df8b",
             "component": {
-              "id": "67f91909-2bd1-45f6-9ef8-c605b98927c0",
-              "updatedAt": "2017-12-08T11:06:10+0000",
+              "id": "b8fa6546-7305-4b4e-94d7-ec21ac262cac",
+              "updatedAt": "2018-05-18T08:22:46+0000",
               "images": [
                 {
                   "position": 0,
-                  "id": "1f380148-2b95-4415-9f5b-fe7ea79f4ffc",
+                  "id": "9d04e0a1-dc0d-44be-95ea-cc0eb58f986f",
                   "image": {
                     "metadata": {
                       "format": "jpg",
@@ -65,66 +96,66 @@
           },
           {
             "position": {
-              "sort": 3
-            },
-            "id": "4a4ad94f-e439-4777-a11e-b339c0c62e77",
-            "component": {
-              "id": "472045d3-1c5a-4e65-83e5-d3f0feeda0e1",
-              "updatedAt": "2017-12-08T11:06:10+0000",
-              "title": "Take the IQ survey",
-              "description": "You will probably fail",
-              "surveyURL": "https:\/\/de.surveymonkey.com\/r\/5FBK8Z3",
-              "discriminator": "survey_monkey"
-            }
-          },
-          {
-            "position": {
               "sort": 4
             },
-            "id": "d96431b3-156b-4f1e-b173-4e646ad29a75",
+            "id": "61588e2c-e02a-4be2-9fec-f6271f4aa1da",
             "component": {
-              "id": "e72b4d4c-7afc-49ad-b783-19be6145e8f5",
-              "updatedAt": "2017-12-08T11:06:10+0000",
-              "companyName": "wingu GmbH",
-              "personalTitle": "Mr.",
-              "firstName": "Wingu",
-              "lastName": "GmbH",
-              "email": "testing@wingu.de",
-              "mobile": "00491234567890",
-              "phone": "+49 (0)40 123 456 78",
-              "website": "www.wingu.de",
-              "openingHours": "Daily, 9:00 - 17:00",
-              "extraInfo": "Some extra info",
-              "address": {
-                "id": "aaac613f-f0be-4ddc-9100-644d2f67f11b",
-                "country": "DE",
-                "city": "Hamburg",
-                "zipCode": "20097",
-                "street": "Street",
-                "streetNumber": "1"
-              },
-              "externalLinks": {
-                "facebookUrl": "https:\/\/facebook.com\/ComeCloserItsMe",
-                "twitterUrl": "https:\/\/twitter.com\/wingude",
-                "googlePlusUrl": null,
-                "yelpUrl": null,
-                "id": "fef0d5fe-b040-4fd8-8922-1287bd6236d5",
-                "facebookName": "ComeCloserItsMe",
-                "twitterName": "wingude",
-                "googlePlusName": null,
-                "yelpName": null
-              },
-              "discriminator": "contact"
+              "id": "820076a7-1c8e-4437-8192-9eeb3ae09b28",
+              "updatedAt": "2018-05-18T08:22:46+0000",
+              "title": "Take the IQ survey",
+              "description": "You will probably fail",
+              "surveyURL": "https://de.surveymonkey.com/r/5FBK8Z3",
+              "discriminator": "survey_monkey"
             }
           },
           {
             "position": {
               "sort": 5
             },
-            "id": "710af718-5216-457d-859c-55096fdb56e9",
+            "id": "957a6506-e63c-4036-9eed-c436146831a0",
             "component": {
-              "id": "473d3fc4-8dd2-43be-8fff-e5baffa1b804",
-              "updatedAt": "2018-01-16T13:05:44+0000",
+              "id": "ab8b7d88-ed1d-44c0-b49a-c57e199b9e82",
+              "updatedAt": "2018-05-18T08:22:46+0000",
+              "companyName": "Example",
+              "personalTitle": "Mr.",
+              "firstName": "Benjamin",
+              "lastName": "Berg",
+              "email": "benjamin.berg@example.com",
+              "mobile": "004917225446165",
+              "phone": "+49 (0)17 22 544 61",
+              "website": "www.example.com",
+              "openingHours": "Daily, 9:00 - 17:00",
+              "extraInfo": "Some extra info",
+              "address": {
+                "id": "1af4b44d-2fda-4793-b1fb-47a074c4253b",
+                "country": "DE",
+                "city": "Oststadt",
+                "zipCode": "89081",
+                "street": "Kurfuerstendamm",
+                "streetNumber": "66"
+              },
+              "externalLinks": {
+                "facebookUrl": "https://www.facebook.com/wingude",
+                "twitterUrl": "https://twitter.com/wingude",
+                "googlePlusUrl": "https://plus.google.com/+Speicher210",
+                "yelpUrl": "http://www.yelp.com/biz/speicher-210-hamburg-2",
+                "id": "7740ba5e-2f4e-409c-9bcb-4076a0e68c79",
+                "facebookName": "wingude",
+                "twitterName": "wingude",
+                "googlePlusName": "+Speicher210",
+                "yelpName": "speicher-210-hamburg-2"
+              },
+              "discriminator": "contact"
+            }
+          },
+          {
+            "position": {
+              "sort": 6
+            },
+            "id": "b52aec46-7982-493e-977f-09eedd038723",
+            "component": {
+              "id": "86b787a3-8bd7-4fd1-8d69-a7c0cadc11f2",
+              "updatedAt": "2018-05-18T08:22:46+0000",
               "header": "-20 %",
               "description": "Get you cheap stuff here !",
               "barcode": {
@@ -138,45 +169,164 @@
           },
           {
             "position": {
-              "sort": 6
+              "sort": 7
             },
-            "id": "8219d906-8977-4719-a73d-aedc80ea106b",
+            "id": "5dfaecaa-93ab-4c6b-a0d3-41f457e12f59",
             "component": {
-              "id": "4fa7fb8a-304f-4160-ba51-63260c26d0d1",
-              "updatedAt": "2017-12-08T11:06:10+0000",
-              "coordinates": {
-                "longitude": 10.137369,
-                "latitude": 53.535516999999999
+              "id": "49001bb9-6a2c-46bd-b6ef-7e27ec8130b6",
+              "updatedAt": "2018-05-18T08:22:46+0000",
+              "title": "Form component survey",
+              "elements": [
+                {
+                  "name": "full_name",
+                  "label": "Your name",
+                  "required": true,
+                  "type": "text",
+                  "discriminator": "input"
+                },
+                {
+                  "name": "birthday",
+                  "label": "Birthday",
+                  "required": false,
+                  "type": "date",
+                  "discriminator": "input"
+                },
+                {
+                  "name": "gender",
+                  "label": "Gender",
+                  "required": false,
+                  "multiple": false,
+                  "options": [
+                    {
+                      "label": "Male",
+                      "value": "m"
+                    },
+                    {
+                      "label": "Female",
+                      "value": "f"
+                    }
+                  ],
+                  "discriminator": "select"
+                },
+                {
+                  "name": "dessert",
+                  "label": "Dessert",
+                  "required": true,
+                  "multiple": true,
+                  "options": [
+                    {
+                      "label": "Jello",
+                      "value": "jello"
+                    },
+                    {
+                      "label": "Apple pie",
+                      "value": "apple_pie"
+                    },
+                    {
+                      "label": "Schnitzel",
+                      "value": "schnitzel"
+                    }
+                  ],
+                  "discriminator": "select"
+                },
+                {
+                  "name": "text",
+                  "label": "Element text",
+                  "required": false,
+                  "type": "text",
+                  "discriminator": "input"
+                },
+                {
+                  "name": "textarea",
+                  "label": "Element textarea",
+                  "required": false,
+                  "type": "textarea",
+                  "discriminator": "input"
+                },
+                {
+                  "name": "email",
+                  "label": "Element email",
+                  "required": false,
+                  "type": "email",
+                  "discriminator": "input"
+                },
+                {
+                  "name": "url",
+                  "label": "Element url",
+                  "required": false,
+                  "type": "url",
+                  "discriminator": "input"
+                },
+                {
+                  "name": "date",
+                  "label": "Element date",
+                  "required": false,
+                  "type": "date",
+                  "discriminator": "input"
+                },
+                {
+                  "name": "datetime",
+                  "label": "Element datetime",
+                  "required": false,
+                  "type": "datetime",
+                  "discriminator": "input"
+                },
+                {
+                  "name": "time",
+                  "label": "Element time",
+                  "required": false,
+                  "type": "time",
+                  "discriminator": "input"
+                }
+              ],
+              "resubmit": {
+                "allowed": true,
+                "allowedAfterSeconds": null
               },
-              "radius": 694,
+              "discriminator": "form"
+            }
+          },
+          {
+            "position": {
+              "sort": 8
+            },
+            "id": "274ee76b-1ec2-4529-8d3a-0a18f711eee3",
+            "component": {
+              "id": "6166645e-3acf-4ee8-87d8-bc0ee0601404",
+              "updatedAt": "2018-05-18T08:22:46+0000",
+              "coordinates": {
+                "longitude": 10.274538,
+                "latitude": 53.692383
+              },
+              "radius": 868,
               "discriminator": "location"
             }
           },
           {
             "position": {
-              "sort": 7
+              "sort": 9
             },
-            "id": "33524d58-793f-47e0-a94b-78ff364a88bb",
+            "id": "48459d9b-8a1f-42d6-ba3b-1435d09e88ad",
             "component": {
-              "id": "b4aff540-de3a-4740-a3ae-f57947658973",
-              "updatedAt": "2017-12-08T11:06:10+0000",
+              "id": "29b6a40e-a86d-488f-896a-a5d6de2d7993",
+              "updatedAt": "2018-05-18T08:22:46+0000",
               "name": "Best of",
               "media": [
                 {
                   "position": 0,
-                  "id": "9f32873e-a6d6-452d-947d-e2e11abc7f2f",
-                  "name": "DJ Dragos - Wing it",
+                  "fileUrl": "http://www.example.com/audioplaylist/audio_media.mp3",
+                  "id": "0522ae07-c706-4f15-8fb9-66072158b1be",
+                  "name": "David Guetta - Wing it",
                   "length": 39,
-                  "album": null,
-                  "fileUrl": "https:\/\/s3-eu-west-1.amazonaws.com\/wingu-staging-components\/audioplaylist\/audio_media.mp3"
+                  "album": null
                 },
                 {
                   "position": 1,
-                  "id": "023fa44e-abcc-4ecf-85c4-f69f3d5a4ba2",
-                  "name": "DJ Cezary - Boom shakalaka",
+                  "fileUrl": "http://www.example.com/audioplaylist/audio_media.mp3",
+                  "id": "bf09088f-4c6c-4c70-b7bd-8ae13041f96f",
+                  "name": "Boom Face - Boom shakalaka",
                   "length": 39,
-                  "album": null,
-                  "fileUrl": "https:\/\/s3-eu-west-1.amazonaws.com\/wingu-staging-components\/audioplaylist\/audio_media.mp3"
+                  "album": null
                 }
               ],
               "discriminator": "audio_playlist"
@@ -184,103 +334,91 @@
           },
           {
             "position": {
-              "sort": 8
-            },
-            "id": "a61c1903-1cba-45ca-afb6-8d61e6c061a8",
-            "component": {
-              "id": "93d2d5f2-6638-4fba-a634-76ab9e309881",
-              "updatedAt": "2017-12-08T11:06:10+0000",
-              "buttonCaption": "wingu me",
-              "actionType": "open-url",
-              "actionPayload": "http:\/\/www.wingu.de\/",
-              "discriminator": "action"
-            }
-          },
-          {
-            "position": {
-              "sort": 9
-            },
-            "id": "cbe5b575-4af6-4350-a914-b5f78e534810",
-            "component": {
-              "id": "23af7ddf-922f-4505-8ca8-d10918773892",
-              "updatedAt": "2017-12-08T11:06:10+0000",
-              "type": "wave",
-              "colorHex": "04B1F0",
-              "discriminator": "separator"
-            }
-          },
-          {
-            "position": {
               "sort": 10
             },
-            "id": "b87af441-e01d-4c5a-b9e2-a2d8b874f2e3",
+            "id": "b758f2e3-4b8b-4682-89e5-a7ab21c26947",
             "component": {
-              "id": "cdf0ec4c-7c6b-4089-9d8a-61bffabc31ae",
-              "updatedAt": "2017-12-08T11:06:10+0000",
-              "title": "Rate me !",
-              "discriminator": "rating"
+              "id": "861ec6fc-58c6-440f-8b81-556bcec1d9b3",
+              "updatedAt": "2018-05-18T08:22:46+0000",
+              "buttonCaption": "Speicher me",
+              "actionType": "open-url",
+              "actionPayload": "http://www.sp210.com/",
+              "discriminator": "action"
             }
           },
           {
             "position": {
               "sort": 11
             },
-            "id": "fe80808f-7034-4bcd-a33e-79907dffdcc5",
+            "id": "7aacdd4b-24ad-43b0-9d19-1027ecf2e9e3",
             "component": {
-              "id": "13f8298b-cb9f-4185-aa2a-42d3925419f5",
-              "updatedAt": "2017-12-08T11:06:10+0000",
-              "event": "24731115432",
-              "discriminator": "eventbrite"
+              "id": "a4209add-6108-47b6-ad5f-879607d32972",
+              "updatedAt": "2018-05-18T08:22:46+0000",
+              "colorHex": "04b1f0",
+              "type": "wave",
+              "discriminator": "separator"
             }
           },
           {
             "position": {
               "sort": 12
             },
-            "id": "a8fd644e-119e-47b9-9086-ba79f04680ac",
+            "id": "1b0bd8b5-79f3-4766-a6bd-66b291f2e762",
             "component": {
-              "id": "32068b90-19cd-4a93-9c31-2d4d43dc02f0",
-              "updatedAt": "2017-12-08T11:06:10+0000",
-              "buttonCaption": "Trigger me",
-              "discriminator": "webhook"
+              "id": "c6370b33-dd7c-40d8-8dcf-db6c57850763",
+              "updatedAt": "2018-05-18T08:22:46+0000",
+              "title": "Rate me !",
+              "discriminator": "rating"
             }
           },
           {
             "position": {
               "sort": 13
             },
-            "id": "5b64dce4-4fc6-48d3-9353-f9f7d0742343",
+            "id": "078ea887-ca11-4c36-8fb4-2523b6ab60d8",
             "component": {
-              "id": "54713973-7c41-47a9-864b-f74c2a41785f",
-              "updatedAt": "2017-12-08T11:06:10+0000",
+              "id": "029030d7-dcaa-4e98-b516-78210c71a53c",
+              "updatedAt": "2018-05-18T08:22:46+0000",
+              "buttonCaption": "Trigger me",
+              "discriminator": "webhook"
+            }
+          },
+          {
+            "position": {
+              "sort": 14
+            },
+            "id": "935318d1-b361-46dd-8ab1-f4104ceda633",
+            "component": {
+              "id": "dc858798-1eb1-4bd4-b402-4fd7e2256ec7",
+              "updatedAt": "2018-05-18T08:22:46+0000",
               "files": [
                 {
                   "position": 0,
-                  "id": "c60ba14a-2743-4da4-be3b-df1f38316d67",
+                  "fileUrl": "http://www.example.com/files/wingu_presentation.pdf",
+                  "id": "26bdc49b-4468-4368-aee5-37c7c5ae4f99",
                   "name": "wingu presentation",
-                  "size": 900641,
-                  "fileUrl": "https:\/\/s3-eu-west-1.amazonaws.com\/wingu-staging-components\/files\/wingu_presentation.pdf"
+                  "size": 900641
                 }
               ],
               "discriminator": "files"
             }
           }
         ],
-        "legalNote": "Legal note"
+        "legalNote": "Legal note18"
       },
       "locale": {
-        "name": "English",
+        "name": "angielski",
         "code": "en"
       },
-      "createdAt": "2017-12-08T11:06:10+0000"
+      "createdAt": "2018-05-18T08:22:46+0000"
     },
     "packLocales": [
       {
-        "name": "English",
+        "name": "angielski",
         "code": "en"
       }
     ]
   },
-  "name": "NFC 1",
-  "payload": "https:\/\/wingu-sdk-test.de\/nfc\/5ea7f875-7841-48b5-9cce-d9bd1684f87c"
+  "name": "NFC 11",
+  "payload": "https://wingu-sdk-test.de/nfc/0b852b82-c4b1-433d-9ddb-4f3175bb735d"
 }

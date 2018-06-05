@@ -26,7 +26,10 @@
         "nfc": {
           "id": "44da7d7e-0000-4000-a000-000000000001",
           "active": true,
-          "content": null,
+          "content": {
+            "id": "12d1da34-0000-4000-a000-000000000001",
+            "title": "Deck 2 title"
+          },
           "name": "NFC 1",
           "published": true,
           "functioningHours": {

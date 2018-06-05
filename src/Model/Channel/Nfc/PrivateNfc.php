@@ -9,6 +9,7 @@ use Wingu\Engine\SDK\Assertion;
 use Wingu\Engine\SDK\Model\Channel\ChannelTrait;
 use Wingu\Engine\SDK\Model\Channel\PrivateChannel;
 use Wingu\Engine\SDK\Model\Channel\PrivateChannelTrait;
+use Wingu\Engine\SDK\Model\Content\Content;
 
 final class PrivateNfc implements PrivateChannel
 {
@@ -20,6 +21,7 @@ final class PrivateNfc implements PrivateChannel
         string $id,
         string $name,
         bool $active,
+        ?Content $content,
         bool $published,
         ?string $note,
         bool $inFunctioningHours,
@@ -31,6 +33,8 @@ final class PrivateNfc implements PrivateChannel
 
         $this->id   = $id;
         $this->name = $name;
+
+        $this->content = $content;
 
         $this->active    = $active;
         $this->published = $published;

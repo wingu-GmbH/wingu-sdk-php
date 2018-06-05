@@ -5,6 +5,9 @@ declare(strict_types=1);
 namespace Wingu\Engine\SDK\Api\Channel\Nfc;
 
 use Wingu\Engine\SDK\Api\Api;
+use Wingu\Engine\SDK\Api\Paginator\EmbeddedPage;
+use Wingu\Engine\SDK\Api\Paginator\PageInfo;
+use Wingu\Engine\SDK\Api\Paginator\PaginatedResponseIterator;
 use Wingu\Engine\SDK\Model\Channel\Nfc\PrivateNfc as PrivateNfcModel;
 use Wingu\Engine\SDK\Model\Channel\Nfc\PublicNfc as PublicNfcModel;
 
@@ -37,5 +40,35 @@ final class NfcApi extends Api
         $data = $this->decodeResponseBody($response);
 
         return $data['id'];
+    }
+
+    public function myNfcs() : PaginatedResponseIterator
+    {
+        $page = $this->getEmbeddedPage('/api/channel/nfc/my.json');
+
+        return new PaginatedResponseIterator(
+            $page->pageInfo(),
+            $page->embedded(),
+            function (string $href) {
+                return $this->getEmbeddedPage($href);
+            }
+        );
+    }
+
+    private function getEmbeddedPage(string $href) : EmbeddedPage
+    {
+        $request = $this->createGetRequest($href);
+
+        $response = $this->handleRequest($request);
+
+        $data = $this->decodeResponseBody($response);
+
+        $pageInfo = $this->hydrator->hydrateData($data, PageInfo::class);
+        $embedded = $this->hydrator->hydrateData(
+            \array_column($data['_embedded']['nfcs'], 'nfc'),
+            PrivateNfcModel::class . '[]'
+        );
+
+        return new EmbeddedPage($pageInfo, $embedded);
     }
 }

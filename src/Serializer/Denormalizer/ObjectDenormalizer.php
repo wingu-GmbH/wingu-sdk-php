@@ -80,39 +80,42 @@ final class ObjectDenormalizer extends ObjectNormalizer
                     }
                 } elseif ($allowed && ! $ignored && (isset($data[$key]) || \array_key_exists($key, $data))) {
                     $parameterData = $data[$key];
-                    try {
-                        if ($constructorParameter->getClass() !== null) {
-                            if (! $this->serializer instanceof DenormalizerInterface) {
-                                throw new LogicException(
-                                    \sprintf(
-                                        'Cannot create an instance of %s from serialized data because the serializer inject in "%s" is not a denormalizer',
-                                        $constructorParameter->getClass(),
-                                        static::class
-                                    )
+
+                    if ($parameterData !== null || ! $constructorParameter->allowsNull()) {
+                        try {
+                            if ($constructorParameter->getClass() !== null) {
+                                if (! $this->serializer instanceof DenormalizerInterface) {
+                                    throw new LogicException(
+                                        \sprintf(
+                                            'Cannot create an instance of %s from serialized data because the serializer inject in "%s" is not a denormalizer',
+                                            $constructorParameter->getClass(),
+                                            static::class
+                                        )
+                                    );
+                                }
+                                $parameterClass = $constructorParameter->getClass()->getName();
+                                $parameterData  = $this->serializer->denormalize(
+                                    $parameterData,
+                                    $parameterClass,
+                                    $format,
+                                    $this->createChildContext($context, $paramName)
+                                );
+                            } else {
+                                $parameterData = $this->validateAndDenormalize(
+                                    $class,
+                                    $paramName,
+                                    $data[$key],
+                                    $format,
+                                    $context
                                 );
                             }
-                            $parameterClass = $constructorParameter->getClass()->getName();
-                            $parameterData  = $this->serializer->denormalize(
-                                $parameterData,
-                                $parameterClass,
-                                $format,
-                                $this->createChildContext($context, $paramName)
-                            );
-                        } else {
-                            $parameterData = $this->validateAndDenormalize(
-                                $class,
-                                $paramName,
-                                $data[$key],
-                                $format,
-                                $context
+                        } catch (\ReflectionException $e) {
+                            throw new RuntimeException(
+                                \sprintf('Could not determine the class of the parameter "%s".', $key),
+                                0,
+                                $e
                             );
                         }
-                    } catch (\ReflectionException $e) {
-                        throw new RuntimeException(
-                            \sprintf('Could not determine the class of the parameter "%s".', $key),
-                            0,
-                            $e
-                        );
                     }
 
                     // Don't run set for a parameter passed to the constructor

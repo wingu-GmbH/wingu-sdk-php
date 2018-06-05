@@ -1,7 +1,10 @@
 {
   "id": "8c798a67-0000-4000-a000-000000000001",
   "active": true,
-  "content": null,
+  "content": {
+    "id": "12d1da34-0000-4000-a000-000000000003",
+    "packs": []
+  },
   "name": "Beacon 1100",
   "published": true,
   "functioningHours": {
@@ -12,14 +15,17 @@
           {
             "start": {
               "hours": 0,
-              "minutes": 0
+              "minutes": 0,
+              "seconds": 0
             },
             "end": {
               "hours": 24,
-              "minutes": 0
+              "minutes": 0,
+              "seconds": 0
             }
           }
-        ]
+        ],
+        "allDay": true
       },
       {
         "dayOfWeek": 3,
@@ -27,21 +33,25 @@
           {
             "start": {
               "hours": 8,
-              "minutes": 0
+              "minutes": 0,
+              "seconds": 0
             },
             "end": {
               "hours": 12,
-              "minutes": 0
+              "minutes": 0,
+              "seconds": 0
             }
           },
           {
             "start": {
               "hours": 13,
-              "minutes": 0
+              "minutes": 0,
+              "seconds": 0
             },
             "end": {
               "hours": 18,
-              "minutes": 0
+              "minutes": 0,
+              "seconds": 0
             }
           }
         ]
@@ -52,19 +62,22 @@
           {
             "start": {
               "hours": 0,
-              "minutes": 0
+              "minutes": 0,
+              "seconds": 0
             },
             "end": {
               "hours": 24,
-              "minutes": 0
+              "minutes": 0,
+              "seconds": 0
             }
           }
-        ]
+        ],
+        "allDay": true
       }
     ],
-    "timezone": "Europe/Berlin"
+    "timezone": "Europe\/Berlin"
   },
-  "functioningHoursNextEvent": "2018-01-17T08:00:00+0100",
+  "functioningHoursNextEvent": null,
   "inFunctioningHours": true,
   "note": null,
   "broadcastProtocol": 1,
@@ -74,8 +87,8 @@
   "eddystoneUrl": null,
   "location": {
     "coordinates": {
-      "longitude": 9.983716,
-      "latitude": 53.673348
+      "longitude": 9.922292,
+      "latitude": 53.56581
     },
     "address": {
       "formattedAddress": "Germany"
