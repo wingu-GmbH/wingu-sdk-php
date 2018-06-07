@@ -7,33 +7,35 @@ namespace Wingu\Engine\SDK\Tests\Api\Component;
 use GuzzleHttp\Psr7\Response;
 use Http\Message\MessageFactory\GuzzleMessageFactory;
 use Http\Mock\Client as MockClient;
+use Psr\Http\Message\RequestInterface;
 use Wingu\Engine\SDK\Api\Component\ComponentApi;
 use Wingu\Engine\SDK\Api\Configuration;
 use Wingu\Engine\SDK\Hydrator\SymfonySerializerHydrator;
-use Wingu\Engine\SDK\Model\Component\Action;
-use Wingu\Engine\SDK\Model\Component\AudioPlaylist;
-use Wingu\Engine\SDK\Model\Component\AudioPlaylistMedia as Media;
-use Wingu\Engine\SDK\Model\Component\BrandBar;
-use Wingu\Engine\SDK\Model\Component\CMS;
-use Wingu\Engine\SDK\Model\Component\Component;
-use Wingu\Engine\SDK\Model\Component\Contact;
-use Wingu\Engine\SDK\Model\Component\ContactAddress;
-use Wingu\Engine\SDK\Model\Component\ContactExternalLinks;
-use Wingu\Engine\SDK\Model\Component\Coupon;
-use Wingu\Engine\SDK\Model\Component\Files;
-use Wingu\Engine\SDK\Model\Component\FilesFile as File;
-use Wingu\Engine\SDK\Model\Component\Image as InnerImage;
-use Wingu\Engine\SDK\Model\Component\ImageGallery;
-use Wingu\Engine\SDK\Model\Component\ImageGalleryImage as OuterImage;
-use Wingu\Engine\SDK\Model\Component\ImageMetadata as Metadata;
-use Wingu\Engine\SDK\Model\Component\Location;
-use Wingu\Engine\SDK\Model\Component\PrivateForm;
-use Wingu\Engine\SDK\Model\Component\PrivateWebhook;
-use Wingu\Engine\SDK\Model\Component\Proxy;
-use Wingu\Engine\SDK\Model\Component\Rating;
-use Wingu\Engine\SDK\Model\Component\Separator;
-use Wingu\Engine\SDK\Model\Component\SurveyMonkey;
-use Wingu\Engine\SDK\Model\Component\Video;
+use Wingu\Engine\SDK\Model\Request\Component\CMS as RequestCMS;
+use Wingu\Engine\SDK\Model\Response\Component\Action;
+use Wingu\Engine\SDK\Model\Response\Component\AudioPlaylist;
+use Wingu\Engine\SDK\Model\Response\Component\AudioPlaylistMedia as Media;
+use Wingu\Engine\SDK\Model\Response\Component\BrandBar;
+use Wingu\Engine\SDK\Model\Response\Component\CMS;
+use Wingu\Engine\SDK\Model\Response\Component\Component;
+use Wingu\Engine\SDK\Model\Response\Component\Contact;
+use Wingu\Engine\SDK\Model\Response\Component\ContactAddress;
+use Wingu\Engine\SDK\Model\Response\Component\ContactExternalLinks;
+use Wingu\Engine\SDK\Model\Response\Component\Coupon;
+use Wingu\Engine\SDK\Model\Response\Component\Files;
+use Wingu\Engine\SDK\Model\Response\Component\FilesFile as File;
+use Wingu\Engine\SDK\Model\Response\Component\Image as InnerImage;
+use Wingu\Engine\SDK\Model\Response\Component\ImageGallery;
+use Wingu\Engine\SDK\Model\Response\Component\ImageGalleryImage as OuterImage;
+use Wingu\Engine\SDK\Model\Response\Component\ImageMetadata as Metadata;
+use Wingu\Engine\SDK\Model\Response\Component\Location;
+use Wingu\Engine\SDK\Model\Response\Component\PrivateForm;
+use Wingu\Engine\SDK\Model\Response\Component\PrivateWebhook;
+use Wingu\Engine\SDK\Model\Response\Component\Proxy;
+use Wingu\Engine\SDK\Model\Response\Component\Rating;
+use Wingu\Engine\SDK\Model\Response\Component\Separator;
+use Wingu\Engine\SDK\Model\Response\Component\SurveyMonkey;
+use Wingu\Engine\SDK\Model\Response\Component\Video;
 use Wingu\Engine\SDK\Tests\Api\ApiTest;
 
 class ComponentApiTest extends ApiTest
@@ -100,6 +102,67 @@ class ComponentApiTest extends ApiTest
 
         self::assertCount(16, $actual);
         self::assertEquals($expected, \iterator_to_array($actual));
+    }
+
+    public function testPostCmsComponentCreatesCmsComponent() : void
+    {
+        $configurationMock = new Configuration();
+        $requestFactory    = new GuzzleMessageFactory();
+        $hydrator          = new SymfonySerializerHydrator();
+
+        $httpClient = new MockClient();
+        $response   = new Response(
+            201,
+            ['Content-Type' => 'application/json'],
+            \file_get_contents(__DIR__ . '/Fixtures/posted_cms_component.json')
+        );
+        $httpClient->addResponse($response);
+
+        $winguApi = new ComponentApi($configurationMock, $httpClient, $requestFactory, $hydrator);
+
+        $actualResponse = $winguApi->createCmsComponent(
+            new RequestCMS(
+                'just test',
+                'html'
+            )
+        );
+
+        /** @var RequestInterface $actualRequest */
+        $actualRequest = $httpClient->getLastRequest();
+        self::assertSame('{"content":"just test","type":"html"}', $actualRequest->getBody()->getContents());
+        self::assertSame('POST', $actualRequest->getMethod());
+
+        $expectedResponse = $this->getExpectedPostedCms();
+        self::assertEquals($expectedResponse, $actualResponse);
+    }
+
+    public function testPatchCmsComponentPatchesCmsComponent() : void
+    {
+        $configurationMock = new Configuration();
+        $requestFactory    = new GuzzleMessageFactory();
+        $hydrator          = new SymfonySerializerHydrator();
+
+        $httpClient = new MockClient();
+        $response   = new Response(
+            204,
+            ['Content-Type' => 'application/json']
+        );
+        $httpClient->addResponse($response);
+
+        $winguApi = new ComponentApi($configurationMock, $httpClient, $requestFactory, $hydrator);
+
+        $winguApi->updateCmsComponent(
+            '261a7aab-4b03-4817-b471-060c2e046826',
+            new RequestCMS(
+                'update',
+                'html'
+            )
+        );
+
+        /** @var RequestInterface $actualRequest */
+        $actualRequest = $httpClient->getLastRequest();
+        self::assertSame('{"content":"update","type":"html"}', $actualRequest->getBody()->getContents());
+        self::assertSame('PATCH', $actualRequest->getMethod());
     }
 
     private function getExpectedComponent() : Component
@@ -331,6 +394,16 @@ class ComponentApiTest extends ApiTest
             'Trigger me',
             'https://httpbin.org/status/200',
             'Success message!'
+        );
+    }
+
+    private function getExpectedPostedCms() : CMS
+    {
+        return new CMS(
+            '261a7aab-4b03-4817-b471-060c2e046826',
+            new \DateTime('2018-06-05T13:08:11+0000'),
+            'just test',
+            'html'
         );
     }
 }

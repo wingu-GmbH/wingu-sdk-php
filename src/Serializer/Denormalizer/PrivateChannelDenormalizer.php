@@ -9,11 +9,11 @@ use Symfony\Component\Serializer\Exception\UnexpectedValueException;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 use Symfony\Component\Serializer\SerializerAwareInterface;
 use Symfony\Component\Serializer\SerializerInterface;
-use Wingu\Engine\SDK\Model\Channel\Beacon\PrivateBeacon;
-use Wingu\Engine\SDK\Model\Channel\Geofence\PrivateGeofence;
-use Wingu\Engine\SDK\Model\Channel\Nfc\PrivateNfc;
-use Wingu\Engine\SDK\Model\Channel\PrivateChannel;
-use Wingu\Engine\SDK\Model\Channel\QrCode\PrivateQrCode;
+use Wingu\Engine\SDK\Model\Response\Channel\Beacon\PrivateBeacon;
+use Wingu\Engine\SDK\Model\Response\Channel\Geofence\PrivateGeofence;
+use Wingu\Engine\SDK\Model\Response\Channel\Nfc\PrivateNfc;
+use Wingu\Engine\SDK\Model\Response\Channel\PrivateChannel;
+use Wingu\Engine\SDK\Model\Response\Channel\QrCode\PrivateQrCode;
 
 final class PrivateChannelDenormalizer implements DenormalizerInterface, SerializerAwareInterface
 {

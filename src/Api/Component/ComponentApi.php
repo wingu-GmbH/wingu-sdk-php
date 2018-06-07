@@ -8,7 +8,10 @@ use Wingu\Engine\SDK\Api\Api;
 use Wingu\Engine\SDK\Api\Paginator\EmbeddedPage;
 use Wingu\Engine\SDK\Api\Paginator\PageInfo;
 use Wingu\Engine\SDK\Api\Paginator\PaginatedResponseIterator;
-use Wingu\Engine\SDK\Model\Component\Component;
+use Wingu\Engine\SDK\Assertion;
+use Wingu\Engine\SDK\Model\Request\Component\CMS as RequestCMS;
+use Wingu\Engine\SDK\Model\Response\Component\CMS;
+use Wingu\Engine\SDK\Model\Response\Component\Component;
 
 final class ComponentApi extends Api
 {
@@ -32,6 +35,23 @@ final class ComponentApi extends Api
                 return $this->getEmbeddedPage('/api/component/my.json');
             }
         );
+    }
+
+    public function createCmsComponent(RequestCMS $cms) : CMS
+    {
+        $request = $this->createPostRequest('/api/component/cms', $cms);
+
+        $response = $this->handleRequest($request);
+
+        return $this->hydrator->hydrateResponse($response, CMS::class);
+    }
+
+    public function updateCmsComponent(string $id, RequestCMS $cms) : void
+    {
+        Assertion::uuid($id);
+        $request = $this->createPatchRequest('/api/component/cms/' . $id, $cms);
+
+        $this->handleRequest($request);
     }
 
     private function getEmbeddedPage(string $path) : EmbeddedPage

@@ -8,7 +8,7 @@ use Wingu\Engine\SDK\Api\Api;
 use Wingu\Engine\SDK\Api\Paginator\EmbeddedPage;
 use Wingu\Engine\SDK\Api\Paginator\PageInfo;
 use Wingu\Engine\SDK\Api\Paginator\PaginatedResponseIterator;
-use Wingu\Engine\SDK\Model\Channel\PrivateChannel;
+use Wingu\Engine\SDK\Model\Response\Channel\PrivateChannel;
 
 final class ChannelApi extends Api
 {

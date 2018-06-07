@@ -8,8 +8,8 @@ use Wingu\Engine\SDK\Api\Api;
 use Wingu\Engine\SDK\Api\Paginator\EmbeddedPage;
 use Wingu\Engine\SDK\Api\Paginator\PageInfo;
 use Wingu\Engine\SDK\Api\Paginator\PaginatedResponseIterator;
-use Wingu\Engine\SDK\Model\Channel\Nfc\PrivateNfc as PrivateNfcModel;
-use Wingu\Engine\SDK\Model\Channel\Nfc\PublicNfc as PublicNfcModel;
+use Wingu\Engine\SDK\Model\Response\Channel\Nfc\PrivateNfc as PrivateNfcModel;
+use Wingu\Engine\SDK\Model\Response\Channel\Nfc\PublicNfc as PublicNfcModel;
 
 final class NfcApi extends Api
 {

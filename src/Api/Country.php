@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Wingu\Engine\SDK\Api;
 
-use Wingu\Engine\SDK\Model\Country as CountryModel;
+use Wingu\Engine\SDK\Model\Response\Country as CountryModel;
 
 final class Country extends Api
 {

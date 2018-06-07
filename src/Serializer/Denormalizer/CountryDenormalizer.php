@@ -7,7 +7,7 @@ namespace Wingu\Engine\SDK\Serializer\Denormalizer;
 use Symfony\Component\Serializer\Exception\InvalidArgumentException;
 use Symfony\Component\Serializer\Exception\UnexpectedValueException;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
-use Wingu\Engine\SDK\Model\Country as CountryModel;
+use Wingu\Engine\SDK\Model\Response\Country as CountryModel;
 
 final class CountryDenormalizer implements DenormalizerInterface
 {

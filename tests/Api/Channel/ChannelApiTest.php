@@ -10,16 +10,16 @@ use Http\Mock\Client as MockClient;
 use Wingu\Engine\SDK\Api\Channel\ChannelApi;
 use Wingu\Engine\SDK\Api\Configuration;
 use Wingu\Engine\SDK\Hydrator\SymfonySerializerHydrator;
-use Wingu\Engine\SDK\Model\Channel\Beacon\BeaconAddress;
-use Wingu\Engine\SDK\Model\Channel\Beacon\BeaconLocation;
-use Wingu\Engine\SDK\Model\Channel\Beacon\Coordinates;
-use Wingu\Engine\SDK\Model\Channel\Beacon\PrivateBeacon;
-use Wingu\Engine\SDK\Model\Channel\Geofence\Boundaries;
-use Wingu\Engine\SDK\Model\Channel\Geofence\PrivateGeofence;
-use Wingu\Engine\SDK\Model\Channel\Nfc\PrivateNfc;
-use Wingu\Engine\SDK\Model\Channel\QrCode\PrivateQrCode;
-use Wingu\Engine\SDK\Model\Content\PrivateContent;
-use Wingu\Engine\SDK\Model\Content\PrivateListContent;
+use Wingu\Engine\SDK\Model\Response\Channel\Beacon\BeaconAddress;
+use Wingu\Engine\SDK\Model\Response\Channel\Beacon\BeaconLocation;
+use Wingu\Engine\SDK\Model\Response\Channel\Beacon\Coordinates;
+use Wingu\Engine\SDK\Model\Response\Channel\Beacon\PrivateBeacon;
+use Wingu\Engine\SDK\Model\Response\Channel\Geofence\Boundaries;
+use Wingu\Engine\SDK\Model\Response\Channel\Geofence\PrivateGeofence;
+use Wingu\Engine\SDK\Model\Response\Channel\Nfc\PrivateNfc;
+use Wingu\Engine\SDK\Model\Response\Channel\QrCode\PrivateQrCode;
+use Wingu\Engine\SDK\Model\Response\Content\PrivateContent;
+use Wingu\Engine\SDK\Model\Response\Content\PrivateListContent;
 use Wingu\Engine\SDK\Tests\Api\ChannelApiTestCase;
 
 final class ChannelApiTest extends ChannelApiTestCase

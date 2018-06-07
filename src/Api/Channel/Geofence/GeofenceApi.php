@@ -8,8 +8,8 @@ use Wingu\Engine\SDK\Api\Api;
 use Wingu\Engine\SDK\Api\Paginator\EmbeddedPage;
 use Wingu\Engine\SDK\Api\Paginator\PageInfo;
 use Wingu\Engine\SDK\Api\Paginator\PaginatedResponseIterator;
-use Wingu\Engine\SDK\Model\Channel\Geofence\PrivateGeofence as PrivateGeofenceModel;
-use Wingu\Engine\SDK\Model\Channel\Geofence\PublicGeofence as PublicGeofenceModel;
+use Wingu\Engine\SDK\Model\Response\Channel\Geofence\PrivateGeofence as PrivateGeofenceModel;
+use Wingu\Engine\SDK\Model\Response\Channel\Geofence\PublicGeofence as PublicGeofenceModel;
 
 final class GeofenceApi extends Api
 {

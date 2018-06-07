@@ -8,8 +8,8 @@ use Wingu\Engine\SDK\Api\Api;
 use Wingu\Engine\SDK\Api\Paginator\EmbeddedPage;
 use Wingu\Engine\SDK\Api\Paginator\PageInfo;
 use Wingu\Engine\SDK\Api\Paginator\PaginatedResponseIterator;
-use Wingu\Engine\SDK\Model\Channel\Beacon\PrivateBeacon as PrivateBeaconModel;
-use Wingu\Engine\SDK\Model\Channel\Beacon\PublicBeacon as PublicBeaconModel;
+use Wingu\Engine\SDK\Model\Response\Channel\Beacon\PrivateBeacon as PrivateBeaconModel;
+use Wingu\Engine\SDK\Model\Response\Channel\Beacon\PublicBeacon as PublicBeaconModel;
 
 final class BeaconApi extends Api
 {

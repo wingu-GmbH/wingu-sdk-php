@@ -7,7 +7,7 @@ namespace Wingu\Engine\SDK\Tests\Serializer\Denormalizer;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Serializer\Exception\InvalidArgumentException;
 use Symfony\Component\Serializer\Exception\UnexpectedValueException;
-use Wingu\Engine\SDK\Model\Country;
+use Wingu\Engine\SDK\Model\Response\Country;
 use Wingu\Engine\SDK\Serializer\Denormalizer\CountryDenormalizer;
 
 final class CountryDenormalizerTest extends TestCase

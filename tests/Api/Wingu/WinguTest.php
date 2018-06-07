@@ -12,9 +12,9 @@ use Wingu\Engine\SDK\Api\Generic;
 use Wingu\Engine\SDK\Api\Wingu\Wingu;
 use Wingu\Engine\SDK\Hydrator\Hydrator;
 use Wingu\Engine\SDK\Hydrator\SymfonySerializerHydrator;
-use Wingu\Engine\SDK\Model\Wingu\Ping\Cloudinary;
-use Wingu\Engine\SDK\Model\Wingu\Ping\Ping;
-use Wingu\Engine\SDK\Model\Wingu\Ping\Version;
+use Wingu\Engine\SDK\Model\Response\Wingu\Ping\Cloudinary;
+use Wingu\Engine\SDK\Model\Response\Wingu\Ping\Ping;
+use Wingu\Engine\SDK\Model\Response\Wingu\Ping\Version;
 use Wingu\Engine\SDK\Tests\Api\ApiTest;
 
 final class WinguTest extends ApiTest

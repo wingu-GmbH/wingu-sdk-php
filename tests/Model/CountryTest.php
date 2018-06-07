@@ -6,7 +6,7 @@ namespace Wingu\Engine\SDK\Tests\Model;
 
 use PHPUnit\Framework\TestCase;
 use Wingu\Engine\SDK\Exception\AssertInvalidArgument;
-use Wingu\Engine\SDK\Model\Country;
+use Wingu\Engine\SDK\Model\Response\Country;
 
 final class CountryTest extends TestCase
 {

@@ -8,7 +8,11 @@ use Http\Client\HttpClient;
 use Http\Message\RequestFactory;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\Serializer\Normalizer\JsonSerializableNormalizer;
+use Symfony\Component\Serializer\Serializer;
 use Wingu\Engine\SDK\Hydrator\Hydrator;
+use Wingu\Engine\SDK\Model\Request\Request;
 
 abstract class Api
 {
@@ -24,6 +28,9 @@ abstract class Api
     /** @var Hydrator */
     protected $hydrator;
 
+    /** @var Serializer */
+    protected $serializer;
+
     public function __construct(
         Configuration $configuration,
         HttpClient $httpClient,
@@ -34,6 +41,7 @@ abstract class Api
         $this->httpClient     = $httpClient;
         $this->requestFactory = $requestFactory;
         $this->hydrator       = $hydrator;
+        $this->serializer     = new Serializer([new JsonSerializableNormalizer()], [new JsonEncoder()]);
     }
 
     protected function handleRequest(RequestInterface $request) : ResponseInterface
@@ -87,5 +95,54 @@ abstract class Api
         }
 
         return $data;
+    }
+
+    protected function createPostRequest(string $path, Request $requestObject) : RequestInterface
+    {
+        $uri = $this->configuration->backendUrl() . $path;
+
+        $request = $this->requestFactory->createRequest(
+            'POST',
+            $uri,
+            [
+                $this->configuration->apiKeyHeader() => $this->configuration->apiKey(),
+                'Content-Type' => 'application/json',
+            ],
+            $this->serializer->serialize($requestObject, 'json')
+        );
+
+        return $request;
+    }
+
+    protected function createPatchRequest(string $path, Request $requestObject) : RequestInterface
+    {
+        $uri = $this->configuration->backendUrl() . $path;
+
+        $request = $this->requestFactory->createRequest(
+            'PATCH',
+            $uri,
+            [
+                $this->configuration->apiKeyHeader() => $this->configuration->apiKey(),
+            ],
+            $this->serializer->serialize($requestObject, 'json')
+        );
+
+        return $request;
+    }
+
+    protected function createPutRequest(string $path, Request $requestObject) : RequestInterface
+    {
+        $uri = $this->configuration->backendUrl() . $path;
+
+        $request = $this->requestFactory->createRequest(
+            'PUT',
+            $uri,
+            [
+                $this->configuration->apiKeyHeader() => $this->configuration->apiKey(),
+            ],
+            $this->serializer->serialize($requestObject, 'json')
+        );
+
+        return $request;
     }
 }

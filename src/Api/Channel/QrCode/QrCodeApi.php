@@ -8,8 +8,8 @@ use Wingu\Engine\SDK\Api\Api;
 use Wingu\Engine\SDK\Api\Paginator\EmbeddedPage;
 use Wingu\Engine\SDK\Api\Paginator\PageInfo;
 use Wingu\Engine\SDK\Api\Paginator\PaginatedResponseIterator;
-use Wingu\Engine\SDK\Model\Channel\QrCode\PrivateQrCode as PrivateQrCodeModel;
-use Wingu\Engine\SDK\Model\Channel\QrCode\PublicQrCode as PublicQrCodeModel;
+use Wingu\Engine\SDK\Model\Response\Channel\QrCode\PrivateQrCode as PrivateQrCodeModel;
+use Wingu\Engine\SDK\Model\Response\Channel\QrCode\PublicQrCode as PublicQrCodeModel;
 
 final class QrCodeApi extends Api
 {

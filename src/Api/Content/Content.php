@@ -8,7 +8,9 @@ use Wingu\Engine\SDK\Api\Api;
 use Wingu\Engine\SDK\Api\Paginator\EmbeddedPage;
 use Wingu\Engine\SDK\Api\Paginator\PageInfo;
 use Wingu\Engine\SDK\Api\Paginator\PaginatedResponseIterator;
-use Wingu\Engine\SDK\Model\Content\PrivateContent;
+use Wingu\Engine\SDK\Assertion;
+use Wingu\Engine\SDK\Model\Request\Content\PrivateContentChannels;
+use Wingu\Engine\SDK\Model\Response\Content\PrivateContent;
 
 final class Content extends Api
 {
@@ -32,6 +34,22 @@ final class Content extends Api
                 return $this->getEmbeddedPage($href);
             }
         );
+    }
+
+    public function attachMyContentToChannels(string $id, PrivateContentChannels $content) : void
+    {
+        Assertion::uuid($id);
+        $request = $this->createPatchRequest('/api/content/my/' . $id . '/channels', $content);
+
+        $this->handleRequest($request);
+    }
+
+    public function attachMyContentToChannelsExclusively(string $id, PrivateContentChannels $content) : void
+    {
+        Assertion::uuid($id);
+        $request = $this->createPutRequest('/api/content/my/' . $id . 'channels', $content);
+
+        $this->handleRequest($request);
     }
 
     private function getEmbeddedPage(string $href) : EmbeddedPage

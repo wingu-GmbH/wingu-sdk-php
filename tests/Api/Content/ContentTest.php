@@ -7,38 +7,40 @@ namespace Wingu\Engine\SDK\Tests\Api\Content;
 use GuzzleHttp\Psr7\Response;
 use Http\Message\MessageFactory\GuzzleMessageFactory;
 use Http\Mock\Client as MockClient;
+use Psr\Http\Message\RequestInterface;
 use Wingu\Engine\SDK\Api\Configuration;
 use Wingu\Engine\SDK\Api\Content\Content;
 use Wingu\Engine\SDK\Hydrator\SymfonySerializerHydrator;
-use Wingu\Engine\SDK\Model\Card\Card;
-use Wingu\Engine\SDK\Model\Card\Position;
-use Wingu\Engine\SDK\Model\Component\Action;
-use Wingu\Engine\SDK\Model\Component\AudioPlaylist;
-use Wingu\Engine\SDK\Model\Component\AudioPlaylistMedia as Media;
-use Wingu\Engine\SDK\Model\Component\BrandBar;
-use Wingu\Engine\SDK\Model\Component\CMS;
-use Wingu\Engine\SDK\Model\Component\Contact;
-use Wingu\Engine\SDK\Model\Component\ContactAddress;
-use Wingu\Engine\SDK\Model\Component\ContactExternalLinks;
-use Wingu\Engine\SDK\Model\Component\Coupon;
-use Wingu\Engine\SDK\Model\Component\Files;
-use Wingu\Engine\SDK\Model\Component\FilesFile as File;
-use Wingu\Engine\SDK\Model\Component\Image as InnerImage;
-use Wingu\Engine\SDK\Model\Component\ImageGallery;
-use Wingu\Engine\SDK\Model\Component\ImageGalleryImage as OuterImage;
-use Wingu\Engine\SDK\Model\Component\ImageMetadata as Metadata;
-use Wingu\Engine\SDK\Model\Component\Location;
-use Wingu\Engine\SDK\Model\Component\PrivateForm;
-use Wingu\Engine\SDK\Model\Component\PrivateWebhook;
-use Wingu\Engine\SDK\Model\Component\Proxy;
-use Wingu\Engine\SDK\Model\Component\Rating;
-use Wingu\Engine\SDK\Model\Component\Separator;
-use Wingu\Engine\SDK\Model\Component\SurveyMonkey;
-use Wingu\Engine\SDK\Model\Component\Video;
-use Wingu\Engine\SDK\Model\Content\Deck;
-use Wingu\Engine\SDK\Model\Content\Locale;
-use Wingu\Engine\SDK\Model\Content\Pack;
-use Wingu\Engine\SDK\Model\Content\PrivateContent;
+use Wingu\Engine\SDK\Model\Request\Content\PrivateContentChannels;
+use Wingu\Engine\SDK\Model\Response\Card\Card;
+use Wingu\Engine\SDK\Model\Response\Card\Position;
+use Wingu\Engine\SDK\Model\Response\Component\Action;
+use Wingu\Engine\SDK\Model\Response\Component\AudioPlaylist;
+use Wingu\Engine\SDK\Model\Response\Component\AudioPlaylistMedia as Media;
+use Wingu\Engine\SDK\Model\Response\Component\BrandBar;
+use Wingu\Engine\SDK\Model\Response\Component\CMS;
+use Wingu\Engine\SDK\Model\Response\Component\Contact;
+use Wingu\Engine\SDK\Model\Response\Component\ContactAddress;
+use Wingu\Engine\SDK\Model\Response\Component\ContactExternalLinks;
+use Wingu\Engine\SDK\Model\Response\Component\Coupon;
+use Wingu\Engine\SDK\Model\Response\Component\Files;
+use Wingu\Engine\SDK\Model\Response\Component\FilesFile as File;
+use Wingu\Engine\SDK\Model\Response\Component\Image as InnerImage;
+use Wingu\Engine\SDK\Model\Response\Component\ImageGallery;
+use Wingu\Engine\SDK\Model\Response\Component\ImageGalleryImage as OuterImage;
+use Wingu\Engine\SDK\Model\Response\Component\ImageMetadata as Metadata;
+use Wingu\Engine\SDK\Model\Response\Component\Location;
+use Wingu\Engine\SDK\Model\Response\Component\PrivateForm;
+use Wingu\Engine\SDK\Model\Response\Component\PrivateWebhook;
+use Wingu\Engine\SDK\Model\Response\Component\Proxy;
+use Wingu\Engine\SDK\Model\Response\Component\Rating;
+use Wingu\Engine\SDK\Model\Response\Component\Separator;
+use Wingu\Engine\SDK\Model\Response\Component\SurveyMonkey;
+use Wingu\Engine\SDK\Model\Response\Component\Video;
+use Wingu\Engine\SDK\Model\Response\Content\Deck;
+use Wingu\Engine\SDK\Model\Response\Content\Locale;
+use Wingu\Engine\SDK\Model\Response\Content\Pack;
+use Wingu\Engine\SDK\Model\Response\Content\PrivateContent;
 use Wingu\Engine\SDK\Tests\Api\ApiTest;
 
 final class ContentTest extends ApiTest
@@ -93,6 +95,66 @@ final class ContentTest extends ApiTest
         /** @var PrivateContent[] $actualContents */
         $actualContents = \iterator_to_array($actual);
         self::assertEquals($expected, $actualContents);
+    }
+
+    public function testPatchMyContentChannelsAttachesContent() : void
+    {
+        $configurationMock = new Configuration();
+        $requestFactory    = new GuzzleMessageFactory();
+        $hydrator          = new SymfonySerializerHydrator();
+
+        $httpClient = new MockClient();
+        $response   = new Response(
+            204,
+            ['Content-Type' => 'application/json']
+        );
+        $httpClient->addResponse($response);
+
+        $winguApi = new Content($configurationMock, $httpClient, $requestFactory, $hydrator);
+
+        $winguApi->attachMyContentToChannels(
+            '12d1da34-0000-4000-a000-000000000014',
+            new PrivateContentChannels(
+                [
+                    '8c798a67-0000-4000-a000-000000000017',
+                    '8c798a67-0000-4000-a000-000100009987',
+                ]
+            )
+        );
+
+        /** @var RequestInterface $actualRequest */
+        $actualRequest = $httpClient->getLastRequest();
+        self::assertSame('[["8c798a67-0000-4000-a000-000000000017","8c798a67-0000-4000-a000-000100009987"]]', $actualRequest->getBody()->getContents());
+        self::assertSame('PATCH', $actualRequest->getMethod());
+    }
+
+    public function testPutMyContentChannelsAttachesContentExclusively() : void
+    {
+        $configurationMock = new Configuration();
+        $requestFactory    = new GuzzleMessageFactory();
+        $hydrator          = new SymfonySerializerHydrator();
+
+        $httpClient = new MockClient();
+        $response   = new Response(
+            204,
+            ['Content-Type' => 'application/json']
+        );
+        $httpClient->addResponse($response);
+
+        $winguApi = new Content($configurationMock, $httpClient, $requestFactory, $hydrator);
+
+        $winguApi->attachMyContentToChannelsExclusively(
+            '12d1da34-0000-4000-a000-000000000014',
+            new PrivateContentChannels(
+                ['8c798a67-0000-4000-a000-000100009969']
+            )
+        );
+
+        /** @var RequestInterface $actualRequest */
+        $actualRequest = $httpClient->getLastRequest();
+        $contents      = $actualRequest->getBody()->getContents();
+        self::assertSame('[["8c798a67-0000-4000-a000-000100009969"]]', $contents);
+        self::assertSame('PUT', $actualRequest->getMethod());
     }
 
     private function getExpectedPrivateContent() : PrivateContent

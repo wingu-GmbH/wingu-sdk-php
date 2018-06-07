@@ -11,7 +11,7 @@ use Wingu\Engine\SDK\Api\Configuration;
 use Wingu\Engine\SDK\Api\Country;
 use Wingu\Engine\SDK\Api\Generic;
 use Wingu\Engine\SDK\Hydrator\SymfonySerializerHydrator;
-use Wingu\Engine\SDK\Model\Country as CountryModel;
+use Wingu\Engine\SDK\Model\Response\Country as CountryModel;
 
 final class CountryTest extends ApiTest
 {

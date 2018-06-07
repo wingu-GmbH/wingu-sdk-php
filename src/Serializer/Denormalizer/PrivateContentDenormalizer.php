@@ -8,9 +8,9 @@ use Symfony\Component\Serializer\Exception\InvalidArgumentException;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 use Symfony\Component\Serializer\SerializerAwareInterface;
 use Symfony\Component\Serializer\SerializerInterface;
-use Wingu\Engine\SDK\Model\Content\Content;
-use Wingu\Engine\SDK\Model\Content\PrivateContent;
-use Wingu\Engine\SDK\Model\Content\PrivateListContent;
+use Wingu\Engine\SDK\Model\Response\Content\Content;
+use Wingu\Engine\SDK\Model\Response\Content\PrivateContent;
+use Wingu\Engine\SDK\Model\Response\Content\PrivateListContent;
 
 final class PrivateContentDenormalizer implements DenormalizerInterface, SerializerAwareInterface
 {
