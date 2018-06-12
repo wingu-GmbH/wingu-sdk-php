@@ -1,0 +1,20 @@
+{
+  "position": {
+    "sort": 12
+  },
+  "id": "589001e0-a279-4077-bc8e-eb263c4030fa",
+  "component": {
+    "id": "a1a57fee-a9e6-4c32-ad66-da25a5a4382f",
+    "updatedAt": "2018-06-07T10:12:43+0000",
+    "files": [
+      {
+        "position": 0,
+        "fileUrl": "http://www.example.com/wingu-dev-components/files/wingu_presentation.pdf",
+        "id": "3e65a29f-bcec-4de3-96f2-e747e38e75a6",
+        "name": "wingu presentation",
+        "size": 900641
+      }
+    ],
+    "discriminator": "files"
+  }
+}
