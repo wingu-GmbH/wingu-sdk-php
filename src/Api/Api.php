@@ -73,7 +73,10 @@ abstract class Api
     /** @param mixed[] $queryParameters */
     protected function createGetRequest(string $path, array $queryParameters = []) : RequestInterface
     {
-        $uri = $this->configuration->backendUrl() . $path . '?' . \http_build_query($queryParameters);
+        $uri = $this->configuration->backendUrl() . $path;
+        if (!empty($queryParameters)) {
+            $uri .= '?' . \http_build_query($queryParameters);
+        }
 
         $request = $this->requestFactory->createRequest(
             'GET',
