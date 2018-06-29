@@ -13,6 +13,7 @@ use Wingu\Engine\SDK\Api\Channel\Nfc\NfcApi;
 use Wingu\Engine\SDK\Api\Channel\QrCode\QrCodeApi;
 use Wingu\Engine\SDK\Api\Component\ComponentApi;
 use Wingu\Engine\SDK\Api\Content\Content;
+use Wingu\Engine\SDK\Api\Content\ContentTemplate;
 use Wingu\Engine\SDK\Api\Wingu\Wingu;
 use Wingu\Engine\SDK\Hydrator\Hydrator;
 
@@ -80,6 +81,11 @@ final class WinguApi
         return $this->getService(Content::class);
     }
 
+    public function contentTemplate() : ContentTemplate
+    {
+        return $this->getService(ContentTemplate::class);
+    }
+
     public function wingu() : Wingu
     {
         return $this->getService(Wingu::class);
@@ -88,6 +94,16 @@ final class WinguApi
     public function country() : Country
     {
         return $this->getService(Country::class);
+    }
+
+    public function deck() : Deck
+    {
+        return $this->getService(Deck::class);
+    }
+
+    public function card() : Card
+    {
+        return $this->getService(Card::class);
     }
 
     /** @return mixed */

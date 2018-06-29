@@ -74,7 +74,7 @@ abstract class Api
     protected function createGetRequest(string $path, array $queryParameters = []) : RequestInterface
     {
         $uri = $this->configuration->backendUrl() . $path;
-        if (!empty($queryParameters)) {
+        if (! empty($queryParameters)) {
             $uri .= '?' . \http_build_query($queryParameters);
         }
 

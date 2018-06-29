@@ -14,6 +14,7 @@ use Wingu\Engine\SDK\Hydrator\SymfonySerializerHydrator;
 use Wingu\Engine\SDK\Model\Request\Component\CMS as RequestCMS;
 use Wingu\Engine\SDK\Model\Response\Component\Action;
 use Wingu\Engine\SDK\Model\Response\Component\AudioPlaylist;
+use Wingu\Engine\SDK\Model\Response\Component\AudioPlaylistAlbum;
 use Wingu\Engine\SDK\Model\Response\Component\AudioPlaylistMedia as Media;
 use Wingu\Engine\SDK\Model\Response\Component\BrandBar;
 use Wingu\Engine\SDK\Model\Response\Component\CMS;
@@ -206,7 +207,7 @@ class ComponentApiTest extends ApiTest
                     'http://example.com/audioplaylist/audio_media.mp3',
                     'David Guetta - Wing it',
                     39,
-                    null
+                    new AudioPlaylistAlbum('Demo 1 Album 1')
                 ),
                 new Media(
                     '2d5f4a19-3200-4dd3-baa3-275359ca12f1',
@@ -214,7 +215,7 @@ class ComponentApiTest extends ApiTest
                     'http://example.com/audioplaylist/audio_media.mp3',
                     'Boom Face - Boom shakalaka',
                     39,
-                    null
+                    new AudioPlaylistAlbum('Demo 2 Album 2')
                 ),
             ]
         );

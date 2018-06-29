@@ -1,0 +1,15 @@
+{
+  "id": "6159c274-9215-4c96-9cfe-d0ce5f5635f7",
+  "deck": {
+    "id": "1e4bfb95-87d6-4070-b9cd-a85681595f62",
+    "title": "My new deck",
+    "description": "Description of my new deck",
+    "cards": [],
+    "legalNote": null
+  },
+  "locale": {
+    "name": "angielski",
+    "code": "en"
+  },
+  "createdAt": "2018-06-21T08:18:00+0000"
+}

@@ -11,6 +11,8 @@ use Psr\Http\Message\RequestInterface;
 use Wingu\Engine\SDK\Api\Configuration;
 use Wingu\Engine\SDK\Api\Content\Content;
 use Wingu\Engine\SDK\Hydrator\SymfonySerializerHydrator;
+use Wingu\Engine\SDK\Model\Request\Content\Pack as RequestPack;
+use Wingu\Engine\SDK\Model\Request\Content\PrivateContent as RequestContent;
 use Wingu\Engine\SDK\Model\Request\Content\PrivateContentChannels;
 use Wingu\Engine\SDK\Model\Response\Card\Card;
 use Wingu\Engine\SDK\Model\Response\Card\Position;
@@ -40,6 +42,7 @@ use Wingu\Engine\SDK\Model\Response\Component\Video;
 use Wingu\Engine\SDK\Model\Response\Content\Deck;
 use Wingu\Engine\SDK\Model\Response\Content\Locale;
 use Wingu\Engine\SDK\Model\Response\Content\Pack;
+use Wingu\Engine\SDK\Model\Response\Content\Pack as ResponsePack;
 use Wingu\Engine\SDK\Model\Response\Content\PrivateContent;
 use Wingu\Engine\SDK\Tests\Api\ApiTest;
 
@@ -124,7 +127,10 @@ final class ContentTest extends ApiTest
 
         /** @var RequestInterface $actualRequest */
         $actualRequest = $httpClient->getLastRequest();
-        self::assertSame('[["8c798a67-0000-4000-a000-000000000017","8c798a67-0000-4000-a000-000100009987"]]', $actualRequest->getBody()->getContents());
+        self::assertSame(
+            '[["8c798a67-0000-4000-a000-000000000017","8c798a67-0000-4000-a000-000100009987"]]',
+            $actualRequest->getBody()->getContents()
+        );
         self::assertSame('PATCH', $actualRequest->getMethod());
     }
 
@@ -155,6 +161,70 @@ final class ContentTest extends ApiTest
         $contents      = $actualRequest->getBody()->getContents();
         self::assertSame('[["8c798a67-0000-4000-a000-000100009969"]]', $contents);
         self::assertSame('PUT', $actualRequest->getMethod());
+    }
+
+    public function testPostContentCreatesContent() : void
+    {
+        $configurationMock = new Configuration();
+        $requestFactory    = new GuzzleMessageFactory();
+        $hydrator          = new SymfonySerializerHydrator();
+
+        $httpClient = new MockClient();
+        $response   = new Response(
+            201,
+            ['Content-Type' => 'application/json'],
+            \file_get_contents(__DIR__ . '/Fixtures/posted_private_content.json')
+        );
+        $httpClient->addResponse($response);
+
+        $winguApi = new Content($configurationMock, $httpClient, $requestFactory, $hydrator);
+
+        $actualResponse = $winguApi->createContent(
+            new RequestContent(
+                '00da2678-7517-4751-996c-ec21edb662ed'
+            )
+        );
+
+        /** @var RequestInterface $actualRequest */
+        $actualRequest = $httpClient->getLastRequest();
+        self::assertSame('{"template":"00da2678-7517-4751-996c-ec21edb662ed"}', $actualRequest->getBody()->getContents());
+        self::assertSame('POST', $actualRequest->getMethod());
+
+        $expectedResponse = $this->getExpectedPostedContent();
+        self::assertEquals($expectedResponse, $actualResponse);
+    }
+
+    public function testPostMyPackCreatesPack() : void
+    {
+        $configurationMock = new Configuration();
+        $requestFactory    = new GuzzleMessageFactory();
+        $hydrator          = new SymfonySerializerHydrator();
+
+        $httpClient = new MockClient();
+        $response   = new Response(
+            201,
+            ['Content-Type' => 'application/json'],
+            \file_get_contents(__DIR__ . '/Fixtures/posted_pack.json')
+        );
+        $httpClient->addResponse($response);
+
+        $winguApi = new Content($configurationMock, $httpClient, $requestFactory, $hydrator);
+
+        $actualResponse = $winguApi->createMyPack(
+            new RequestPack(
+                'fb574c18-bff6-4b84-9e5e-5d7047dddf01',
+                '1e4bfb95-87d6-4070-b9cd-a85681595f62',
+                'en'
+            )
+        );
+
+        /** @var RequestInterface $actualRequest */
+        $actualRequest = $httpClient->getLastRequest();
+        self::assertSame('{"content":"fb574c18-bff6-4b84-9e5e-5d7047dddf01","deck":"1e4bfb95-87d6-4070-b9cd-a85681595f62","locale":"en"}', $actualRequest->getBody()->getContents());
+        self::assertSame('POST', $actualRequest->getMethod());
+
+        $expectedResponse = $this->getExpectedPostedPack();
+        self::assertEquals($expectedResponse, $actualResponse);
     }
 
     private function getExpectedPrivateContent() : PrivateContent
@@ -399,6 +469,28 @@ final class ContentTest extends ApiTest
                     new Locale('angielski', 'en')
                 ),
             ]
+        );
+    }
+
+    private function getExpectedPostedContent() : PrivateContent
+    {
+        return new PrivateContent(
+            'fb574c18-bff6-4b84-9e5e-5d7047dddf01',
+            []
+        );
+    }
+
+    private function getExpectedPostedPack() : ResponsePack
+    {
+        return new ResponsePack(
+            '6159c274-9215-4c96-9cfe-d0ce5f5635f7',
+            new Deck(
+                '1e4bfb95-87d6-4070-b9cd-a85681595f62',
+                'My new deck',
+                'Description of my new deck',
+                []
+            ),
+            new Locale('angielski', 'en')
         );
     }
 }

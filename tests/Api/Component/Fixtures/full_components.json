@@ -38,7 +38,18 @@
               "id": "842bf0aa-065b-440d-bd30-0e657f2ae876",
               "name": "David Guetta - Wing it",
               "length": 39,
-              "album": null
+              "album": {
+                "name": "Demo 1 Album 1",
+                "cover": {
+                  "metadata": {
+                    "format": "jpg",
+                    "width": 60,
+                    "height": 60
+                  },
+                  "cloudinaryId": "sample",
+                  "type": "cloudinary"
+                }
+              }
             },
             {
               "position": 1,
@@ -46,7 +57,18 @@
               "id": "2d5f4a19-3200-4dd3-baa3-275359ca12f1",
               "name": "Boom Face - Boom shakalaka",
               "length": 39,
-              "album": null
+              "album": {
+                "name": "Demo 2 Album 2",
+                "cover": {
+                  "metadata": {
+                    "format": "jpg",
+                    "width": 72,
+                    "height": 72
+                  },
+                  "cloudinaryId": "sample",
+                  "type": "cloudinary"
+                }
+              }
             }
           ],
           "discriminator": "audio_playlist"
