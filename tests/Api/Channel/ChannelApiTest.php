@@ -10,6 +10,9 @@ use Http\Mock\Client as MockClient;
 use Wingu\Engine\SDK\Api\Channel\ChannelApi;
 use Wingu\Engine\SDK\Api\Configuration;
 use Wingu\Engine\SDK\Hydrator\SymfonySerializerHydrator;
+use Wingu\Engine\SDK\Model\Request\Channel\PrivateChannelsFilter;
+use Wingu\Engine\SDK\Model\Request\Channel\PrivateChannelsSorting;
+use Wingu\Engine\SDK\Model\Request\RequestParameters;
 use Wingu\Engine\SDK\Model\Response\Channel\Beacon\BeaconAddress;
 use Wingu\Engine\SDK\Model\Response\Channel\Beacon\BeaconLocation;
 use Wingu\Engine\SDK\Model\Response\Channel\Beacon\Coordinates;
@@ -195,6 +198,65 @@ final class ChannelApiTest extends ChannelApiTestCase
         self::assertEquals($expected, \iterator_to_array($actual));
     }
 
+
+    public function testMyChannelsWithFiltersReturnsFilteredResult() : void
+    {
+        $configurationMock = new Configuration();
+        $requestFactory    = new GuzzleMessageFactory();
+        $hydrator          = new SymfonySerializerHydrator();
+
+        $httpClient = new MockClient();
+        $httpClient->addResponse(
+            new Response(
+                200,
+                ['Content-Type' => 'application/json'],
+                \file_get_contents(__DIR__ . '/Fixtures/full_private_channels_filtered.json')
+            )
+        );
+
+        $channelApi = new ChannelApi($configurationMock, $httpClient, $requestFactory, $hydrator);
+        // beacons with content attached
+        $actual = $channelApi->myChannels(new PrivateChannelsFilter(null, null, 'beacon', null, null, null, true));
+
+        $expected = [
+            $this->getExpectedFilteredBeacon1(),
+            $this->getExpectedFilteredBeacon2(),
+            $this->getExpectedFilteredBeacon3(),
+        ];
+
+        self::assertCount(3, $actual);
+        self::assertEquals($expected, \iterator_to_array($actual));
+    }
+
+    public function testMyChannelsWithSortingReturnsSortedResult() : void
+    {
+        $configurationMock = new Configuration();
+        $requestFactory    = new GuzzleMessageFactory();
+        $hydrator          = new SymfonySerializerHydrator();
+
+        $httpClient = new MockClient();
+        $httpClient->addResponse(
+            new Response(
+                200,
+                ['Content-Type' => 'application/json'],
+                \file_get_contents(__DIR__ . '/Fixtures/full_private_channels_sorted.json')
+            )
+        );
+
+        $channelApi = new ChannelApi($configurationMock, $httpClient, $requestFactory, $hydrator);
+        $actual     = $channelApi->myChannels(null, new PrivateChannelsSorting(RequestParameters::SORTING_ORDER_DESC));
+
+        $expected = [
+            $this->getExpectedSortedChannel1(),
+            $this->getExpectedSortedChannel2(),
+            $this->getExpectedSortedChannel3(),
+        ];
+
+        self::assertCount(3, $actual);
+        self::assertEquals($expected, \iterator_to_array($actual));
+    }
+
+
     private function getExpectedPrivateBeacon() : PrivateBeacon
     {
         return new PrivateBeacon(
@@ -340,6 +402,105 @@ final class ChannelApiTest extends ChannelApiTestCase
                     ],
                 ]
             )
+        );
+    }
+
+    private function getExpectedFilteredBeacon1() : PrivateBeacon
+    {
+        return new PrivateBeacon(
+            '44d8d1f7-fb01-488a-8c45-c8a8c07b265a',
+            'Beacon 1',
+            true,
+            new PrivateListContent('12d1da34-0000-4000-a000-000000000009', 'Deck 9 title'),
+            true,
+            null,
+            true,
+            null,
+            '3f104004-b288-4501-80c2-4ac30a02355b',
+            1,
+            1,
+            new BeaconLocation(null, new BeaconAddress(null))
+        );
+    }
+
+    private function getExpectedFilteredBeacon2() : PrivateBeacon
+    {
+        return new PrivateBeacon(
+            '6075909e-1605-4ede-8754-cd07257b6826',
+            'Beacon 3',
+            true,
+            new PrivateListContent('12d1da34-0000-4000-a000-000000000007', 'Deck 7 title'),
+            true,
+            null,
+            true,
+            null,
+            '3f104004-b288-4501-80c2-4ac30a02355b',
+            3,
+            3,
+            new BeaconLocation(null, new BeaconAddress(null))
+        );
+    }
+
+    private function getExpectedFilteredBeacon3() : PrivateBeacon
+    {
+        return new PrivateBeacon(
+            '7a9d69c2-651c-48aa-ab9a-701c2fac2392',
+            'Beacon 2',
+            true,
+            new PrivateListContent('12d1da34-0000-4000-a000-000000000002', 'Deck 2 title'),
+            true,
+            null,
+            true,
+            null,
+            '3f104004-b288-4501-80c2-4ac30a02355b',
+            2,
+            2,
+            new BeaconLocation(null, new BeaconAddress(null))
+        );
+    }
+
+    private function getExpectedSortedChannel1() : PrivateQrCode
+    {
+        return new PrivateQrCode(
+            '9a8798c6-0000-4000-a000-000000000010',
+            'QR 10',
+            true,
+            new PrivateListContent('12d1da34-0000-4000-a000-000000000002', 'Deck 2 title'),
+            true,
+            null,
+            true,
+            null,
+            'https://wingu-sdk-test.de/qrcode/33d6f4c2-759b-4a81-b800-686430118729'
+        );
+    }
+
+    private function getExpectedSortedChannel2() : PrivateQrCode
+    {
+        return new PrivateQrCode(
+            '9a8798c6-0000-4000-a000-000000000009',
+            'QR 9',
+            true,
+            new PrivateListContent('12d1da34-0000-4000-a000-000000000009', 'Deck 9 title'),
+            true,
+            null,
+            true,
+            null,
+            'https://wingu-sdk-test.de/qrcode/5dbe060a-7d0a-43bf-a025-2a7bacedc1f7'
+        );
+    }
+
+    private function getExpectedSortedChannel3() : PrivateQrCode
+    {
+        return new PrivateQrCode(
+            '9a8798c6-0000-4000-a000-000000000008',
+            'QR 8',
+            true,
+            new PrivateListContent('12d1da34-0000-4000-a000-000000000002', 'Deck 2 title'),
+            true,
+            null,
+            true,
+            null,
+            'https://wingu-sdk-test.de/qrcode/b9a5abd6-4156-4bb9-a4e0-58a19e6c95f4'
         );
     }
 }

@@ -1,0 +1,114 @@
+{
+  "page": 1,
+  "limit": 10,
+  "pages": 1,
+  "total": 3,
+  "_links": {
+    "self": {
+      "href": "/api/channel/my?filter%5Bdiscriminator%5D=beacon&filter%5BhasContentAttached%5D=1&page=1&limit=10"
+    },
+    "first": {
+      "href": "/api/channel/my?filter%5Bdiscriminator%5D=beacon&filter%5BhasContentAttached%5D=1&page=1&limit=10"
+    },
+    "last": {
+      "href": "/api/channel/my?filter%5Bdiscriminator%5D=beacon&filter%5BhasContentAttached%5D=1&page=1&limit=10"
+    }
+  },
+  "_embedded": {
+    "channels": [
+      {
+        "beacon": {
+          "id": "44d8d1f7-fb01-488a-8c45-c8a8c07b265a",
+          "active": true,
+          "content": {
+            "title": "Deck 9 title",
+            "id": "12d1da34-0000-4000-a000-000000000009"
+          },
+          "name": "Beacon 1",
+          "published": true,
+          "functioningHours": null,
+          "functioningHoursNextEvent": null,
+          "inFunctioningHours": true,
+          "note": null,
+          "broadcastProtocol": 3,
+          "uuid": "3f104004-b288-4501-80c2-4ac30a02355b",
+          "major": 1,
+          "minor": 1,
+          "eddystoneUrl": "https://wij.cc/Ft1RMdM",
+          "location": {
+            "coordinates": null,
+            "address": {
+              "formattedAddress": null
+            }
+          },
+          "preset": {
+            "type": "kontaktio_simple",
+            "deviceCode": "1"
+          }
+        }
+      },
+      {
+        "beacon": {
+          "id": "6075909e-1605-4ede-8754-cd07257b6826",
+          "active": true,
+          "content": {
+            "title": "Deck 7 title",
+            "id": "12d1da34-0000-4000-a000-000000000007"
+          },
+          "name": "Beacon 3",
+          "published": true,
+          "functioningHours": null,
+          "functioningHoursNextEvent": null,
+          "inFunctioningHours": true,
+          "note": null,
+          "broadcastProtocol": 3,
+          "uuid": "3f104004-b288-4501-80c2-4ac30a02355b",
+          "major": 3,
+          "minor": 3,
+          "eddystoneUrl": "https://wij.cc/XJbyEbc",
+          "location": {
+            "coordinates": null,
+            "address": {
+              "formattedAddress": null
+            }
+          },
+          "preset": {
+            "type": "unknown",
+            "deviceCode": "3"
+          }
+        }
+      },
+      {
+        "beacon": {
+          "id": "7a9d69c2-651c-48aa-ab9a-701c2fac2392",
+          "active": true,
+          "content": {
+            "title": "Deck 2 title",
+            "id": "12d1da34-0000-4000-a000-000000000002"
+          },
+          "name": "Beacon 2",
+          "published": true,
+          "functioningHours": null,
+          "functioningHoursNextEvent": null,
+          "inFunctioningHours": true,
+          "note": null,
+          "broadcastProtocol": 3,
+          "uuid": "3f104004-b288-4501-80c2-4ac30a02355b",
+          "major": 2,
+          "minor": 2,
+          "eddystoneUrl": "https://wij.cc/wJHE4kb",
+          "location": {
+            "coordinates": null,
+            "address": {
+              "formattedAddress": null
+            }
+          },
+          "preset": {
+            "type": "blukii_wingu",
+            "deviceCode": "2"
+          }
+        }
+      }
+    ]
+  }
+}

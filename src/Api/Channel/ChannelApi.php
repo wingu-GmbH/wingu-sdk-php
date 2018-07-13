@@ -8,6 +8,8 @@ use Wingu\Engine\SDK\Api\Api;
 use Wingu\Engine\SDK\Api\Paginator\EmbeddedPage;
 use Wingu\Engine\SDK\Api\Paginator\PageInfo;
 use Wingu\Engine\SDK\Api\Paginator\PaginatedResponseIterator;
+use Wingu\Engine\SDK\Model\Request\Channel\PrivateChannelsFilter;
+use Wingu\Engine\SDK\Model\Request\Channel\PrivateChannelsSorting;
 use Wingu\Engine\SDK\Model\Response\Channel\PrivateChannel;
 
 final class ChannelApi extends Api
@@ -21,9 +23,9 @@ final class ChannelApi extends Api
         return $this->hydrator->hydrateResponse($response, PrivateChannel::class);
     }
 
-    public function myChannels() : PaginatedResponseIterator
+    public function myChannels(?PrivateChannelsFilter $channelsFilter = null, ?PrivateChannelsSorting $channelsSorting = null) : PaginatedResponseIterator
     {
-        $page = $this->getEmbeddedPage('/api/channel/my.json');
+        $page = $this->getEmbeddedPage('/api/channel/my.json', $channelsFilter, $channelsSorting);
 
         return new PaginatedResponseIterator(
             $page->pageInfo(),
@@ -34,9 +36,18 @@ final class ChannelApi extends Api
         );
     }
 
-    private function getEmbeddedPage(string $href) : EmbeddedPage
+    private function getEmbeddedPage(string $href, ?PrivateChannelsFilter $channelsFilter = null, ?PrivateChannelsSorting $channelsSorting = null) : EmbeddedPage
     {
-        $request = $this->createGetRequest($href);
+        $params = [];
+
+        if ($channelsFilter !== null) {
+            $params['filter'] = $channelsFilter->toArray();
+        }
+        if ($channelsSorting !== null) {
+            $params['sorting'] = $channelsSorting->toArray();
+        }
+
+        $request = $this->createGetRequest($href, $params);
 
         $response = $this->handleRequest($request);
 
