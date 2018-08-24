@@ -8,6 +8,8 @@ use Wingu\Engine\SDK\Api\Api;
 use Wingu\Engine\SDK\Api\Paginator\EmbeddedPage;
 use Wingu\Engine\SDK\Api\Paginator\PageInfo;
 use Wingu\Engine\SDK\Api\Paginator\PaginatedResponseIterator;
+use Wingu\Engine\SDK\Assertion;
+use Wingu\Engine\SDK\Model\Request\Channel\Beacon\PrivateBeacon as RequestPrivateBeacon;
 use Wingu\Engine\SDK\Model\Response\Channel\Beacon\PrivateBeacon as PrivateBeaconModel;
 use Wingu\Engine\SDK\Model\Response\Channel\Beacon\PublicBeacon as PublicBeaconModel;
 
@@ -53,6 +55,15 @@ final class BeaconApi extends Api
                 return $this->getEmbeddedPage($href);
             }
         );
+    }
+
+    public function updateMyBeacon(string $id, RequestPrivateBeacon $beacon) : void
+    {
+        Assertion::uuid($id);
+
+        $request = $this->createPatchRequest('/api/channel/beacon/my/' . $id, $beacon);
+
+        $this->handleRequest($request);
     }
 
     private function getEmbeddedPage(string $href) : EmbeddedPage

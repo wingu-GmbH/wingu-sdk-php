@@ -8,6 +8,8 @@ use Wingu\Engine\SDK\Api\Api;
 use Wingu\Engine\SDK\Api\Paginator\EmbeddedPage;
 use Wingu\Engine\SDK\Api\Paginator\PageInfo;
 use Wingu\Engine\SDK\Api\Paginator\PaginatedResponseIterator;
+use Wingu\Engine\SDK\Assertion;
+use Wingu\Engine\SDK\Model\Request\Channel\QrCode\PrivateQrCode as RequestPrivateQrCode;
 use Wingu\Engine\SDK\Model\Response\Channel\QrCode\PrivateQrCode as PrivateQrCodeModel;
 use Wingu\Engine\SDK\Model\Response\Channel\QrCode\PublicQrCode as PublicQrCodeModel;
 
@@ -53,6 +55,15 @@ final class QrCodeApi extends Api
                 return $this->getEmbeddedPage($href);
             }
         );
+    }
+
+    public function updateMyQrCode(string $id, RequestPrivateQrCode $qrCode) : void
+    {
+        Assertion::uuid($id);
+
+        $request = $this->createPatchRequest('/api/channel/qrcode/my/' . $id, $qrCode);
+
+        $this->handleRequest($request);
     }
 
     private function getEmbeddedPage(string $href) : EmbeddedPage

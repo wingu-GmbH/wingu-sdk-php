@@ -1,0 +1,78 @@
+{
+  "page": 2,
+  "limit": 3,
+  "pages": 4,
+  "total": 10,
+  "_links": {
+    "self": {
+      "href": "/api/channel/my?filter%5Bdiscriminator%5D=nfc&page=2&limit=3"
+    },
+    "first": {
+      "href": "/api/channel/my?filter%5Bdiscriminator%5D=nfc&page=1&limit=3"
+    },
+    "last": {
+      "href": "/api/channel/my?filter%5Bdiscriminator%5D=nfc&page=4&limit=3"
+    },
+    "next": {
+      "href": "/api/channel/my?filter%5Bdiscriminator%5D=nfc&page=3&limit=3"
+    },
+    "previous": {
+      "href": "/api/channel/my?filter%5Bdiscriminator%5D=nfc&page=1&limit=3"
+    }
+  },
+  "_embedded": {
+    "channels": [
+      {
+        "nfc": {
+          "id": "44da7d7e-0000-4000-a000-000000000004",
+          "active": true,
+          "content": {
+            "title": "Deck 2 title",
+            "id": "12d1da34-0000-4000-a000-000000000002"
+          },
+          "name": "NFC 4",
+          "published": true,
+          "functioningHours": null,
+          "functioningHoursNextEvent": null,
+          "inFunctioningHours": true,
+          "note": null,
+          "payload": "https://wingu-sdk-test.de/nfc/f9ee97b4-3b18-43fd-9264-aa368fd4cae3"
+        }
+      },
+      {
+        "nfc": {
+          "id": "44da7d7e-0000-4000-a000-000000000005",
+          "active": true,
+          "content": {
+            "title": "Deck 10 title",
+            "id": "12d1da34-0000-4000-a000-000000000010"
+          },
+          "name": "NFC 5",
+          "published": true,
+          "functioningHours": null,
+          "functioningHoursNextEvent": null,
+          "inFunctioningHours": true,
+          "note": null,
+          "payload": "https://wingu-sdk-test.de/nfc/d36c3333-35b9-43f2-9c75-ff5710d70494"
+        }
+      },
+      {
+        "nfc": {
+          "id": "44da7d7e-0000-4000-a000-000000000006",
+          "active": true,
+          "content": {
+            "title": "Deck 3 title",
+            "id": "12d1da34-0000-4000-a000-000000000003"
+          },
+          "name": "NFC 6",
+          "published": true,
+          "functioningHours": null,
+          "functioningHoursNextEvent": null,
+          "inFunctioningHours": true,
+          "note": null,
+          "payload": "https://wingu-sdk-test.de/nfc/adb93329-e7d2-4197-ad3b-e6ea3baaf202"
+        }
+      }
+    ]
+  }
+}

@@ -126,6 +126,7 @@ abstract class Api
             $uri,
             [
                 $this->configuration->apiKeyHeader() => $this->configuration->apiKey(),
+                'Content-Type' => 'application/json',
             ],
             $this->serializer->serialize($requestObject, 'json')
         );
@@ -142,6 +143,7 @@ abstract class Api
             $uri,
             [
                 $this->configuration->apiKeyHeader() => $this->configuration->apiKey(),
+                'Content-Type' => 'application/json',
             ],
             $this->serializer->serialize($requestObject, 'json')
         );

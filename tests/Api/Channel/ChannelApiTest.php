@@ -9,9 +9,11 @@ use Http\Message\MessageFactory\GuzzleMessageFactory;
 use Http\Mock\Client as MockClient;
 use Wingu\Engine\SDK\Api\Channel\ChannelApi;
 use Wingu\Engine\SDK\Api\Configuration;
+use Wingu\Engine\SDK\Api\Exception\HttpClient\NotFound;
 use Wingu\Engine\SDK\Hydrator\SymfonySerializerHydrator;
 use Wingu\Engine\SDK\Model\Request\Channel\PrivateChannelsFilter;
 use Wingu\Engine\SDK\Model\Request\Channel\PrivateChannelsSorting;
+use Wingu\Engine\SDK\Model\Request\PaginationParameters;
 use Wingu\Engine\SDK\Model\Request\RequestParameters;
 use Wingu\Engine\SDK\Model\Response\Channel\Beacon\BeaconAddress;
 use Wingu\Engine\SDK\Model\Response\Channel\Beacon\BeaconLocation;
@@ -198,7 +200,6 @@ final class ChannelApiTest extends ChannelApiTestCase
         self::assertEquals($expected, \iterator_to_array($actual));
     }
 
-
     public function testMyChannelsWithFiltersReturnsFilteredResult() : void
     {
         $configurationMock = new Configuration();
@@ -256,6 +257,142 @@ final class ChannelApiTest extends ChannelApiTestCase
         self::assertEquals($expected, \iterator_to_array($actual));
     }
 
+    public function testMyChannelsPageReturnsPageWithChannelsEmbedded() : void
+    {
+        $configurationMock = new Configuration();
+        $requestFactory    = new GuzzleMessageFactory();
+        $hydrator          = new SymfonySerializerHydrator();
+
+        $httpClient = new MockClient();
+        $httpClient->addResponse(
+            new Response(
+                200,
+                ['Content-Type' => 'application/json'],
+                \file_get_contents(__DIR__ . '/Fixtures/full_private_channels_page.json')
+            )
+        );
+
+        $channelApi     = new ChannelApi($configurationMock, $httpClient, $requestFactory, $hydrator);
+        $actual         = $channelApi->myChannelsPage(new PaginationParameters(2, 4));
+        $actualChannels = $actual->embedded();
+
+        $expectedChannels = [
+            $this->getExpectedPrivateListBeacon(),
+            $this->getExpectedPrivateListNfc(),
+            $this->getExpectedPrivateListQrCode(),
+            $this->getExpectedPrivateListGeofence(),
+        ];
+        self::assertCount(4, $actualChannels);
+        self::assertEquals($expectedChannels, $actualChannels);
+
+        $actualPageInfo = $actual->pageInfo();
+
+        self::assertTrue($actualPageInfo->hasNextPage());
+        self::assertSame(2, $actualPageInfo->page());
+        self::assertSame(4, $actualPageInfo->limit());
+        self::assertSame(3, $actualPageInfo->pages());
+        self::assertSame(9, $actualPageInfo->total());
+    }
+
+    public function testMyChannelsPageWithWithFiltersReturnsFilteredResult() : void
+    {
+        $configurationMock = new Configuration();
+        $requestFactory    = new GuzzleMessageFactory();
+        $hydrator          = new SymfonySerializerHydrator();
+
+        $httpClient = new MockClient();
+        $httpClient->addResponse(
+            new Response(
+                200,
+                ['Content-Type' => 'application/json'],
+                \file_get_contents(__DIR__ . '/Fixtures/full_private_channels_page_filtered.json')
+            )
+        );
+
+        $channelApi     = new ChannelApi($configurationMock, $httpClient, $requestFactory, $hydrator);
+        $actual         = $channelApi->myChannelsPage(
+            new PaginationParameters(2, 3),
+            new PrivateChannelsFilter(null, null, 'beacon', null, null, null, true)
+        );
+        $actualChannels = $actual->embedded();
+
+        $expectedChannels = [
+            $this->getExpectedFilteredNfc1(),
+            $this->getExpectedFilteredNfc2(),
+            $this->getExpectedFilteredNfc3(),
+        ];
+
+        self::assertCount(3, $actualChannels);
+        self::assertEquals($expectedChannels, $actualChannels);
+
+        $actualPageInfo = $actual->pageInfo();
+
+        self::assertTrue($actualPageInfo->hasNextPage());
+        self::assertSame(2, $actualPageInfo->page());
+        self::assertSame(3, $actualPageInfo->limit());
+        self::assertSame(4, $actualPageInfo->pages());
+        self::assertSame(10, $actualPageInfo->total());
+    }
+
+    public function testMyChannelsPageWithSortingReturnsSortedResult() : void
+    {
+        $configurationMock = new Configuration();
+        $requestFactory    = new GuzzleMessageFactory();
+        $hydrator          = new SymfonySerializerHydrator();
+
+        $httpClient = new MockClient();
+        $httpClient->addResponse(
+            new Response(
+                200,
+                ['Content-Type' => 'application/json'],
+                \file_get_contents(__DIR__ . '/Fixtures/full_private_channels_page_sorted.json')
+            )
+        );
+
+        $channelApi     = new ChannelApi($configurationMock, $httpClient, $requestFactory, $hydrator);
+        $actual         = $channelApi->myChannelsPage(
+            new PaginationParameters(2, 3),
+            null,
+            new PrivateChannelsSorting(null, RequestParameters::SORTING_ORDER_DESC)
+        );
+        $actualChannels = $actual->embedded();
+
+        $expectedChannels = [
+            $this->getExpectedSortedChannelFromSecondPage1(),
+            $this->getExpectedSortedChannelFromSecondPage2(),
+            $this->getExpectedSortedChannelFromSecondPage3(),
+        ];
+
+        self::assertCount(3, $actualChannels);
+        self::assertEquals($expectedChannels, $actualChannels);
+
+        $actualPageInfo = $actual->pageInfo();
+
+        self::assertTrue($actualPageInfo->hasNextPage());
+        self::assertSame(2, $actualPageInfo->page());
+        self::assertSame(3, $actualPageInfo->limit());
+        self::assertSame(46, $actualPageInfo->pages());
+        self::assertSame(137, $actualPageInfo->total());
+    }
+
+    public function testMyChannelsPageThrowsExceptionWhenPageIsNotFound() : void
+    {
+        $configurationMock = new Configuration();
+        $requestFactory    = new GuzzleMessageFactory();
+        $hydrator          = new SymfonySerializerHydrator();
+        $httpClient        = new MockClient();
+        $httpClient->addResponse(new Response(
+            404
+        ));
+//        $httpClient->addResponse(new NotFound())
+
+        $channelApi = new ChannelApi($configurationMock, $httpClient, $requestFactory, $hydrator);
+
+        $this->expectException(NotFound::class);
+        $this->expectExceptionMessage('Resource not found.');
+
+        $channelApi->myChannelsPage(new PaginationParameters(999, 10));
+    }
 
     private function getExpectedPrivateBeacon() : PrivateBeacon
     {
@@ -501,6 +638,114 @@ final class ChannelApiTest extends ChannelApiTestCase
             true,
             null,
             'https://wingu-sdk-test.de/qrcode/b9a5abd6-4156-4bb9-a4e0-58a19e6c95f4'
+        );
+    }
+
+    private function getExpectedFilteredNfc1() : PrivateNfc
+    {
+        return new PrivateNfc(
+            '44da7d7e-0000-4000-a000-000000000004',
+            'NFC 4',
+            true,
+            new PrivateListContent(
+                '12d1da34-0000-4000-a000-000000000002',
+                'Deck 2 title'
+            ),
+            true,
+            null,
+            true,
+            null,
+            'https://wingu-sdk-test.de/nfc/f9ee97b4-3b18-43fd-9264-aa368fd4cae3'
+        );
+    }
+
+    private function getExpectedFilteredNfc2() : PrivateNfc
+    {
+        return new PrivateNfc(
+            '44da7d7e-0000-4000-a000-000000000005',
+            'NFC 5',
+            true,
+            new PrivateListContent(
+                '12d1da34-0000-4000-a000-000000000010',
+                'Deck 10 title'
+            ),
+            true,
+            null,
+            true,
+            null,
+            'https://wingu-sdk-test.de/nfc/d36c3333-35b9-43f2-9c75-ff5710d70494'
+        );
+    }
+
+    private function getExpectedFilteredNfc3() : PrivateNfc
+    {
+        return new PrivateNfc(
+            '44da7d7e-0000-4000-a000-000000000006',
+            'NFC 6',
+            true,
+            new PrivateListContent(
+                '12d1da34-0000-4000-a000-000000000003',
+                'Deck 3 title'
+            ),
+            true,
+            null,
+            true,
+            null,
+            'https://wingu-sdk-test.de/nfc/adb93329-e7d2-4197-ad3b-e6ea3baaf202'
+        );
+    }
+
+    private function getExpectedSortedChannelFromSecondPage1() : PrivateQrCode
+    {
+        return new PrivateQrCode(
+            '9a8798c6-0000-4000-a000-000000000006',
+            'QR 6',
+            true,
+            new PrivateListContent(
+                '12d1da34-0000-4000-a000-000000000006',
+                'Deck 6 title'
+            ),
+            true,
+            null,
+            true,
+            null,
+            'https://wingu-sdk-test.de/qrcode/6bfbc8d8-b2ef-465a-becf-4554192d33c3'
+        );
+    }
+
+    private function getExpectedSortedChannelFromSecondPage2() : PrivateQrCode
+    {
+        return new PrivateQrCode(
+            '9a8798c6-0000-4000-a000-000000000005',
+            'QR 5',
+            true,
+            new PrivateListContent(
+                '12d1da34-0000-4000-a000-000000000005',
+                'Deck 5 title'
+            ),
+            true,
+            null,
+            true,
+            null,
+            'https://wingu-sdk-test.de/qrcode/4d28241d-cbfd-488c-a3a6-5695b19db740'
+        );
+    }
+
+    private function getExpectedSortedChannelFromSecondPage3() : PrivateQrCode
+    {
+        return new PrivateQrCode(
+            '9a8798c6-0000-4000-a000-000000000004',
+            'QR 4',
+            true,
+            new PrivateListContent(
+                '12d1da34-0000-4000-a000-000000000001',
+                'Deck 1 title'
+            ),
+            true,
+            null,
+            true,
+            null,
+            'https://wingu-sdk-test.de/qrcode/04d8873c-8758-49eb-ba95-6146366f1d58'
         );
     }
 }

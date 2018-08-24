@@ -128,7 +128,7 @@ final class ContentTest extends ApiTest
         /** @var RequestInterface $actualRequest */
         $actualRequest = $httpClient->getLastRequest();
         self::assertSame(
-            '[["8c798a67-0000-4000-a000-000000000017","8c798a67-0000-4000-a000-000100009987"]]',
+            '{"channels":["8c798a67-0000-4000-a000-000000000017","8c798a67-0000-4000-a000-000100009987"]}',
             $actualRequest->getBody()->getContents()
         );
         self::assertSame('PATCH', $actualRequest->getMethod());
@@ -159,7 +159,7 @@ final class ContentTest extends ApiTest
         /** @var RequestInterface $actualRequest */
         $actualRequest = $httpClient->getLastRequest();
         $contents      = $actualRequest->getBody()->getContents();
-        self::assertSame('[["8c798a67-0000-4000-a000-000100009969"]]', $contents);
+        self::assertSame('{"channels":["8c798a67-0000-4000-a000-000100009969"]}', $contents);
         self::assertSame('PUT', $actualRequest->getMethod());
     }
 

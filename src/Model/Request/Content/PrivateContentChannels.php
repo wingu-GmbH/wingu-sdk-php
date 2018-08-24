@@ -26,7 +26,7 @@ final class PrivateContentChannels implements Request
     public function jsonSerialize()
     {
         return [
-            $this->channels,
+            'channels' => $this->channels,
         ];
     }
 }

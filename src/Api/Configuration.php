@@ -8,7 +8,7 @@ final class Configuration
 {
     public const BACKEND_URL_PRODUCTION = 'https://wingu-engine.de';
 
-    public const BACKEND_URL_SANDBOX = 'https://wingu-backend-staging.herokuapp.com';
+    public const BACKEND_URL_SANDBOX = 'https://wingu-engine-staging.de';
 
     private const API_KEY_HEADER = 'X-API-KEY';
 

@@ -1,0 +1,78 @@
+{
+  "page": 2,
+  "limit": 3,
+  "pages": 46,
+  "total": 137,
+  "_links": {
+    "self": {
+      "href": "/api/channel/my?sorting%5Bname%5D=DESC&page=2&limit=3"
+    },
+    "first": {
+      "href": "/api/channel/my?sorting%5Bname%5D=DESC&page=1&limit=3"
+    },
+    "last": {
+      "href": "/api/channel/my?sorting%5Bname%5D=DESC&page=46&limit=3"
+    },
+    "next": {
+      "href": "/api/channel/my?sorting%5Bname%5D=DESC&page=3&limit=3"
+    },
+    "previous": {
+      "href": "/api/channel/my?sorting%5Bname%5D=DESC&page=1&limit=3"
+    }
+  },
+  "_embedded": {
+    "channels": [
+      {
+        "qrcode": {
+          "id": "9a8798c6-0000-4000-a000-000000000006",
+          "active": true,
+          "content": {
+            "title": "Deck 6 title",
+            "id": "12d1da34-0000-4000-a000-000000000006"
+          },
+          "name": "QR 6",
+          "published": true,
+          "functioningHours": null,
+          "functioningHoursNextEvent": null,
+          "inFunctioningHours": true,
+          "note": null,
+          "payload": "https://wingu-sdk-test.de/qrcode/6bfbc8d8-b2ef-465a-becf-4554192d33c3"
+        }
+      },
+      {
+        "qrcode": {
+          "id": "9a8798c6-0000-4000-a000-000000000005",
+          "active": true,
+          "content": {
+            "title": "Deck 5 title",
+            "id": "12d1da34-0000-4000-a000-000000000005"
+          },
+          "name": "QR 5",
+          "published": true,
+          "functioningHours": null,
+          "functioningHoursNextEvent": null,
+          "inFunctioningHours": true,
+          "note": null,
+          "payload": "https://wingu-sdk-test.de/qrcode/4d28241d-cbfd-488c-a3a6-5695b19db740"
+        }
+      },
+      {
+        "qrcode": {
+          "id": "9a8798c6-0000-4000-a000-000000000004",
+          "active": true,
+          "content": {
+            "title": "Deck 1 title",
+            "id": "12d1da34-0000-4000-a000-000000000001"
+          },
+          "name": "QR 4",
+          "published": true,
+          "functioningHours": null,
+          "functioningHoursNextEvent": null,
+          "inFunctioningHours": true,
+          "note": null,
+          "payload": "https://wingu-sdk-test.de/qrcode/04d8873c-8758-49eb-ba95-6146366f1d58"
+        }
+      }
+    ]
+  }
+}

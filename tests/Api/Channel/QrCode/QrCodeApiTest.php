@@ -7,9 +7,13 @@ namespace Wingu\Engine\SDK\Tests\Api\Channel\QrCode;
 use GuzzleHttp\Psr7\Response;
 use Http\Message\MessageFactory\GuzzleMessageFactory;
 use Http\Mock\Client as MockClient;
+use Psr\Http\Message\RequestInterface;
 use Wingu\Engine\SDK\Api\Channel\QrCode\QrCodeApi;
 use Wingu\Engine\SDK\Api\Configuration;
 use Wingu\Engine\SDK\Hydrator\SymfonySerializerHydrator;
+use Wingu\Engine\SDK\Model\Request\BooleanValue;
+use Wingu\Engine\SDK\Model\Request\Channel\QrCode\PrivateQrCode as RequestQrCode;
+use Wingu\Engine\SDK\Model\Request\StringValue;
 use Wingu\Engine\SDK\Model\Response\Card\Card;
 use Wingu\Engine\SDK\Model\Response\Card\Position;
 use Wingu\Engine\SDK\Model\Response\Channel\QrCode\PrivateQrCode;
@@ -392,6 +396,37 @@ final class QrCodeApiTest extends ChannelApiTestCase
 
         self::assertCount(2, $actual);
         self::assertEquals($expected, \iterator_to_array($actual));
+    }
+
+    public function testPatchMyQrCodeUpdatesPrivateQrCode() : void
+    {
+        $configurationMock = new Configuration();
+        $requestFactory    = new GuzzleMessageFactory();
+        $hydrator          = new SymfonySerializerHydrator();
+
+        $httpClient = new MockClient();
+        $response   = new Response(
+            204,
+            ['Content-Type' => 'application/json']
+        );
+        $httpClient->addResponse($response);
+
+        $winguApi = new QrCodeApi($configurationMock, $httpClient, $requestFactory, $hydrator);
+
+        $winguApi->updateMyQrCode(
+            '9a8798c6-0000-4000-a000-000000000001',
+            new RequestQrCode(
+                new StringValue(null),
+                new StringValue('New QrCode name'),
+                null,
+                new BooleanValue(false)
+            )
+        );
+
+        /** @var RequestInterface $actualRequest */
+        $actualRequest = $httpClient->getLastRequest();
+        self::assertSame('{"content":null,"name":"New QrCode name","published":"0"}', $actualRequest->getBody()->getContents());
+        self::assertSame('PATCH', $actualRequest->getMethod());
     }
 
     private function getExpectedMinimalPrivateListQrCode() : PrivateQrCode

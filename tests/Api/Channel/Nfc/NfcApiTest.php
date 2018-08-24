@@ -7,9 +7,13 @@ namespace Wingu\Engine\SDK\Tests\Api\Channel\Nfc;
 use GuzzleHttp\Psr7\Response;
 use Http\Message\MessageFactory\GuzzleMessageFactory;
 use Http\Mock\Client as MockClient;
+use Psr\Http\Message\RequestInterface;
 use Wingu\Engine\SDK\Api\Channel\Nfc\NfcApi;
 use Wingu\Engine\SDK\Api\Configuration;
 use Wingu\Engine\SDK\Hydrator\SymfonySerializerHydrator;
+use Wingu\Engine\SDK\Model\Request\BooleanValue;
+use Wingu\Engine\SDK\Model\Request\Channel\Nfc\PrivateNfc as RequestNfc;
+use Wingu\Engine\SDK\Model\Request\StringValue;
 use Wingu\Engine\SDK\Model\Response\Card\Card;
 use Wingu\Engine\SDK\Model\Response\Card\Position;
 use Wingu\Engine\SDK\Model\Response\Channel\Nfc\PrivateNfc;
@@ -392,6 +396,37 @@ final class NfcApiTest extends ChannelApiTestCase
 
         self::assertCount(2, $actual);
         self::assertEquals($expected, \iterator_to_array($actual));
+    }
+
+    public function testPatchMyNfcUpdatesPrivateNfc() : void
+    {
+        $configurationMock = new Configuration();
+        $requestFactory    = new GuzzleMessageFactory();
+        $hydrator          = new SymfonySerializerHydrator();
+
+        $httpClient = new MockClient();
+        $response   = new Response(
+            204,
+            ['Content-Type' => 'application/json']
+        );
+        $httpClient->addResponse($response);
+
+        $winguApi = new NfcApi($configurationMock, $httpClient, $requestFactory, $hydrator);
+
+        $winguApi->updateMyNfc(
+            '44da7d7e-0000-4000-a000-000000000001',
+            new RequestNfc(
+                new StringValue(null),
+                new StringValue('New NFC name'),
+                null,
+                new BooleanValue(false)
+            )
+        );
+
+        /** @var RequestInterface $actualRequest */
+        $actualRequest = $httpClient->getLastRequest();
+        self::assertSame('{"content":null,"name":"New NFC name","published":"0"}', $actualRequest->getBody()->getContents());
+        self::assertSame('PATCH', $actualRequest->getMethod());
     }
 
     private function getExpectedMinimalPrivateListNfc() : PrivateNfc

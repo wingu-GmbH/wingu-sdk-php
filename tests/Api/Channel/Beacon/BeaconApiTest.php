@@ -7,6 +7,7 @@ namespace Wingu\Engine\SDK\Tests\Api\Channel\Beacon;
 use GuzzleHttp\Psr7\Response;
 use Http\Message\MessageFactory\GuzzleMessageFactory;
 use Http\Mock\Client as MockClient;
+use Psr\Http\Message\RequestInterface;
 use Speicher210\BusinessHours\BusinessHours;
 use Speicher210\BusinessHours\Day\AllDay;
 use Speicher210\BusinessHours\Day\Day;
@@ -14,6 +15,9 @@ use Speicher210\BusinessHours\Day\Time\TimeInterval;
 use Wingu\Engine\SDK\Api\Channel\Beacon\BeaconApi;
 use Wingu\Engine\SDK\Api\Configuration;
 use Wingu\Engine\SDK\Hydrator\SymfonySerializerHydrator;
+use Wingu\Engine\SDK\Model\Request\BooleanValue;
+use Wingu\Engine\SDK\Model\Request\Channel\Beacon\PrivateBeacon as RequestBeacon;
+use Wingu\Engine\SDK\Model\Request\StringValue;
 use Wingu\Engine\SDK\Model\Response\Card\Card;
 use Wingu\Engine\SDK\Model\Response\Card\Position;
 use Wingu\Engine\SDK\Model\Response\Channel\Beacon\BeaconAddress;
@@ -655,6 +659,37 @@ final class BeaconApiTest extends ChannelApiTestCase
         /** @var PrivateListContent $actualBeaconWithEmptyContentTitle */
         $actualBeaconWithEmptyContentTitle = $actualBeacons[2]->content();
         self::assertNull($actualBeaconWithEmptyContentTitle->title());
+    }
+
+    public function testPatchMyBeaconUpdatesPrivateBeacon() : void
+    {
+        $configurationMock = new Configuration();
+        $requestFactory    = new GuzzleMessageFactory();
+        $hydrator          = new SymfonySerializerHydrator();
+
+        $httpClient = new MockClient();
+        $response   = new Response(
+            204,
+            ['Content-Type' => 'application/json']
+        );
+        $httpClient->addResponse($response);
+
+        $winguApi = new BeaconApi($configurationMock, $httpClient, $requestFactory, $hydrator);
+
+        $winguApi->updateMyBeacon(
+            '009b12e0-9426-45fd-9476-561540139ec1',
+            new RequestBeacon(
+                new StringValue(null),
+                new StringValue('New beacon name'),
+                null,
+                new BooleanValue(false)
+            )
+        );
+
+        /** @var RequestInterface $actualRequest */
+        $actualRequest = $httpClient->getLastRequest();
+        self::assertSame('{"content":null,"name":"New beacon name","published":"0"}', $actualRequest->getBody()->getContents());
+        self::assertSame('PATCH', $actualRequest->getMethod());
     }
 
     private function getExpectedMinimalPrivateListBeacon() : PrivateBeacon

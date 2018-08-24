@@ -8,6 +8,8 @@ use Wingu\Engine\SDK\Api\Api;
 use Wingu\Engine\SDK\Api\Paginator\EmbeddedPage;
 use Wingu\Engine\SDK\Api\Paginator\PageInfo;
 use Wingu\Engine\SDK\Api\Paginator\PaginatedResponseIterator;
+use Wingu\Engine\SDK\Assertion;
+use Wingu\Engine\SDK\Model\Request\Channel\Nfc\PrivateNfc as RequestPrivateNfc;
 use Wingu\Engine\SDK\Model\Response\Channel\Nfc\PrivateNfc as PrivateNfcModel;
 use Wingu\Engine\SDK\Model\Response\Channel\Nfc\PublicNfc as PublicNfcModel;
 
@@ -53,6 +55,15 @@ final class NfcApi extends Api
                 return $this->getEmbeddedPage($href);
             }
         );
+    }
+
+    public function updateMyNfc(string $id, RequestPrivateNfc $nfc) : void
+    {
+        Assertion::uuid($id);
+
+        $request = $this->createPatchRequest('/api/channel/nfc/my/' . $id, $nfc);
+
+        $this->handleRequest($request);
     }
 
     private function getEmbeddedPage(string $href) : EmbeddedPage

@@ -8,6 +8,8 @@ use Wingu\Engine\SDK\Api\Api;
 use Wingu\Engine\SDK\Api\Paginator\EmbeddedPage;
 use Wingu\Engine\SDK\Api\Paginator\PageInfo;
 use Wingu\Engine\SDK\Api\Paginator\PaginatedResponseIterator;
+use Wingu\Engine\SDK\Assertion;
+use Wingu\Engine\SDK\Model\Request\Channel\Geofence\PrivateGeofence as RequestPrivateGeofence;
 use Wingu\Engine\SDK\Model\Response\Channel\Geofence\PrivateGeofence as PrivateGeofenceModel;
 use Wingu\Engine\SDK\Model\Response\Channel\Geofence\PublicGeofence as PublicGeofenceModel;
 
@@ -42,6 +44,15 @@ final class GeofenceApi extends Api
                 return $this->getEmbeddedPage($href);
             }
         );
+    }
+
+    public function updateMyGeofence(string $id, RequestPrivateGeofence $geofence) : void
+    {
+        Assertion::uuid($id);
+
+        $request = $this->createPatchRequest('/api/channel/geofence/my/' . $id, $geofence);
+
+        $this->handleRequest($request);
     }
 
     private function getEmbeddedPage(string $href) : EmbeddedPage

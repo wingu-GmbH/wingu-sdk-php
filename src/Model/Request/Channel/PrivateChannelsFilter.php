@@ -7,7 +7,7 @@ namespace Wingu\Engine\SDK\Model\Request\Channel;
 use Wingu\Engine\SDK\Assertion;
 use Wingu\Engine\SDK\Model\Request\RequestParameters;
 
-class PrivateChannelsFilter implements RequestParameters
+final class PrivateChannelsFilter implements RequestParameters
 {
     private const DISCRIMINATORS = ['beacon', 'geofence', 'nfc', 'qrcode'];
 

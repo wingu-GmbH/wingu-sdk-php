@@ -10,6 +10,7 @@ use Wingu\Engine\SDK\Api\Paginator\PageInfo;
 use Wingu\Engine\SDK\Api\Paginator\PaginatedResponseIterator;
 use Wingu\Engine\SDK\Model\Request\Channel\PrivateChannelsFilter;
 use Wingu\Engine\SDK\Model\Request\Channel\PrivateChannelsSorting;
+use Wingu\Engine\SDK\Model\Request\PaginationParameters;
 use Wingu\Engine\SDK\Model\Response\Channel\PrivateChannel;
 
 final class ChannelApi extends Api
@@ -23,23 +24,42 @@ final class ChannelApi extends Api
         return $this->hydrator->hydrateResponse($response, PrivateChannel::class);
     }
 
-    public function myChannels(?PrivateChannelsFilter $channelsFilter = null, ?PrivateChannelsSorting $channelsSorting = null) : PaginatedResponseIterator
-    {
-        $page = $this->getEmbeddedPage('/api/channel/my.json', $channelsFilter, $channelsSorting);
+    public function myChannels(
+        ?PrivateChannelsFilter $channelsFilter = null,
+        ?PrivateChannelsSorting $channelsSorting = null
+    ) : PaginatedResponseIterator {
+        $page = $this->getMyChannelsPage(null, $channelsFilter, $channelsSorting);
 
         return new PaginatedResponseIterator(
             $page->pageInfo(),
             $page->embedded(),
             function (string $href) {
-                return $this->getEmbeddedPage($href);
+                $path = \parse_url($href, \PHP_URL_PATH);
+                \parse_str(\parse_url($href, \PHP_URL_QUERY) ?? '', $query);
+
+                return $this->getEmbeddedPage($path, $query);
             }
         );
     }
 
-    private function getEmbeddedPage(string $href, ?PrivateChannelsFilter $channelsFilter = null, ?PrivateChannelsSorting $channelsSorting = null) : EmbeddedPage
-    {
+    public function myChannelsPage(
+        PaginationParameters $paginationParameters,
+        ?PrivateChannelsFilter $channelsFilter = null,
+        ?PrivateChannelsSorting $channelsSorting = null
+    ) : EmbeddedPage {
+        return $this->getMyChannelsPage($paginationParameters, $channelsFilter, $channelsSorting);
+    }
+
+    private function getMyChannelsPage(
+        ?PaginationParameters $paginationParameters,
+        ?PrivateChannelsFilter $channelsFilter,
+        ?PrivateChannelsSorting $channelsSorting
+    ) : EmbeddedPage {
         $params = [];
 
+        if ($paginationParameters !== null) {
+            $params = $paginationParameters->toArray();
+        }
         if ($channelsFilter !== null) {
             $params['filter'] = $channelsFilter->toArray();
         }
@@ -47,7 +67,13 @@ final class ChannelApi extends Api
             $params['sorting'] = $channelsSorting->toArray();
         }
 
-        $request = $this->createGetRequest($href, $params);
+        return $this->getEmbeddedPage('/api/channel/my.json', $params);
+    }
+
+    /** @param mixed[] $params */
+    private function getEmbeddedPage(string $path, array $params) : EmbeddedPage
+    {
+        $request = $this->createGetRequest($path, $params);
 
         $response = $this->handleRequest($request);
 
@@ -65,10 +91,7 @@ final class ChannelApi extends Api
         );
 
         $pageInfo = $this->hydrator->hydrateData($data, PageInfo::class);
-        $embedded = $this->hydrator->hydrateData(
-            $embedded,
-            PrivateChannel::class . '[]'
-        );
+        $embedded = $this->hydrator->hydrateData($embedded, PrivateChannel::class . '[]');
 
         return new EmbeddedPage($pageInfo, $embedded);
     }

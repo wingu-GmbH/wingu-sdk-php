@@ -1,0 +1,371 @@
+{
+  "page": 2,
+  "limit": 4,
+  "pages": 3,
+  "total": 9,
+  "_links": {
+    "self": {
+      "href": "/api/channel/my?page=2&limit=4"
+    },
+    "first": {
+      "href": "/api/channel/my?page=1&limit=4"
+    },
+    "last": {
+      "href": "/api/channel/my?page=3&limit=4"
+    },
+    "previous": {
+      "href": "/api/channel/my?page=1&limit=4"
+    },
+    "next": {
+      "href": "/api/channel/my?page=3&limit=4"
+    }
+  },
+  "_embedded": {
+    "channels": [
+      {
+        "beacon": {
+          "id": "8c798a67-0000-4000-a000-000000000001",
+          "active": true,
+          "content": {
+            "id": "12d1da34-0000-4000-a000-000000000003",
+            "title": "Deck 1 title"
+          },
+          "name": "Beacon 1100",
+          "published": true,
+          "functioningHours": {
+            "days": [
+              {
+                "dayOfWeek": 1,
+                "intervals": [
+                  {
+                    "start": {
+                      "hours": 0,
+                      "minutes": 0
+                    },
+                    "end": {
+                      "hours": 24,
+                      "minutes": 0
+                    }
+                  }
+                ]
+              },
+              {
+                "dayOfWeek": 3,
+                "intervals": [
+                  {
+                    "start": {
+                      "hours": 8,
+                      "minutes": 0
+                    },
+                    "end": {
+                      "hours": 12,
+                      "minutes": 0
+                    }
+                  },
+                  {
+                    "start": {
+                      "hours": 13,
+                      "minutes": 0
+                    },
+                    "end": {
+                      "hours": 18,
+                      "minutes": 0
+                    }
+                  }
+                ]
+              },
+              {
+                "dayOfWeek": 5,
+                "intervals": [
+                  {
+                    "start": {
+                      "hours": 0,
+                      "minutes": 0
+                    },
+                    "end": {
+                      "hours": 24,
+                      "minutes": 0
+                    }
+                  }
+                ]
+              }
+            ],
+            "timezone": "Europe/Berlin"
+          },
+          "functioningHoursNextEvent": "2018-01-17T08:00:00+0100",
+          "inFunctioningHours": true,
+          "note": null,
+          "broadcastProtocol": 1,
+          "uuid": "2e422b9f-4955-4f1d-95d1-e57626ad1b26",
+          "major": 1,
+          "minor": 100,
+          "eddystoneUrl": null,
+          "location": {
+            "coordinates": {
+              "longitude": 9.983716,
+              "latitude": 53.673348
+            },
+            "address": {
+              "formattedAddress": "Germany"
+            }
+          },
+          "preset": null
+        }
+      },
+      {
+        "nfc": {
+          "id": "44da7d7e-0000-4000-a000-000000000001",
+          "active": true,
+          "content": {
+            "id": "12d1da34-0000-4000-a000-000000000001",
+            "title": "Deck 2 title"
+          },
+          "name": "NFC 1",
+          "published": true,
+          "functioningHours": {
+            "days": [
+              {
+                "dayOfWeek": 1,
+                "intervals": [
+                  {
+                    "start": {
+                      "hours": 0,
+                      "minutes": 0
+                    },
+                    "end": {
+                      "hours": 24,
+                      "minutes": 0
+                    }
+                  }
+                ]
+              },
+              {
+                "dayOfWeek": 3,
+                "intervals": [
+                  {
+                    "start": {
+                      "hours": 8,
+                      "minutes": 0
+                    },
+                    "end": {
+                      "hours": 12,
+                      "minutes": 0
+                    }
+                  },
+                  {
+                    "start": {
+                      "hours": 13,
+                      "minutes": 0
+                    },
+                    "end": {
+                      "hours": 18,
+                      "minutes": 0
+                    }
+                  }
+                ]
+              },
+              {
+                "dayOfWeek": 5,
+                "intervals": [
+                  {
+                    "start": {
+                      "hours": 0,
+                      "minutes": 0
+                    },
+                    "end": {
+                      "hours": 24,
+                      "minutes": 0
+                    }
+                  }
+                ]
+              }
+            ],
+            "timezone": "Europe/Berlin"
+          },
+          "functioningHoursNextEvent": "2018-01-18T08:00:00+0100",
+          "inFunctioningHours": false,
+          "note": null,
+          "payload": "https://wingu-sdk-test.de/nfc/d465179f-c30a-423c-a06b-5ce63f6f75ff"
+        }
+      },
+      {
+        "qrcode": {
+          "id": "9a8798c6-0000-4000-a000-000000000001",
+          "active": true,
+          "content": {
+            "id": "12d1da34-0000-4000-a000-000000000009",
+            "title": "Deck 3 title"
+          },
+          "name": "QR 1",
+          "published": true,
+          "functioningHours": {
+            "days": [
+              {
+                "dayOfWeek": 1,
+                "intervals": [
+                  {
+                    "start": {
+                      "hours": 0,
+                      "minutes": 0
+                    },
+                    "end": {
+                      "hours": 24,
+                      "minutes": 0
+                    }
+                  }
+                ]
+              },
+              {
+                "dayOfWeek": 3,
+                "intervals": [
+                  {
+                    "start": {
+                      "hours": 8,
+                      "minutes": 0
+                    },
+                    "end": {
+                      "hours": 12,
+                      "minutes": 0
+                    }
+                  },
+                  {
+                    "start": {
+                      "hours": 13,
+                      "minutes": 0
+                    },
+                    "end": {
+                      "hours": 18,
+                      "minutes": 0
+                    }
+                  }
+                ]
+              },
+              {
+                "dayOfWeek": 5,
+                "intervals": [
+                  {
+                    "start": {
+                      "hours": 0,
+                      "minutes": 0
+                    },
+                    "end": {
+                      "hours": 24,
+                      "minutes": 0
+                    }
+                  }
+                ]
+              }
+            ],
+            "timezone": "Europe/Berlin"
+          },
+          "functioningHoursNextEvent": "2018-01-18T08:00:00+0100",
+          "inFunctioningHours": true,
+          "note": null,
+          "payload": "https://wingu-sdk-test.de/qrcode/7a4b84eb-ae3f-4246-8a67-d16fbdd82595"
+        }
+      },
+      {
+        "geofence": {
+          "id": "0a0b190a-0000-4000-a000-000000000001",
+          "active": true,
+          "content": {
+            "id": "12d1da34-0000-4000-a000-000000000007",
+            "title": "Deck 4 title"
+          },
+          "name": "Fence 1",
+          "published": true,
+          "functioningHours": {
+            "days": [
+              {
+                "dayOfWeek": 1,
+                "intervals": [
+                  {
+                    "start": {
+                      "hours": 0,
+                      "minutes": 0
+                    },
+                    "end": {
+                      "hours": 24,
+                      "minutes": 0
+                    }
+                  }
+                ]
+              },
+              {
+                "dayOfWeek": 3,
+                "intervals": [
+                  {
+                    "start": {
+                      "hours": 8,
+                      "minutes": 0
+                    },
+                    "end": {
+                      "hours": 12,
+                      "minutes": 0
+                    }
+                  },
+                  {
+                    "start": {
+                      "hours": 13,
+                      "minutes": 0
+                    },
+                    "end": {
+                      "hours": 18,
+                      "minutes": 0
+                    }
+                  }
+                ]
+              },
+              {
+                "dayOfWeek": 5,
+                "intervals": [
+                  {
+                    "start": {
+                      "hours": 0,
+                      "minutes": 0
+                    },
+                    "end": {
+                      "hours": 24,
+                      "minutes": 0
+                    }
+                  }
+                ]
+              }
+            ],
+            "timezone": "Europe/Berlin"
+          },
+          "functioningHoursNextEvent": "2018-01-18T08:00:00+0100",
+          "inFunctioningHours": true,
+          "note": null,
+          "boundaries": {
+            "type": "Polygon",
+            "coordinates": [
+              [
+                [
+                  9.723595,
+                  53.661423
+                ],
+                [
+                  9.723595,
+                  53.662321315284
+                ],
+                [
+                  9.7251110338049,
+                  53.66232130571
+                ],
+                [
+                  9.7251110338049,
+                  53.661422990426
+                ],
+                [
+                  9.723595,
+                  53.661423
+                ]
+              ]
+            ]
+          }
+        }
+      }
+    ]
+  }
+}
