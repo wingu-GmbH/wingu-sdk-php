@@ -9,28 +9,28 @@ final class ContactAddress
     /** @var string */
     private $id;
 
-    /** @var string */
+    /** @var string|null */
     private $country;
 
-    /** @var string */
+    /** @var string|null */
     private $city;
 
-    /** @var string */
+    /** @var string|null */
     private $zipCode;
 
-    /** @var string */
+    /** @var string|null */
     private $street;
 
-    /** @var string */
+    /** @var string|null */
     private $streetNumber;
 
     public function __construct(
         string $id,
-        string $country,
-        string $city,
-        string $zipCode,
-        string $street,
-        string $streetNumber
+        ?string $country,
+        ?string $city,
+        ?string $zipCode,
+        ?string $street,
+        ?string $streetNumber
     ) {
         $this->id           = $id;
         $this->country      = $country;
@@ -45,27 +45,27 @@ final class ContactAddress
         return $this->id;
     }
 
-    public function country() : string
+    public function country() : ?string
     {
         return $this->country;
     }
 
-    public function city() : string
+    public function city() : ?string
     {
         return $this->city;
     }
 
-    public function zipCode() : string
+    public function zipCode() : ?string
     {
         return $this->zipCode;
     }
 
-    public function street() : string
+    public function street() : ?string
     {
         return $this->street;
     }
 
-    public function streetNumber() : string
+    public function streetNumber() : ?string
     {
         return $this->streetNumber;
     }

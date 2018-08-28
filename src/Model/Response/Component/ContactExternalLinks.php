@@ -9,40 +9,40 @@ final class ContactExternalLinks
     /** @var string */
     private $id;
 
-    /** @var string */
+    /** @var string|null */
     private $facebookUrl;
 
-    /** @var string */
+    /** @var string|null */
     private $twitterUrl;
 
-    /** @var string */
+    /** @var string|null */
     private $googlePlusUrl;
 
-    /** @var string */
+    /** @var string|null */
     private $yelpUrl;
 
-    /** @var string */
+    /** @var string|null */
     private $facebookName;
 
-    /** @var string */
+    /** @var string|null */
     private $twitterName;
 
-    /** @var string */
+    /** @var string|null */
     private $googlePlusName;
 
-    /** @var string */
+    /** @var string|null */
     private $yelpName;
 
     public function __construct(
         string $id,
-        string $facebookUrl,
-        string $twitterUrl,
-        string $googlePlusUrl,
-        string $yelpUrl,
-        string $facebookName,
-        string $twitterName,
-        string $googlePlusName,
-        string $yelpName
+        ?string $facebookUrl,
+        ?string $twitterUrl,
+        ?string $googlePlusUrl,
+        ?string $yelpUrl,
+        ?string $facebookName,
+        ?string $twitterName,
+        ?string $googlePlusName,
+        ?string $yelpName
     ) {
         $this->id             = $id;
         $this->facebookUrl    = $facebookUrl;
@@ -60,42 +60,42 @@ final class ContactExternalLinks
         return $this->id;
     }
 
-    public function facebookUrl() : string
+    public function facebookUrl() : ?string
     {
         return $this->facebookUrl;
     }
 
-    public function twitterUrl() : string
+    public function twitterUrl() : ?string
     {
         return $this->twitterUrl;
     }
 
-    public function googlePlusUrl() : string
+    public function googlePlusUrl() : ?string
     {
         return $this->googlePlusUrl;
     }
 
-    public function yelpUrl() : string
+    public function yelpUrl() : ?string
     {
         return $this->yelpUrl;
     }
 
-    public function facebookName() : string
+    public function facebookName() : ?string
     {
         return $this->facebookName;
     }
 
-    public function twitterName() : string
+    public function twitterName() : ?string
     {
         return $this->twitterName;
     }
 
-    public function googlePlusName() : string
+    public function googlePlusName() : ?string
     {
         return $this->googlePlusName;
     }
 
-    public function yelpName() : string
+    public function yelpName() : ?string
     {
         return $this->yelpName;
     }

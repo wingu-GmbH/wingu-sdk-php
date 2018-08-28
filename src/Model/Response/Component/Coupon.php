@@ -8,7 +8,7 @@ class Coupon implements Component
 {
     use ComponentTrait;
 
-    /** @var string */
+    /** @var string|null */
     private $header;
 
     /** @var string */
@@ -20,7 +20,7 @@ class Coupon implements Component
     public function __construct(
         string $id,
         \DateTime $updatedAt,
-        string $header,
+        ?string $header,
         string $description,
         ?string $disclaimer
     ) {
@@ -31,7 +31,7 @@ class Coupon implements Component
         $this->disclaimer  = $disclaimer;
     }
 
-    public function getHeader() : string
+    public function getHeader() : ?string
     {
         return $this->header;
     }
