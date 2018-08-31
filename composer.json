@@ -7,6 +7,14 @@
     {
       "name": "Dragos Protung",
       "email": "dragos@protung.ro"
+    },
+    {
+      "name": "Cezary Stępkowski",
+      "email": "cezary.stepkowski@wingu.de"
+    },
+    {
+      "name": "Szymon Kamiński",
+      "email": "szymon.kaminski@wingu.de"
     }
   ],
   "minimum-stability": "stable",
@@ -20,6 +28,8 @@
     "php-http/message": "^1.6",
     "php-http/message-factory": "^1.0",
     "php-http/multipart-stream-builder": "^1.0",
+
+    "phpdocumentor/reflection-docblock": "^3.0|^4.0",
 
     "symfony/serializer": "^4.0",
     "symfony/property-access": "^4.0",
