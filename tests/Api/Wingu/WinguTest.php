@@ -8,7 +8,7 @@ use GuzzleHttp\Psr7\Response;
 use Http\Message\MessageFactory\GuzzleMessageFactory;
 use Http\Mock\Client as MockClient;
 use Wingu\Engine\SDK\Api\Configuration;
-use Wingu\Engine\SDK\Api\Generic;
+use Wingu\Engine\SDK\Api\Exception\Generic;
 use Wingu\Engine\SDK\Api\Wingu\Wingu;
 use Wingu\Engine\SDK\Hydrator\Hydrator;
 use Wingu\Engine\SDK\Hydrator\SymfonySerializerHydrator;

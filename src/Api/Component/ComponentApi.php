@@ -54,6 +54,11 @@ final class ComponentApi extends Api
         $this->handleRequest($request);
     }
 
+    public function deleteMyComponent(string $id) : void
+    {
+        // @todo implement.
+    }
+
     private function getEmbeddedPage(string $path) : EmbeddedPage
     {
         $request = $this->createGetRequest($path);

@@ -55,6 +55,11 @@ final class GeofenceApi extends Api
         $this->handleRequest($request);
     }
 
+    public function deleteMyGeofence(string $id) : void
+    {
+        // @todo implement.
+    }
+
     private function getEmbeddedPage(string $href) : EmbeddedPage
     {
         $request = $this->createGetRequest($href);

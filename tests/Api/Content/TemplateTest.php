@@ -8,12 +8,12 @@ use GuzzleHttp\Psr7\Response;
 use Http\Message\MessageFactory\GuzzleMessageFactory;
 use Http\Mock\Client as MockClient;
 use Wingu\Engine\SDK\Api\Configuration;
-use Wingu\Engine\SDK\Api\Content\ContentTemplate;
+use Wingu\Engine\SDK\Api\Content\Template;
 use Wingu\Engine\SDK\Hydrator\SymfonySerializerHydrator;
-use Wingu\Engine\SDK\Model\Response\Content\Template;
+use Wingu\Engine\SDK\Model\Response\Content\Template as TemplateModel;
 use Wingu\Engine\SDK\Tests\Api\ApiTest;
 
-final class ContentTemplateTest extends ApiTest
+final class TemplateTest extends ApiTest
 {
     public function testTemplatesReturnsTemplates() : void
     {
@@ -30,7 +30,7 @@ final class ContentTemplateTest extends ApiTest
             )
         );
 
-        $winguApi = new ContentTemplate($configurationMock, $httpClient, $requestFactory, $hydrator);
+        $winguApi = new Template($configurationMock, $httpClient, $requestFactory, $hydrator);
         $actual   = $winguApi->templates();
 
         $expected = [
@@ -41,9 +41,9 @@ final class ContentTemplateTest extends ApiTest
         self::assertEquals($expected, \iterator_to_array($actual));
     }
 
-    private function getExpectedTemplate() : Template
+    private function getExpectedTemplate() : TemplateModel
     {
-        return new Template(
+        return new TemplateModel(
             '00da2678-7517-4751-996c-ec21edb662ed',
             '#FFFFFF',
             '#000000',

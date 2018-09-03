@@ -57,6 +57,11 @@ final class Content extends Api
         return $this->hydrator->hydrateResponse($response, Pack::class);
     }
 
+    public function deleteMyPack(string $id) : void
+    {
+        // @todo implement.
+    }
+
     public function attachMyContentToChannels(string $id, PrivateContentChannels $content) : void
     {
         Assertion::uuid($id);

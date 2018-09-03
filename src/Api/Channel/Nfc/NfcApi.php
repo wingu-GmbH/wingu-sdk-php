@@ -66,6 +66,11 @@ final class NfcApi extends Api
         $this->handleRequest($request);
     }
 
+    public function deleteMyNfc(string $id) : void
+    {
+        // @todo implement.
+    }
+
     private function getEmbeddedPage(string $href) : EmbeddedPage
     {
         $request = $this->createGetRequest($href);

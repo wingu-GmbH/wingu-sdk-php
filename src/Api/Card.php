@@ -17,4 +17,9 @@ final class Card extends Api
 
         return $this->hydrator->hydrateResponse($response, ResponseCard::class);
     }
+
+    public function deleteMyCard(string $id) : void
+    {
+        // @todo implement.
+    }
 }

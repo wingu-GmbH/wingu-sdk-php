@@ -11,6 +11,7 @@ use Psr\Http\Message\ResponseInterface;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\Normalizer\JsonSerializableNormalizer;
 use Symfony\Component\Serializer\Serializer;
+use Wingu\Engine\SDK\Api\Exception\Generic;
 use Wingu\Engine\SDK\Hydrator\Hydrator;
 use Wingu\Engine\SDK\Model\Request\Request;
 

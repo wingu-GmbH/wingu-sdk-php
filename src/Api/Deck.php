@@ -17,4 +17,9 @@ final class Deck extends Api
 
         return $this->hydrator->hydrateResponse($response, ResponseDeck::class);
     }
+
+    public function deleteMyDeck(string $id) : void
+    {
+        // @todo implement.
+    }
 }

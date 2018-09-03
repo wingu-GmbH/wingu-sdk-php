@@ -80,6 +80,27 @@ final class PaginatedResponseIterator implements \Iterator, \Countable
         $this->fetchEmbedded($this->pageInfo->links()->first());
     }
 
+
+//    public function seek($position) {
+//        if (!isset($this->array[$position])) {
+//            throw new OutOfBoundsException("invalid seek position ($position)");
+//        }
+//
+//        $this->position = $position;
+//    }
+
+//    /**
+//     * {@inheritdoc}
+//     */
+//    public function seek($position)
+//    {
+//        $this->currentPagePosition = $position;
+//        if (! $this->valid()) {
+//            throw new \OutOfBoundsException();
+//        }
+//        $this->fetchEmbedded($this->pageInfo->links->self());
+//    }
+
     /**
      * {@inheritdoc}
      */

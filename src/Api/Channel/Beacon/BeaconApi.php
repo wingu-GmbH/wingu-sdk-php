@@ -66,6 +66,11 @@ final class BeaconApi extends Api
         $this->handleRequest($request);
     }
 
+    public function deleteMyBeacon(string $id) : void
+    {
+        // @todo implement.
+    }
+
     private function getEmbeddedPage(string $href) : EmbeddedPage
     {
         $request = $this->createGetRequest($href);

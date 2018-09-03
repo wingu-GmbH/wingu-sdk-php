@@ -8,9 +8,9 @@ use Wingu\Engine\SDK\Api\Api;
 use Wingu\Engine\SDK\Api\Paginator\EmbeddedPage;
 use Wingu\Engine\SDK\Api\Paginator\PageInfo;
 use Wingu\Engine\SDK\Api\Paginator\PaginatedResponseIterator;
-use Wingu\Engine\SDK\Model\Response\Content\Template;
+use Wingu\Engine\SDK\Model\Response\Content\Template as TemplateModel;
 
-final class ContentTemplate extends Api
+final class Template extends Api
 {
     public function templates() : PaginatedResponseIterator
     {
@@ -36,7 +36,7 @@ final class ContentTemplate extends Api
         $pageInfo = $this->hydrator->hydrateData($data, PageInfo::class);
         $embedded = $this->hydrator->hydrateData(
             \array_column($data['_embedded']['templates'], 'template'),
-            Template::class . '[]'
+            TemplateModel::class . '[]'
         );
 
         return new EmbeddedPage($pageInfo, $embedded);
