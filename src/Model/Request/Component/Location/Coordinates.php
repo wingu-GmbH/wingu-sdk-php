@@ -21,7 +21,7 @@ final class Coordinates implements Request
     }
 
     /** @inheritdoc */
-    public function jsonSerialize()
+    public function jsonSerialize() : array
     {
         return [
             'longitude' => $this->longitude,

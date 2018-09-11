@@ -62,7 +62,7 @@ final class GeofenceApiTest extends ChannelApiTestCase
             new Response(
                 200,
                 ['Content-Type' => 'application/json'],
-                \file_get_contents(__DIR__ . '/Fixtures/full_public_geofence.json')
+                $this->getDataFromFixturesFile('full_public_geofence.json')
             )
         );
 
@@ -100,7 +100,7 @@ final class GeofenceApiTest extends ChannelApiTestCase
             new Response(
                 200,
                 ['Content-Type' => 'application/json'],
-                \file_get_contents(__DIR__ . '/Fixtures/full_private_geofence.json')
+                $this->getDataFromFixturesFile('full_private_geofence.json')
             )
         );
 
@@ -384,7 +384,7 @@ final class GeofenceApiTest extends ChannelApiTestCase
             new Response(
                 200,
                 ['Content-Type' => 'application/json'],
-                \file_get_contents(__DIR__ . '/Fixtures/private_geofences_list.json')
+                $this->getDataFromFixturesFile('private_geofences_list.json')
             )
         );
 

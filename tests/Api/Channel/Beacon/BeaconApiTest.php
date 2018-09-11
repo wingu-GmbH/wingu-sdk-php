@@ -71,7 +71,7 @@ final class BeaconApiTest extends ChannelApiTestCase
             new Response(
                 200,
                 ['Content-Type' => 'application/json'],
-                \file_get_contents(__DIR__ . '/Fixtures/full_public_beacon.json')
+                $this->getDataFromFixturesFile('full_public_beacon.json')
             )
         );
 
@@ -318,7 +318,7 @@ final class BeaconApiTest extends ChannelApiTestCase
             new Response(
                 200,
                 ['Content-Type' => 'application/json'],
-                \file_get_contents(__DIR__ . '/Fixtures/full_private_beacon.json')
+                $this->getDataFromFixturesFile('full_private_beacon.json')
             )
         );
 
@@ -630,7 +630,7 @@ final class BeaconApiTest extends ChannelApiTestCase
             new Response(
                 200,
                 ['Content-Type' => 'application/json'],
-                \file_get_contents(__DIR__ . '/Fixtures/private_beacons_list.json')
+                $this->getDataFromFixturesFile('private_beacons_list.json')
             )
         );
 

@@ -61,7 +61,7 @@ final class NfcApiTest extends ChannelApiTestCase
             new Response(
                 200,
                 ['Content-Type' => 'application/json'],
-                \file_get_contents(__DIR__ . '/Fixtures/full_public_nfc.json')
+                $this->getDataFromFixturesFile('full_public_nfc.json')
             )
         );
 
@@ -88,7 +88,7 @@ final class NfcApiTest extends ChannelApiTestCase
             new Response(
                 200,
                 ['Content-Type' => 'application/json'],
-                \file_get_contents(__DIR__ . '/Fixtures/full_private_nfc.json')
+                $this->getDataFromFixturesFile('full_private_nfc.json')
             )
         );
 
@@ -382,7 +382,7 @@ final class NfcApiTest extends ChannelApiTestCase
             new Response(
                 200,
                 ['Content-Type' => 'application/json'],
-                \file_get_contents(__DIR__ . '/Fixtures/private_nfcs_list.json')
+                $this->getDataFromFixturesFile('private_nfcs_list.json')
             )
         );
 

@@ -27,7 +27,7 @@ final class DeckTest extends ApiTest
         $response   = new Response(
             201,
             ['Content-Type' => 'application/json'],
-            \file_get_contents(__DIR__ . '/Fixtures/posted_deck.json')
+            $this->getDataFromFixturesFile('posted_deck.json')
         );
         $httpClient->addResponse($response);
 

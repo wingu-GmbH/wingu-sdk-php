@@ -40,7 +40,7 @@ final class ChannelApiTest extends ChannelApiTestCase
             new Response(
                 200,
                 ['Content-Type' => 'application/json'],
-                \file_get_contents(__DIR__ . '/Fixtures/full_private_beacon.json')
+                $this->getDataFromFixturesFile('full_private_beacon.json')
             )
         );
 
@@ -63,7 +63,7 @@ final class ChannelApiTest extends ChannelApiTestCase
             new Response(
                 200,
                 ['Content-Type' => 'application/json'],
-                \file_get_contents(__DIR__ . '/Fixtures/full_private_geofence.json')
+                $this->getDataFromFixturesFile('full_private_geofence.json')
             )
         );
 
@@ -86,7 +86,7 @@ final class ChannelApiTest extends ChannelApiTestCase
             new Response(
                 200,
                 ['Content-Type' => 'application/json'],
-                \file_get_contents(__DIR__ . '/Fixtures/full_private_nfc.json')
+                $this->getDataFromFixturesFile('full_private_nfc.json')
             )
         );
 
@@ -109,7 +109,7 @@ final class ChannelApiTest extends ChannelApiTestCase
             new Response(
                 200,
                 ['Content-Type' => 'application/json'],
-                \file_get_contents(__DIR__ . '/Fixtures/full_private_qrcode.json')
+                $this->getDataFromFixturesFile('full_private_qrcode.json')
             )
         );
 
@@ -132,7 +132,7 @@ final class ChannelApiTest extends ChannelApiTestCase
             new Response(
                 200,
                 ['Content-Type' => 'application/json'],
-                \file_get_contents(__DIR__ . '/Fixtures/full_private_channels.json')
+                $this->getDataFromFixturesFile('full_private_channels.json')
             )
         );
 
@@ -161,28 +161,28 @@ final class ChannelApiTest extends ChannelApiTestCase
             new Response(
                 200,
                 ['Content-Type' => 'application/json'],
-                \file_get_contents(__DIR__ . '/Fixtures/full_private_channels_paginated_1.json')
+                $this->getDataFromFixturesFile('full_private_channels_paginated_1.json')
             )
         );
         $httpClient->addResponse(
             new Response(
                 200,
                 ['Content-Type' => 'application/json'],
-                \file_get_contents(__DIR__ . '/Fixtures/full_private_channels_paginated_2.json')
+                $this->getDataFromFixturesFile('full_private_channels_paginated_2.json')
             )
         );
         $httpClient->addResponse(
             new Response(
                 200,
                 ['Content-Type' => 'application/json'],
-                \file_get_contents(__DIR__ . '/Fixtures/full_private_channels_paginated_3.json')
+                $this->getDataFromFixturesFile('full_private_channels_paginated_3.json')
             )
         );
         $httpClient->addResponse(
             new Response(
                 200,
                 ['Content-Type' => 'application/json'],
-                \file_get_contents(__DIR__ . '/Fixtures/full_private_channels_paginated_4.json')
+                $this->getDataFromFixturesFile('full_private_channels_paginated_4.json')
             )
         );
 
@@ -211,7 +211,7 @@ final class ChannelApiTest extends ChannelApiTestCase
             new Response(
                 200,
                 ['Content-Type' => 'application/json'],
-                \file_get_contents(__DIR__ . '/Fixtures/full_private_channels_filtered.json')
+                $this->getDataFromFixturesFile('full_private_channels_filtered.json')
             )
         );
 
@@ -240,7 +240,7 @@ final class ChannelApiTest extends ChannelApiTestCase
             new Response(
                 200,
                 ['Content-Type' => 'application/json'],
-                \file_get_contents(__DIR__ . '/Fixtures/full_private_channels_sorted.json')
+                $this->getDataFromFixturesFile('full_private_channels_sorted.json')
             )
         );
 
@@ -268,7 +268,7 @@ final class ChannelApiTest extends ChannelApiTestCase
             new Response(
                 200,
                 ['Content-Type' => 'application/json'],
-                \file_get_contents(__DIR__ . '/Fixtures/full_private_channels_page.json')
+                $this->getDataFromFixturesFile('full_private_channels_page.json')
             )
         );
 
@@ -305,7 +305,7 @@ final class ChannelApiTest extends ChannelApiTestCase
             new Response(
                 200,
                 ['Content-Type' => 'application/json'],
-                \file_get_contents(__DIR__ . '/Fixtures/full_private_channels_page_filtered.json')
+                $this->getDataFromFixturesFile('full_private_channels_page_filtered.json')
             )
         );
 
@@ -345,7 +345,7 @@ final class ChannelApiTest extends ChannelApiTestCase
             new Response(
                 200,
                 ['Content-Type' => 'application/json'],
-                \file_get_contents(__DIR__ . '/Fixtures/full_private_channels_page_sorted.json')
+                $this->getDataFromFixturesFile('full_private_channels_page_sorted.json')
             )
         );
 

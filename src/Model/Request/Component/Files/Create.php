@@ -9,7 +9,7 @@ use Wingu\Engine\SDK\Model\Request\Request;
 final class Create implements Request
 {
     /** @inheritdoc */
-    public function jsonSerialize()
+    public function jsonSerialize() : array
     {
         return [];
     }

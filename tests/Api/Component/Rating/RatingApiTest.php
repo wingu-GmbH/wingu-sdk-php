@@ -28,7 +28,7 @@ class RatingApiTest extends ApiTest
         $response   = new Response(
             201,
             ['Content-Type' => 'application/json'],
-            \file_get_contents(__DIR__ . '/Fixtures/posted_rating_component.json')
+            $this->getDataFromFixturesFile('posted_rating_component.json')
         );
         $httpClient->addResponse($response);
 

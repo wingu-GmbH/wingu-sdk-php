@@ -30,7 +30,7 @@ class CouponApiTest extends ApiTest
         $response   = new Response(
             201,
             ['Content-Type' => 'application/json'],
-            \file_get_contents(__DIR__ . '/Fixtures/posted_coupon_component.json')
+            $this->getDataFromFixturesFile('posted_coupon_component.json')
         );
         $httpClient->addResponse($response);
 

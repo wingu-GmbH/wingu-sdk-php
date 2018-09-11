@@ -23,7 +23,7 @@ final class PrivateContentChannels implements Request
     }
 
     /** @inheritdoc */
-    public function jsonSerialize()
+    public function jsonSerialize() : array
     {
         return [
             'channels' => $this->channels,

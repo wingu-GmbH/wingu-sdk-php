@@ -31,7 +31,7 @@ final class Pack implements Request
     }
 
     /** @inheritdoc */
-    public function jsonSerialize()
+    public function jsonSerialize() : array
     {
         return [
             'content' => $this->content,

@@ -29,7 +29,7 @@ class LocationApiTest extends ApiTest
         $response   = new Response(
             201,
             ['Content-Type' => 'application/json'],
-            \file_get_contents(__DIR__ . '/Fixtures/posted_location_component.json')
+            $this->getDataFromFixturesFile('posted_location_component.json')
         );
         $httpClient->addResponse($response);
 

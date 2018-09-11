@@ -27,7 +27,7 @@ class FilesApiTest extends ApiTest
         $response   = new Response(
             201,
             ['Content-Type' => 'application/json'],
-            \file_get_contents(__DIR__ . '/Fixtures/posted_files_component.json')
+            $this->getDataFromFixturesFile('posted_files_component.json')
         );
         $httpClient->addResponse($response);
 

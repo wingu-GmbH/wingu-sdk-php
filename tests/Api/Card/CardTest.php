@@ -30,7 +30,7 @@ class CardTest extends ApiTest
         $response   = new Response(
             201,
             ['Content-Type' => 'application/json'],
-            \file_get_contents(__DIR__ . '/Fixtures/posted_card.json')
+            $this->getDataFromFixturesFile('posted_card.json')
         );
         $httpClient->addResponse($response);
 

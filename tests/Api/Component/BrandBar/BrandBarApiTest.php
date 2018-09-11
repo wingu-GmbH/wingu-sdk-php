@@ -32,7 +32,7 @@ class BrandBarApiTest extends ApiTest
         $response   = new Response(
             201,
             ['Content-Type' => 'application/json'],
-            \file_get_contents(__DIR__ . '/Fixtures/posted_brand_bar_component.json')
+            $this->getDataFromFixturesFile('posted_brand_bar_component.json')
         );
         $httpClient->addResponse($response);
 

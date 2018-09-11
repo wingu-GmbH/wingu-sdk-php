@@ -94,7 +94,7 @@ final class ComponentDenormalizer implements DenormalizerInterface, SerializerAw
     /**
      * {@inheritdoc}
      */
-    public function setSerializer(SerializerInterface $serializer)
+    public function setSerializer(SerializerInterface $serializer) : void
     {
         if (! $serializer instanceof DenormalizerInterface) {
             throw new InvalidArgumentException(

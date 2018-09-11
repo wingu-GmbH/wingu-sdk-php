@@ -62,7 +62,7 @@ final class ObjectDenormalizer extends ObjectNormalizer
                 $paramName = $constructorParameter->name;
                 $key       = $this->nameConverter !== null ? $this->nameConverter->normalize($paramName) : $paramName;
 
-                $allowed = $allowedAttributes === false || \in_array($paramName, $allowedAttributes, true);
+                $allowed = $allowedAttributes === false || (\is_array($allowedAttributes) && \in_array($paramName, $allowedAttributes, true));
                 $ignored = ! $this->isAllowedAttribute($class, $paramName, $format, $context);
                 if ($constructorParameter->isVariadic()) {
                     if ($allowed && ! $ignored && (isset($data[$key]) || \array_key_exists($key, $data))) {
@@ -215,16 +215,17 @@ final class ObjectDenormalizer extends ObjectNormalizer
             // PHP's json_decode automatically converts Numbers without a decimal part to integers.     Boundaries
             // To circumvent this behavior, integers are converted to floats when denormalizing JSON based formats and when
             // a float is expected.
-            if ($builtinType === Type::BUILTIN_TYPE_FLOAT && \is_int($data) && \strpos($format, JsonEncoder::FORMAT) !== false) {
+            if ($builtinType === Type::BUILTIN_TYPE_FLOAT && \is_int($data) && $format !== null && \strpos($format, JsonEncoder::FORMAT) !== false) {
                 return (float) $data;
             }
 
-            if (\call_user_func('is_' . $builtinType, $data)) {
+            $functionName = 'is_' . $builtinType;
+            if (\is_callable($functionName) && $functionName($data) !== false) {
                 return $data;
             }
         }
 
-        if (! empty($context[self::DISABLE_TYPE_ENFORCEMENT])) {
+        if (isset($context[self::DISABLE_TYPE_ENFORCEMENT])) {
             return $data;
         }
 

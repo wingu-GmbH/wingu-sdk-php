@@ -50,7 +50,7 @@ class ComponentApiTest extends ApiTest
             new Response(
                 200,
                 ['Content-Type' => 'application/json'],
-                \file_get_contents(__DIR__ . '/Fixtures/full_component.json')
+                $this->getDataFromFixturesFile('full_component.json')
             )
         );
 
@@ -73,7 +73,7 @@ class ComponentApiTest extends ApiTest
             new Response(
                 200,
                 ['Content-Type' => 'application/json'],
-                \file_get_contents(__DIR__ . '/Fixtures/full_components.json')
+                $this->getDataFromFixturesFile('full_components.json')
             )
         );
 

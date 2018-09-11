@@ -26,7 +26,7 @@ final class TemplateTest extends ApiTest
             new Response(
                 200,
                 ['Content-Type' => 'application/json'],
-                \file_get_contents(__DIR__ . '/Fixtures/content_templates_list.json')
+                $this->getDataFromFixturesFile('content_templates_list.json')
             )
         );
 

@@ -30,7 +30,7 @@ final class PaginatedResponseIterator implements \Iterator, \Countable
     }
 
     /**
-     * {@inheritdoc}
+     * @return mixed
      */
     public function current()
     {
@@ -40,7 +40,7 @@ final class PaginatedResponseIterator implements \Iterator, \Countable
     /**
      * {@inheritdoc}
      */
-    public function next()
+    public function next() : void
     {
         $this->currentPagePosition++;
 
@@ -52,7 +52,7 @@ final class PaginatedResponseIterator implements \Iterator, \Countable
     }
 
     /**
-     * {@inheritdoc}
+     * @return mixed
      */
     public function key()
     {
@@ -62,7 +62,7 @@ final class PaginatedResponseIterator implements \Iterator, \Countable
     /**
      * {@inheritdoc}
      */
-    public function valid()
+    public function valid() : bool
     {
         return isset($this->embedded[$this->currentPagePosition]);
     }
@@ -70,7 +70,7 @@ final class PaginatedResponseIterator implements \Iterator, \Countable
     /**
      * {@inheritdoc}
      */
-    public function rewind()
+    public function rewind() : void
     {
         $this->currentPagePosition = 0;
         if ($this->pageInfo->page() === 1) {
@@ -104,7 +104,7 @@ final class PaginatedResponseIterator implements \Iterator, \Countable
     /**
      * {@inheritdoc}
      */
-    public function count()
+    public function count() : int
     {
         return $this->pageInfo->total();
     }

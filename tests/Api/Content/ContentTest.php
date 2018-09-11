@@ -59,7 +59,7 @@ final class ContentTest extends ApiTest
             new Response(
                 200,
                 ['Content-Type' => 'application/json'],
-                \file_get_contents(__DIR__ . '/Fixtures/full_private_content.json')
+                $this->getDataFromFixturesFile('full_private_content.json')
             )
         );
 
@@ -82,7 +82,7 @@ final class ContentTest extends ApiTest
             new Response(
                 200,
                 ['Content-Type' => 'application/json'],
-                \file_get_contents(__DIR__ . '/Fixtures/private_contents_list.json')
+                $this->getDataFromFixturesFile('private_contents_list.json')
             )
         );
 
@@ -173,7 +173,7 @@ final class ContentTest extends ApiTest
         $response   = new Response(
             201,
             ['Content-Type' => 'application/json'],
-            \file_get_contents(__DIR__ . '/Fixtures/posted_private_content.json')
+            $this->getDataFromFixturesFile('posted_private_content.json')
         );
         $httpClient->addResponse($response);
 
@@ -187,7 +187,10 @@ final class ContentTest extends ApiTest
 
         /** @var RequestInterface $actualRequest */
         $actualRequest = $httpClient->getLastRequest();
-        self::assertSame('{"template":"00da2678-7517-4751-996c-ec21edb662ed"}', $actualRequest->getBody()->getContents());
+        self::assertSame(
+            '{"template":"00da2678-7517-4751-996c-ec21edb662ed"}',
+            $actualRequest->getBody()->getContents()
+        );
         self::assertSame('POST', $actualRequest->getMethod());
 
         $expectedResponse = $this->getExpectedPostedContent();
@@ -204,7 +207,7 @@ final class ContentTest extends ApiTest
         $response   = new Response(
             201,
             ['Content-Type' => 'application/json'],
-            \file_get_contents(__DIR__ . '/Fixtures/posted_pack.json')
+            $this->getDataFromFixturesFile('posted_pack.json')
         );
         $httpClient->addResponse($response);
 
@@ -220,7 +223,10 @@ final class ContentTest extends ApiTest
 
         /** @var RequestInterface $actualRequest */
         $actualRequest = $httpClient->getLastRequest();
-        self::assertSame('{"content":"fb574c18-bff6-4b84-9e5e-5d7047dddf01","deck":"1e4bfb95-87d6-4070-b9cd-a85681595f62","locale":"en"}', $actualRequest->getBody()->getContents());
+        self::assertSame(
+            '{"content":"fb574c18-bff6-4b84-9e5e-5d7047dddf01","deck":"1e4bfb95-87d6-4070-b9cd-a85681595f62","locale":"en"}',
+            $actualRequest->getBody()->getContents()
+        );
         self::assertSame('POST', $actualRequest->getMethod());
 
         $expectedResponse = $this->getExpectedPostedPack();

@@ -61,7 +61,7 @@ final class QrCodeApiTest extends ChannelApiTestCase
             new Response(
                 200,
                 ['Content-Type' => 'application/json'],
-                \file_get_contents(__DIR__ . '/Fixtures/full_public_qrcode.json')
+                $this->getDataFromFixturesFile('full_public_qrcode.json')
             )
         );
 
@@ -88,7 +88,7 @@ final class QrCodeApiTest extends ChannelApiTestCase
             new Response(
                 200,
                 ['Content-Type' => 'application/json'],
-                \file_get_contents(__DIR__ . '/Fixtures/full_private_qrcode.json')
+                $this->getDataFromFixturesFile('full_private_qrcode.json')
             )
         );
 
@@ -382,7 +382,7 @@ final class QrCodeApiTest extends ChannelApiTestCase
             new Response(
                 200,
                 ['Content-Type' => 'application/json'],
-                \file_get_contents(__DIR__ . '/Fixtures/private_qrcodes_list.json')
+                $this->getDataFromFixturesFile('private_qrcodes_list.json')
             )
         );
 

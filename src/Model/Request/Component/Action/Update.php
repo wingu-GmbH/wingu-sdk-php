@@ -32,7 +32,7 @@ final class Update implements Request
     }
 
     /** @inheritdoc */
-    public function jsonSerialize()
+    public function jsonSerialize() : array
     {
         return [
             'buttonCaption' => $this->buttonCaption,

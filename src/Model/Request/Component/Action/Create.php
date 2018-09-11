@@ -32,7 +32,7 @@ final class Create implements Request
     }
 
     /** @inheritdoc */
-    public function jsonSerialize()
+    public function jsonSerialize() : array
     {
         return [
             'buttonCaption' => $this->buttonCaption,

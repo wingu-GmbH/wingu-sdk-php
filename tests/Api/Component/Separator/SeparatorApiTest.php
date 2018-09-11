@@ -28,7 +28,7 @@ class SeparatorApiTest extends ApiTest
         $response   = new Response(
             201,
             ['Content-Type' => 'application/json'],
-            \file_get_contents(__DIR__ . '/Fixtures/posted_separator_component.json')
+            $this->getDataFromFixturesFile('posted_separator_component.json')
         );
         $httpClient->addResponse($response);
 

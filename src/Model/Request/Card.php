@@ -27,7 +27,7 @@ final class Card implements Request
     }
 
     /** @inheritdoc */
-    public function jsonSerialize()
+    public function jsonSerialize() : array
     {
         return [
             'deck' => $this->deck,
