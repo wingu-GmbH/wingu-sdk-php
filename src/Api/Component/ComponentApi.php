@@ -8,13 +8,13 @@ use Wingu\Engine\SDK\Api\Api;
 use Wingu\Engine\SDK\Api\Paginator\EmbeddedPage;
 use Wingu\Engine\SDK\Api\Paginator\PageInfo;
 use Wingu\Engine\SDK\Api\Paginator\PaginatedResponseIterator;
-use Wingu\Engine\SDK\Assertion;
-use Wingu\Engine\SDK\Model\Request\Component\CMS as RequestCMS;
-use Wingu\Engine\SDK\Model\Response\Component\CMS;
 use Wingu\Engine\SDK\Model\Response\Component\Component;
 
 final class ComponentApi extends Api
 {
+    /** @var mixed[] */
+    private $services = [];
+
     public function myComponent(string $id) : Component
     {
         $request = $this->createGetRequest('/api/component/' . $id . '.json');
@@ -35,23 +35,6 @@ final class ComponentApi extends Api
                 return $this->getEmbeddedPage('/api/component/my.json');
             }
         );
-    }
-
-    public function createCmsComponent(RequestCMS $cms) : CMS
-    {
-        $request = $this->createPostRequest('/api/component/cms', $cms);
-
-        $response = $this->handleRequest($request);
-
-        return $this->hydrator->hydrateResponse($response, CMS::class);
-    }
-
-    public function updateCmsComponent(string $id, RequestCMS $cms) : void
-    {
-        Assertion::uuid($id);
-        $request = $this->createPatchRequest('/api/component/cms/' . $id, $cms);
-
-        $this->handleRequest($request);
     }
 
     public function deleteMyComponent(string $id) : void
@@ -85,5 +68,100 @@ final class ComponentApi extends Api
         );
 
         return new EmbeddedPage($pageInfo, $embedded);
+    }
+
+    public function action() : ActionApi
+    {
+        return $this->getService(ActionApi::class);
+    }
+
+    public function audioPlaylist() : AudioPlaylistApi
+    {
+        return $this->getService(AudioPlaylistApi::class);
+    }
+
+    public function brandBar() : BrandBarApi
+    {
+        return $this->getService(BrandBarApi::class);
+    }
+
+    public function cms() : CMSApi
+    {
+        return $this->getService(CMSApi::class);
+    }
+
+    public function contact() : ContactApi
+    {
+        return $this->getService(ContactApi::class);
+    }
+
+    public function coupon() : CouponApi
+    {
+        return $this->getService(CouponApi::class);
+    }
+
+    public function files() : FilesApi
+    {
+        return $this->getService(FilesApi::class);
+    }
+
+    public function form() : FormApi
+    {
+        return $this->getService(FormApi::class);
+    }
+
+    public function imageGallery() : ImageGalleryApi
+    {
+        return $this->getService(ImageGalleryApi::class);
+    }
+
+    public function location() : LocationApi
+    {
+        return $this->getService(LocationApi::class);
+    }
+
+    public function proxy() : ProxyApi
+    {
+        return $this->getService(ProxyApi::class);
+    }
+
+    public function rating() : RatingApi
+    {
+        return $this->getService(RatingApi::class);
+    }
+
+    public function separator() : SeparatorApi
+    {
+        return $this->getService(SeparatorApi::class);
+    }
+
+    public function surveyMonkey() : SurveyMonkeyApi
+    {
+        return $this->getService(SurveyMonkeyApi::class);
+    }
+
+    public function video() : VideoApi
+    {
+        return $this->getService(VideoApi::class);
+    }
+
+    public function webhook() : WebhookApi
+    {
+        return $this->getService(WebhookApi::class);
+    }
+
+    /** @return mixed */
+    public function getService(string $class)
+    {
+        if (! isset($this->services[$class])) {
+            $this->services[$class] = new $class(
+                $this->configuration,
+                $this->httpClient,
+                $this->requestFactory,
+                $this->hydrator
+            );
+        }
+
+        return $this->services[$class];
     }
 }

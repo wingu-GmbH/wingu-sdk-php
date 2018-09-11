@@ -7,11 +7,9 @@ namespace Wingu\Engine\SDK\Tests\Api\Component;
 use GuzzleHttp\Psr7\Response;
 use Http\Message\MessageFactory\GuzzleMessageFactory;
 use Http\Mock\Client as MockClient;
-use Psr\Http\Message\RequestInterface;
 use Wingu\Engine\SDK\Api\Component\ComponentApi;
 use Wingu\Engine\SDK\Api\Configuration;
 use Wingu\Engine\SDK\Hydrator\SymfonySerializerHydrator;
-use Wingu\Engine\SDK\Model\Request\Component\CMS as RequestCMS;
 use Wingu\Engine\SDK\Model\Response\Component\Action;
 use Wingu\Engine\SDK\Model\Response\Component\AudioPlaylist;
 use Wingu\Engine\SDK\Model\Response\Component\AudioPlaylistAlbum;
@@ -103,67 +101,6 @@ class ComponentApiTest extends ApiTest
 
         self::assertCount(16, $actual);
         self::assertEquals($expected, \iterator_to_array($actual));
-    }
-
-    public function testPostCmsComponentCreatesCmsComponent() : void
-    {
-        $configurationMock = new Configuration();
-        $requestFactory    = new GuzzleMessageFactory();
-        $hydrator          = new SymfonySerializerHydrator();
-
-        $httpClient = new MockClient();
-        $response   = new Response(
-            201,
-            ['Content-Type' => 'application/json'],
-            \file_get_contents(__DIR__ . '/Fixtures/posted_cms_component.json')
-        );
-        $httpClient->addResponse($response);
-
-        $winguApi = new ComponentApi($configurationMock, $httpClient, $requestFactory, $hydrator);
-
-        $actualResponse = $winguApi->createCmsComponent(
-            new RequestCMS(
-                'just test',
-                'html'
-            )
-        );
-
-        /** @var RequestInterface $actualRequest */
-        $actualRequest = $httpClient->getLastRequest();
-        self::assertSame('{"content":"just test","type":"html"}', $actualRequest->getBody()->getContents());
-        self::assertSame('POST', $actualRequest->getMethod());
-
-        $expectedResponse = $this->getExpectedPostedCms();
-        self::assertEquals($expectedResponse, $actualResponse);
-    }
-
-    public function testPatchCmsComponentPatchesCmsComponent() : void
-    {
-        $configurationMock = new Configuration();
-        $requestFactory    = new GuzzleMessageFactory();
-        $hydrator          = new SymfonySerializerHydrator();
-
-        $httpClient = new MockClient();
-        $response   = new Response(
-            204,
-            ['Content-Type' => 'application/json']
-        );
-        $httpClient->addResponse($response);
-
-        $winguApi = new ComponentApi($configurationMock, $httpClient, $requestFactory, $hydrator);
-
-        $winguApi->updateCmsComponent(
-            '261a7aab-4b03-4817-b471-060c2e046826',
-            new RequestCMS(
-                'update',
-                'html'
-            )
-        );
-
-        /** @var RequestInterface $actualRequest */
-        $actualRequest = $httpClient->getLastRequest();
-        self::assertSame('{"content":"update","type":"html"}', $actualRequest->getBody()->getContents());
-        self::assertSame('PATCH', $actualRequest->getMethod());
     }
 
     private function getExpectedComponent() : Component
@@ -395,16 +332,6 @@ class ComponentApiTest extends ApiTest
             'Trigger me',
             'https://httpbin.org/status/200',
             'Success message!'
-        );
-    }
-
-    private function getExpectedPostedCms() : CMS
-    {
-        return new CMS(
-            '261a7aab-4b03-4817-b471-060c2e046826',
-            new \DateTime('2018-06-05T13:08:11+0000'),
-            'just test',
-            'html'
         );
     }
 }

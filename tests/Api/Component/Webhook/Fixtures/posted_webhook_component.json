@@ -1,0 +1,8 @@
+{
+  "id": "0104987b-390f-4f1f-9554-a148df61b90f",
+  "updatedAt": "2018-09-07T12:00:00+0000",
+  "buttonCaption": "Trigger me",
+  "url": "https://httpbin.org/status/200",
+  "feedbackSuccessMessage": "Success message!",
+  "discriminator": "webhook"
+}

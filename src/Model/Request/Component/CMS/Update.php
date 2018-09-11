@@ -2,24 +2,24 @@
 
 declare(strict_types=1);
 
-namespace Wingu\Engine\SDK\Model\Request\Component;
+namespace Wingu\Engine\SDK\Model\Request\Component\CMS;
 
 use Wingu\Engine\SDK\Assertion;
 use Wingu\Engine\SDK\Model\Request\Request;
 
-final class CMS implements Request
+final class Update implements Request
 {
     private const TYPES = ['html', 'markdown'];
 
-    /** @var string */
+    /** @var string|null */
     private $content;
 
-    /** @var string */
+    /** @var string|null */
     private $type;
 
     public function __construct(
-        string $content,
-        string $type
+        ?string $content,
+        ?string $type
     ) {
         Assertion::inArray($type, self::TYPES);
         $this->content = $content;

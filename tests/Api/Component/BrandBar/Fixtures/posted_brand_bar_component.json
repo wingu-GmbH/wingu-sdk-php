@@ -1,0 +1,16 @@
+{
+  "id": "a65747f7-7093-4bf5-ab2f-5fd0d5699ab5",
+  "updatedAt": "2018-09-07T09:09:30+0000",
+  "background": {
+    "color": "2b7d83"
+  },
+  "text": {
+    "text": "brandbar text",
+    "alignment": "left",
+    "color": "04b1f0"
+  },
+  "image": {
+    "alignment": "left"
+  },
+  "discriminator": "brand_bar"
+}

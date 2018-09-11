@@ -1,0 +1,34 @@
+{
+  "id": "58778834-e728-49a9-a1c7-aef8732d3797",
+  "updatedAt": "2018-09-07T09:36:06+0000",
+  "companyName": "Example",
+  "personalTitle": "Mr.",
+  "firstName": "Benjamin",
+  "lastName": "Berg",
+  "email": "benjamin.berg@example.com",
+  "mobile": "004917225446165",
+  "phone": "+49 (0)17 22 544 61",
+  "website": "www.example.com",
+  "openingHours": "Daily, 9:00 - 17:00",
+  "extraInfo": "Some extra info",
+  "address": {
+    "id": "4884dc34-1689-489a-93a9-c04fb74a90eb",
+    "country": "DE",
+    "city": "Oststadt",
+    "zipCode": "89081",
+    "street": "Kurfuerstendamm",
+    "streetNumber": "66"
+  },
+  "externalLinks": {
+    "facebookUrl": "https://www.facebook.com/wingude",
+    "twitterUrl": "https://twitter.com/wingude",
+    "googlePlusUrl": "https://plus.google.com/+Speicher210",
+    "yelpUrl": "http://www.yelp.com/biz/speicher-210-hamburg-2",
+    "id": "fc889bc3-c31f-446c-8b83-828705c6bd0f",
+    "facebookName": "wingude",
+    "twitterName": "wingude",
+    "googlePlusName": "+Speicher210",
+    "yelpName": "speicher-210-hamburg-2"
+  },
+  "discriminator": "contact"
+}

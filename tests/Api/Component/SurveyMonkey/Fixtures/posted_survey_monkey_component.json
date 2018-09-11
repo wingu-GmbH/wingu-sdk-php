@@ -1,0 +1,8 @@
+{
+  "id": "3fafd116-4e03-469c-a28d-035ca17fc46e",
+  "updatedAt": "2018-09-07T11:52:29+0000",
+  "title": "Take the IQ survey",
+  "description": "You will probably fail",
+  "surveyURL": "https://de.surveymonkey.com/r/5FBK8Z3",
+  "discriminator": "survey_monkey"
+}

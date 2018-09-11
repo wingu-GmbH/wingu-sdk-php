@@ -1,0 +1,13 @@
+{
+  "id": "1557f82a-052e-4d6f-aa89-c67d1cc5bd9d",
+  "updatedAt": "2018-09-07T11:17:46+0000",
+  "header": "-20 %",
+  "description": "Get you cheap stuff here!",
+  "barcode": {
+    "type": "EAN_13",
+    "value": "4000161100348"
+  },
+  "backgroundImage": null,
+  "disclaimer": "Disclaimer",
+  "discriminator": "coupon"
+}

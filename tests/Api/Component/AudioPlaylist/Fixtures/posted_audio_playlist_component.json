@@ -1,0 +1,7 @@
+{
+  "id": "b75ea792-07fe-427f-a1b5-867e25a29c23",
+  "updatedAt": "2018-09-05T11:04:19+0000",
+  "name": "playlist name",
+  "media": [],
+  "discriminator": "audio_playlist"
+}

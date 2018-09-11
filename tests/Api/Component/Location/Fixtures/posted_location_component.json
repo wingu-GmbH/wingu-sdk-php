@@ -1,0 +1,10 @@
+{
+  "id": "ef9a3c06-8734-4a51-8205-083fe4e4b1cc",
+  "updatedAt": "2018-09-07T11:38:18+0000",
+  "coordinates": {
+    "longitude": 10.233362,
+    "latitude": 53.614503
+  },
+  "radius": 602,
+  "discriminator": "location"
+}

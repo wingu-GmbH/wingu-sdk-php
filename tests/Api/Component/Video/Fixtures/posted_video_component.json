@@ -1,0 +1,8 @@
+{
+  "id": "800ff36f-e13b-4711-a413-d6b412875f16",
+  "updatedAt": "2018-09-07T11:56:19+0000",
+  "type": "youtube",
+  "payload": "zfQdPcO--DA",
+  "description": "Video description",
+  "discriminator": "video"
+}

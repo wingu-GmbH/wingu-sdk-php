@@ -66,7 +66,7 @@ final class WinguApi
         return $this->getService(NfcApi::class);
     }
 
-    public function qrcode() : QrCodeApi
+    public function qrCode() : QrCodeApi
     {
         return $this->getService(QrCodeApi::class);
     }
