@@ -692,6 +692,29 @@ final class BeaconApiTest extends ChannelApiTestCase
         self::assertSame('PATCH', $actualRequest->getMethod());
     }
 
+    public function testDeleteMyBeaconRemovesPrivateBeacon() : void
+    {
+        $configurationMock = new Configuration();
+        $requestFactory    = new GuzzleMessageFactory();
+        $hydrator          = new SymfonySerializerHydrator();
+
+        $httpClient = new MockClient();
+        $response   = new Response(
+            204,
+            ['Content-Type' => 'application/json']
+        );
+        $httpClient->addResponse($response);
+
+        $winguApi = new BeaconApi($configurationMock, $httpClient, $requestFactory, $hydrator);
+
+        $winguApi->deleteMyBeacon('8c798a67-0000-4000-a000-000000000007');
+
+        /** @var RequestInterface $actualRequest */
+        $actualRequest = $httpClient->getLastRequest();
+        self::assertSame('', $actualRequest->getBody()->getContents());
+        self::assertSame('DELETE', $actualRequest->getMethod());
+    }
+
     private function getExpectedMinimalPrivateListBeacon() : PrivateBeacon
     {
         return new PrivateBeacon(

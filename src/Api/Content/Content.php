@@ -59,7 +59,10 @@ final class Content extends Api
 
     public function deleteMyPack(string $id) : void
     {
-        // @todo implement.
+        Assertion::uuid($id);
+        $request = $this->createDeleteRequest('/api/content/my/pack/' . $id);
+
+        $this->handleRequest($request);
     }
 
     public function attachMyContentToChannels(string $id, PrivateContentChannels $content) : void

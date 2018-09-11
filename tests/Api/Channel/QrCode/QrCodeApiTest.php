@@ -429,6 +429,29 @@ final class QrCodeApiTest extends ChannelApiTestCase
         self::assertSame('PATCH', $actualRequest->getMethod());
     }
 
+    public function testDeleteMyQrCodeRemovesPrivateQrCode() : void
+    {
+        $configurationMock = new Configuration();
+        $requestFactory    = new GuzzleMessageFactory();
+        $hydrator          = new SymfonySerializerHydrator();
+
+        $httpClient = new MockClient();
+        $response   = new Response(
+            204,
+            ['Content-Type' => 'application/json']
+        );
+        $httpClient->addResponse($response);
+
+        $winguApi = new QrCodeApi($configurationMock, $httpClient, $requestFactory, $hydrator);
+
+        $winguApi->deleteMyQrCode('9a8798c6-0000-4000-a000-000000000004');
+
+        /** @var RequestInterface $actualRequest */
+        $actualRequest = $httpClient->getLastRequest();
+        self::assertSame('', $actualRequest->getBody()->getContents());
+        self::assertSame('DELETE', $actualRequest->getMethod());
+    }
+
     private function getExpectedMinimalPrivateListQrCode() : PrivateQrCode
     {
         return new PrivateQrCode(

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Wingu\Engine\SDK\Api;
 
+use Wingu\Engine\SDK\Assertion;
 use Wingu\Engine\SDK\Model\Request\Deck\Deck as RequestDeck;
 use Wingu\Engine\SDK\Model\Response\Content\Deck as ResponseDeck;
 
@@ -20,6 +21,9 @@ final class Deck extends Api
 
     public function deleteMyDeck(string $id) : void
     {
-        // @todo implement.
+        Assertion::uuid($id);
+        $request = $this->createDeleteRequest('/api/deck/my/' . $id);
+
+        $this->handleRequest($request);
     }
 }

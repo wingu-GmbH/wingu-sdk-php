@@ -227,6 +227,29 @@ final class ContentTest extends ApiTest
         self::assertEquals($expectedResponse, $actualResponse);
     }
 
+    public function testDeleteMyPackRemovesPrivatePack() : void
+    {
+        $configurationMock = new Configuration();
+        $requestFactory    = new GuzzleMessageFactory();
+        $hydrator          = new SymfonySerializerHydrator();
+
+        $httpClient = new MockClient();
+        $response   = new Response(
+            204,
+            ['Content-Type' => 'application/json']
+        );
+        $httpClient->addResponse($response);
+
+        $winguApi = new Content($configurationMock, $httpClient, $requestFactory, $hydrator);
+
+        $winguApi->deleteMyPack('749b3b88-cee7-495c-9bf0-d1fc1d869cee');
+
+        /** @var RequestInterface $actualRequest */
+        $actualRequest = $httpClient->getLastRequest();
+        self::assertSame('', $actualRequest->getBody()->getContents());
+        self::assertSame('DELETE', $actualRequest->getMethod());
+    }
+
     private function getExpectedPrivateContent() : PrivateContent
     {
         return new PrivateContent(

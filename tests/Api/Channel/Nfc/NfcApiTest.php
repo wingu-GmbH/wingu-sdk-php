@@ -429,6 +429,29 @@ final class NfcApiTest extends ChannelApiTestCase
         self::assertSame('PATCH', $actualRequest->getMethod());
     }
 
+    public function testDeleteMyNfcRemovesPrivateNfc() : void
+    {
+        $configurationMock = new Configuration();
+        $requestFactory    = new GuzzleMessageFactory();
+        $hydrator          = new SymfonySerializerHydrator();
+
+        $httpClient = new MockClient();
+        $response   = new Response(
+            204,
+            ['Content-Type' => 'application/json']
+        );
+        $httpClient->addResponse($response);
+
+        $winguApi = new NfcApi($configurationMock, $httpClient, $requestFactory, $hydrator);
+
+        $winguApi->deleteMyNfc('44da7d7e-0000-4000-a000-000000000013');
+
+        /** @var RequestInterface $actualRequest */
+        $actualRequest = $httpClient->getLastRequest();
+        self::assertSame('', $actualRequest->getBody()->getContents());
+        self::assertSame('DELETE', $actualRequest->getMethod());
+    }
+
     private function getExpectedMinimalPrivateListNfc() : PrivateNfc
     {
         return new PrivateNfc(

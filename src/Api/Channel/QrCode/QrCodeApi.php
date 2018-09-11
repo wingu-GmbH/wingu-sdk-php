@@ -68,7 +68,10 @@ final class QrCodeApi extends Api
 
     public function deleteMyQrCode(string $id) : void
     {
-        // @todo implement.
+        Assertion::uuid($id);
+        $request = $this->createDeleteRequest('/api/channel/qrcode/my/' . $id);
+
+        $this->handleRequest($request);
     }
 
     private function getEmbeddedPage(string $href) : EmbeddedPage

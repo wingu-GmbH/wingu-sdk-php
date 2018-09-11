@@ -68,7 +68,10 @@ final class NfcApi extends Api
 
     public function deleteMyNfc(string $id) : void
     {
-        // @todo implement.
+        Assertion::uuid($id);
+        $request = $this->createDeleteRequest('/api/channel/nfc/my/' . $id);
+
+        $this->handleRequest($request);
     }
 
     private function getEmbeddedPage(string $href) : EmbeddedPage

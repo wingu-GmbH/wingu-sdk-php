@@ -8,6 +8,7 @@ use Wingu\Engine\SDK\Api\Api;
 use Wingu\Engine\SDK\Api\Paginator\EmbeddedPage;
 use Wingu\Engine\SDK\Api\Paginator\PageInfo;
 use Wingu\Engine\SDK\Api\Paginator\PaginatedResponseIterator;
+use Wingu\Engine\SDK\Assertion;
 use Wingu\Engine\SDK\Model\Response\Component\Component;
 
 final class ComponentApi extends Api
@@ -39,7 +40,10 @@ final class ComponentApi extends Api
 
     public function deleteMyComponent(string $id) : void
     {
-        // @todo implement.
+        Assertion::uuid($id);
+        $request = $this->createDeleteRequest('/api/component/' . $id);
+
+        $this->handleRequest($request);
     }
 
     private function getEmbeddedPage(string $path) : EmbeddedPage

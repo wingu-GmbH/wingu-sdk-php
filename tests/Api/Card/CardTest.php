@@ -53,6 +53,29 @@ class CardTest extends ApiTest
         self::assertEquals($expectedResponse, $actualResponse);
     }
 
+    public function testDeleteMyCardRemovesPrivateCard() : void
+    {
+        $configurationMock = new Configuration();
+        $requestFactory    = new GuzzleMessageFactory();
+        $hydrator          = new SymfonySerializerHydrator();
+
+        $httpClient = new MockClient();
+        $response   = new Response(
+            204,
+            ['Content-Type' => 'application/json']
+        );
+        $httpClient->addResponse($response);
+
+        $winguApi = new Card($configurationMock, $httpClient, $requestFactory, $hydrator);
+
+        $winguApi->deleteMyCard('1aaeece0-8152-4961-adbe-c6b37e23ddd7');
+
+        /** @var RequestInterface $actualRequest */
+        $actualRequest = $httpClient->getLastRequest();
+        self::assertSame('', $actualRequest->getBody()->getContents());
+        self::assertSame('DELETE', $actualRequest->getMethod());
+    }
+
     private function getExpectedPostedCard() : ResponseCard
     {
         return new ResponseCard(

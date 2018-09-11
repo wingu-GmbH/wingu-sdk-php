@@ -151,4 +151,20 @@ abstract class Api
 
         return $request;
     }
+
+    protected function createDeleteRequest(string $path) : RequestInterface
+    {
+        $uri = $this->configuration->backendUrl() . $path;
+
+        $request = $this->requestFactory->createRequest(
+            'DELETE',
+            $uri,
+            [
+                $this->configuration->apiKeyHeader() => $this->configuration->apiKey(),
+                'Content-Type' => 'application/json',
+            ]
+        );
+
+        return $request;
+    }
 }

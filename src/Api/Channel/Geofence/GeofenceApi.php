@@ -57,7 +57,10 @@ final class GeofenceApi extends Api
 
     public function deleteMyGeofence(string $id) : void
     {
-        // @todo implement.
+        Assertion::uuid($id);
+        $request = $this->createDeleteRequest('/api/channel/geofence/my/' . $id);
+
+        $this->handleRequest($request);
     }
 
     private function getEmbeddedPage(string $href) : EmbeddedPage
