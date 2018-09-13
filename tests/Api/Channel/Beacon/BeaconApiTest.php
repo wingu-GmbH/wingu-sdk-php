@@ -16,7 +16,11 @@ use Wingu\Engine\SDK\Api\Channel\Beacon\BeaconApi;
 use Wingu\Engine\SDK\Api\Configuration;
 use Wingu\Engine\SDK\Hydrator\SymfonySerializerHydrator;
 use Wingu\Engine\SDK\Model\Request\BooleanValue;
+use Wingu\Engine\SDK\Model\Request\Channel\Beacon\BeaconAddress as RequestBeaconAddress;
+use Wingu\Engine\SDK\Model\Request\Channel\Beacon\BeaconLocation as RequestBeaconLocation;
+use Wingu\Engine\SDK\Model\Request\Channel\Beacon\Coordinates as RequestCoordinates;
 use Wingu\Engine\SDK\Model\Request\Channel\Beacon\PrivateBeacon as RequestBeacon;
+use Wingu\Engine\SDK\Model\Request\Channel\Beacon\PublicBeaconLocation as RequestPublicBeacon;
 use Wingu\Engine\SDK\Model\Request\StringValue;
 use Wingu\Engine\SDK\Model\Response\Card\Card;
 use Wingu\Engine\SDK\Model\Response\Card\Position;
@@ -661,6 +665,38 @@ final class BeaconApiTest extends ChannelApiTestCase
         self::assertNull($actualBeaconWithEmptyContentTitle->title());
     }
 
+    public function testPostBeaconLocationUpdatesPublicBeaconLocation() : void
+    {
+        $configurationMock = new Configuration();
+        $requestFactory    = new GuzzleMessageFactory();
+        $hydrator          = new SymfonySerializerHydrator();
+
+        $httpClient = new MockClient();
+        $response   = new Response(
+            204,
+            ['Content-Type' => 'application/json']
+        );
+        $httpClient->addResponse($response);
+
+        $winguApi = new BeaconApi($configurationMock, $httpClient, $requestFactory, $hydrator);
+
+        $winguApi->updateBeaconLocation(
+            '14683274-a9f0-46e8-8c04-ebc40e0d52cb',
+            new RequestPublicBeacon(
+                new RequestCoordinates(10.285146, 53.519232),
+                new \DateTimeImmutable('2018-09-12 10:22:20', new \DateTimeZone('America/Argentina/Cordoba'))
+            )
+        );
+
+        /** @var RequestInterface $actualRequest */
+        $actualRequest = $httpClient->getLastRequest();
+        self::assertSame(
+            '{"coordinates":{"longitude":10.285146,"latitude":53.519232},"locationAcquiredDateTime":"2018-09-12T10:22:20-03:00"}',
+            $actualRequest->getBody()->getContents()
+        );
+        self::assertSame('POST', $actualRequest->getMethod());
+    }
+
     public function testPatchMyBeaconUpdatesPrivateBeacon() : void
     {
         $configurationMock = new Configuration();
@@ -679,6 +715,7 @@ final class BeaconApiTest extends ChannelApiTestCase
         $winguApi->updateMyBeacon(
             '009b12e0-9426-45fd-9476-561540139ec1',
             new RequestBeacon(
+                new RequestBeaconLocation(null, null),
                 new StringValue(null),
                 new StringValue('New beacon name'),
                 null,
@@ -688,7 +725,46 @@ final class BeaconApiTest extends ChannelApiTestCase
 
         /** @var RequestInterface $actualRequest */
         $actualRequest = $httpClient->getLastRequest();
-        self::assertSame('{"content":null,"name":"New beacon name","published":"0"}', $actualRequest->getBody()->getContents());
+        self::assertSame(
+            '{"content":null,"name":"New beacon name","published":"0","location":{"coordinates":null,"address":null}}',
+            $actualRequest->getBody()->getContents()
+        );
+        self::assertSame('PATCH', $actualRequest->getMethod());
+    }
+
+    public function testPatchMyBeaconWithLocationUpdatesPrivateBeaconLocation() : void
+    {
+        $configurationMock = new Configuration();
+        $requestFactory    = new GuzzleMessageFactory();
+        $hydrator          = new SymfonySerializerHydrator();
+
+        $httpClient = new MockClient();
+        $response   = new Response(
+            204,
+            ['Content-Type' => 'application/json']
+        );
+        $httpClient->addResponse($response);
+
+        $winguApi = new BeaconApi($configurationMock, $httpClient, $requestFactory, $hydrator);
+
+        $winguApi->updateMyBeacon(
+            '009b12e0-9426-45fd-9476-561540139ec1',
+            new RequestBeacon(
+                new RequestBeaconLocation(
+                    new RequestCoordinates(10.285146, 53.519232),
+                    new RequestBeaconAddress('imaginary address')
+                ),
+                null,
+                new StringValue('New beacon with a location')
+            )
+        );
+
+        /** @var RequestInterface $actualRequest */
+        $actualRequest = $httpClient->getLastRequest();
+        self::assertSame(
+            '{"name":"New beacon with a location","location":{"coordinates":{"longitude":10.285146,"latitude":53.519232},"address":{"formattedAddress":"imaginary address"}}}',
+            $actualRequest->getBody()->getContents()
+        );
         self::assertSame('PATCH', $actualRequest->getMethod());
     }
 
