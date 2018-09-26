@@ -8,6 +8,8 @@ use Wingu\Engine\SDK\Assertion;
 
 final class Locale
 {
+    private const CODES = ['de', 'en', 'es', 'pl'];
+
     /** @var string */
     private $name;
 
@@ -18,6 +20,7 @@ final class Locale
     {
         Assertion::notEmpty($name);
         Assertion::notEmpty($code);
+        Assertion::inArray($code, self::CODES);
 
         $this->name = $name;
         $this->code = $code;

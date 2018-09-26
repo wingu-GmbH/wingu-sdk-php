@@ -20,23 +20,31 @@ use Wingu\Engine\SDK\Model\Response\Component\Action;
 use Wingu\Engine\SDK\Model\Response\Component\AudioPlaylist;
 use Wingu\Engine\SDK\Model\Response\Component\AudioPlaylistMedia as Media;
 use Wingu\Engine\SDK\Model\Response\Component\BrandBar;
+use Wingu\Engine\SDK\Model\Response\Component\BrandBarBackground;
+use Wingu\Engine\SDK\Model\Response\Component\BrandBarImage;
+use Wingu\Engine\SDK\Model\Response\Component\BrandBarText;
 use Wingu\Engine\SDK\Model\Response\Component\CMS;
 use Wingu\Engine\SDK\Model\Response\Component\Contact;
 use Wingu\Engine\SDK\Model\Response\Component\ContactAddress;
 use Wingu\Engine\SDK\Model\Response\Component\ContactExternalLinks;
 use Wingu\Engine\SDK\Model\Response\Component\Coupon;
+use Wingu\Engine\SDK\Model\Response\Component\Element\Input;
+use Wingu\Engine\SDK\Model\Response\Component\Element\Select;
+use Wingu\Engine\SDK\Model\Response\Component\Element\SelectOption;
 use Wingu\Engine\SDK\Model\Response\Component\Files;
 use Wingu\Engine\SDK\Model\Response\Component\FilesFile as File;
-use Wingu\Engine\SDK\Model\Response\Component\Image as InnerImage;
+use Wingu\Engine\SDK\Model\Response\Component\Image;
 use Wingu\Engine\SDK\Model\Response\Component\ImageGallery;
 use Wingu\Engine\SDK\Model\Response\Component\ImageGalleryImage as OuterImage;
-use Wingu\Engine\SDK\Model\Response\Component\ImageMetadata as Metadata;
+use Wingu\Engine\SDK\Model\Response\Component\ImageMetadata;
 use Wingu\Engine\SDK\Model\Response\Component\Location;
 use Wingu\Engine\SDK\Model\Response\Component\PrivateForm;
 use Wingu\Engine\SDK\Model\Response\Component\PrivateWebhook;
 use Wingu\Engine\SDK\Model\Response\Component\Proxy;
 use Wingu\Engine\SDK\Model\Response\Component\Rating;
 use Wingu\Engine\SDK\Model\Response\Component\Separator;
+use Wingu\Engine\SDK\Model\Response\Component\SubmitDestination\Email;
+use Wingu\Engine\SDK\Model\Response\Component\SubmitDestination\Endpoint;
 use Wingu\Engine\SDK\Model\Response\Component\SurveyMonkey;
 use Wingu\Engine\SDK\Model\Response\Component\Video;
 use Wingu\Engine\SDK\Model\Response\Content\Deck;
@@ -44,6 +52,7 @@ use Wingu\Engine\SDK\Model\Response\Content\Locale;
 use Wingu\Engine\SDK\Model\Response\Content\Pack;
 use Wingu\Engine\SDK\Model\Response\Content\Pack as ResponsePack;
 use Wingu\Engine\SDK\Model\Response\Content\PrivateContent;
+use Wingu\Engine\SDK\Model\Response\Coordinates;
 use Wingu\Engine\SDK\Tests\Api\ApiTest;
 
 final class ContentTest extends ApiTest
@@ -273,7 +282,13 @@ final class ContentTest extends ApiTest
                                 new Position(0),
                                 new BrandBar(
                                     '9e8f2944-b313-486d-b69a-1f396de39aea',
-                                    new \DateTime('2018-05-18T08:22:41+0000')
+                                    new \DateTime('2018-05-18T08:22:41+0000'),
+                                    new BrandBarBackground('44f843'),
+                                    new BrandBarText('wingu brand 1', 'left', '04b1f0'),
+                                    new BrandBarImage(
+                                        new Image(new ImageMetadata('jpg', 30, 30), 'sample', 'cloudinary'),
+                                        'left'
+                                    )
                                 )
                             ),
                             new Card(
@@ -317,7 +332,7 @@ final class ContentTest extends ApiTest
                                         new OuterImage(
                                             '4b512c62-2471-474b-8436-e9fce8542c46',
                                             0,
-                                            new InnerImage(new Metadata('jpg', 864, 576), 'sample', 'cloudinary'),
+                                            new Image(new ImageMetadata('jpg', 864, 576), 'sample', 'cloudinary'),
                                             'caption'
                                         ),
                                     ]
@@ -389,6 +404,42 @@ final class ContentTest extends ApiTest
                                     'e0910ef7-533f-4472-95b7-1506891bbb33',
                                     new \DateTime('2018-05-18T08:22:41+0000'),
                                     'Form component survey',
+                                    [
+                                        new Input('full_name', 'Your name', true, 'text'),
+                                        new Input('birthday', 'Birthday', false, 'date'),
+                                        new Select(
+                                            'gender',
+                                            'Gender',
+                                            false,
+                                            false,
+                                            [
+                                                new SelectOption('Male', 'm'),
+                                                new SelectOption('Female', 'f'),
+                                            ]
+                                        ),
+                                        new Select(
+                                            'dessert',
+                                            'Dessert',
+                                            true,
+                                            true,
+                                            [
+                                                new SelectOption('Jello', 'jello'),
+                                                new SelectOption('Apple pie', 'apple_pie'),
+                                                new SelectOption('Schnitzel', 'schnitzel'),
+                                            ]
+                                        ),
+                                        new Input('text', 'Element text', false, 'text'),
+                                        new Input('textarea', 'Element textarea', false, 'textarea'),
+                                        new Input('email', 'Element email', false, 'email'),
+                                        new Input('url', 'Element url', false, 'url'),
+                                        new Input('date', 'Element date', false, 'date'),
+                                        new Input('datetime', 'Element datetime', false, 'datetime'),
+                                        new Input('time', 'Element time', false, 'time'),
+                                    ],
+                                    [
+                                        new Email('test+form-component@wingu.de'),
+                                        new Endpoint('https://httpbin.org/status/200', []),
+                                    ],
                                     'Thank you for your feedback!'
                                 )
                             ),
@@ -397,7 +448,9 @@ final class ContentTest extends ApiTest
                                 new Position(9),
                                 new Location(
                                     'f2d9c2e9-be24-48c5-8177-958b6e31edad',
-                                    new \DateTime('2018-05-18T08:22:41+0000')
+                                    new \DateTime('2018-05-18T08:22:41+0000'),
+                                    new Coordinates(10.233362, 53.614503),
+                                    602
                                 )
                             ),
                             new Card(
@@ -453,7 +506,8 @@ final class ContentTest extends ApiTest
                                 new Separator(
                                     'e5bebec7-7d71-4e4d-9e7b-ac83bc87ae3e',
                                     new \DateTime('2018-05-18T08:22:41+0000'),
-                                    'wave'
+                                    'wave',
+                                    '04b1f0'
                                 )
                             ),
                             new Card(
@@ -493,9 +547,11 @@ final class ContentTest extends ApiTest
                                     ]
                                 )
                             ),
-                        ]
+                        ],
+                        'Legal note1'
                     ),
-                    new Locale('angielski', 'en')
+                    new Locale('angielski', 'en'),
+                    new \DateTimeImmutable('2018-05-18T08:22:41+0000')
                 ),
             ]
         );
@@ -517,9 +573,11 @@ final class ContentTest extends ApiTest
                 '1e4bfb95-87d6-4070-b9cd-a85681595f62',
                 'My new deck',
                 'Description of my new deck',
-                []
+                [],
+                null
             ),
-            new Locale('angielski', 'en')
+            new Locale('angielski', 'en'),
+            new \DateTimeImmutable('2018-06-21T08:18:00+0000')
         );
     }
 }

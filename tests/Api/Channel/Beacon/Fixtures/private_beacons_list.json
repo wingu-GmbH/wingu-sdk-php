@@ -31,7 +31,7 @@
           "uuid": "3f104004-b288-4501-80c2-4ac30a02355b",
           "major": 3,
           "minor": 3,
-          "eddystoneUrl": "https://wij.cc/jEdFNYY",
+          "eddystoneUrl": null,
           "location": {
             "coordinates": null,
             "address": {
@@ -131,7 +131,7 @@
           "uuid": "2e422b9f-4955-4f1d-95d1-e57626ad1b26",
           "major": 1,
           "minor": 100,
-          "eddystoneUrl": null,
+          "eddystoneUrl": "https://wingu-sdk-test.de/jEdFNYY",
           "location": {
             "coordinates": {
               "longitude": 9.922292,

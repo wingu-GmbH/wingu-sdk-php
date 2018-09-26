@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Wingu\Engine\SDK\Model\Request\Component\Webhook;
 
+use Wingu\Engine\SDK\Assertion;
 use Wingu\Engine\SDK\Model\Request\Request;
 
 final class Update implements Request
@@ -19,6 +20,7 @@ final class Update implements Request
 
     public function __construct(string $buttonCaption, string $feedbackSuccessMessage, string $url)
     {
+        Assertion::nullOrUrl($url);
         $this->buttonCaption          = $buttonCaption;
         $this->feedbackSuccessMessage = $feedbackSuccessMessage;
         $this->url                    = $url;

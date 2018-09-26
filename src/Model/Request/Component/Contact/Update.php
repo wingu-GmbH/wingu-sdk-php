@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Wingu\Engine\SDK\Model\Request\Component\Contact;
 
+use Wingu\Engine\SDK\Assertion;
 use Wingu\Engine\SDK\Model\Request\Component\Contact\Address\Update as Address;
 use Wingu\Engine\SDK\Model\Request\Component\Contact\ExternalLinks\Update as ExternalLinks;
 use Wingu\Engine\SDK\Model\Request\Request;
@@ -60,6 +61,7 @@ final class Update implements Request
         ExternalLinks $externalLinks,
         ?string $extraInfo
     ) {
+        Assertion::nullOrEmail($email);
         $this->companyName   = $companyName;
         $this->personalTitle = $personalTitle;
         $this->firstName     = $firstName;

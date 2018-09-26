@@ -17,6 +17,12 @@ class Coupon implements Component
     /** @var string|null */
     private $disclaimer;
 
+    /** @var CouponBarcode|null */
+    private $barcode;
+
+    /** @var Image|null */
+    private $backgroundImage;
+
     public function __construct(
         string $id,
         \DateTime $updatedAt,
@@ -31,18 +37,28 @@ class Coupon implements Component
         $this->disclaimer  = $disclaimer;
     }
 
-    public function getHeader() : ?string
+    public function header() : ?string
     {
         return $this->header;
     }
 
-    public function getDescription() : string
+    public function description() : string
     {
         return $this->description;
     }
 
-    public function getDisclaimer() : ?string
+    public function disclaimer() : ?string
     {
         return $this->disclaimer;
+    }
+
+    public function barcode() : ?CouponBarcode
+    {
+        return $this->barcode;
+    }
+
+    public function backgroundImage() : ?Image
+    {
+        return $this->backgroundImage;
     }
 }

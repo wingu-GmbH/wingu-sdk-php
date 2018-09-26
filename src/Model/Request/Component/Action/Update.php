@@ -26,6 +26,7 @@ final class Update implements Request
         ?string $actionPayload
     ) {
         Assertion::nullOrInArray($actionType, self::TYPES);
+        Assertion::nullOrUrl($actionPayload);
         $this->buttonCaption = $buttonCaption;
         $this->actionType    = $actionType;
         $this->actionPayload = $actionPayload;

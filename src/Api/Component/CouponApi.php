@@ -14,7 +14,7 @@ final class CouponApi extends Api
 {
     public function create(Create $coupon) : Coupon
     {
-        $request = $this->createPostRequest('/api/component/coupon', $coupon);
+        $request = $this->createMultipartPostRequest('/api/component/coupon', $coupon);
 
         $response = $this->handleRequest($request);
 
@@ -24,7 +24,12 @@ final class CouponApi extends Api
     public function update(string $id, Update $coupon) : void
     {
         Assertion::uuid($id);
-        $request = $this->createPatchRequest('/api/component/coupon/' . $id, $coupon);
+
+        if ($coupon->files() === []) {
+            $request = $this->createPatchRequest('/api/component/coupon/' . $id, $coupon);
+        } else {
+            $request = $this->createMultipartPatchRequest('/api/component/coupon/' . $id, $coupon);
+        }
 
         $this->handleRequest($request);
     }

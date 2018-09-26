@@ -32,7 +32,9 @@ final class PrivateChannelsFilter implements RequestParameters
     /** @var bool|null */
     private $hasContentAttached;
 
-    /** @param string[] $channels */
+    /**
+     * @param string[] $channels
+     */
     public function __construct(
         ?array $channels = null,
         ?string $name = null,

@@ -14,10 +14,13 @@ final class PrivateContent implements Content
     /** @var Pack[] */
     private $packs;
 
-    /** @param Pack[] $packs */
+    /**
+     * @param Pack[] $packs
+     */
     public function __construct(string $id, array $packs)
     {
         Assertion::uuid($id);
+        Assertion::allIsInstanceOf($packs, Pack::class);
 
         $this->id    = $id;
         $this->packs = $packs;

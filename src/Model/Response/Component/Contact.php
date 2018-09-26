@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Wingu\Engine\SDK\Model\Response\Component;
 
+use Assert\Assertion;
 use Wingu\Engine\SDK\Model\Response\Component\ContactAddress as Address;
 use Wingu\Engine\SDK\Model\Response\Component\ContactExternalLinks as ExternalLinks;
 
@@ -63,6 +64,8 @@ final class Contact implements Component
         ?Address $address,
         ?ExternalLinks $externalLinks
     ) {
+        Assertion::nullOrEmail($email);
+
         $this->id            = $id;
         $this->updatedAt     = $updatedAt;
         $this->companyName   = $companyName;

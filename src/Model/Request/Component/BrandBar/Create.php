@@ -6,21 +6,25 @@ namespace Wingu\Engine\SDK\Model\Request\Component\BrandBar;
 
 use Wingu\Engine\SDK\Model\Request\Component\BrandBar\Image\Create as Image;
 use Wingu\Engine\SDK\Model\Request\Component\BrandBar\Text\Create as Text;
-use Wingu\Engine\SDK\Model\Request\Request;
+use Wingu\Engine\SDK\Model\Request\MultipartRequest;
 
-final class Create implements Request
+final class Create implements MultipartRequest
 {
-    /** @var Text */
+    /** @var Text|null */
     private $text;
 
-    /** @var Image */
+    /** @var Image|null */
     private $image;
 
     /** @var string|null */
     private $backgroundColor;
 
-    public function __construct(Text $text, Image $image, ?string $backgroundColor)
+    public function __construct(?Text $text, ?Image $image, ?string $backgroundColor)
     {
+        if ($text === null && $image === null) {
+            throw new \InvalidArgumentException('BrandBar requires either Text or Image, or both');
+        }
+
         $this->text            = $text;
         $this->image           = $image;
         $this->backgroundColor = $backgroundColor;
@@ -34,5 +38,17 @@ final class Create implements Request
             'image' => $this->image,
             'backgroundColor' => $this->backgroundColor,
         ];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function files() : array
+    {
+        if ($this->image !== null) {
+            return $this->image->files();
+        }
+
+        return [];
     }
 }

@@ -8,13 +8,13 @@ use Wingu\Engine\SDK\Model\Request\Request;
 
 final class Coordinates implements Request
 {
-    /** @var string */
+    /** @var float */
     private $longitude;
 
-    /** @var string */
+    /** @var float */
     private $latitude;
 
-    public function __construct(string $longitude, string $latitude)
+    public function __construct(float $longitude, float $latitude)
     {
         $this->longitude = $longitude;
         $this->latitude  = $latitude;

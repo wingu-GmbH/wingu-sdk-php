@@ -1,0 +1,14 @@
+{
+  "position": 0,
+  "id": "95d6a519-7824-4fba-86d1-60f70ef6ace1",
+  "image": {
+    "metadata": {
+      "format": "jpg",
+      "width": 400,
+      "height": 400
+    },
+    "cloudinaryId": "dev-components-imagegallery-68e5d517d241611a2278c9f1355b7691",
+    "type": "cloudinary"
+  },
+  "caption": "wingu icon"
+}

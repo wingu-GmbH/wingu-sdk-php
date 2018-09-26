@@ -4,11 +4,9 @@ declare(strict_types=1);
 
 namespace Wingu\Engine\SDK\Model\Response\Component;
 
-use Wingu\Engine\SDK\Model\Response\Component\ImageMetadata as Metadata;
-
 class Image
 {
-    /** @var Metadata */
+    /** @var ImageMetadata */
     private $metadata;
 
     /** @var string */
@@ -17,7 +15,7 @@ class Image
     /** @var string */
     private $type;
 
-    public function __construct(Metadata $metadata, string $cloudinaryId, string $type)
+    public function __construct(ImageMetadata $metadata, string $cloudinaryId, string $type)
     {
         $this->metadata     = $metadata;
         $this->cloudinaryId = $cloudinaryId;

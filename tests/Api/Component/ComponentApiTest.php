@@ -7,34 +7,48 @@ namespace Wingu\Engine\SDK\Tests\Api\Component;
 use GuzzleHttp\Psr7\Response;
 use Http\Message\MessageFactory\GuzzleMessageFactory;
 use Http\Mock\Client as MockClient;
+use Psr\Http\Message\RequestInterface;
 use Wingu\Engine\SDK\Api\Component\ComponentApi;
 use Wingu\Engine\SDK\Api\Configuration;
 use Wingu\Engine\SDK\Hydrator\SymfonySerializerHydrator;
+use Wingu\Engine\SDK\Model\Request\Component\Copy;
 use Wingu\Engine\SDK\Model\Response\Component\Action;
 use Wingu\Engine\SDK\Model\Response\Component\AudioPlaylist;
 use Wingu\Engine\SDK\Model\Response\Component\AudioPlaylistAlbum;
+use Wingu\Engine\SDK\Model\Response\Component\AudioPlaylistCover;
 use Wingu\Engine\SDK\Model\Response\Component\AudioPlaylistMedia as Media;
 use Wingu\Engine\SDK\Model\Response\Component\BrandBar;
+use Wingu\Engine\SDK\Model\Response\Component\BrandBarBackground;
+use Wingu\Engine\SDK\Model\Response\Component\BrandBarImage;
+use Wingu\Engine\SDK\Model\Response\Component\BrandBarText;
 use Wingu\Engine\SDK\Model\Response\Component\CMS;
 use Wingu\Engine\SDK\Model\Response\Component\Component;
 use Wingu\Engine\SDK\Model\Response\Component\Contact;
 use Wingu\Engine\SDK\Model\Response\Component\ContactAddress;
 use Wingu\Engine\SDK\Model\Response\Component\ContactExternalLinks;
 use Wingu\Engine\SDK\Model\Response\Component\Coupon;
+use Wingu\Engine\SDK\Model\Response\Component\Element\Input;
+use Wingu\Engine\SDK\Model\Response\Component\Element\Select;
+use Wingu\Engine\SDK\Model\Response\Component\Element\SelectOption;
 use Wingu\Engine\SDK\Model\Response\Component\Files;
 use Wingu\Engine\SDK\Model\Response\Component\FilesFile as File;
 use Wingu\Engine\SDK\Model\Response\Component\Image as InnerImage;
+use Wingu\Engine\SDK\Model\Response\Component\Image;
 use Wingu\Engine\SDK\Model\Response\Component\ImageGallery;
 use Wingu\Engine\SDK\Model\Response\Component\ImageGalleryImage as OuterImage;
 use Wingu\Engine\SDK\Model\Response\Component\ImageMetadata as Metadata;
+use Wingu\Engine\SDK\Model\Response\Component\ImageMetadata;
 use Wingu\Engine\SDK\Model\Response\Component\Location;
 use Wingu\Engine\SDK\Model\Response\Component\PrivateForm;
 use Wingu\Engine\SDK\Model\Response\Component\PrivateWebhook;
 use Wingu\Engine\SDK\Model\Response\Component\Proxy;
 use Wingu\Engine\SDK\Model\Response\Component\Rating;
 use Wingu\Engine\SDK\Model\Response\Component\Separator;
+use Wingu\Engine\SDK\Model\Response\Component\SubmitDestination\Email;
+use Wingu\Engine\SDK\Model\Response\Component\SubmitDestination\Endpoint;
 use Wingu\Engine\SDK\Model\Response\Component\SurveyMonkey;
 use Wingu\Engine\SDK\Model\Response\Component\Video;
+use Wingu\Engine\SDK\Model\Response\Coordinates;
 use Wingu\Engine\SDK\Tests\Api\ApiTest;
 
 class ComponentApiTest extends ApiTest
@@ -103,6 +117,42 @@ class ComponentApiTest extends ApiTest
         self::assertEquals($expected, \iterator_to_array($actual));
     }
 
+    public function testCopyComponentCopiesComponentToMultipleDecks() : void
+    {
+        $configurationMock = new Configuration();
+        $requestFactory    = new GuzzleMessageFactory();
+        $hydrator          = new SymfonySerializerHydrator();
+
+        $httpClient = new MockClient();
+        $response   = new Response(
+            204,
+            ['Content-Type' => 'application/json']
+        );
+        $httpClient->addResponse($response);
+
+        $winguApi = new ComponentApi($configurationMock, $httpClient, $requestFactory, $hydrator);
+
+        $winguApi->copyMyComponent(
+            '666dd3d7-5568-4b01-ae80-22899ca5fec5',
+            new Copy(
+                [
+                    'ea45b0c8-0000-4000-a000-000000000017',
+                    'ea45b0c8-0000-4000-a000-000000000018',
+                    'ea45b0c8-0000-4000-a000-000000000019',
+                ]
+            )
+        );
+
+        /** @var RequestInterface $actualRequest */
+        $actualRequest = $httpClient->getLastRequest();
+        $contents      = $actualRequest->getBody()->getContents();
+        self::assertSame(
+            '{"decks":["ea45b0c8-0000-4000-a000-000000000017","ea45b0c8-0000-4000-a000-000000000018","ea45b0c8-0000-4000-a000-000000000019"]}',
+            $contents
+        );
+        self::assertSame('PUT', $actualRequest->getMethod());
+    }
+
     private function getExpectedComponent() : Component
     {
         return new Files(
@@ -127,7 +177,7 @@ class ComponentApiTest extends ApiTest
             new \DateTime('2018-05-18T08:22:41+0000'),
             'Speicher me',
             'open-url',
-            'http://www.sp210.com/'
+            'https://www.sp210.com/'
         );
     }
 
@@ -144,7 +194,18 @@ class ComponentApiTest extends ApiTest
                     'http://example.com/audioplaylist/audio_media.mp3',
                     'David Guetta - Wing it',
                     39,
-                    new AudioPlaylistAlbum('Demo 1 Album 1')
+                    new AudioPlaylistAlbum(
+                        'Demo 1 Album 1',
+                        new AudioPlaylistCover(
+                            new ImageMetadata(
+                                'jpg',
+                                60,
+                                60
+                            ),
+                            'sample',
+                            'cloudinary'
+                        )
+                    )
                 ),
                 new Media(
                     '2d5f4a19-3200-4dd3-baa3-275359ca12f1',
@@ -152,7 +213,18 @@ class ComponentApiTest extends ApiTest
                     'http://example.com/audioplaylist/audio_media.mp3',
                     'Boom Face - Boom shakalaka',
                     39,
-                    new AudioPlaylistAlbum('Demo 2 Album 2')
+                    new AudioPlaylistAlbum(
+                        'Demo 2 Album 2',
+                        new AudioPlaylistCover(
+                            new ImageMetadata(
+                                'jpg',
+                                72,
+                                72
+                            ),
+                            'sample',
+                            'cloudinary'
+                        )
+                    )
                 ),
             ]
         );
@@ -162,7 +234,17 @@ class ComponentApiTest extends ApiTest
     {
         return new BrandBar(
             '1c648a2b-b83c-40bd-b32c-8fa55baea4fd',
-            new \DateTime('2018-05-18T08:22:41+0000')
+            new \DateTime('2018-05-18T08:22:41+0000'),
+            new BrandBarBackground('2b7d83'),
+            new BrandBarText('wingu brand 5', 'left', '04b1f0'),
+            new BrandBarImage(
+                new Image(
+                    new ImageMetadata('jpg', 30, 30),
+                    'sample',
+                    'cloudinary'
+                ),
+                'left'
+            )
         );
     }
 
@@ -247,6 +329,42 @@ class ComponentApiTest extends ApiTest
             '05f21ca6-4b65-42a8-aea1-b21346a029a6',
             new \DateTime('2018-05-18T08:22:41+0000'),
             'Form component survey',
+            [
+                new Input('full_name', 'Your name', true, 'text'),
+                new Input('birthday', 'Birthday', false, 'date'),
+                new Select(
+                    'gender',
+                    'Gender',
+                    false,
+                    false,
+                    [
+                        new SelectOption('Male', 'm'),
+                        new SelectOption('Female', 'f'),
+                    ]
+                ),
+                new Select(
+                    'dessert',
+                    'Dessert',
+                    true,
+                    true,
+                    [
+                        new SelectOption('Jello', 'jello'),
+                        new SelectOption('Apple pie', 'apple_pie'),
+                        new SelectOption('Schnitzel', 'schnitzel'),
+                    ]
+                ),
+                new Input('text', 'Element text', false, 'text'),
+                new Input('textarea', 'Element textarea', false, 'textarea'),
+                new Input('email', 'Element email', false, 'email'),
+                new Input('url', 'Element url', false, 'url'),
+                new Input('date', 'Element date', false, 'date'),
+                new Input('datetime', 'Element datetime', false, 'datetime'),
+                new Input('time', 'Element time', false, 'time'),
+            ],
+            [
+                new Email('test+form-component@wingu.de'),
+                new Endpoint('https://httpbin.org/status/200', []),
+            ],
             'Thank you for your feedback!'
         );
     }
@@ -271,7 +389,9 @@ class ComponentApiTest extends ApiTest
     {
         return new Location(
             'f2d9c2e9-be24-48c5-8177-958b6e31edad',
-            new \DateTime('2018-05-18T08:22:41+0000')
+            new \DateTime('2018-05-18T08:22:41+0000'),
+            new Coordinates(10.233362, 53.614503),
+            602
         );
     }
 
@@ -298,7 +418,8 @@ class ComponentApiTest extends ApiTest
         return new Separator(
             '172350a7-898f-4522-8220-553328f97374',
             new \DateTime('2018-05-18T08:22:41+0000'),
-            'wave'
+            'wave',
+            '04b1f0'
         );
     }
 

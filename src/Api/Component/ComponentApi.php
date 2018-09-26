@@ -9,6 +9,7 @@ use Wingu\Engine\SDK\Api\Paginator\EmbeddedPage;
 use Wingu\Engine\SDK\Api\Paginator\PageInfo;
 use Wingu\Engine\SDK\Api\Paginator\PaginatedResponseIterator;
 use Wingu\Engine\SDK\Assertion;
+use Wingu\Engine\SDK\Model\Request\Component\Copy;
 use Wingu\Engine\SDK\Model\Response\Component\Component;
 
 final class ComponentApi extends Api
@@ -23,6 +24,13 @@ final class ComponentApi extends Api
         $response = $this->handleRequest($request);
 
         return $this->hydrator->hydrateResponse($response, Component::class);
+    }
+
+    public function copyMyComponent(string $id, Copy $component) : void
+    {
+        $request = $this->createPutRequest('/api/component/' . $id . '/copy', $component);
+
+        $this->handleRequest($request);
     }
 
     public function myComponents() : PaginatedResponseIterator
@@ -155,7 +163,7 @@ final class ComponentApi extends Api
     }
 
     /** @return mixed */
-    public function getService(string $class)
+    private function getService(string $class)
     {
         if (! isset($this->services[$class])) {
             $this->services[$class] = new $class(

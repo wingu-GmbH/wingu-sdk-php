@@ -10,6 +10,15 @@
     "color": "04b1f0"
   },
   "image": {
+    "image": {
+      "metadata": {
+        "format": "png",
+        "width": 30,
+        "height": 30
+      },
+      "cloudinaryId": "sample",
+      "type": "cloudinary"
+    },
     "alignment": "left"
   },
   "discriminator": "brand_bar"

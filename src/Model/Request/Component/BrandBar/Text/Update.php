@@ -11,16 +11,16 @@ final class Update implements Request
 {
     private const ALIGNMENT = ['left', 'center', 'right'];
 
-    /** @var string */
+    /** @var string|null */
     private $text;
 
-    /** @var string */
+    /** @var string|null */
     private $alignment;
 
-    /** @var string */
+    /** @var string|null */
     private $color;
 
-    public function __construct(string $text, string $alignment, string $color)
+    public function __construct(?string $text, ?string $alignment, ?string $color)
     {
         Assertion::inArray($alignment, self::ALIGNMENT);
         $this->text      = $text;

@@ -311,10 +311,17 @@
                         }
                       ],
                       "feedbackSuccessMessage": "Thank you for your feedback!",
-                      "submitDestination": {
-                        "url": "https://httpbin.org/status/200",
-                        "email": "test+form-component@wingu.de"
-                      },
+                      "submitDestinations": [
+                        {
+                          "discriminator": "email",
+                          "email": "test+form-component@wingu.de"
+                        },
+                        {
+                          "discriminator": "endpoint",
+                          "url": "https://httpbin.org/status/200",
+                          "headers": []
+                        }
+                      ],
                       "resubmit": {
                         "allowed": true,
                         "allowedAfterSeconds": null

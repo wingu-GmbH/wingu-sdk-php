@@ -17,7 +17,6 @@ use Wingu\Engine\SDK\Model\Request\PaginationParameters;
 use Wingu\Engine\SDK\Model\Request\RequestParameters;
 use Wingu\Engine\SDK\Model\Response\Channel\Beacon\BeaconAddress;
 use Wingu\Engine\SDK\Model\Response\Channel\Beacon\BeaconLocation;
-use Wingu\Engine\SDK\Model\Response\Channel\Beacon\Coordinates;
 use Wingu\Engine\SDK\Model\Response\Channel\Beacon\PrivateBeacon;
 use Wingu\Engine\SDK\Model\Response\Channel\Geofence\Boundaries;
 use Wingu\Engine\SDK\Model\Response\Channel\Geofence\PrivateGeofence;
@@ -25,6 +24,7 @@ use Wingu\Engine\SDK\Model\Response\Channel\Nfc\PrivateNfc;
 use Wingu\Engine\SDK\Model\Response\Channel\QrCode\PrivateQrCode;
 use Wingu\Engine\SDK\Model\Response\Content\PrivateContent;
 use Wingu\Engine\SDK\Model\Response\Content\PrivateListContent;
+use Wingu\Engine\SDK\Model\Response\Coordinates;
 use Wingu\Engine\SDK\Tests\Api\ChannelApiTestCase;
 
 final class ChannelApiTest extends ChannelApiTestCase
@@ -408,7 +408,8 @@ final class ChannelApiTest extends ChannelApiTestCase
             '2e422b9f-4955-4f1d-95d1-e57626ad1b26',
             1,
             100,
-            new BeaconLocation(new Coordinates(9.922292, 53.56581), new BeaconAddress('Germany'))
+            null,
+            new BeaconLocation(new BeaconAddress('Germany'), new Coordinates(9.922292, 53.56581))
         );
     }
 
@@ -482,7 +483,8 @@ final class ChannelApiTest extends ChannelApiTestCase
             '2e422b9f-4955-4f1d-95d1-e57626ad1b26',
             1,
             100,
-            new BeaconLocation(new Coordinates(9.983716, 53.673348), new BeaconAddress('Germany'))
+            null,
+            new BeaconLocation(new BeaconAddress('Germany'), new Coordinates(9.983716, 53.673348))
         );
     }
 
@@ -556,7 +558,8 @@ final class ChannelApiTest extends ChannelApiTestCase
             '3f104004-b288-4501-80c2-4ac30a02355b',
             1,
             1,
-            new BeaconLocation(null, new BeaconAddress(null))
+            'https://wingu-sdk-test.de/Ft1RMdM',
+            new BeaconLocation(new BeaconAddress(null), null)
         );
     }
 
@@ -574,7 +577,8 @@ final class ChannelApiTest extends ChannelApiTestCase
             '3f104004-b288-4501-80c2-4ac30a02355b',
             3,
             3,
-            new BeaconLocation(null, new BeaconAddress(null))
+            'https://wingu-sdk-test.de/XJbyEbc',
+            new BeaconLocation(new BeaconAddress(null), null)
         );
     }
 
@@ -592,7 +596,8 @@ final class ChannelApiTest extends ChannelApiTestCase
             '3f104004-b288-4501-80c2-4ac30a02355b',
             2,
             2,
-            new BeaconLocation(null, new BeaconAddress(null))
+            'https://wingu-sdk-test.de/wJHE4kb',
+            new BeaconLocation(new BeaconAddress(null), null)
         );
     }
 

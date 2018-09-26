@@ -8,11 +8,45 @@ final class BrandBar implements Component
 {
     use ComponentTrait;
 
+    /** @var BrandBarBackground|null */
+    private $background;
+
+    /** @var BrandBarText|null */
+    private $text;
+
+    /** @var BrandBarImage|null */
+    private $image;
+
     public function __construct(
         string $id,
-        \DateTime $updatedAt
+        \DateTime $updatedAt,
+        BrandBarBackground $background,
+        ?BrandBarText $text,
+        ?BrandBarImage $image
     ) {
-        $this->id        = $id;
-        $this->updatedAt = $updatedAt;
+        if ($text === null && $image === null) {
+            throw new \InvalidArgumentException('BrandBar requires either Text or Image, or both');
+        }
+
+        $this->id         = $id;
+        $this->updatedAt  = $updatedAt;
+        $this->background = $background;
+        $this->text       = $text;
+        $this->image      = $image;
+    }
+
+    public function background() : ?BrandBarBackground
+    {
+        return $this->background;
+    }
+
+    public function text() : ?BrandBarText
+    {
+        return $this->text;
+    }
+
+    public function image() : ?BrandBarImage
+    {
+        return $this->image;
     }
 }

@@ -7,6 +7,7 @@ namespace Wingu\Engine\SDK\Api\Component;
 use Wingu\Engine\SDK\Api\Api;
 use Wingu\Engine\SDK\Assertion;
 use Wingu\Engine\SDK\Model\Request\Component\Rating\Create;
+use Wingu\Engine\SDK\Model\Request\Component\Rating\Rate;
 use Wingu\Engine\SDK\Model\Request\Component\Rating\Update;
 use Wingu\Engine\SDK\Model\Response\Component\Rating;
 
@@ -25,6 +26,14 @@ final class RatingApi extends Api
     {
         Assertion::uuid($id);
         $request = $this->createPatchRequest('/api/component/rating/' . $id, $rating);
+
+        $this->handleRequest($request);
+    }
+
+    public function createRate(string $id, Rate $rate) : void
+    {
+        Assertion::uuid($id);
+        $request = $this->createPostRequest('/api/component/rating/' . $id . '/rate', $rate);
 
         $this->handleRequest($request);
     }

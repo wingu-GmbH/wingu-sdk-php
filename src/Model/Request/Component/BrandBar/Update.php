@@ -6,9 +6,9 @@ namespace Wingu\Engine\SDK\Model\Request\Component\BrandBar;
 
 use Wingu\Engine\SDK\Model\Request\Component\BrandBar\Image\Update as Image;
 use Wingu\Engine\SDK\Model\Request\Component\BrandBar\Text\Update as Text;
-use Wingu\Engine\SDK\Model\Request\Request;
+use Wingu\Engine\SDK\Model\Request\MultipartRequest;
 
-final class Update implements Request
+final class Update implements MultipartRequest
 {
     /** @var Text|null */
     private $text;
@@ -34,5 +34,17 @@ final class Update implements Request
             'image' => $this->image,
             'backgroundColor' => $this->backgroundColor,
         ];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function files() : array
+    {
+        if ($this->image !== null) {
+            return $this->image->files();
+        }
+
+        return [];
     }
 }

@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Wingu\Engine\SDK\Model\Response\Component;
 
+use Wingu\Engine\SDK\Assertion;
+
 class PrivateWebhook implements Component
 {
     use ComponentTrait;
@@ -24,6 +26,8 @@ class PrivateWebhook implements Component
         string $url,
         string $feedbackSuccessMessage
     ) {
+        Assertion::url($url);
+
         $this->id                     = $id;
         $this->updatedAt              = $updatedAt;
         $this->buttonCaption          = $buttonCaption;

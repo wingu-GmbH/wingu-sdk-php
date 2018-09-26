@@ -17,13 +17,17 @@ final class Pack
     /** @var Locale */
     private $locale;
 
-    public function __construct(string $id, Deck $deck, Locale $locale)
+    /** @var \DateTimeImmutable */
+    private $createdAt;
+
+    public function __construct(string $id, Deck $deck, Locale $locale, \DateTimeImmutable $createdAt)
     {
         Assertion::uuid($id);
 
-        $this->id     = $id;
-        $this->deck   = $deck;
-        $this->locale = $locale;
+        $this->id        = $id;
+        $this->deck      = $deck;
+        $this->locale    = $locale;
+        $this->createdAt = $createdAt;
     }
 
     public function id() : string
@@ -39,5 +43,10 @@ final class Pack
     public function locale() : Locale
     {
         return $this->locale;
+    }
+
+    public function createdAt() : \DateTimeImmutable
+    {
+        return $this->createdAt;
     }
 }

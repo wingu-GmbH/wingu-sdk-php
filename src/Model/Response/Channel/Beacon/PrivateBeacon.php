@@ -17,6 +17,9 @@ final class PrivateBeacon implements PrivateChannel
     use PrivateChannelTrait;
     use BeaconTrait;
 
+    /** @var string|null */
+    private $eddystoneUrl;
+
     public function __construct(
         string $id,
         string $name,
@@ -29,6 +32,7 @@ final class PrivateBeacon implements PrivateChannel
         string $uuid,
         int $major,
         int $minor,
+        ?string $eddystoneUrl,
         BeaconLocation $location
     ) {
         Assertion::uuid($id);
@@ -53,6 +57,12 @@ final class PrivateBeacon implements PrivateChannel
         $this->inFunctioningHours = $inFunctioningHours;
         $this->functioningHours   = $functioningHours;
 
-        $this->location = $location;
+        $this->eddystoneUrl = $eddystoneUrl;
+        $this->location     = $location;
+    }
+
+    public function eddystoneUrl() : ?string
+    {
+        return $this->eddystoneUrl;
     }
 }

@@ -26,24 +26,31 @@ use Wingu\Engine\SDK\Model\Response\Card\Card;
 use Wingu\Engine\SDK\Model\Response\Card\Position;
 use Wingu\Engine\SDK\Model\Response\Channel\Beacon\BeaconAddress;
 use Wingu\Engine\SDK\Model\Response\Channel\Beacon\BeaconLocation;
-use Wingu\Engine\SDK\Model\Response\Channel\Beacon\Coordinates;
 use Wingu\Engine\SDK\Model\Response\Channel\Beacon\PrivateBeacon;
 use Wingu\Engine\SDK\Model\Response\Channel\Beacon\PublicBeacon;
 use Wingu\Engine\SDK\Model\Response\Component\Action;
 use Wingu\Engine\SDK\Model\Response\Component\AudioPlaylist;
 use Wingu\Engine\SDK\Model\Response\Component\AudioPlaylistMedia as Media;
 use Wingu\Engine\SDK\Model\Response\Component\BrandBar;
+use Wingu\Engine\SDK\Model\Response\Component\BrandBarBackground;
+use Wingu\Engine\SDK\Model\Response\Component\BrandBarImage;
+use Wingu\Engine\SDK\Model\Response\Component\BrandBarText;
 use Wingu\Engine\SDK\Model\Response\Component\CMS;
 use Wingu\Engine\SDK\Model\Response\Component\Contact;
 use Wingu\Engine\SDK\Model\Response\Component\ContactAddress;
 use Wingu\Engine\SDK\Model\Response\Component\ContactExternalLinks;
 use Wingu\Engine\SDK\Model\Response\Component\Coupon;
+use Wingu\Engine\SDK\Model\Response\Component\Element\Input;
+use Wingu\Engine\SDK\Model\Response\Component\Element\Select;
+use Wingu\Engine\SDK\Model\Response\Component\Element\SelectOption;
 use Wingu\Engine\SDK\Model\Response\Component\Files;
 use Wingu\Engine\SDK\Model\Response\Component\FilesFile as File;
 use Wingu\Engine\SDK\Model\Response\Component\Image as InnerImage;
+use Wingu\Engine\SDK\Model\Response\Component\Image;
 use Wingu\Engine\SDK\Model\Response\Component\ImageGallery;
 use Wingu\Engine\SDK\Model\Response\Component\ImageGalleryImage as OuterImage;
 use Wingu\Engine\SDK\Model\Response\Component\ImageMetadata as Metadata;
+use Wingu\Engine\SDK\Model\Response\Component\ImageMetadata;
 use Wingu\Engine\SDK\Model\Response\Component\Location;
 use Wingu\Engine\SDK\Model\Response\Component\PrivateForm;
 use Wingu\Engine\SDK\Model\Response\Component\PrivateWebhook;
@@ -52,6 +59,8 @@ use Wingu\Engine\SDK\Model\Response\Component\PublicForm;
 use Wingu\Engine\SDK\Model\Response\Component\PublicWebhook;
 use Wingu\Engine\SDK\Model\Response\Component\Rating;
 use Wingu\Engine\SDK\Model\Response\Component\Separator;
+use Wingu\Engine\SDK\Model\Response\Component\SubmitDestination\Email;
+use Wingu\Engine\SDK\Model\Response\Component\SubmitDestination\Endpoint;
 use Wingu\Engine\SDK\Model\Response\Component\SurveyMonkey;
 use Wingu\Engine\SDK\Model\Response\Component\Video;
 use Wingu\Engine\SDK\Model\Response\Content\Deck;
@@ -60,6 +69,7 @@ use Wingu\Engine\SDK\Model\Response\Content\Pack;
 use Wingu\Engine\SDK\Model\Response\Content\PrivateContent;
 use Wingu\Engine\SDK\Model\Response\Content\PrivateListContent;
 use Wingu\Engine\SDK\Model\Response\Content\PublicContent;
+use Wingu\Engine\SDK\Model\Response\Coordinates;
 use Wingu\Engine\SDK\Tests\Api\ChannelApiTestCase;
 
 final class BeaconApiTest extends ChannelApiTestCase
@@ -102,7 +112,17 @@ final class BeaconApiTest extends ChannelApiTestCase
                                 new Position(0),
                                 new BrandBar(
                                     'b97919cb-5822-4eed-b192-a8f4b3a7c9ef',
-                                    new \DateTime('2018-05-18T08:22:46+0000')
+                                    new \DateTime('2018-05-18T08:22:46+0000'),
+                                    new BrandBarBackground('a5f433'),
+                                    new BrandBarText('wingu brand 12', 'left', '04b1f0'),
+                                    new BrandBarImage(
+                                        new Image(
+                                            new ImageMetadata('jpg', 30, 30),
+                                            'sample',
+                                            'cloudinary'
+                                        ),
+                                        'left'
+                                    )
                                 )
                             ),
                             new Card(
@@ -215,7 +235,9 @@ final class BeaconApiTest extends ChannelApiTestCase
                                 new Position(8),
                                 new Location(
                                     '8d708833-50ae-4c08-b15e-047573bb35dd',
-                                    new \DateTime('2018-05-18T08:22:46+0000')
+                                    new \DateTime('2018-05-18T08:22:46+0000'),
+                                    new Coordinates(9.946769, 53.702252),
+                                    495
                                 )
                             ),
                             new Card(
@@ -262,7 +284,8 @@ final class BeaconApiTest extends ChannelApiTestCase
                                 new Separator(
                                     '160c6c2b-fdf3-44ba-8ddb-4dcdcf126081',
                                     new \DateTime('2018-05-18T08:22:46+0000'),
-                                    'wave'
+                                    'wave',
+                                    '04b1f0'
                                 )
                             ),
                             new Card(
@@ -300,12 +323,14 @@ final class BeaconApiTest extends ChannelApiTestCase
                                     ]
                                 )
                             ),
-                        ]
+                        ],
+                        'Legal note12'
                     ),
-                    new Locale('angielski', 'en')
+                    new Locale('angielski', 'en'),
+                    new \DateTimeImmutable('2018-05-18T08:22:46+0000')
                 )
             ),
-            new BeaconLocation(new Coordinates(10.285146, 53.519232), new BeaconAddress('Germany'))
+            new BeaconLocation(new BeaconAddress('Germany'), new Coordinates(10.285146, 53.519232))
         );
 
         self::assertEquals($expected, $actual);
@@ -363,7 +388,17 @@ final class BeaconApiTest extends ChannelApiTestCase
                                     new Position(0),
                                     new BrandBar(
                                         '44a77e5d-0800-4628-967d-307418f95886',
-                                        new \DateTime('2018-05-18T08:22:41+0000')
+                                        new \DateTime('2018-05-18T08:22:41+0000'),
+                                        new BrandBarBackground('80e559'),
+                                        new BrandBarText('wingu brand 2', 'left', '04b1f0'),
+                                        new BrandBarImage(
+                                            new Image(
+                                                new ImageMetadata('jpg', 30, 30),
+                                                'sample',
+                                                'cloudinary'
+                                            ),
+                                            'left'
+                                        )
                                     )
                                 ),
                                 new Card(
@@ -479,6 +514,42 @@ final class BeaconApiTest extends ChannelApiTestCase
                                         '30b7651a-81a7-4fd0-9bf4-c044af097faa',
                                         new \DateTime('2018-05-18T08:22:41+0000'),
                                         'Form component survey',
+                                        [
+                                            new Input('full_name', 'Your name', true, 'text'),
+                                            new Input('birthday', 'Birthday', false, 'date'),
+                                            new Select(
+                                                'gender',
+                                                'Gender',
+                                                false,
+                                                false,
+                                                [
+                                                    new SelectOption('Male', 'm'),
+                                                    new SelectOption('Female', 'f'),
+                                                ]
+                                            ),
+                                            new Select(
+                                                'dessert',
+                                                'Dessert',
+                                                true,
+                                                true,
+                                                [
+                                                    new SelectOption('Jello', 'jello'),
+                                                    new SelectOption('Apple pie', 'apple_pie'),
+                                                    new SelectOption('Schnitzel', 'schnitzel'),
+                                                ]
+                                            ),
+                                            new Input('text', 'Element text', false, 'text'),
+                                            new Input('textarea', 'Element textarea', false, 'textarea'),
+                                            new Input('email', 'Element email', false, 'email'),
+                                            new Input('url', 'Element url', false, 'url'),
+                                            new Input('date', 'Element date', false, 'date'),
+                                            new Input('datetime', 'Element datetime', false, 'datetime'),
+                                            new Input('time', 'Element time', false, 'time'),
+                                        ],
+                                        [
+                                            new Email('test+form-component@wingu.de'),
+                                            new Endpoint('https://httpbin.org/status/200', []),
+                                        ],
                                         'Thank you for your feedback!'
                                     )
                                 ),
@@ -487,7 +558,9 @@ final class BeaconApiTest extends ChannelApiTestCase
                                     new Position(9),
                                     new Location(
                                         'b06b9a7d-fafa-4bef-9bad-cb303d778e53',
-                                        new \DateTime('2018-05-18T08:22:41+0000')
+                                        new \DateTime('2018-05-18T08:22:41+0000'),
+                                        new Coordinates(9.784855, 53.709772),
+                                        602
                                     )
                                 ),
                                 new Card(
@@ -543,7 +616,8 @@ final class BeaconApiTest extends ChannelApiTestCase
                                     new Separator(
                                         '172350a7-898f-4522-8220-553328f97374',
                                         new \DateTime('2018-05-18T08:22:41+0000'),
-                                        'wave'
+                                        'wave',
+                                        '04b1f0'
                                     )
                                 ),
                                 new Card(
@@ -583,9 +657,11 @@ final class BeaconApiTest extends ChannelApiTestCase
                                         ]
                                     )
                                 ),
-                            ]
+                            ],
+                            'Legal note2'
                         ),
-                        new Locale('angielski', 'en')
+                        new Locale('angielski', 'en'),
+                        new \DateTimeImmutable('2018-05-18T08:22:41+0000')
                     ),
                 ]
             ),
@@ -596,7 +672,8 @@ final class BeaconApiTest extends ChannelApiTestCase
             '3f104004-b288-4501-80c2-4ac30a02355b',
             3,
             3,
-            new BeaconLocation(null, new BeaconAddress(null))
+            'https://wingu-sdk-test.de/jEdFNYY',
+            new BeaconLocation(new BeaconAddress(null), null)
         );
 
         self::assertEquals($expected, $actual);
@@ -805,7 +882,8 @@ final class BeaconApiTest extends ChannelApiTestCase
             '3f104004-b288-4501-80c2-4ac30a02355b',
             3,
             3,
-            new BeaconLocation(null, new BeaconAddress(null))
+            null,
+            new BeaconLocation(new BeaconAddress(null), null)
         );
     }
 
@@ -823,7 +901,8 @@ final class BeaconApiTest extends ChannelApiTestCase
             '2e422b9f-4955-4f1d-95d1-e57626ad1b26',
             1,
             100,
-            new BeaconLocation(new Coordinates(9.922292, 53.56581), new BeaconAddress('Germany'))
+            'https://wingu-sdk-test.de/jEdFNYY',
+            new BeaconLocation(new BeaconAddress('Germany'), new Coordinates(9.922292, 53.56581))
         );
     }
 
@@ -841,7 +920,8 @@ final class BeaconApiTest extends ChannelApiTestCase
             '2e422b9f-4955-4f1d-95d1-e57626ad1b26',
             1,
             101,
-            new BeaconLocation(new Coordinates(9.858576, 53.618839), new BeaconAddress('Germany'))
+            null,
+            new BeaconLocation(new BeaconAddress('Germany'), new Coordinates(9.858576, 53.618839))
         );
     }
 }

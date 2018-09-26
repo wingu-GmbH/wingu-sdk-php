@@ -4,10 +4,11 @@ declare(strict_types=1);
 
 namespace Wingu\Engine\SDK\Model\Request\Component\Coupon;
 
+use Psr\Http\Message\StreamInterface;
 use Wingu\Engine\SDK\Model\Request\Component\Coupon\Barcode\Update as Barcode;
-use Wingu\Engine\SDK\Model\Request\Request;
+use Wingu\Engine\SDK\Model\Request\MultipartRequest;
 
-final class Update implements Request
+final class Update implements MultipartRequest
 {
     /** @var string|null */
     private $header;
@@ -18,22 +19,29 @@ final class Update implements Request
     /** @var Barcode */
     private $barcode;
 
-    /** todo: File
-     * private $backgroundImage;
-     */
+    /** @var StreamInterface|null */
+    private $backgroundImage;
 
     /** @var string|null */
     private $disclaimer;
 
-    public function __construct(?string $header, ?string $description, Barcode $barcode, ?string $disclaimer)
-    {
-        $this->header      = $header;
-        $this->description = $description;
-        $this->barcode     = $barcode;
-        $this->disclaimer  = $disclaimer;
+    public function __construct(
+        ?string $header,
+        ?string $description,
+        Barcode $barcode,
+        ?StreamInterface $backgroundImage,
+        ?string $disclaimer
+    ) {
+        $this->header          = $header;
+        $this->description     = $description;
+        $this->barcode         = $barcode;
+        $this->backgroundImage = $backgroundImage;
+        $this->disclaimer      = $disclaimer;
     }
 
-    /** @inheritdoc */
+    /**
+     * {@inheritdoc}
+     */
     public function jsonSerialize() : array
     {
         return [
@@ -41,6 +49,20 @@ final class Update implements Request
             'description' => $this->description,
             'barcode' => $this->barcode,
             'disclaimer' => $this->disclaimer,
+        ];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function files() : array
+    {
+        if ($this->backgroundImage === null) {
+            return [];
+        }
+
+        return [
+            'backgroundImage' => $this->backgroundImage,
         ];
     }
 }

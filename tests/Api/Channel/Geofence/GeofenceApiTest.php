@@ -23,23 +23,33 @@ use Wingu\Engine\SDK\Model\Response\Component\Action;
 use Wingu\Engine\SDK\Model\Response\Component\AudioPlaylist;
 use Wingu\Engine\SDK\Model\Response\Component\AudioPlaylistMedia as Media;
 use Wingu\Engine\SDK\Model\Response\Component\BrandBar;
+use Wingu\Engine\SDK\Model\Response\Component\BrandBarBackground;
+use Wingu\Engine\SDK\Model\Response\Component\BrandBarImage;
+use Wingu\Engine\SDK\Model\Response\Component\BrandBarText;
 use Wingu\Engine\SDK\Model\Response\Component\CMS;
 use Wingu\Engine\SDK\Model\Response\Component\Contact;
 use Wingu\Engine\SDK\Model\Response\Component\ContactAddress;
 use Wingu\Engine\SDK\Model\Response\Component\ContactExternalLinks;
 use Wingu\Engine\SDK\Model\Response\Component\Coupon;
+use Wingu\Engine\SDK\Model\Response\Component\Element\Input;
+use Wingu\Engine\SDK\Model\Response\Component\Element\Select;
+use Wingu\Engine\SDK\Model\Response\Component\Element\SelectOption;
 use Wingu\Engine\SDK\Model\Response\Component\Files;
 use Wingu\Engine\SDK\Model\Response\Component\FilesFile as File;
 use Wingu\Engine\SDK\Model\Response\Component\Image as InnerImage;
+use Wingu\Engine\SDK\Model\Response\Component\Image;
 use Wingu\Engine\SDK\Model\Response\Component\ImageGallery;
 use Wingu\Engine\SDK\Model\Response\Component\ImageGalleryImage as OuterImage;
 use Wingu\Engine\SDK\Model\Response\Component\ImageMetadata as Metadata;
+use Wingu\Engine\SDK\Model\Response\Component\ImageMetadata;
 use Wingu\Engine\SDK\Model\Response\Component\Location;
 use Wingu\Engine\SDK\Model\Response\Component\PrivateForm;
 use Wingu\Engine\SDK\Model\Response\Component\PrivateWebhook;
 use Wingu\Engine\SDK\Model\Response\Component\Proxy;
 use Wingu\Engine\SDK\Model\Response\Component\Rating;
 use Wingu\Engine\SDK\Model\Response\Component\Separator;
+use Wingu\Engine\SDK\Model\Response\Component\SubmitDestination\Email;
+use Wingu\Engine\SDK\Model\Response\Component\SubmitDestination\Endpoint;
 use Wingu\Engine\SDK\Model\Response\Component\SurveyMonkey;
 use Wingu\Engine\SDK\Model\Response\Component\Video;
 use Wingu\Engine\SDK\Model\Response\Content\Deck;
@@ -47,6 +57,7 @@ use Wingu\Engine\SDK\Model\Response\Content\Locale;
 use Wingu\Engine\SDK\Model\Response\Content\Pack;
 use Wingu\Engine\SDK\Model\Response\Content\PrivateContent;
 use Wingu\Engine\SDK\Model\Response\Content\PrivateListContent;
+use Wingu\Engine\SDK\Model\Response\Coordinates;
 use Wingu\Engine\SDK\Tests\Api\ChannelApiTestCase;
 
 final class GeofenceApiTest extends ChannelApiTestCase
@@ -75,13 +86,11 @@ final class GeofenceApiTest extends ChannelApiTestCase
             new Boundaries(
                 'Polygon',
                 [
-                    [
-                        [9.912364, 53.436167],
-                        [9.912364, 53.436616157642],
-                        [9.9131179849328, 53.436616155268],
-                        [9.9131179849328, 53.436166997626],
-                        [9.912364, 53.436167],
-                    ],
+                    [9.912364, 53.436167],
+                    [9.912364, 53.436616157642],
+                    [9.9131179849328, 53.436616155268],
+                    [9.9131179849328, 53.436166997626],
+                    [9.912364, 53.436167],
                 ]
             )
         );
@@ -126,7 +135,17 @@ final class GeofenceApiTest extends ChannelApiTestCase
                                     new Position(0),
                                     new BrandBar(
                                         '3e46dc07-2685-45ba-85a7-0fb29581ab52',
-                                        new \DateTime('2018-05-18T08:22:41+0000')
+                                        new \DateTime('2018-05-18T08:22:41+0000'),
+                                        new BrandBarBackground('38a16a'),
+                                        new BrandBarText('wingu brand 7', 'left', '04b1f0'),
+                                        new BrandBarImage(
+                                            new Image(
+                                                new ImageMetadata('jpg', 30, 30),
+                                                'sample',
+                                                'cloudinary'
+                                            ),
+                                            'left'
+                                        )
                                     )
                                 ),
                                 new Card(
@@ -242,6 +261,42 @@ final class GeofenceApiTest extends ChannelApiTestCase
                                         'a787b433-7dfb-4e59-b26a-6786e6fd44ac',
                                         new \DateTime('2018-05-18T08:22:41+0000'),
                                         'Form component survey',
+                                        [
+                                            new Input('full_name', 'Your name', true, 'text'),
+                                            new Input('birthday', 'Birthday', false, 'date'),
+                                            new Select(
+                                                'gender',
+                                                'Gender',
+                                                false,
+                                                false,
+                                                [
+                                                    new SelectOption('Male', 'm'),
+                                                    new SelectOption('Female', 'f'),
+                                                ]
+                                            ),
+                                            new Select(
+                                                'dessert',
+                                                'Dessert',
+                                                true,
+                                                true,
+                                                [
+                                                    new SelectOption('Jello', 'jello'),
+                                                    new SelectOption('Apple pie', 'apple_pie'),
+                                                    new SelectOption('Schnitzel', 'schnitzel'),
+                                                ]
+                                            ),
+                                            new Input('text', 'Element text', false, 'text'),
+                                            new Input('textarea', 'Element textarea', false, 'textarea'),
+                                            new Input('email', 'Element email', false, 'email'),
+                                            new Input('url', 'Element url', false, 'url'),
+                                            new Input('date', 'Element date', false, 'date'),
+                                            new Input('datetime', 'Element datetime', false, 'datetime'),
+                                            new Input('time', 'Element time', false, 'time'),
+                                        ],
+                                        [
+                                            new Email('test+form-component@wingu.de'),
+                                            new Endpoint('https://httpbin.org/status/200', []),
+                                        ],
                                         'Thank you for your feedback!'
                                     )
                                 ),
@@ -250,7 +305,9 @@ final class GeofenceApiTest extends ChannelApiTestCase
                                     new Position(9),
                                     new Location(
                                         'ff4d0744-78bf-469f-bd5c-7a30ccce81d9',
-                                        new \DateTime('2018-05-18T08:22:41+0000')
+                                        new \DateTime('2018-05-18T08:22:41+0000'),
+                                        new Coordinates(9.8514, 53.481692),
+                                        912
                                     )
                                 ),
                                 new Card(
@@ -306,7 +363,8 @@ final class GeofenceApiTest extends ChannelApiTestCase
                                     new Separator(
                                         '596d6441-2cd4-41fa-8887-9da4d52b196c',
                                         new \DateTime('2018-05-18T08:22:41+0000'),
-                                        'wave'
+                                        'wave',
+                                        '04b1f0'
                                     )
                                 ),
                                 new Card(
@@ -346,9 +404,11 @@ final class GeofenceApiTest extends ChannelApiTestCase
                                         ]
                                     )
                                 ),
-                            ]
+                            ],
+                            'Legal note7'
                         ),
-                        new Locale('angielski', 'en')
+                        new Locale('angielski', 'en'),
+                        new \DateTimeImmutable('2018-05-18T08:22:41+0000')
                     ),
                 ]
             ),
@@ -427,7 +487,10 @@ final class GeofenceApiTest extends ChannelApiTestCase
 
         /** @var RequestInterface $actualRequest */
         $actualRequest = $httpClient->getLastRequest();
-        self::assertSame('{"content":null,"name":"New geofence name","published":"0"}', $actualRequest->getBody()->getContents());
+        self::assertSame(
+            '{"content":null,"name":"New geofence name","published":"0"}',
+            $actualRequest->getBody()->getContents()
+        );
         self::assertSame('PATCH', $actualRequest->getMethod());
     }
 

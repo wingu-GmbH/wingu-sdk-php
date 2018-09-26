@@ -2,6 +2,120 @@
   "id": "05f21ca6-4b65-42a8-aea1-b21346a029a6",
   "updatedAt": "2018-05-18T08:22:41+0000",
   "title": "Form component survey",
+  "elements": [
+    {
+      "name": "full_name",
+      "label": "Your name",
+      "required": true,
+      "type": "text",
+      "discriminator": "input"
+    },
+    {
+      "name": "birthday",
+      "label": "Birthday",
+      "required": false,
+      "type": "date",
+      "discriminator": "input"
+    },
+    {
+      "name": "gender",
+      "label": "Gender",
+      "required": false,
+      "multiple": false,
+      "options": [
+        {
+          "label": "Male",
+          "value": "m"
+        },
+        {
+          "label": "Female",
+          "value": "f"
+        }
+      ],
+      "discriminator": "select"
+    },
+    {
+      "name": "dessert",
+      "label": "Dessert",
+      "required": true,
+      "multiple": true,
+      "options": [
+        {
+          "label": "Jello",
+          "value": "jello"
+        },
+        {
+          "label": "Apple pie",
+          "value": "apple_pie"
+        },
+        {
+          "label": "Schnitzel",
+          "value": "schnitzel"
+        }
+      ],
+      "discriminator": "select"
+    },
+    {
+      "name": "text",
+      "label": "Element text",
+      "required": false,
+      "type": "text",
+      "discriminator": "input"
+    },
+    {
+      "name": "textarea",
+      "label": "Element textarea",
+      "required": false,
+      "type": "textarea",
+      "discriminator": "input"
+    },
+    {
+      "name": "email",
+      "label": "Element email",
+      "required": false,
+      "type": "email",
+      "discriminator": "input"
+    },
+    {
+      "name": "url",
+      "label": "Element url",
+      "required": false,
+      "type": "url",
+      "discriminator": "input"
+    },
+    {
+      "name": "date",
+      "label": "Element date",
+      "required": false,
+      "type": "date",
+      "discriminator": "input"
+    },
+    {
+      "name": "datetime",
+      "label": "Element datetime",
+      "required": false,
+      "type": "datetime",
+      "discriminator": "input"
+    },
+    {
+      "name": "time",
+      "label": "Element time",
+      "required": false,
+      "type": "time",
+      "discriminator": "input"
+    }
+  ],
+  "submitDestinations": [
+    {
+      "discriminator": "email",
+      "email": "test+form-component@wingu.de"
+    },
+    {
+      "discriminator": "endpoint",
+      "url": "https://httpbin.org/status/200",
+      "headers": []
+    }
+  ],
   "feedbackSuccessMessage": "Thank you for your feedback!",
   "resubmit": {
     "allowed": true,

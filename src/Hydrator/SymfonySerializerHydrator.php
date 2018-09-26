@@ -12,6 +12,8 @@ use Symfony\Component\Serializer\Normalizer\DateTimeNormalizer;
 use Symfony\Component\Serializer\Serializer;
 use Wingu\Engine\SDK\Serializer\Denormalizer\ComponentDenormalizer;
 use Wingu\Engine\SDK\Serializer\Denormalizer\CountryDenormalizer;
+use Wingu\Engine\SDK\Serializer\Denormalizer\FormElementDenormalizer;
+use Wingu\Engine\SDK\Serializer\Denormalizer\FormSubmitDestinationDenormalizer;
 use Wingu\Engine\SDK\Serializer\Denormalizer\FunctioningHoursDenormalizer;
 use Wingu\Engine\SDK\Serializer\Denormalizer\ObjectDenormalizer;
 use Wingu\Engine\SDK\Serializer\Denormalizer\PrivateChannelDenormalizer;
@@ -26,6 +28,8 @@ final class SymfonySerializerHydrator implements Hydrator
     {
         $this->serializer = new Serializer(
             [
+                new FormElementDenormalizer(),
+                new FormSubmitDestinationDenormalizer(),
                 new ComponentDenormalizer(),
                 new PrivateContentDenormalizer(),
                 new DateTimeNormalizer(),

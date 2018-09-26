@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Wingu\Engine\SDK\Model\Response\Component;
 
+use Assert\Assertion;
+
 final class Action implements Component
 {
     use ComponentTrait;
@@ -24,6 +26,8 @@ final class Action implements Component
         string $actionType,
         string $actionPayload
     ) {
+        Assertion::url($actionPayload);
+
         $this->id            = $id;
         $this->updatedAt     = $updatedAt;
         $this->buttonCaption = $buttonCaption;

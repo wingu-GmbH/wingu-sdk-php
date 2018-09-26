@@ -13,7 +13,9 @@ class ImageGallery implements Component
     /** @var Image[] */
     private $images;
 
-    /** @param Image[] $images */
+    /**
+     * @param Image[] $images
+     */
     public function __construct(string $id, \DateTime $updatedAt, array $images)
     {
         $this->id        = $id;
@@ -21,7 +23,9 @@ class ImageGallery implements Component
         $this->images    = $images;
     }
 
-    /** @return Image[] */
+    /**
+     * @return Image[]
+     */
     public function images() : array
     {
         return $this->images;

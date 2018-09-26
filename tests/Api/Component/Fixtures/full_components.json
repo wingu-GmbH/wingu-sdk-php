@@ -22,7 +22,7 @@
           "updatedAt": "2018-05-18T08:22:41+0000",
           "buttonCaption": "Speicher me",
           "actionType": "open-url",
-          "actionPayload": "http://www.sp210.com/",
+          "actionPayload": "https://www.sp210.com/",
           "discriminator": "action"
         }
       },
@@ -286,10 +286,17 @@
             }
           ],
           "feedbackSuccessMessage": "Thank you for your feedback!",
-          "submitDestination": {
-            "url": "https://httpbin.org/status/200",
-            "email": "test+form-component@wingu.de"
-          },
+          "submitDestinations": [
+            {
+              "discriminator": "email",
+              "email": "test+form-component@wingu.de"
+            },
+            {
+              "discriminator": "endpoint",
+              "url": "https://httpbin.org/status/200",
+              "headers": []
+            }
+          ],
           "resubmit": {
             "allowed": true,
             "allowedAfterSeconds": null

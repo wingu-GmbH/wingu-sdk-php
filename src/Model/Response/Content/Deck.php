@@ -21,16 +21,23 @@ final class Deck
     /** @var Card[] */
     private $cards;
 
-    /** @param Card[] $cards */
-    public function __construct(string $id, string $title, ?string $description, array $cards)
+    /** @var string|null */
+    private $legalNote;
+
+    /**
+     * @param Card[] $cards
+     */
+    public function __construct(string $id, string $title, ?string $description, array $cards, ?string $legalNote)
     {
         Assertion::uuid($id);
         Assertion::notEmpty($title);
+        Assertion::allIsInstanceOf($cards, Card::class);
 
         $this->id          = $id;
         $this->title       = $title;
         $this->description = $description;
         $this->cards       = $cards;
+        $this->legalNote   = $legalNote;
     }
 
     public function id() : string
@@ -54,5 +61,10 @@ final class Deck
     public function cards() : array
     {
         return $this->cards;
+    }
+
+    public function legalNote() : ?string
+    {
+        return $this->legalNote;
     }
 }

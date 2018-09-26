@@ -79,7 +79,8 @@ final class DeckTest extends ApiTest
             '1e4bfb95-87d6-4070-b9cd-a85681595f62',
             'My new deck',
             'Description of my new deck',
-            []
+            [],
+            null
         );
     }
 }

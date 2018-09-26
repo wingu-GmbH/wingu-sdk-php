@@ -16,7 +16,9 @@ final class AudioPlaylist implements Component
     /** @var Media[] */
     private $media;
 
-    /** @param Media[] $media */
+    /**
+     * @param Media[] $media
+     */
     public function __construct(string $id, \DateTime $updatedAt, ?string $name, array $media)
     {
         $this->id        = $id;
@@ -30,7 +32,9 @@ final class AudioPlaylist implements Component
         return $this->name;
     }
 
-    /** @return Media[] */
+    /**
+     * @return Media[]
+     */
     public function media() : array
     {
         return $this->media;

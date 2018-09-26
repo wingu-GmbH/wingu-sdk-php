@@ -84,7 +84,8 @@ class SeparatorApiTest extends ApiTest
         return new Separator(
             '28ebe9e5-53a4-41d2-8e3b-f8d8a442ae34',
             new \DateTime('2018-09-07T11:49:07+0000'),
-            'wave'
+            'wave',
+            '04b1f0'
         );
     }
 }

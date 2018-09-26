@@ -295,10 +295,17 @@
                   }
                 ],
                 "feedbackSuccessMessage": "Thank you for your feedback!",
-                "submitDestination": {
-                  "url": "https://httpbin.org/status/200",
-                  "email": "test+form-component@wingu.de"
-                },
+                "submitDestinations": [
+                  {
+                    "discriminator": "email",
+                    "email": "test+form-component@wingu.de"
+                  },
+                  {
+                    "discriminator": "endpoint",
+                    "url": "https://httpbin.org/status/200",
+                    "headers": []
+                  }
+                ],
                 "resubmit": {
                   "allowed": true,
                   "allowedAfterSeconds": null
@@ -527,7 +534,7 @@
   "uuid": "3f104004-b288-4501-80c2-4ac30a02355b",
   "major": 3,
   "minor": 3,
-  "eddystoneUrl": "https://wij.cc/jEdFNYY",
+  "eddystoneUrl": "https://wingu-sdk-test.de/jEdFNYY",
   "location": {
     "coordinates": null,
     "address": {

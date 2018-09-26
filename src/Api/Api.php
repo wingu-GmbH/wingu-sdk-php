@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Wingu\Engine\SDK\Api;
 
 use Http\Client\HttpClient;
+use Http\Discovery\StreamFactoryDiscovery;
+use Http\Message\MultipartStream\MultipartStreamBuilder;
 use Http\Message\RequestFactory;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
@@ -13,7 +15,9 @@ use Symfony\Component\Serializer\Normalizer\JsonSerializableNormalizer;
 use Symfony\Component\Serializer\Serializer;
 use Wingu\Engine\SDK\Api\Exception\Generic;
 use Wingu\Engine\SDK\Hydrator\Hydrator;
+use Wingu\Engine\SDK\Model\Request\MultipartRequest;
 use Wingu\Engine\SDK\Model\Request\Request;
+use Wingu\Engine\SDK\Request\RequestDataManipulator;
 
 abstract class Api
 {
@@ -112,7 +116,34 @@ abstract class Api
                 $this->configuration->apiKeyHeader() => $this->configuration->apiKey(),
                 'Content-Type' => 'application/json',
             ],
-            $this->serializer->serialize($requestObject, 'json')
+            (string) \json_encode($requestObject)
+        );
+
+        return $request;
+    }
+
+    protected function createMultipartPostRequest(string $path, MultipartRequest $requestObject) : RequestInterface
+    {
+        $uri = $this->configuration->backendUrl() . $path;
+
+        $builder = new MultipartStreamBuilder(StreamFactoryDiscovery::find());
+        foreach (RequestDataManipulator::flatten($requestObject) as $name => $stream) {
+            $builder->addResource($name, $stream);
+        }
+        foreach ($requestObject->files() as $name => $stream) {
+            $builder->addResource($name, $stream);
+        }
+        $multipartStream = $builder->build();
+        $boundary        = $builder->getBoundary();
+
+        $request = $this->requestFactory->createRequest(
+            'POST',
+            $uri,
+            [
+                $this->configuration->apiKeyHeader() => $this->configuration->apiKey(),
+                'Content-Type' => 'multipart/form-data; boundary="' . $boundary . '"',
+            ],
+            $multipartStream
         );
 
         return $request;
@@ -129,7 +160,34 @@ abstract class Api
                 $this->configuration->apiKeyHeader() => $this->configuration->apiKey(),
                 'Content-Type' => 'application/json',
             ],
-            $this->serializer->serialize($requestObject, 'json')
+            (string) \json_encode($requestObject)
+        );
+
+        return $request;
+    }
+
+    protected function createMultipartPatchRequest(string $path, MultipartRequest $requestObject) : RequestInterface
+    {
+        $uri = $this->configuration->backendUrl() . $path;
+
+        $builder = new MultipartStreamBuilder(StreamFactoryDiscovery::find());
+        foreach (RequestDataManipulator::flatten($requestObject) as $name => $stream) {
+            $builder->addResource($name, $stream);
+        }
+        foreach ($requestObject->files() as $name => $stream) {
+            $builder->addResource($name, $stream);
+        }
+        $multipartStream = $builder->build();
+        $boundary        = $builder->getBoundary();
+
+        $request = $this->requestFactory->createRequest(
+            'PATCH',
+            $uri,
+            [
+                $this->configuration->apiKeyHeader() => $this->configuration->apiKey(),
+                'Content-Type' => 'multipart/form-data; boundary="' . $boundary . '"',
+            ],
+            $multipartStream
         );
 
         return $request;
@@ -146,7 +204,7 @@ abstract class Api
                 $this->configuration->apiKeyHeader() => $this->configuration->apiKey(),
                 'Content-Type' => 'application/json',
             ],
-            $this->serializer->serialize($requestObject, 'json')
+            (string) \json_encode($requestObject)
         );
 
         return $request;

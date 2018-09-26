@@ -41,13 +41,25 @@ class CouponApiTest extends ApiTest
                 '-20 %',
                 'Get you cheap stuff here!',
                 new CreateBarcode('EAN_13', '4000161100348'),
+                \GuzzleHttp\Psr7\stream_for(\fopen('examples/wingu_image.png', 'rb')),
                 'Disclaimer'
             )
         );
 
         /** @var RequestInterface $actualRequest */
         $actualRequest = $httpClient->getLastRequest();
-        self::assertSame('{"header":"-20 %","description":"Get you cheap stuff here!","barcode":{"type":"EAN_13","description":"4000161100348"},"disclaimer":"Disclaimer"}', $actualRequest->getBody()->getContents());
+
+        self::assertStringStartsWith('multipart/form-data; boundary="', $actualRequest->getHeaderLine('Content-Type'));
+        $actualRequestBody = $actualRequest->getBody()->getContents();
+        self::assertContains('Content-Disposition: form-data; name="header"', $actualRequestBody);
+        self::assertContains('Content-Disposition: form-data; name="description"', $actualRequestBody);
+        self::assertContains('Content-Disposition: form-data; name="barcode[type]"', $actualRequestBody);
+        self::assertContains('Content-Disposition: form-data; name="barcode[description]"', $actualRequestBody);
+        self::assertContains('Content-Disposition: form-data; name="disclaimer"', $actualRequestBody);
+        self::assertContains(
+            'Content-Disposition: form-data; name="backgroundImage"; filename="wingu_image.png"',
+            $actualRequestBody
+        );
         self::assertSame('POST', $actualRequest->getMethod());
 
         $expectedResponse = $this->getExpectedCoupon();
@@ -75,6 +87,7 @@ class CouponApiTest extends ApiTest
                 'updated Coupon',
                 'Get your edited stuff here!',
                 new UpdateBarcode('EAN_13', 'edited'),
+                null,
                 null
             )
         );
