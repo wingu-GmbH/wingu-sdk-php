@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Wingu\Engine\SDK\Api;
 
 use Http\Client\HttpClient;
+use Http\Discovery\HttpClientDiscovery;
+use Http\Discovery\MessageFactoryDiscovery;
 use Http\Message\RequestFactory;
 use Wingu\Engine\SDK\Api\Channel\Beacon\BeaconApi;
 use Wingu\Engine\SDK\Api\Channel\ChannelApi;
@@ -16,6 +18,7 @@ use Wingu\Engine\SDK\Api\Content\Content;
 use Wingu\Engine\SDK\Api\Content\Template;
 use Wingu\Engine\SDK\Api\Wingu\Wingu;
 use Wingu\Engine\SDK\Hydrator\Hydrator;
+use Wingu\Engine\SDK\Hydrator\SymfonySerializerHydrator;
 
 final class WinguApi
 {
@@ -36,14 +39,14 @@ final class WinguApi
 
     public function __construct(
         Configuration $configuration,
-        HttpClient $httpClient,
-        RequestFactory $requestFactory,
-        Hydrator $hydrator
+        ?HttpClient $httpClient = null,
+        ?RequestFactory $requestFactory = null,
+        ?Hydrator $hydrator = null
     ) {
         $this->configuration  = $configuration;
-        $this->httpClient     = $httpClient;
-        $this->requestFactory = $requestFactory;
-        $this->hydrator       = $hydrator;
+        $this->httpClient     = $httpClient ?: HttpClientDiscovery::find();
+        $this->requestFactory = $requestFactory ?: MessageFactoryDiscovery::find();
+        $this->hydrator       = $hydrator ?: new SymfonySerializerHydrator();
     }
 
     public function channel() : ChannelApi

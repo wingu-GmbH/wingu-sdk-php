@@ -11,7 +11,7 @@ use Psr\Http\Message\RequestInterface;
 use Wingu\Engine\SDK\Api\Component\ImageGalleryApi;
 use Wingu\Engine\SDK\Api\Configuration;
 use Wingu\Engine\SDK\Hydrator\SymfonySerializerHydrator;
-use Wingu\Engine\SDK\Model\Request\Component\ImageGallery\Create;
+use Wingu\Engine\SDK\Model\Request\Component\ImageGallery\Create as CreateImageGallery;
 use Wingu\Engine\SDK\Model\Request\Component\ImageGallery\Image\Create as CreateImage;
 use Wingu\Engine\SDK\Model\Request\Component\ImageGallery\Image\Update as UpdateImage;
 use Wingu\Engine\SDK\Model\Request\Component\ImageGallery\ImagesPosition;
@@ -21,7 +21,7 @@ use Wingu\Engine\SDK\Model\Response\Component\ImageGalleryImage;
 use Wingu\Engine\SDK\Model\Response\Component\ImageMetadata;
 use Wingu\Engine\SDK\Tests\Api\ApiTest;
 
-class ImageGalleryApiTest extends ApiTest
+final class ImageGalleryApiTest extends ApiTest
 {
     public function testCreateReturnsNewImageGalleryComponent() : void
     {
@@ -39,9 +39,7 @@ class ImageGalleryApiTest extends ApiTest
 
         $winguApi = new ImageGalleryApi($configurationMock, $httpClient, $requestFactory, $hydrator);
 
-        $actualResponse = $winguApi->create(
-            new Create()
-        );
+        $actualResponse = $winguApi->create(new CreateImageGallery());
 
         /** @var RequestInterface $actualRequest */
         $actualRequest = $httpClient->getLastRequest();
