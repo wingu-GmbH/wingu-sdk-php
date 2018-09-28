@@ -18,6 +18,7 @@ use Wingu\Engine\SDK\Serializer\Denormalizer\FunctioningHoursDenormalizer;
 use Wingu\Engine\SDK\Serializer\Denormalizer\ObjectDenormalizer;
 use Wingu\Engine\SDK\Serializer\Denormalizer\PrivateChannelDenormalizer;
 use Wingu\Engine\SDK\Serializer\Denormalizer\PrivateContentDenormalizer;
+use Wingu\Engine\SDK\Serializer\Denormalizer\RatingsDenormalizer;
 
 final class SymfonySerializerHydrator implements Hydrator
 {
@@ -30,6 +31,7 @@ final class SymfonySerializerHydrator implements Hydrator
             [
                 new FormElementDenormalizer(),
                 new FormSubmitDestinationDenormalizer(),
+                new RatingsDenormalizer(),
                 new ComponentDenormalizer(),
                 new PrivateContentDenormalizer(),
                 new DateTimeNormalizer(),
@@ -43,7 +45,9 @@ final class SymfonySerializerHydrator implements Hydrator
         );
     }
 
-    /** @param mixed[] $data
+    /**
+     * @param mixed[] $data
+     *
      * @return mixed
      */
     public function hydrateData(array $data, string $class)
@@ -63,7 +67,7 @@ final class SymfonySerializerHydrator implements Hydrator
             throw new Hydration(
                 \sprintf(
                     'The %s cannot hydrate response with Content-Type: %s',
-                    __CLASS__,
+                    self::class,
                     $contentType
                 )
             );

@@ -10,6 +10,7 @@ interface Hydrator
 {
     /**
      * @param mixed[] $data
+     *
      * @return mixed
      */
     public function hydrateData(array $data, string $class);

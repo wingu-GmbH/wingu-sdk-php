@@ -5,12 +5,10 @@ declare(strict_types=1);
 namespace Wingu\Engine\SDK\Tests\Api\Card;
 
 use GuzzleHttp\Psr7\Response;
-use Http\Message\MessageFactory\GuzzleMessageFactory;
 use Http\Mock\Client as MockClient;
 use Psr\Http\Message\RequestInterface;
 use Wingu\Engine\SDK\Api\Card;
 use Wingu\Engine\SDK\Api\Configuration;
-use Wingu\Engine\SDK\Hydrator\SymfonySerializerHydrator;
 use Wingu\Engine\SDK\Model\Request\Card as RequestCard;
 use Wingu\Engine\SDK\Model\Response\Card\Card as ResponseCard;
 use Wingu\Engine\SDK\Model\Response\Card\Position;
@@ -23,8 +21,6 @@ class CardTest extends ApiTest
     public function testAddCardToDeckAttachesCardToDeck() : void
     {
         $configurationMock = new Configuration();
-        $requestFactory    = new GuzzleMessageFactory();
-        $hydrator          = new SymfonySerializerHydrator();
 
         $httpClient = new MockClient();
         $response   = new Response(
@@ -34,7 +30,7 @@ class CardTest extends ApiTest
         );
         $httpClient->addResponse($response);
 
-        $winguApi = new Card($configurationMock, $httpClient, $requestFactory, $hydrator);
+        $winguApi = new Card($configurationMock, $httpClient);
 
         $actualResponse = $winguApi->addCardToDeck(
             new RequestCard(
@@ -56,8 +52,6 @@ class CardTest extends ApiTest
     public function testDeleteMyCardRemovesPrivateCard() : void
     {
         $configurationMock = new Configuration();
-        $requestFactory    = new GuzzleMessageFactory();
-        $hydrator          = new SymfonySerializerHydrator();
 
         $httpClient = new MockClient();
         $response   = new Response(
@@ -66,7 +60,7 @@ class CardTest extends ApiTest
         );
         $httpClient->addResponse($response);
 
-        $winguApi = new Card($configurationMock, $httpClient, $requestFactory, $hydrator);
+        $winguApi = new Card($configurationMock, $httpClient);
 
         $winguApi->deleteMyCard('1aaeece0-8152-4961-adbe-c6b37e23ddd7');
 

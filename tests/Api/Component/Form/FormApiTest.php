@@ -5,12 +5,10 @@ declare(strict_types=1);
 namespace Wingu\Engine\SDK\Tests\Api\Component\Form;
 
 use GuzzleHttp\Psr7\Response;
-use Http\Message\MessageFactory\GuzzleMessageFactory;
 use Http\Mock\Client as MockClient;
 use Psr\Http\Message\RequestInterface;
 use Wingu\Engine\SDK\Api\Component\FormApi;
 use Wingu\Engine\SDK\Api\Configuration;
-use Wingu\Engine\SDK\Hydrator\SymfonySerializerHydrator;
 use Wingu\Engine\SDK\Model\Request\BooleanValue;
 use Wingu\Engine\SDK\Model\Request\Component\Form\Create;
 use Wingu\Engine\SDK\Model\Request\Component\Form\Element\Input as RequestInput;
@@ -34,8 +32,6 @@ class FormApiTest extends ApiTest
     public function testCreateReturnsNewFormComponent() : void
     {
         $configurationMock = new Configuration();
-        $requestFactory    = new GuzzleMessageFactory();
-        $hydrator          = new SymfonySerializerHydrator();
 
         $httpClient = new MockClient();
         $response   = new Response(
@@ -45,7 +41,7 @@ class FormApiTest extends ApiTest
         );
         $httpClient->addResponse($response);
 
-        $winguApi = new FormApi($configurationMock, $httpClient, $requestFactory, $hydrator);
+        $winguApi = new FormApi($configurationMock, $httpClient);
 
         $actualResponse = $winguApi->create(
             new Create(
@@ -88,8 +84,6 @@ class FormApiTest extends ApiTest
     public function testUpdatePatchesFormComponent() : void
     {
         $configurationMock = new Configuration();
-        $requestFactory    = new GuzzleMessageFactory();
-        $hydrator          = new SymfonySerializerHydrator();
 
         $httpClient = new MockClient();
         $response   = new Response(
@@ -98,7 +92,7 @@ class FormApiTest extends ApiTest
         );
         $httpClient->addResponse($response);
 
-        $winguApi = new FormApi($configurationMock, $httpClient, $requestFactory, $hydrator);
+        $winguApi = new FormApi($configurationMock, $httpClient);
 
         $winguApi->update(
             '05f21ca6-4b65-42a8-aea1-b21346a029a6',

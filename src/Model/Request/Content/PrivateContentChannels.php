@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Wingu\Engine\SDK\Model\Request\Content;
 
+use Assert\Assert;
 use Wingu\Engine\SDK\Assertion;
 use Wingu\Engine\SDK\Model\Request\Request;
 
@@ -16,9 +17,8 @@ final class PrivateContentChannels implements Request
     public function __construct(array $channels)
     {
         Assertion::notEmpty($channels);
-        foreach ($channels as $channel) {
-            Assertion::uuid($channel);
-        }
+        Assert::thatAll($channels)->uuid();
+
         $this->channels = $channels;
     }
 

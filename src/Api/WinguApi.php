@@ -15,6 +15,7 @@ use Wingu\Engine\SDK\Api\Channel\Nfc\NfcApi;
 use Wingu\Engine\SDK\Api\Channel\QrCode\QrCodeApi;
 use Wingu\Engine\SDK\Api\Component\ComponentApi;
 use Wingu\Engine\SDK\Api\Content\Content;
+use Wingu\Engine\SDK\Api\Content\Locale;
 use Wingu\Engine\SDK\Api\Content\Template;
 use Wingu\Engine\SDK\Api\Wingu\Wingu;
 use Wingu\Engine\SDK\Hydrator\Hydrator;
@@ -87,6 +88,11 @@ final class WinguApi
     public function contentTemplate() : Template
     {
         return $this->getService(Template::class);
+    }
+
+    public function contentLocale() : Locale
+    {
+        return $this->getService(Locale::class);
     }
 
     public function wingu() : Wingu

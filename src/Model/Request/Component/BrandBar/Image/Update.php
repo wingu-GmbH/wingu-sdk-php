@@ -12,15 +12,15 @@ final class Update implements MultipartRequest
 {
     private const ALIGNMENT = ['left', 'center', 'right'];
 
-    /** @var string */
+    /** @var string|null */
     private $alignment;
 
     /** @var StreamInterface|null */
     private $image;
 
-    public function __construct(string $alignment, ?StreamInterface $image)
+    public function __construct(?string $alignment = null, ?StreamInterface $image = null)
     {
-        Assertion::inArray($alignment, self::ALIGNMENT);
+        Assertion::nullOrInArray($alignment, self::ALIGNMENT);
         $this->alignment = $alignment;
         $this->image     = $image;
     }
@@ -28,9 +28,9 @@ final class Update implements MultipartRequest
     /** @inheritdoc */
     public function jsonSerialize() : array
     {
-        return [
+        return \array_filter([
             'alignment' => $this->alignment,
-        ];
+        ]);
     }
 
     /**

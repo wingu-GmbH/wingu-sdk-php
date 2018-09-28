@@ -5,12 +5,10 @@ declare(strict_types=1);
 namespace Wingu\Engine\SDK\Tests\Api\Component\Action;
 
 use GuzzleHttp\Psr7\Response;
-use Http\Message\MessageFactory\GuzzleMessageFactory;
 use Http\Mock\Client as MockClient;
 use Psr\Http\Message\RequestInterface;
 use Wingu\Engine\SDK\Api\Component\ActionApi;
 use Wingu\Engine\SDK\Api\Configuration;
-use Wingu\Engine\SDK\Hydrator\SymfonySerializerHydrator;
 use Wingu\Engine\SDK\Model\Request\Component\Action\Create;
 use Wingu\Engine\SDK\Model\Request\Component\Action\Update;
 use Wingu\Engine\SDK\Model\Response\Component\Action;
@@ -21,8 +19,6 @@ class ActionApiTest extends ApiTest
     public function testCreateReturnsNewActionComponent() : void
     {
         $configurationMock = new Configuration();
-        $requestFactory    = new GuzzleMessageFactory();
-        $hydrator          = new SymfonySerializerHydrator();
 
         $httpClient = new MockClient();
         $response   = new Response(
@@ -32,7 +28,7 @@ class ActionApiTest extends ApiTest
         );
         $httpClient->addResponse($response);
 
-        $winguApi = new ActionApi($configurationMock, $httpClient, $requestFactory, $hydrator);
+        $winguApi = new ActionApi($configurationMock, $httpClient);
 
         $actualResponse = $winguApi->create(
             new Create(
@@ -57,8 +53,6 @@ class ActionApiTest extends ApiTest
     public function testUpdatePatchesActionComponent() : void
     {
         $configurationMock = new Configuration();
-        $requestFactory    = new GuzzleMessageFactory();
-        $hydrator          = new SymfonySerializerHydrator();
 
         $httpClient = new MockClient();
         $response   = new Response(
@@ -67,7 +61,7 @@ class ActionApiTest extends ApiTest
         );
         $httpClient->addResponse($response);
 
-        $winguApi = new ActionApi($configurationMock, $httpClient, $requestFactory, $hydrator);
+        $winguApi = new ActionApi($configurationMock, $httpClient);
 
         $winguApi->update(
             'ea0226b8-d6a2-4f20-a3a2-d4db7485bc32',
@@ -80,7 +74,7 @@ class ActionApiTest extends ApiTest
 
         /** @var RequestInterface $actualRequest */
         $actualRequest = $httpClient->getLastRequest();
-        self::assertSame('{"buttonCaption":"edited me","actionType":null,"actionPayload":null}', $actualRequest->getBody()->getContents());
+        self::assertSame('{"buttonCaption":"edited me"}', $actualRequest->getBody()->getContents());
         self::assertSame('PATCH', $actualRequest->getMethod());
     }
 

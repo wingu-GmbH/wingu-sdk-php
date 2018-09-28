@@ -23,6 +23,7 @@ final class Create implements Request
     public function __construct(string $type, string $payload, ?string $description)
     {
         Assertion::inArray($type, self::TYPES);
+
         $this->type        = $type;
         $this->payload     = $payload;
         $this->description = $description;

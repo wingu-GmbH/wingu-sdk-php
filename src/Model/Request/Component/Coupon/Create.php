@@ -10,26 +10,26 @@ use Wingu\Engine\SDK\Model\Request\MultipartRequest;
 
 final class Create implements MultipartRequest
 {
-    /** @var string */
+    /** @var string|null */
     private $header;
 
     /** @var string */
     private $description;
 
-    /** @var Barcode */
+    /** @var Barcode|null */
     private $barcode;
 
-    /** @var StreamInterface */
+    /** @var StreamInterface|null */
     private $backgroundImage;
 
     /** @var string|null */
     private $disclaimer;
 
     public function __construct(
-        string $header,
+        ?string $header,
         string $description,
-        Barcode $barcode,
-        StreamInterface $backgroundImage,
+        ?Barcode $barcode,
+        ?StreamInterface $backgroundImage,
         ?string $disclaimer
     ) {
         $this->header          = $header;
@@ -57,6 +57,10 @@ final class Create implements MultipartRequest
      */
     public function files() : array
     {
+        if ($this->backgroundImage === null) {
+            return [];
+        }
+
         return [
             'backgroundImage' => $this->backgroundImage,
         ];

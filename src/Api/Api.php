@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Wingu\Engine\SDK\Api;
 
 use Http\Client\HttpClient;
+use Http\Discovery\HttpClientDiscovery;
+use Http\Discovery\MessageFactoryDiscovery;
 use Http\Discovery\StreamFactoryDiscovery;
 use Http\Message\MultipartStream\MultipartStreamBuilder;
 use Http\Message\RequestFactory;
@@ -15,6 +17,7 @@ use Symfony\Component\Serializer\Normalizer\JsonSerializableNormalizer;
 use Symfony\Component\Serializer\Serializer;
 use Wingu\Engine\SDK\Api\Exception\Generic;
 use Wingu\Engine\SDK\Hydrator\Hydrator;
+use Wingu\Engine\SDK\Hydrator\SymfonySerializerHydrator;
 use Wingu\Engine\SDK\Model\Request\MultipartRequest;
 use Wingu\Engine\SDK\Model\Request\Request;
 use Wingu\Engine\SDK\Request\RequestDataManipulator;
@@ -38,14 +41,14 @@ abstract class Api
 
     public function __construct(
         Configuration $configuration,
-        HttpClient $httpClient,
-        RequestFactory $requestFactory,
-        Hydrator $hydrator
+        ?HttpClient $httpClient = null,
+        ?RequestFactory $requestFactory = null,
+        ?Hydrator $hydrator = null
     ) {
         $this->configuration  = $configuration;
-        $this->httpClient     = $httpClient;
-        $this->requestFactory = $requestFactory;
-        $this->hydrator       = $hydrator;
+        $this->httpClient     = $httpClient ?: HttpClientDiscovery::find();
+        $this->requestFactory = $requestFactory ?: MessageFactoryDiscovery::find();
+        $this->hydrator       = $hydrator ?: new SymfonySerializerHydrator();
         $this->serializer     = new Serializer([new JsonSerializableNormalizer()], [new JsonEncoder()]);
     }
 
@@ -83,15 +86,13 @@ abstract class Api
             $uri .= '?' . \http_build_query($queryParameters);
         }
 
-        $request = $this->requestFactory->createRequest(
+        return $this->requestFactory->createRequest(
             'GET',
             $uri,
             [
                 $this->configuration->apiKeyHeader() => $this->configuration->apiKey(),
             ]
         );
-
-        return $request;
     }
 
     /** @return mixed[] */
@@ -109,7 +110,7 @@ abstract class Api
     {
         $uri = $this->configuration->backendUrl() . $path;
 
-        $request = $this->requestFactory->createRequest(
+        return $this->requestFactory->createRequest(
             'POST',
             $uri,
             [
@@ -118,8 +119,6 @@ abstract class Api
             ],
             (string) \json_encode($requestObject)
         );
-
-        return $request;
     }
 
     protected function createMultipartPostRequest(string $path, MultipartRequest $requestObject) : RequestInterface
@@ -136,7 +135,7 @@ abstract class Api
         $multipartStream = $builder->build();
         $boundary        = $builder->getBoundary();
 
-        $request = $this->requestFactory->createRequest(
+        return $this->requestFactory->createRequest(
             'POST',
             $uri,
             [
@@ -145,15 +144,13 @@ abstract class Api
             ],
             $multipartStream
         );
-
-        return $request;
     }
 
     protected function createPatchRequest(string $path, Request $requestObject) : RequestInterface
     {
         $uri = $this->configuration->backendUrl() . $path;
 
-        $request = $this->requestFactory->createRequest(
+        return $this->requestFactory->createRequest(
             'PATCH',
             $uri,
             [
@@ -162,8 +159,6 @@ abstract class Api
             ],
             (string) \json_encode($requestObject)
         );
-
-        return $request;
     }
 
     protected function createMultipartPatchRequest(string $path, MultipartRequest $requestObject) : RequestInterface
@@ -180,7 +175,7 @@ abstract class Api
         $multipartStream = $builder->build();
         $boundary        = $builder->getBoundary();
 
-        $request = $this->requestFactory->createRequest(
+        return $this->requestFactory->createRequest(
             'PATCH',
             $uri,
             [
@@ -189,15 +184,13 @@ abstract class Api
             ],
             $multipartStream
         );
-
-        return $request;
     }
 
     protected function createPutRequest(string $path, Request $requestObject) : RequestInterface
     {
         $uri = $this->configuration->backendUrl() . $path;
 
-        $request = $this->requestFactory->createRequest(
+        return $this->requestFactory->createRequest(
             'PUT',
             $uri,
             [
@@ -206,15 +199,13 @@ abstract class Api
             ],
             (string) \json_encode($requestObject)
         );
-
-        return $request;
     }
 
     protected function createDeleteRequest(string $path) : RequestInterface
     {
         $uri = $this->configuration->backendUrl() . $path;
 
-        $request = $this->requestFactory->createRequest(
+        return $this->requestFactory->createRequest(
             'DELETE',
             $uri,
             [
@@ -222,7 +213,5 @@ abstract class Api
                 'Content-Type' => 'application/json',
             ]
         );
-
-        return $request;
     }
 }

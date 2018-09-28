@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Wingu\Engine\SDK\Model\Request\Channel;
 
+use Assert\Assert;
 use Wingu\Engine\SDK\Assertion;
 use Wingu\Engine\SDK\Model\Request\RequestParameters;
 
@@ -45,9 +46,7 @@ final class PrivateChannelsFilter implements RequestParameters
         ?bool $hasContentAttached = null
     ) {
         if ($channels !== null) {
-            foreach ($channels as $channel) {
-                Assertion::uuid($channel);
-            }
+            Assert::thatAll($channels)->uuid();
         }
         Assertion::nullOrInArray($discriminator, self::DISCRIMINATORS);
 

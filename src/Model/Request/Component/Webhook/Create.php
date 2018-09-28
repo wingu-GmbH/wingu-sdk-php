@@ -21,6 +21,7 @@ final class Create implements Request
     public function __construct(string $buttonCaption, string $feedbackSuccessMessage, string $url)
     {
         Assertion::url($url);
+
         $this->buttonCaption          = $buttonCaption;
         $this->feedbackSuccessMessage = $feedbackSuccessMessage;
         $this->url                    = $url;

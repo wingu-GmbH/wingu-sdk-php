@@ -9,6 +9,7 @@ use Wingu\Engine\SDK\Assertion;
 use Wingu\Engine\SDK\Model\Request\Component\Webhook\Create;
 use Wingu\Engine\SDK\Model\Request\Component\Webhook\Update;
 use Wingu\Engine\SDK\Model\Response\Component\PrivateWebhook;
+use Wingu\Engine\SDK\Model\Response\Component\WebhookTrigger;
 
 final class WebhookApi extends Api
 {
@@ -27,5 +28,15 @@ final class WebhookApi extends Api
         $request = $this->createPatchRequest('/api/component/webhook/' . $id, $webhook);
 
         $this->handleRequest($request);
+    }
+
+    public function trigger(string $id) : WebhookTrigger
+    {
+        Assertion::uuid($id);
+        $request = $this->createGetRequest('/api/component/webhook/' . $id . '/trigger');
+
+        $response = $this->handleRequest($request);
+
+        return $this->hydrator->hydrateResponse($response, WebhookTrigger::class);
     }
 }

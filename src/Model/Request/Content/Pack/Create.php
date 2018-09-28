@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Wingu\Engine\SDK\Model\Request\Content;
+namespace Wingu\Engine\SDK\Model\Request\Content\Pack;
 
 use Wingu\Engine\SDK\Assertion;
 use Wingu\Engine\SDK\Model\Request\Request;
 
-final class Pack implements Request
+final class Create implements Request
 {
     private const LOCALES = ['en', 'de', 'pl', 'es'];
 
@@ -25,6 +25,7 @@ final class Pack implements Request
         Assertion::uuid($content);
         Assertion::uuid($deck);
         Assertion::inArray($locale, self::LOCALES);
+
         $this->content = $content;
         $this->deck    = $deck;
         $this->locale  = $locale;

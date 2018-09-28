@@ -20,9 +20,9 @@ final class Update implements Request
     /** @var string|null */
     private $color;
 
-    public function __construct(?string $text, ?string $alignment, ?string $color)
+    public function __construct(?string $text = null, ?string $alignment = null, ?string $color = null)
     {
-        Assertion::inArray($alignment, self::ALIGNMENT);
+        Assertion::nullOrInArray($alignment, self::ALIGNMENT);
         $this->text      = $text;
         $this->alignment = $alignment;
         $this->color     = $color;
@@ -31,10 +31,10 @@ final class Update implements Request
     /** @inheritdoc */
     public function jsonSerialize() : array
     {
-        return [
+        return \array_filter([
             'text' => $this->text,
             'alignment' => $this->alignment,
             'color' => $this->color,
-        ];
+        ]);
     }
 }

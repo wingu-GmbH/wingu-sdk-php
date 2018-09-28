@@ -11,7 +11,7 @@ final class Update implements Request
     /** @var string|null */
     private $title;
 
-    public function __construct(?string $title)
+    public function __construct(?string $title = null)
     {
         $this->title = $title;
     }
@@ -19,8 +19,8 @@ final class Update implements Request
     /** @inheritdoc */
     public function jsonSerialize() : array
     {
-        return [
+        return \array_filter([
             'title' => $this->title,
-        ];
+        ]);
     }
 }

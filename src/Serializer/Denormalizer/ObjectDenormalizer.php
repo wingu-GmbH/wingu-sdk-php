@@ -18,7 +18,7 @@ use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 
 final class ObjectDenormalizer extends ObjectNormalizer
 {
-    /** @var null|PropertyTypeExtractorInterface */
+    /** @var PropertyTypeExtractorInterface|null */
     private $typeExtractor;
 
     /**
@@ -147,6 +147,7 @@ final class ObjectDenormalizer extends ObjectNormalizer
     /**
      * @param mixed[] $context
      * @param mixed   $data
+     *
      * @return mixed
      */
     private function validateAndDenormalize(

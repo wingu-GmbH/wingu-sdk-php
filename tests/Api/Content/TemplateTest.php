@@ -5,11 +5,9 @@ declare(strict_types=1);
 namespace Wingu\Engine\SDK\Tests\Api\Content;
 
 use GuzzleHttp\Psr7\Response;
-use Http\Message\MessageFactory\GuzzleMessageFactory;
 use Http\Mock\Client as MockClient;
 use Wingu\Engine\SDK\Api\Configuration;
 use Wingu\Engine\SDK\Api\Content\Template;
-use Wingu\Engine\SDK\Hydrator\SymfonySerializerHydrator;
 use Wingu\Engine\SDK\Model\Response\Content\Template as TemplateModel;
 use Wingu\Engine\SDK\Tests\Api\ApiTest;
 
@@ -18,8 +16,6 @@ final class TemplateTest extends ApiTest
     public function testTemplatesReturnsTemplates() : void
     {
         $configurationMock = new Configuration();
-        $requestFactory    = new GuzzleMessageFactory();
-        $hydrator          = new SymfonySerializerHydrator();
 
         $httpClient = new MockClient();
         $httpClient->addResponse(
@@ -30,7 +26,7 @@ final class TemplateTest extends ApiTest
             )
         );
 
-        $winguApi = new Template($configurationMock, $httpClient, $requestFactory, $hydrator);
+        $winguApi = new Template($configurationMock, $httpClient);
         $actual   = $winguApi->templates();
 
         $expected = [

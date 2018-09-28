@@ -6,7 +6,7 @@ namespace Wingu\Engine\SDK\Model\Request\Deck;
 
 use Wingu\Engine\SDK\Model\Request\Request;
 
-final class Deck implements Request
+final class Create implements Request
 {
     /** @var string */
     private $title;

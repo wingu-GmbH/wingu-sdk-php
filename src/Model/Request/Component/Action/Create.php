@@ -27,6 +27,7 @@ final class Create implements Request
     ) {
         Assertion::inArray($actionType, self::TYPES);
         Assertion::url($actionPayload);
+
         $this->buttonCaption = $buttonCaption;
         $this->actionType    = $actionType;
         $this->actionPayload = $actionPayload;

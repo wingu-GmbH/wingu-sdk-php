@@ -14,7 +14,11 @@ final class CouponApi extends Api
 {
     public function create(Create $coupon) : Coupon
     {
-        $request = $this->createMultipartPostRequest('/api/component/coupon', $coupon);
+        if ($coupon->files() === []) {
+            $request = $this->createPostRequest('/api/component/coupon', $coupon);
+        } else {
+            $request = $this->createMultipartPostRequest('/api/component/coupon', $coupon);
+        }
 
         $response = $this->handleRequest($request);
 

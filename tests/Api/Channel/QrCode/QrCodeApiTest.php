@@ -5,12 +5,10 @@ declare(strict_types=1);
 namespace Wingu\Engine\SDK\Tests\Api\Channel\QrCode;
 
 use GuzzleHttp\Psr7\Response;
-use Http\Message\MessageFactory\GuzzleMessageFactory;
 use Http\Mock\Client as MockClient;
 use Psr\Http\Message\RequestInterface;
 use Wingu\Engine\SDK\Api\Channel\QrCode\QrCodeApi;
 use Wingu\Engine\SDK\Api\Configuration;
-use Wingu\Engine\SDK\Hydrator\SymfonySerializerHydrator;
 use Wingu\Engine\SDK\Model\Request\BooleanValue;
 use Wingu\Engine\SDK\Model\Request\Channel\QrCode\PrivateQrCode as RequestQrCode;
 use Wingu\Engine\SDK\Model\Request\StringValue;
@@ -64,8 +62,6 @@ final class QrCodeApiTest extends ChannelApiTestCase
     public function testQrCodeReturnsPublicQrCode() : void
     {
         $configurationMock = new Configuration();
-        $requestFactory    = new GuzzleMessageFactory();
-        $hydrator          = new SymfonySerializerHydrator();
 
         $httpClient = new MockClient();
         $httpClient->addResponse(
@@ -76,7 +72,7 @@ final class QrCodeApiTest extends ChannelApiTestCase
             )
         );
 
-        $winguApi = new QrCodeApi($configurationMock, $httpClient, $requestFactory, $hydrator);
+        $winguApi = new QrCodeApi($configurationMock, $httpClient);
         $actual   = $winguApi->qrCode('9a8798c6-0000-4000-a000-000000000001');
 
         $expected = new PublicQrCode(
@@ -91,8 +87,6 @@ final class QrCodeApiTest extends ChannelApiTestCase
     public function testMyQrCodeReturnsPrivateQrCode() : void
     {
         $configurationMock = new Configuration();
-        $requestFactory    = new GuzzleMessageFactory();
-        $hydrator          = new SymfonySerializerHydrator();
 
         $httpClient = new MockClient();
         $httpClient->addResponse(
@@ -103,7 +97,7 @@ final class QrCodeApiTest extends ChannelApiTestCase
             )
         );
 
-        $winguApi = new QrCodeApi($configurationMock, $httpClient, $requestFactory, $hydrator);
+        $winguApi = new QrCodeApi($configurationMock, $httpClient);
         $actual   = $winguApi->myQrCode('9a8798c6-0000-4000-a000-000000000002');
 
         $expected = new PrivateQrCode(
@@ -415,8 +409,6 @@ final class QrCodeApiTest extends ChannelApiTestCase
     public function testPayloadReturnsQrCodeId() : void
     {
         $configurationMock = new Configuration();
-        $requestFactory    = new GuzzleMessageFactory();
-        $hydrator          = new SymfonySerializerHydrator();
 
         $httpClient = new MockClient();
         $httpClient->addResponse(
@@ -427,7 +419,7 @@ final class QrCodeApiTest extends ChannelApiTestCase
             )
         );
 
-        $winguApi = new QrCodeApi($configurationMock, $httpClient, $requestFactory, $hydrator);
+        $winguApi = new QrCodeApi($configurationMock, $httpClient);
         $actual   = $winguApi->payload('https://wingu-sdk-test.de/qrcode/7a4b84eb-ae3f-4246-8a67-d16fbdd82595');
 
         self::assertSame('9a8798c6-0000-4000-a000-000000000004', $actual);
@@ -436,8 +428,6 @@ final class QrCodeApiTest extends ChannelApiTestCase
     public function testMyQrCodesReturnsResult() : void
     {
         $configurationMock = new Configuration();
-        $requestFactory    = new GuzzleMessageFactory();
-        $hydrator          = new SymfonySerializerHydrator();
 
         $httpClient = new MockClient();
         $httpClient->addResponse(
@@ -448,7 +438,7 @@ final class QrCodeApiTest extends ChannelApiTestCase
             )
         );
 
-        $qrcodeApi = new QrCodeApi($configurationMock, $httpClient, $requestFactory, $hydrator);
+        $qrcodeApi = new QrCodeApi($configurationMock, $httpClient);
         $actual    = $qrcodeApi->myQrCodes();
 
         $expected = [
@@ -463,8 +453,6 @@ final class QrCodeApiTest extends ChannelApiTestCase
     public function testPatchMyQrCodeUpdatesPrivateQrCode() : void
     {
         $configurationMock = new Configuration();
-        $requestFactory    = new GuzzleMessageFactory();
-        $hydrator          = new SymfonySerializerHydrator();
 
         $httpClient = new MockClient();
         $response   = new Response(
@@ -473,7 +461,7 @@ final class QrCodeApiTest extends ChannelApiTestCase
         );
         $httpClient->addResponse($response);
 
-        $winguApi = new QrCodeApi($configurationMock, $httpClient, $requestFactory, $hydrator);
+        $winguApi = new QrCodeApi($configurationMock, $httpClient);
 
         $winguApi->updateMyQrCode(
             '9a8798c6-0000-4000-a000-000000000001',
@@ -494,8 +482,6 @@ final class QrCodeApiTest extends ChannelApiTestCase
     public function testDeleteMyQrCodeRemovesPrivateQrCode() : void
     {
         $configurationMock = new Configuration();
-        $requestFactory    = new GuzzleMessageFactory();
-        $hydrator          = new SymfonySerializerHydrator();
 
         $httpClient = new MockClient();
         $response   = new Response(
@@ -504,7 +490,7 @@ final class QrCodeApiTest extends ChannelApiTestCase
         );
         $httpClient->addResponse($response);
 
-        $winguApi = new QrCodeApi($configurationMock, $httpClient, $requestFactory, $hydrator);
+        $winguApi = new QrCodeApi($configurationMock, $httpClient);
 
         $winguApi->deleteMyQrCode('9a8798c6-0000-4000-a000-000000000004');
 

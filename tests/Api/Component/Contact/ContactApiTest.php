@@ -5,18 +5,17 @@ declare(strict_types=1);
 namespace Wingu\Engine\SDK\Tests\Api\Component\Contact;
 
 use GuzzleHttp\Psr7\Response;
-use Http\Message\MessageFactory\GuzzleMessageFactory;
 use Http\Mock\Client as MockClient;
 use Psr\Http\Message\RequestInterface;
 use Wingu\Engine\SDK\Api\Component\ContactApi;
 use Wingu\Engine\SDK\Api\Configuration;
-use Wingu\Engine\SDK\Hydrator\SymfonySerializerHydrator;
 use Wingu\Engine\SDK\Model\Request\Component\Contact\Address\Create as CreateAddress;
 use Wingu\Engine\SDK\Model\Request\Component\Contact\Address\Update as UpdateAddress;
 use Wingu\Engine\SDK\Model\Request\Component\Contact\Create;
 use Wingu\Engine\SDK\Model\Request\Component\Contact\ExternalLinks\Create as CreateExternalLinks;
 use Wingu\Engine\SDK\Model\Request\Component\Contact\ExternalLinks\Update as UpdateExternalLinks;
 use Wingu\Engine\SDK\Model\Request\Component\Contact\Update;
+use Wingu\Engine\SDK\Model\Request\StringValue;
 use Wingu\Engine\SDK\Model\Response\Component\Contact;
 use Wingu\Engine\SDK\Model\Response\Component\ContactAddress;
 use Wingu\Engine\SDK\Model\Response\Component\ContactExternalLinks;
@@ -27,8 +26,6 @@ class ContactApiTest extends ApiTest
     public function testCreateReturnsNewContactComponent() : void
     {
         $configurationMock = new Configuration();
-        $requestFactory    = new GuzzleMessageFactory();
-        $hydrator          = new SymfonySerializerHydrator();
 
         $httpClient = new MockClient();
         $response   = new Response(
@@ -38,7 +35,7 @@ class ContactApiTest extends ApiTest
         );
         $httpClient->addResponse($response);
 
-        $winguApi = new ContactApi($configurationMock, $httpClient, $requestFactory, $hydrator);
+        $winguApi = new ContactApi($configurationMock, $httpClient);
 
         $actualResponse = $winguApi->create(
             new Create(
@@ -80,8 +77,6 @@ class ContactApiTest extends ApiTest
     public function testUpdatePatchesContactComponent() : void
     {
         $configurationMock = new Configuration();
-        $requestFactory    = new GuzzleMessageFactory();
-        $hydrator          = new SymfonySerializerHydrator();
 
         $httpClient = new MockClient();
         $response   = new Response(
@@ -90,29 +85,29 @@ class ContactApiTest extends ApiTest
         );
         $httpClient->addResponse($response);
 
-        $winguApi = new ContactApi($configurationMock, $httpClient, $requestFactory, $hydrator);
+        $winguApi = new ContactApi($configurationMock, $httpClient);
 
         $winguApi->update(
             '58778834-e728-49a9-a1c7-aef8732d3797',
             new Update(
-                'Wingu',
-                'Sir',
+                new StringValue('Wingu'),
+                new StringValue('Sir'),
                 null,
                 null,
                 null,
                 null,
                 null,
-                'https://www.wingu.de',
+                new StringValue('https://www.wingu.de'),
                 new UpdateAddress(null, null, null, null, null),
                 null,
                 new UpdateExternalLinks(null, null, null, null),
-                'Edited extra info'
+                new StringValue('Edited extra info')
             )
         );
 
         /** @var RequestInterface $actualRequest */
         $actualRequest = $httpClient->getLastRequest();
-        self::assertSame('{"companyName":"Wingu","personalTitle":"Sir","firstName":null,"lastName":null,"mobile":null,"phone":null,"email":null,"website":"https:\/\/www.wingu.de","address":{"country":null,"city":null,"zipCode":null,"street":null,"streetNumber":null},"openingHours":null,"externalLinks":{"facebookName":null,"twitterName":null,"googlePlusName":null,"yelpName":null},"extraInfo":"Edited extra info"}', $actualRequest->getBody()->getContents());
+        self::assertSame('{"companyName":"Wingu","personalTitle":"Sir","website":"https:\/\/www.wingu.de","address":[],"externalLinks":[],"extraInfo":"Edited extra info"}', $actualRequest->getBody()->getContents());
         self::assertSame('PATCH', $actualRequest->getMethod());
     }
 

@@ -118,8 +118,9 @@ final class FunctioningHoursDenormalizerTest extends TestCase
     }
 
     /**
-     * @dataProvider dataProviderInvalidDataForDenormalizer
      * @param mixed[] $data
+     *
+     * @dataProvider dataProviderInvalidDataForDenormalizer
      */
     public function testDenormalizeThrowsExceptionWhenDataIsNotValid(array $data) : void
     {

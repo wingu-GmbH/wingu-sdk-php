@@ -21,12 +21,13 @@ final class Update implements Request
     private $actionPayload;
 
     public function __construct(
-        ?string $buttonCaption,
-        ?string $actionType,
-        ?string $actionPayload
+        ?string $buttonCaption = null,
+        ?string $actionType = null,
+        ?string $actionPayload = null
     ) {
         Assertion::nullOrInArray($actionType, self::TYPES);
         Assertion::nullOrUrl($actionPayload);
+
         $this->buttonCaption = $buttonCaption;
         $this->actionType    = $actionType;
         $this->actionPayload = $actionPayload;
@@ -35,10 +36,10 @@ final class Update implements Request
     /** @inheritdoc */
     public function jsonSerialize() : array
     {
-        return [
+        return \array_filter([
             'buttonCaption' => $this->buttonCaption,
             'actionType' => $this->actionType,
             'actionPayload' => $this->actionPayload,
-        ];
+        ]);
     }
 }

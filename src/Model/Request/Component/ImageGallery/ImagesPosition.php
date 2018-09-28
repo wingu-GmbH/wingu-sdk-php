@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Wingu\Engine\SDK\Model\Request\Component\ImageGallery;
 
+use Assert\Assert;
 use Wingu\Engine\SDK\Assertion;
 use Wingu\Engine\SDK\Model\Request\Request;
 
@@ -16,9 +17,8 @@ final class ImagesPosition implements Request
     public function __construct(array $orderedImages)
     {
         Assertion::notEmpty($orderedImages);
-        foreach ($orderedImages as $image) {
-            Assertion::uuid($image);
-        }
+        Assert::thatAll($orderedImages)->uuid();
+
         $this->orderedImages = $orderedImages;
     }
 

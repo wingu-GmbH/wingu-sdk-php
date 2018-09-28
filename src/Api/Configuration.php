@@ -12,7 +12,7 @@ final class Configuration
 
     private const API_KEY_HEADER = 'X-API-KEY';
 
-    /** @var null|string */
+    /** @var string|null */
     private $apiKey;
 
     /** @var string */

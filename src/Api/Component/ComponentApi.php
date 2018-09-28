@@ -63,7 +63,7 @@ final class ComponentApi extends Api
         $data = $this->decodeResponseBody($response);
 
         $embedded = \array_map(
-            function ($data) {
+            static function ($data) {
                 $discriminator         = $data['component']['discriminator'];
                 $data                  = \reset($data);
                 $data['discriminator'] = $discriminator;

@@ -5,15 +5,14 @@ declare(strict_types=1);
 namespace Wingu\Engine\SDK\Tests\Api\Component\BrandBar;
 
 use GuzzleHttp\Psr7\Response;
-use Http\Message\MessageFactory\GuzzleMessageFactory;
 use Http\Mock\Client as MockClient;
 use Psr\Http\Message\RequestInterface;
 use Wingu\Engine\SDK\Api\Component\BrandBarApi;
 use Wingu\Engine\SDK\Api\Configuration;
-use Wingu\Engine\SDK\Hydrator\SymfonySerializerHydrator;
 use Wingu\Engine\SDK\Model\Request\Component\BrandBar\Create;
 use Wingu\Engine\SDK\Model\Request\Component\BrandBar\Image\Create as CreateImage;
 use Wingu\Engine\SDK\Model\Request\Component\BrandBar\Text\Create as CreateText;
+use Wingu\Engine\SDK\Model\Request\Component\BrandBar\Text\Update as TextUpdate;
 use Wingu\Engine\SDK\Model\Request\Component\BrandBar\Update;
 use Wingu\Engine\SDK\Model\Response\Component\BrandBar;
 use Wingu\Engine\SDK\Model\Response\Component\BrandBarBackground;
@@ -28,8 +27,6 @@ class BrandBarApiTest extends ApiTest
     public function testCreateReturnsNewBrandBarComponent() : void
     {
         $configurationMock = new Configuration();
-        $requestFactory    = new GuzzleMessageFactory();
-        $hydrator          = new SymfonySerializerHydrator();
 
         $httpClient = new MockClient();
         $response   = new Response(
@@ -39,7 +36,7 @@ class BrandBarApiTest extends ApiTest
         );
         $httpClient->addResponse($response);
 
-        $winguApi = new BrandBarApi($configurationMock, $httpClient, $requestFactory, $hydrator);
+        $winguApi = new BrandBarApi($configurationMock, $httpClient);
 
         $actualResponse = $winguApi->create(
             new Create(
@@ -74,8 +71,6 @@ class BrandBarApiTest extends ApiTest
     public function testCreateThrowsExceptionWhenTextAndImageAreBothNull() : void
     {
         $configurationMock = new Configuration();
-        $requestFactory    = new GuzzleMessageFactory();
-        $hydrator          = new SymfonySerializerHydrator();
 
         $httpClient = new MockClient();
         $response   = new Response(
@@ -84,7 +79,7 @@ class BrandBarApiTest extends ApiTest
         );
         $httpClient->addResponse($response);
 
-        $winguApi = new BrandBarApi($configurationMock, $httpClient, $requestFactory, $hydrator);
+        $winguApi = new BrandBarApi($configurationMock, $httpClient);
 
         $this->expectException(\Throwable::class);
         $this->expectExceptionMessage('BrandBar requires either Text or Image, or both');
@@ -97,8 +92,6 @@ class BrandBarApiTest extends ApiTest
     public function testUpdatePatchesBrandBarComponent() : void
     {
         $configurationMock = new Configuration();
-        $requestFactory    = new GuzzleMessageFactory();
-        $hydrator          = new SymfonySerializerHydrator();
 
         $httpClient = new MockClient();
         $response   = new Response(
@@ -107,16 +100,16 @@ class BrandBarApiTest extends ApiTest
         );
         $httpClient->addResponse($response);
 
-        $winguApi = new BrandBarApi($configurationMock, $httpClient, $requestFactory, $hydrator);
+        $winguApi = new BrandBarApi($configurationMock, $httpClient);
 
         $winguApi->update(
             'a65747f7-7093-4bf5-ab2f-5fd0d5699ab5',
-            new Update(null, null, null)
+            new Update(new TextUpdate(null, 'center', null), null, null)
         );
 
         /** @var RequestInterface $actualRequest */
         $actualRequest = $httpClient->getLastRequest();
-        self::assertSame('{"text":null,"image":null,"backgroundColor":null}', $actualRequest->getBody()->getContents());
+        self::assertSame('{"text":{"alignment":"center"}}', $actualRequest->getBody()->getContents());
         self::assertSame('PATCH', $actualRequest->getMethod());
     }
 

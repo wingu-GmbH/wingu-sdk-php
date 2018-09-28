@@ -8,8 +8,10 @@ use Wingu\Engine\SDK\Api\Api;
 use Wingu\Engine\SDK\Assertion;
 use Wingu\Engine\SDK\Model\Request\Component\Rating\Create;
 use Wingu\Engine\SDK\Model\Request\Component\Rating\Rate;
+use Wingu\Engine\SDK\Model\Request\Component\Rating\Statistic;
 use Wingu\Engine\SDK\Model\Request\Component\Rating\Update;
 use Wingu\Engine\SDK\Model\Response\Component\Rating;
+use Wingu\Engine\SDK\Model\Response\Component\RatingStatistic;
 
 final class RatingApi extends Api
 {
@@ -36,5 +38,14 @@ final class RatingApi extends Api
         $request = $this->createPostRequest('/api/component/rating/' . $id . '/rate', $rate);
 
         $this->handleRequest($request);
+    }
+
+    public function statistic(string $id, Statistic $statistic) : RatingStatistic
+    {
+        $request = $this->createGetRequest('/api/component/rating/' . $id . '/statistic', $statistic->toArray());
+
+        $response = $this->handleRequest($request);
+
+        return $this->hydrator->hydrateResponse($response, RatingStatistic::class);
     }
 }

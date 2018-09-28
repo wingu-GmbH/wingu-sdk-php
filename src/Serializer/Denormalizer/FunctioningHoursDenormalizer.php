@@ -16,6 +16,7 @@ final class FunctioningHoursDenormalizer implements DenormalizerInterface
      * @param string   $class   The expected class to instantiate
      * @param string   $format  Format the given data was extracted from
      * @param string[] $context Options available to the denormalizer
+     *
      * @return mixed
      */
     public function denormalize($data, $class, $format = null, array $context = [])

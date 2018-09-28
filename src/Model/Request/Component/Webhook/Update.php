@@ -18,9 +18,10 @@ final class Update implements Request
     /** @var string|null */
     private $url;
 
-    public function __construct(string $buttonCaption, string $feedbackSuccessMessage, string $url)
+    public function __construct(?string $buttonCaption = null, ?string $feedbackSuccessMessage = null, ?string $url = null)
     {
         Assertion::nullOrUrl($url);
+
         $this->buttonCaption          = $buttonCaption;
         $this->feedbackSuccessMessage = $feedbackSuccessMessage;
         $this->url                    = $url;
@@ -29,10 +30,10 @@ final class Update implements Request
     /** @inheritdoc */
     public function jsonSerialize() : array
     {
-        return [
+        return \array_filter([
             'buttonCaption' => $this->buttonCaption,
             'feedbackSuccessMessage' => $this->feedbackSuccessMessage,
             'url' => $this->url,
-        ];
+        ]);
     }
 }

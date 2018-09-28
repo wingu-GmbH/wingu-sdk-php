@@ -5,17 +5,16 @@ declare(strict_types=1);
 namespace Wingu\Engine\SDK\Tests\Api\Component\AudioPlaylist;
 
 use GuzzleHttp\Psr7\Response;
-use Http\Message\MessageFactory\GuzzleMessageFactory;
 use Http\Mock\Client as MockClient;
 use Psr\Http\Message\RequestInterface;
 use Wingu\Engine\SDK\Api\Component\AudioPlaylistApi;
 use Wingu\Engine\SDK\Api\Configuration;
-use Wingu\Engine\SDK\Hydrator\SymfonySerializerHydrator;
 use Wingu\Engine\SDK\Model\Request\Component\AudioPlaylist\Create;
 use Wingu\Engine\SDK\Model\Request\Component\AudioPlaylist\Media\Create as CreateMedia;
 use Wingu\Engine\SDK\Model\Request\Component\AudioPlaylist\Media\Update as UpdateMedia;
 use Wingu\Engine\SDK\Model\Request\Component\AudioPlaylist\MediaPosition;
 use Wingu\Engine\SDK\Model\Request\Component\AudioPlaylist\Update;
+use Wingu\Engine\SDK\Model\Request\StringValue;
 use Wingu\Engine\SDK\Model\Response\Component\AudioPlaylist;
 use Wingu\Engine\SDK\Model\Response\Component\AudioPlaylistMedia;
 use Wingu\Engine\SDK\Tests\Api\ApiTest;
@@ -25,8 +24,6 @@ class AudioPlaylistApiTest extends ApiTest
     public function testCreateReturnsNewAudioPlaylistComponent() : void
     {
         $configurationMock = new Configuration();
-        $requestFactory    = new GuzzleMessageFactory();
-        $hydrator          = new SymfonySerializerHydrator();
 
         $httpClient = new MockClient();
         $response   = new Response(
@@ -36,7 +33,7 @@ class AudioPlaylistApiTest extends ApiTest
         );
         $httpClient->addResponse($response);
 
-        $winguApi = new AudioPlaylistApi($configurationMock, $httpClient, $requestFactory, $hydrator);
+        $winguApi = new AudioPlaylistApi($configurationMock, $httpClient);
 
         $actualResponse = $winguApi->create(
             new Create(
@@ -56,8 +53,6 @@ class AudioPlaylistApiTest extends ApiTest
     public function testUpdatePatchesAudioPlaylistComponent() : void
     {
         $configurationMock = new Configuration();
-        $requestFactory    = new GuzzleMessageFactory();
-        $hydrator          = new SymfonySerializerHydrator();
 
         $httpClient = new MockClient();
         $response   = new Response(
@@ -66,12 +61,12 @@ class AudioPlaylistApiTest extends ApiTest
         );
         $httpClient->addResponse($response);
 
-        $winguApi = new AudioPlaylistApi($configurationMock, $httpClient, $requestFactory, $hydrator);
+        $winguApi = new AudioPlaylistApi($configurationMock, $httpClient);
 
         $winguApi->update(
             'b75ea792-07fe-427f-a1b5-867e25a29c23',
             new Update(
-                'updated playlist name'
+                new StringValue('updated playlist name')
             )
         );
 
@@ -84,8 +79,6 @@ class AudioPlaylistApiTest extends ApiTest
     public function testCreateMediaReturnsNewAudioPlaylistMedia() : void
     {
         $configurationMock = new Configuration();
-        $requestFactory    = new GuzzleMessageFactory();
-        $hydrator          = new SymfonySerializerHydrator();
 
         $httpClient = new MockClient();
         $response   = new Response(
@@ -95,7 +88,7 @@ class AudioPlaylistApiTest extends ApiTest
         );
         $httpClient->addResponse($response);
 
-        $winguApi = new AudioPlaylistApi($configurationMock, $httpClient, $requestFactory, $hydrator);
+        $winguApi = new AudioPlaylistApi($configurationMock, $httpClient);
 
         $actualResponse = $winguApi->createMedia(
             '55d9a8ec-87dc-41c9-a4fe-1b8d5603e004',
@@ -120,8 +113,6 @@ class AudioPlaylistApiTest extends ApiTest
     public function testUpdateMediaPatchesAudioPlaylistMedia() : void
     {
         $configurationMock = new Configuration();
-        $requestFactory    = new GuzzleMessageFactory();
-        $hydrator          = new SymfonySerializerHydrator();
 
         $httpClient = new MockClient();
         $response   = new Response(
@@ -130,7 +121,7 @@ class AudioPlaylistApiTest extends ApiTest
         );
         $httpClient->addResponse($response);
 
-        $winguApi = new AudioPlaylistApi($configurationMock, $httpClient, $requestFactory, $hydrator);
+        $winguApi = new AudioPlaylistApi($configurationMock, $httpClient);
 
         $winguApi->updateMedia(
             'b0c6ace5-5448-4ed2-b124-b262823e8d2d',
@@ -149,8 +140,6 @@ class AudioPlaylistApiTest extends ApiTest
     public function testUpdateMediaPositionPatchesAudioPlaylistMediaPosition() : void
     {
         $configurationMock = new Configuration();
-        $requestFactory    = new GuzzleMessageFactory();
-        $hydrator          = new SymfonySerializerHydrator();
 
         $httpClient = new MockClient();
         $response   = new Response(
@@ -159,7 +148,7 @@ class AudioPlaylistApiTest extends ApiTest
         );
         $httpClient->addResponse($response);
 
-        $winguApi = new AudioPlaylistApi($configurationMock, $httpClient, $requestFactory, $hydrator);
+        $winguApi = new AudioPlaylistApi($configurationMock, $httpClient);
 
         $winguApi->updateMediaPosition(
             'b0c6ace5-5448-4ed2-b124-b262823e8d2d',
@@ -181,8 +170,6 @@ class AudioPlaylistApiTest extends ApiTest
     public function testDeleteMediaRemovesAudioPlaylistMedia() : void
     {
         $configurationMock = new Configuration();
-        $requestFactory    = new GuzzleMessageFactory();
-        $hydrator          = new SymfonySerializerHydrator();
 
         $httpClient = new MockClient();
         $response   = new Response(
@@ -191,7 +178,7 @@ class AudioPlaylistApiTest extends ApiTest
         );
         $httpClient->addResponse($response);
 
-        $winguApi = new AudioPlaylistApi($configurationMock, $httpClient, $requestFactory, $hydrator);
+        $winguApi = new AudioPlaylistApi($configurationMock, $httpClient);
 
         $winguApi->deleteMedia('b0c6ace5-5448-4ed2-b124-b262823e8d2d');
 

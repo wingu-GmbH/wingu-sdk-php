@@ -17,11 +17,10 @@ final class Update implements Request
     /** @var string|null */
     private $type;
 
-    public function __construct(
-        ?string $content,
-        ?string $type
-    ) {
-        Assertion::inArray($type, self::TYPES);
+    public function __construct(?string $content = null, ?string $type = null)
+    {
+        Assertion::nullOrInArray($type, self::TYPES);
+
         $this->content = $content;
         $this->type    = $type;
     }
@@ -29,9 +28,9 @@ final class Update implements Request
     /** @inheritdoc */
     public function jsonSerialize() : array
     {
-        return [
+        return \array_filter([
             'content' => $this->content,
             'type' => $this->type,
-        ];
+        ]);
     }
 }

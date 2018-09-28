@@ -5,12 +5,10 @@ declare(strict_types=1);
 namespace Wingu\Engine\SDK\Tests\Api\Component;
 
 use GuzzleHttp\Psr7\Response;
-use Http\Message\MessageFactory\GuzzleMessageFactory;
 use Http\Mock\Client as MockClient;
 use Psr\Http\Message\RequestInterface;
 use Wingu\Engine\SDK\Api\Component\ComponentApi;
 use Wingu\Engine\SDK\Api\Configuration;
-use Wingu\Engine\SDK\Hydrator\SymfonySerializerHydrator;
 use Wingu\Engine\SDK\Model\Request\Component\Copy;
 use Wingu\Engine\SDK\Model\Response\Component\Action;
 use Wingu\Engine\SDK\Model\Response\Component\AudioPlaylist;
@@ -56,8 +54,6 @@ class ComponentApiTest extends ApiTest
     public function testMyComponentReturnsComponent() : void
     {
         $configurationMock = new Configuration();
-        $requestFactory    = new GuzzleMessageFactory();
-        $hydrator          = new SymfonySerializerHydrator();
 
         $httpClient = new MockClient();
         $httpClient->addResponse(
@@ -68,7 +64,7 @@ class ComponentApiTest extends ApiTest
             )
         );
 
-        $winguApi = new ComponentApi($configurationMock, $httpClient, $requestFactory, $hydrator);
+        $winguApi = new ComponentApi($configurationMock, $httpClient);
 
         $actual   = $winguApi->myComponent('a81700f1-83d1-4d1c-be86-37410b6a8d0a');
         $expected = $this->getExpectedComponent();
@@ -79,8 +75,6 @@ class ComponentApiTest extends ApiTest
     public function testMyComponentsReturnsResult() : void
     {
         $configurationMock = new Configuration();
-        $requestFactory    = new GuzzleMessageFactory();
-        $hydrator          = new SymfonySerializerHydrator();
 
         $httpClient = new MockClient();
         $httpClient->addResponse(
@@ -91,7 +85,7 @@ class ComponentApiTest extends ApiTest
             )
         );
 
-        $componentApi = new ComponentApi($configurationMock, $httpClient, $requestFactory, $hydrator);
+        $componentApi = new ComponentApi($configurationMock, $httpClient);
         $actual       = $componentApi->myComponents();
 
         $expected = [
@@ -120,8 +114,6 @@ class ComponentApiTest extends ApiTest
     public function testCopyComponentCopiesComponentToMultipleDecks() : void
     {
         $configurationMock = new Configuration();
-        $requestFactory    = new GuzzleMessageFactory();
-        $hydrator          = new SymfonySerializerHydrator();
 
         $httpClient = new MockClient();
         $response   = new Response(
@@ -130,7 +122,7 @@ class ComponentApiTest extends ApiTest
         );
         $httpClient->addResponse($response);
 
-        $winguApi = new ComponentApi($configurationMock, $httpClient, $requestFactory, $hydrator);
+        $winguApi = new ComponentApi($configurationMock, $httpClient);
 
         $winguApi->copyMyComponent(
             '666dd3d7-5568-4b01-ae80-22899ca5fec5',

@@ -5,15 +5,15 @@ declare(strict_types=1);
 namespace Wingu\Engine\SDK\Tests\Api\Content;
 
 use GuzzleHttp\Psr7\Response;
-use Http\Message\MessageFactory\GuzzleMessageFactory;
 use Http\Mock\Client as MockClient;
 use Psr\Http\Message\RequestInterface;
 use Wingu\Engine\SDK\Api\Configuration;
 use Wingu\Engine\SDK\Api\Content\Content;
-use Wingu\Engine\SDK\Hydrator\SymfonySerializerHydrator;
-use Wingu\Engine\SDK\Model\Request\Content\Pack as RequestPack;
+use Wingu\Engine\SDK\Model\Request\Content\Pack\Create as CreatePack;
+use Wingu\Engine\SDK\Model\Request\Content\Pack\Update as UpdatePack;
 use Wingu\Engine\SDK\Model\Request\Content\PrivateContent as RequestContent;
 use Wingu\Engine\SDK\Model\Request\Content\PrivateContentChannels;
+use Wingu\Engine\SDK\Model\Request\Content\Update as UpdateContent;
 use Wingu\Engine\SDK\Model\Response\Card\Card;
 use Wingu\Engine\SDK\Model\Response\Card\Position;
 use Wingu\Engine\SDK\Model\Response\Component\Action;
@@ -60,8 +60,6 @@ final class ContentTest extends ApiTest
     public function testMyContentReturnsPrivateContent() : void
     {
         $configurationMock = new Configuration();
-        $requestFactory    = new GuzzleMessageFactory();
-        $hydrator          = new SymfonySerializerHydrator();
 
         $httpClient = new MockClient();
         $httpClient->addResponse(
@@ -72,7 +70,7 @@ final class ContentTest extends ApiTest
             )
         );
 
-        $winguApi = new Content($configurationMock, $httpClient, $requestFactory, $hydrator);
+        $winguApi = new Content($configurationMock, $httpClient);
         $actual   = $winguApi->myContent('12d1da34-0000-4000-a000-000000000001');
 
         $expected = $this->getExpectedPrivateContent();
@@ -83,8 +81,6 @@ final class ContentTest extends ApiTest
     public function testMyContentsReturnsResult() : void
     {
         $configurationMock = new Configuration();
-        $requestFactory    = new GuzzleMessageFactory();
-        $hydrator          = new SymfonySerializerHydrator();
 
         $httpClient = new MockClient();
         $httpClient->addResponse(
@@ -95,7 +91,7 @@ final class ContentTest extends ApiTest
             )
         );
 
-        $contentApi = new Content($configurationMock, $httpClient, $requestFactory, $hydrator);
+        $contentApi = new Content($configurationMock, $httpClient);
         $actual     = $contentApi->myContents();
 
         $expected = [
@@ -112,8 +108,6 @@ final class ContentTest extends ApiTest
     public function testPatchMyContentChannelsAttachesContent() : void
     {
         $configurationMock = new Configuration();
-        $requestFactory    = new GuzzleMessageFactory();
-        $hydrator          = new SymfonySerializerHydrator();
 
         $httpClient = new MockClient();
         $response   = new Response(
@@ -122,7 +116,7 @@ final class ContentTest extends ApiTest
         );
         $httpClient->addResponse($response);
 
-        $winguApi = new Content($configurationMock, $httpClient, $requestFactory, $hydrator);
+        $winguApi = new Content($configurationMock, $httpClient);
 
         $winguApi->attachMyContentToChannels(
             '12d1da34-0000-4000-a000-000000000014',
@@ -146,8 +140,6 @@ final class ContentTest extends ApiTest
     public function testPutMyContentChannelsAttachesContentExclusively() : void
     {
         $configurationMock = new Configuration();
-        $requestFactory    = new GuzzleMessageFactory();
-        $hydrator          = new SymfonySerializerHydrator();
 
         $httpClient = new MockClient();
         $response   = new Response(
@@ -156,7 +148,7 @@ final class ContentTest extends ApiTest
         );
         $httpClient->addResponse($response);
 
-        $winguApi = new Content($configurationMock, $httpClient, $requestFactory, $hydrator);
+        $winguApi = new Content($configurationMock, $httpClient);
 
         $winguApi->attachMyContentToChannelsExclusively(
             '12d1da34-0000-4000-a000-000000000014',
@@ -175,8 +167,6 @@ final class ContentTest extends ApiTest
     public function testPostContentCreatesContent() : void
     {
         $configurationMock = new Configuration();
-        $requestFactory    = new GuzzleMessageFactory();
-        $hydrator          = new SymfonySerializerHydrator();
 
         $httpClient = new MockClient();
         $response   = new Response(
@@ -186,7 +176,7 @@ final class ContentTest extends ApiTest
         );
         $httpClient->addResponse($response);
 
-        $winguApi = new Content($configurationMock, $httpClient, $requestFactory, $hydrator);
+        $winguApi = new Content($configurationMock, $httpClient);
 
         $actualResponse = $winguApi->createContent(
             new RequestContent(
@@ -209,8 +199,6 @@ final class ContentTest extends ApiTest
     public function testPostMyPackCreatesPack() : void
     {
         $configurationMock = new Configuration();
-        $requestFactory    = new GuzzleMessageFactory();
-        $hydrator          = new SymfonySerializerHydrator();
 
         $httpClient = new MockClient();
         $response   = new Response(
@@ -220,10 +208,10 @@ final class ContentTest extends ApiTest
         );
         $httpClient->addResponse($response);
 
-        $winguApi = new Content($configurationMock, $httpClient, $requestFactory, $hydrator);
+        $winguApi = new Content($configurationMock, $httpClient);
 
         $actualResponse = $winguApi->createMyPack(
-            new RequestPack(
+            new CreatePack(
                 'fb574c18-bff6-4b84-9e5e-5d7047dddf01',
                 '1e4bfb95-87d6-4070-b9cd-a85681595f62',
                 'en'
@@ -242,11 +230,9 @@ final class ContentTest extends ApiTest
         self::assertEquals($expectedResponse, $actualResponse);
     }
 
-    public function testDeleteMyPackRemovesPrivatePack() : void
+    public function testDeleteContentRemovesContent() : void
     {
         $configurationMock = new Configuration();
-        $requestFactory    = new GuzzleMessageFactory();
-        $hydrator          = new SymfonySerializerHydrator();
 
         $httpClient = new MockClient();
         $response   = new Response(
@@ -255,7 +241,53 @@ final class ContentTest extends ApiTest
         );
         $httpClient->addResponse($response);
 
-        $winguApi = new Content($configurationMock, $httpClient, $requestFactory, $hydrator);
+        $winguApi = new Content($configurationMock, $httpClient);
+
+        $winguApi->deleteContent('12d1da34-0000-4000-a000-000000000018');
+
+        /** @var RequestInterface $actualRequest */
+        $actualRequest = $httpClient->getLastRequest();
+        self::assertSame('', $actualRequest->getBody()->getContents());
+        self::assertSame('DELETE', $actualRequest->getMethod());
+    }
+
+    public function testUpdateContentPatchesContent() : void
+    {
+        $configurationMock = new Configuration();
+
+        $httpClient = new MockClient();
+        $response   = new Response(
+            204,
+            ['Content-Type' => 'application/json']
+        );
+        $httpClient->addResponse($response);
+
+        $winguApi = new Content($configurationMock, $httpClient);
+
+        $winguApi->updateContent(
+            '12d1da34-0000-4000-a000-000000000002',
+            new UpdateContent('00da2678-7517-4751-996c-ec21edb662ed')
+        );
+
+        /** @var RequestInterface $actualRequest */
+        $actualRequest = $httpClient->getLastRequest();
+        $contents      = $actualRequest->getBody()->getContents();
+        self::assertSame('{"template":"00da2678-7517-4751-996c-ec21edb662ed"}', $contents);
+        self::assertSame('PATCH', $actualRequest->getMethod());
+    }
+
+    public function testDeleteMyPackRemovesPrivatePack() : void
+    {
+        $configurationMock = new Configuration();
+
+        $httpClient = new MockClient();
+        $response   = new Response(
+            204,
+            ['Content-Type' => 'application/json']
+        );
+        $httpClient->addResponse($response);
+
+        $winguApi = new Content($configurationMock, $httpClient);
 
         $winguApi->deleteMyPack('749b3b88-cee7-495c-9bf0-d1fc1d869cee');
 
@@ -263,6 +295,31 @@ final class ContentTest extends ApiTest
         $actualRequest = $httpClient->getLastRequest();
         self::assertSame('', $actualRequest->getBody()->getContents());
         self::assertSame('DELETE', $actualRequest->getMethod());
+    }
+
+    public function testUpdateMyPackPatchesPrivatePack() : void
+    {
+        $configurationMock = new Configuration();
+
+        $httpClient = new MockClient();
+        $response   = new Response(
+            204,
+            ['Content-Type' => 'application/json']
+        );
+        $httpClient->addResponse($response);
+
+        $winguApi = new Content($configurationMock, $httpClient);
+
+        $winguApi->updateMyPack(
+            '2fafed3b-bccb-4c66-8b38-ad76eb49c8e4',
+            new UpdatePack('de')
+        );
+
+        /** @var RequestInterface $actualRequest */
+        $actualRequest = $httpClient->getLastRequest();
+        $contents      = $actualRequest->getBody()->getContents();
+        self::assertSame('{"locale":"de"}', $contents);
+        self::assertSame('PATCH', $actualRequest->getMethod());
     }
 
     private function getExpectedPrivateContent() : PrivateContent

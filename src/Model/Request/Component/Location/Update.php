@@ -9,15 +9,17 @@ use Wingu\Engine\SDK\Model\Request\Request;
 
 final class Update implements Request
 {
-    /** @var Coordinates */
+    private const MAX_VALUE = 2000000;
+
+    /** @var Coordinates|null */
     private $coordinates;
 
     /** @var int|null */
     private $radius;
 
-    public function __construct(Coordinates $coordinates, ?int $radius)
+    public function __construct(?Coordinates $coordinates = null, ?int $radius = null)
     {
-        Assertion::nullOrRange($radius, 0, 2000000);
+        Assertion::nullOrRange($radius, 0, self::MAX_VALUE);
         $this->coordinates = $coordinates;
         $this->radius      = $radius;
     }
@@ -25,9 +27,9 @@ final class Update implements Request
     /** @inheritdoc */
     public function jsonSerialize() : array
     {
-        return [
+        return \array_filter([
             'coordinates' => $this->coordinates,
             'radius' => $this->radius,
-        ];
+        ]);
     }
 }

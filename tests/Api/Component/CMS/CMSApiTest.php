@@ -5,12 +5,10 @@ declare(strict_types=1);
 namespace Wingu\Engine\SDK\Tests\Api\Component\CMS;
 
 use GuzzleHttp\Psr7\Response;
-use Http\Message\MessageFactory\GuzzleMessageFactory;
 use Http\Mock\Client as MockClient;
 use Psr\Http\Message\RequestInterface;
 use Wingu\Engine\SDK\Api\Component\CMSApi;
 use Wingu\Engine\SDK\Api\Configuration;
-use Wingu\Engine\SDK\Hydrator\SymfonySerializerHydrator;
 use Wingu\Engine\SDK\Model\Request\Component\CMS\Create as CreateCMS;
 use Wingu\Engine\SDK\Model\Request\Component\CMS\Update as UpdateCMS;
 use Wingu\Engine\SDK\Model\Response\Component\CMS;
@@ -21,8 +19,6 @@ class CMSApiTest extends ApiTest
     public function testCreateReturnsNewCmsComponent() : void
     {
         $configurationMock = new Configuration();
-        $requestFactory    = new GuzzleMessageFactory();
-        $hydrator          = new SymfonySerializerHydrator();
 
         $httpClient = new MockClient();
         $response   = new Response(
@@ -32,7 +28,7 @@ class CMSApiTest extends ApiTest
         );
         $httpClient->addResponse($response);
 
-        $winguApi = new CMSApi($configurationMock, $httpClient, $requestFactory, $hydrator);
+        $winguApi = new CMSApi($configurationMock, $httpClient);
 
         $actualResponse = $winguApi->create(
             new CreateCMS(
@@ -53,8 +49,6 @@ class CMSApiTest extends ApiTest
     public function testUpdatePatchesCmsComponent() : void
     {
         $configurationMock = new Configuration();
-        $requestFactory    = new GuzzleMessageFactory();
-        $hydrator          = new SymfonySerializerHydrator();
 
         $httpClient = new MockClient();
         $response   = new Response(
@@ -63,7 +57,7 @@ class CMSApiTest extends ApiTest
         );
         $httpClient->addResponse($response);
 
-        $winguApi = new CMSApi($configurationMock, $httpClient, $requestFactory, $hydrator);
+        $winguApi = new CMSApi($configurationMock, $httpClient);
 
         $winguApi->update(
             '261a7aab-4b03-4817-b471-060c2e046826',

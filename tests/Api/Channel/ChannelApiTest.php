@@ -5,12 +5,10 @@ declare(strict_types=1);
 namespace Wingu\Engine\SDK\Tests\Api\Channel;
 
 use GuzzleHttp\Psr7\Response;
-use Http\Message\MessageFactory\GuzzleMessageFactory;
 use Http\Mock\Client as MockClient;
 use Wingu\Engine\SDK\Api\Channel\ChannelApi;
 use Wingu\Engine\SDK\Api\Configuration;
 use Wingu\Engine\SDK\Api\Exception\HttpClient\NotFound;
-use Wingu\Engine\SDK\Hydrator\SymfonySerializerHydrator;
 use Wingu\Engine\SDK\Model\Request\Channel\PrivateChannelsFilter;
 use Wingu\Engine\SDK\Model\Request\Channel\PrivateChannelsSorting;
 use Wingu\Engine\SDK\Model\Request\PaginationParameters;
@@ -32,8 +30,6 @@ final class ChannelApiTest extends ChannelApiTestCase
     public function testMyChannelReturnsPrivateBeacon() : void
     {
         $configurationMock = new Configuration();
-        $requestFactory    = new GuzzleMessageFactory();
-        $hydrator          = new SymfonySerializerHydrator();
 
         $httpClient = new MockClient();
         $httpClient->addResponse(
@@ -44,7 +40,7 @@ final class ChannelApiTest extends ChannelApiTestCase
             )
         );
 
-        $winguApi = new ChannelApi($configurationMock, $httpClient, $requestFactory, $hydrator);
+        $winguApi = new ChannelApi($configurationMock, $httpClient);
 
         $actual = $winguApi->myChannel('8c798a67-0000-4000-a000-000000000001');
 
@@ -55,8 +51,6 @@ final class ChannelApiTest extends ChannelApiTestCase
     public function testMyChannelReturnsPrivateGeofence() : void
     {
         $configurationMock = new Configuration();
-        $requestFactory    = new GuzzleMessageFactory();
-        $hydrator          = new SymfonySerializerHydrator();
 
         $httpClient = new MockClient();
         $httpClient->addResponse(
@@ -67,7 +61,7 @@ final class ChannelApiTest extends ChannelApiTestCase
             )
         );
 
-        $winguApi = new ChannelApi($configurationMock, $httpClient, $requestFactory, $hydrator);
+        $winguApi = new ChannelApi($configurationMock, $httpClient);
 
         $actual   = $winguApi->myChannel('0a0b190a-0000-4000-a000-000000000001');
         $expected = $this->getExpectedPrivateGeofence();
@@ -78,8 +72,6 @@ final class ChannelApiTest extends ChannelApiTestCase
     public function testMyChannelReturnsPrivateNfc() : void
     {
         $configurationMock = new Configuration();
-        $requestFactory    = new GuzzleMessageFactory();
-        $hydrator          = new SymfonySerializerHydrator();
 
         $httpClient = new MockClient();
         $httpClient->addResponse(
@@ -90,7 +82,7 @@ final class ChannelApiTest extends ChannelApiTestCase
             )
         );
 
-        $winguApi = new ChannelApi($configurationMock, $httpClient, $requestFactory, $hydrator);
+        $winguApi = new ChannelApi($configurationMock, $httpClient);
 
         $actual   = $winguApi->myChannel('44da7d7e-0000-4000-a000-000000000001');
         $expected = $this->getExpectedPrivateNfc();
@@ -101,8 +93,6 @@ final class ChannelApiTest extends ChannelApiTestCase
     public function testMyChannelReturnsPrivateQrCode() : void
     {
         $configurationMock = new Configuration();
-        $requestFactory    = new GuzzleMessageFactory();
-        $hydrator          = new SymfonySerializerHydrator();
 
         $httpClient = new MockClient();
         $httpClient->addResponse(
@@ -113,7 +103,7 @@ final class ChannelApiTest extends ChannelApiTestCase
             )
         );
 
-        $winguApi = new ChannelApi($configurationMock, $httpClient, $requestFactory, $hydrator);
+        $winguApi = new ChannelApi($configurationMock, $httpClient);
 
         $actual   = $winguApi->myChannel('9a8798c6-0000-4000-a000-000000000001');
         $expected = $this->getExpectedPrivateQrCode();
@@ -124,8 +114,6 @@ final class ChannelApiTest extends ChannelApiTestCase
     public function testMyChannelsReturnsResult() : void
     {
         $configurationMock = new Configuration();
-        $requestFactory    = new GuzzleMessageFactory();
-        $hydrator          = new SymfonySerializerHydrator();
 
         $httpClient = new MockClient();
         $httpClient->addResponse(
@@ -136,7 +124,7 @@ final class ChannelApiTest extends ChannelApiTestCase
             )
         );
 
-        $channelApi = new ChannelApi($configurationMock, $httpClient, $requestFactory, $hydrator);
+        $channelApi = new ChannelApi($configurationMock, $httpClient);
         $actual     = $channelApi->myChannels();
 
         $expected = [
@@ -153,8 +141,6 @@ final class ChannelApiTest extends ChannelApiTestCase
     public function testMyChannelsReturnsResultAndFetchesNextPages() : void
     {
         $configurationMock = new Configuration();
-        $requestFactory    = new GuzzleMessageFactory();
-        $hydrator          = new SymfonySerializerHydrator();
 
         $httpClient = new MockClient();
         $httpClient->addResponse(
@@ -186,7 +172,7 @@ final class ChannelApiTest extends ChannelApiTestCase
             )
         );
 
-        $channelApi = new ChannelApi($configurationMock, $httpClient, $requestFactory, $hydrator);
+        $channelApi = new ChannelApi($configurationMock, $httpClient);
         $actual     = $channelApi->myChannels();
 
         $expected = [
@@ -203,8 +189,6 @@ final class ChannelApiTest extends ChannelApiTestCase
     public function testMyChannelsWithFiltersReturnsFilteredResult() : void
     {
         $configurationMock = new Configuration();
-        $requestFactory    = new GuzzleMessageFactory();
-        $hydrator          = new SymfonySerializerHydrator();
 
         $httpClient = new MockClient();
         $httpClient->addResponse(
@@ -215,7 +199,7 @@ final class ChannelApiTest extends ChannelApiTestCase
             )
         );
 
-        $channelApi = new ChannelApi($configurationMock, $httpClient, $requestFactory, $hydrator);
+        $channelApi = new ChannelApi($configurationMock, $httpClient);
         // beacons with content attached
         $actual = $channelApi->myChannels(new PrivateChannelsFilter(null, null, 'beacon', null, null, null, true));
 
@@ -232,8 +216,6 @@ final class ChannelApiTest extends ChannelApiTestCase
     public function testMyChannelsWithSortingReturnsSortedResult() : void
     {
         $configurationMock = new Configuration();
-        $requestFactory    = new GuzzleMessageFactory();
-        $hydrator          = new SymfonySerializerHydrator();
 
         $httpClient = new MockClient();
         $httpClient->addResponse(
@@ -244,7 +226,7 @@ final class ChannelApiTest extends ChannelApiTestCase
             )
         );
 
-        $channelApi = new ChannelApi($configurationMock, $httpClient, $requestFactory, $hydrator);
+        $channelApi = new ChannelApi($configurationMock, $httpClient);
         $actual     = $channelApi->myChannels(null, new PrivateChannelsSorting(RequestParameters::SORTING_ORDER_DESC));
 
         $expected = [
@@ -260,8 +242,6 @@ final class ChannelApiTest extends ChannelApiTestCase
     public function testMyChannelsPageReturnsPageWithChannelsEmbedded() : void
     {
         $configurationMock = new Configuration();
-        $requestFactory    = new GuzzleMessageFactory();
-        $hydrator          = new SymfonySerializerHydrator();
 
         $httpClient = new MockClient();
         $httpClient->addResponse(
@@ -272,7 +252,7 @@ final class ChannelApiTest extends ChannelApiTestCase
             )
         );
 
-        $channelApi     = new ChannelApi($configurationMock, $httpClient, $requestFactory, $hydrator);
+        $channelApi     = new ChannelApi($configurationMock, $httpClient);
         $actual         = $channelApi->myChannelsPage(new PaginationParameters(2, 4));
         $actualChannels = $actual->embedded();
 
@@ -297,8 +277,6 @@ final class ChannelApiTest extends ChannelApiTestCase
     public function testMyChannelsPageWithWithFiltersReturnsFilteredResult() : void
     {
         $configurationMock = new Configuration();
-        $requestFactory    = new GuzzleMessageFactory();
-        $hydrator          = new SymfonySerializerHydrator();
 
         $httpClient = new MockClient();
         $httpClient->addResponse(
@@ -309,7 +287,7 @@ final class ChannelApiTest extends ChannelApiTestCase
             )
         );
 
-        $channelApi     = new ChannelApi($configurationMock, $httpClient, $requestFactory, $hydrator);
+        $channelApi     = new ChannelApi($configurationMock, $httpClient);
         $actual         = $channelApi->myChannelsPage(
             new PaginationParameters(2, 3),
             new PrivateChannelsFilter(null, null, 'beacon', null, null, null, true)
@@ -337,8 +315,6 @@ final class ChannelApiTest extends ChannelApiTestCase
     public function testMyChannelsPageWithSortingReturnsSortedResult() : void
     {
         $configurationMock = new Configuration();
-        $requestFactory    = new GuzzleMessageFactory();
-        $hydrator          = new SymfonySerializerHydrator();
 
         $httpClient = new MockClient();
         $httpClient->addResponse(
@@ -349,7 +325,7 @@ final class ChannelApiTest extends ChannelApiTestCase
             )
         );
 
-        $channelApi     = new ChannelApi($configurationMock, $httpClient, $requestFactory, $hydrator);
+        $channelApi     = new ChannelApi($configurationMock, $httpClient);
         $actual         = $channelApi->myChannelsPage(
             new PaginationParameters(2, 3),
             null,
@@ -378,15 +354,13 @@ final class ChannelApiTest extends ChannelApiTestCase
     public function testMyChannelsPageThrowsExceptionWhenPageIsNotFound() : void
     {
         $configurationMock = new Configuration();
-        $requestFactory    = new GuzzleMessageFactory();
-        $hydrator          = new SymfonySerializerHydrator();
-        $httpClient        = new MockClient();
+
+        $httpClient = new MockClient();
         $httpClient->addResponse(new Response(
             404
         ));
-//        $httpClient->addResponse(new NotFound())
 
-        $channelApi = new ChannelApi($configurationMock, $httpClient, $requestFactory, $hydrator);
+        $channelApi = new ChannelApi($configurationMock, $httpClient);
 
         $this->expectException(NotFound::class);
         $this->expectExceptionMessage('Resource not found.');

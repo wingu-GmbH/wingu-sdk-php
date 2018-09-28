@@ -39,9 +39,10 @@ final class RequestDataManipulatorTest extends TestCase
     }
 
     /**
-     * @dataProvider dataProviderTestFlatten
      * @param mixed[] $data
      * @param mixed[] $expected
+     *
+     * @dataProvider dataProviderTestFlatten
      */
     public function testFlatten(array $data, array $expected) : void
     {
