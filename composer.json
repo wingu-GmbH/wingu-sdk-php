@@ -33,9 +33,9 @@
 
     "phpdocumentor/reflection-docblock": "^3.0|^4.0",
 
-    "symfony/serializer": "^4.0",
-    "symfony/property-access": "^4.0",
-    "symfony/property-info": "^4.0",
+    "symfony/serializer": "^3.4|^4.0",
+    "symfony/property-access": "^3.4|^4.0",
+    "symfony/property-info": "^3.4|^4.0",
 
     "speicher210/business-hours": "^2.0"
   },

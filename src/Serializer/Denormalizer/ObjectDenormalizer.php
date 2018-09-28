@@ -36,7 +36,12 @@ final class ObjectDenormalizer extends ObjectNormalizer
     }
 
     /**
-     * {@inheritdoc}
+     * @param mixed[]      $data
+     * @param mixed        $class
+     * @param mixed[]      $context
+     * @param mixed[]|bool $allowedAttributes
+     *
+     * @return mixed|object|null
      */
     protected function instantiateObject(
         array &$data,
@@ -62,7 +67,11 @@ final class ObjectDenormalizer extends ObjectNormalizer
                 $paramName = $constructorParameter->name;
                 $key       = $this->nameConverter !== null ? $this->nameConverter->normalize($paramName) : $paramName;
 
-                $allowed = $allowedAttributes === false || (\is_array($allowedAttributes) && \in_array($paramName, $allowedAttributes, true));
+                $allowed = $allowedAttributes === false || (\is_array($allowedAttributes) && \in_array(
+                    $paramName,
+                    $allowedAttributes,
+                    true
+                ));
                 $ignored = ! $this->isAllowedAttribute($class, $paramName, $format, $context);
                 if ($constructorParameter->isVariadic()) {
                     if ($allowed && ! $ignored && (isset($data[$key]) || \array_key_exists($key, $data))) {
@@ -88,7 +97,7 @@ final class ObjectDenormalizer extends ObjectNormalizer
                                     throw new LogicException(
                                         \sprintf(
                                             'Cannot create an instance of %s from serialized data because the serializer inject in "%s" is not a denormalizer',
-                                            $constructorParameter->getClass(),
+                                            $constructorParameter->getClass()->getName(),
                                             static::class
                                         )
                                     );
@@ -216,7 +225,10 @@ final class ObjectDenormalizer extends ObjectNormalizer
             // PHP's json_decode automatically converts Numbers without a decimal part to integers.     Boundaries
             // To circumvent this behavior, integers are converted to floats when denormalizing JSON based formats and when
             // a float is expected.
-            if ($builtinType === Type::BUILTIN_TYPE_FLOAT && \is_int($data) && $format !== null && \strpos($format, JsonEncoder::FORMAT) !== false) {
+            if ($builtinType === Type::BUILTIN_TYPE_FLOAT && \is_int($data) && $format !== null && \strpos(
+                $format,
+                JsonEncoder::FORMAT
+            ) !== false) {
                 return (float) $data;
             }
 
