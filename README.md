@@ -3,6 +3,8 @@
 [![Build Status](https://travis-ci.org/wingu-GmbH/wingu-sdk-php.png?branch=master)](https://travis-ci.org/wingu-GmbH/wingu-sdk-php)
 [![Code Coverage](https://codecov.io/gh/wingu-GmbH/wingu-sdk-php/branch/master/graph/badge.svg)](https://codecov.io/gh/wingu-GmbH/wingu-sdk-php)
 [![GitHub license](https://img.shields.io/github/license/wingu-GmbH/wingu-sdk-php.svg)](https://github.com/wingu-GmbH/wingu-sdk-php/blob/master/LICENSE.md)
+[![GitHub tag](https://img.shields.io/github/tag/wingu-GmbH/wingu-sdk-php.svg)](https://github.com/wingu-GmbH/wingu-sdk-php/tags)
+[![Packagist](https://img.shields.io/packagist/v/wingu/wingu-sdk-php.svg)](https://packagist.org/packages/wingu/wingu-sdk-php)
 
 Welcome to Wingu PHP SDK. It will help you connect to the API of Wingu Proximity Platform.  
 Documentation is avaliable at [Wingu Engine API Doc](https://wingu-engine.de/api/doc).
