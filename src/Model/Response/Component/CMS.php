@@ -8,6 +8,10 @@ final class CMS implements Component
 {
     use ComponentTrait;
 
+    private const TYPE_HTML = 'html';
+
+    private const TYPE_MARKDOWN = 'markdown';
+
     /** @var string */
     private $content;
 
@@ -34,5 +38,15 @@ final class CMS implements Component
     public function type() : string
     {
         return $this->type;
+    }
+
+    public function isHtml() : bool
+    {
+        return $this->type === self::TYPE_HTML;
+    }
+
+    public function isMarkdown() : bool
+    {
+        return $this->type === self::TYPE_MARKDOWN;
     }
 }

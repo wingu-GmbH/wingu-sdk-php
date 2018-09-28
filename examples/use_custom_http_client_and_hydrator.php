@@ -23,9 +23,8 @@ $cms = $componentApi->myComponent('98ba7df5-a1f1-49ee-a005-842897b91a1a');
 
 $content = $cms->content();
 
-if ($cms->type() === 'markdown') {
+if ($cms->isMarkdown()) {
     /** Parse and do other things to Markdown $content you retrieved */
 } else {
     /** Content must be HTML, treat it differently */
 }
-

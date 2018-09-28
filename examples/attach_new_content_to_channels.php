@@ -10,10 +10,10 @@ $configuration  = new \Wingu\Engine\SDK\Api\Configuration($apiKey);
 $winguApi       = new \Wingu\Engine\SDK\Api\WinguApi($configuration);
 
 // Create new CMS component with your content, it can also be Markdown, if so - pass 'markdown' as 2nd parameter
-$createdComponent = $winguApi->component()->cms()->create(new \Wingu\Engine\SDK\Model\Request\Component\CMS\Create($myHtmlContent, 'html'));
+$createdComponent = $winguApi->component()->cms()->create(new \Wingu\Engine\SDK\Model\Request\Component\CMS\Create('<p>html content</p>', 'html'));
 
 // Create new Deck that will later on hold CMS component, optionally you can add description and legal note to it
-$createdDeck      = $winguApi->deck()->createDeck(new \Wingu\Engine\SDK\Model\Request\Deck\Create($myDeckTitle, 'Short description', $legalNote));
+$createdDeck      = $winguApi->deck()->createDeck(new \Wingu\Engine\SDK\Model\Request\Deck\Create('Deck title', 'Short description', 'Some legal note'));
 
 // Fetch first available template and store its ID
 $template         = $winguApi->contentTemplate()->templates()->current()->id();
