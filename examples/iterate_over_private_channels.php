@@ -6,11 +6,8 @@ require_once __DIR__ . '/../vendor/autoload.php';
 
 $apiKey = 'your-api-key'; // Change this to your API key.
 
-$messageFactory = new \Http\Message\MessageFactory\GuzzleMessageFactory();
 $configuration  = new \Wingu\Engine\SDK\Api\Configuration($apiKey);
-$httpClient     = new \Http\Client\Curl\Client($messageFactory);
-$hydrator       = new \Wingu\Engine\SDK\Hydrator\SymfonySerializerHydrator();
-$winguApi       = new \Wingu\Engine\SDK\Api\WinguApi($configuration, $httpClient, $messageFactory, $hydrator);
+$winguApi       = new \Wingu\Engine\SDK\Api\WinguApi($configuration);
 
 $channelsApi = $winguApi->channel();
 
