@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Wingu\Engine\SDK\Model\Request\Component;
 
+use Assert\Assert;
 use Wingu\Engine\SDK\Assertion;
 use Wingu\Engine\SDK\Model\Request\Request;
 
@@ -18,9 +19,7 @@ class Copy implements Request
     public function __construct(array $decks)
     {
         Assertion::notEmpty($decks);
-        foreach ($decks as $deck) {
-            Assertion::uuid($deck);
-        }
+        Assert::thatAll($decks)->uuid();
 
         $this->decks = $decks;
     }

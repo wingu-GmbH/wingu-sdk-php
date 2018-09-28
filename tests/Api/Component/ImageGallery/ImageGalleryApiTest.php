@@ -5,16 +5,15 @@ declare(strict_types=1);
 namespace Wingu\Engine\SDK\Tests\Api\Component\ImageGallery;
 
 use GuzzleHttp\Psr7\Response;
-use Http\Message\MessageFactory\GuzzleMessageFactory;
 use Http\Mock\Client as MockClient;
 use Psr\Http\Message\RequestInterface;
 use Wingu\Engine\SDK\Api\Component\ImageGalleryApi;
 use Wingu\Engine\SDK\Api\Configuration;
-use Wingu\Engine\SDK\Hydrator\SymfonySerializerHydrator;
 use Wingu\Engine\SDK\Model\Request\Component\ImageGallery\Create as CreateImageGallery;
 use Wingu\Engine\SDK\Model\Request\Component\ImageGallery\Image\Create as CreateImage;
 use Wingu\Engine\SDK\Model\Request\Component\ImageGallery\Image\Update as UpdateImage;
 use Wingu\Engine\SDK\Model\Request\Component\ImageGallery\ImagesPosition;
+use Wingu\Engine\SDK\Model\Request\StringValue;
 use Wingu\Engine\SDK\Model\Response\Component\Image;
 use Wingu\Engine\SDK\Model\Response\Component\ImageGallery;
 use Wingu\Engine\SDK\Model\Response\Component\ImageGalleryImage;
@@ -26,8 +25,6 @@ final class ImageGalleryApiTest extends ApiTest
     public function testCreateReturnsNewImageGalleryComponent() : void
     {
         $configurationMock = new Configuration();
-        $requestFactory    = new GuzzleMessageFactory();
-        $hydrator          = new SymfonySerializerHydrator();
 
         $httpClient = new MockClient();
         $response   = new Response(
@@ -37,7 +34,7 @@ final class ImageGalleryApiTest extends ApiTest
         );
         $httpClient->addResponse($response);
 
-        $winguApi = new ImageGalleryApi($configurationMock, $httpClient, $requestFactory, $hydrator);
+        $winguApi = new ImageGalleryApi($configurationMock, $httpClient);
 
         $actualResponse = $winguApi->create(new CreateImageGallery());
 
@@ -53,8 +50,6 @@ final class ImageGalleryApiTest extends ApiTest
     public function testCreateImageReturnsNewImageGalleryImage() : void
     {
         $configurationMock = new Configuration();
-        $requestFactory    = new GuzzleMessageFactory();
-        $hydrator          = new SymfonySerializerHydrator();
 
         $httpClient = new MockClient();
         $response   = new Response(
@@ -64,7 +59,7 @@ final class ImageGalleryApiTest extends ApiTest
         );
         $httpClient->addResponse($response);
 
-        $winguApi = new ImageGalleryApi($configurationMock, $httpClient, $requestFactory, $hydrator);
+        $winguApi = new ImageGalleryApi($configurationMock, $httpClient);
 
         $actualResponse = $winguApi->createImage(
             '75989153-1f69-49e2-82e7-d8892e6ddfab',
@@ -90,8 +85,6 @@ final class ImageGalleryApiTest extends ApiTest
     public function testUpdateImagePatchesImageGalleryImage() : void
     {
         $configurationMock = new Configuration();
-        $requestFactory    = new GuzzleMessageFactory();
-        $hydrator          = new SymfonySerializerHydrator();
 
         $httpClient = new MockClient();
         $response   = new Response(
@@ -100,13 +93,13 @@ final class ImageGalleryApiTest extends ApiTest
         );
         $httpClient->addResponse($response);
 
-        $winguApi = new ImageGalleryApi($configurationMock, $httpClient, $requestFactory, $hydrator);
+        $winguApi = new ImageGalleryApi($configurationMock, $httpClient);
 
         $winguApi->updateImage(
             '95d6a519-7824-4fba-86d1-60f70ef6ace1',
             new UpdateImage(
                 1,
-                'updated image name'
+                new StringValue('updated image name')
             )
         );
 
@@ -119,8 +112,6 @@ final class ImageGalleryApiTest extends ApiTest
     public function testUpdateImagesPositionPatchesImageGalleryImagesPosition() : void
     {
         $configurationMock = new Configuration();
-        $requestFactory    = new GuzzleMessageFactory();
-        $hydrator          = new SymfonySerializerHydrator();
 
         $httpClient = new MockClient();
         $response   = new Response(
@@ -129,7 +120,7 @@ final class ImageGalleryApiTest extends ApiTest
         );
         $httpClient->addResponse($response);
 
-        $winguApi = new ImageGalleryApi($configurationMock, $httpClient, $requestFactory, $hydrator);
+        $winguApi = new ImageGalleryApi($configurationMock, $httpClient);
 
         $winguApi->updateImagesPosition(
             '95d6a519-7824-4fba-86d1-60f70ef6ace1',
@@ -151,8 +142,6 @@ final class ImageGalleryApiTest extends ApiTest
     public function testDeleteImageRemovesImageGalleryImage() : void
     {
         $configurationMock = new Configuration();
-        $requestFactory    = new GuzzleMessageFactory();
-        $hydrator          = new SymfonySerializerHydrator();
 
         $httpClient = new MockClient();
         $response   = new Response(
@@ -161,7 +150,7 @@ final class ImageGalleryApiTest extends ApiTest
         );
         $httpClient->addResponse($response);
 
-        $winguApi = new ImageGalleryApi($configurationMock, $httpClient, $requestFactory, $hydrator);
+        $winguApi = new ImageGalleryApi($configurationMock, $httpClient);
 
         $winguApi->deleteImage('95d6a519-7824-4fba-86d1-60f70ef6ace1');
 

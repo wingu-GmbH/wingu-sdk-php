@@ -15,10 +15,10 @@ final class Links
     /** @var Link */
     private $last;
 
-    /** @var null|Link */
+    /** @var Link|null */
     private $previous;
 
-    /** @var null|Link */
+    /** @var Link|null */
     private $next;
 
     public function __construct(Link $self, Link $first, Link $last, ?Link $previous = null, ?Link $next = null)

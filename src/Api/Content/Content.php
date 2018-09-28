@@ -9,9 +9,11 @@ use Wingu\Engine\SDK\Api\Paginator\EmbeddedPage;
 use Wingu\Engine\SDK\Api\Paginator\PageInfo;
 use Wingu\Engine\SDK\Api\Paginator\PaginatedResponseIterator;
 use Wingu\Engine\SDK\Assertion;
-use Wingu\Engine\SDK\Model\Request\Content\Pack as RequestPack;
+use Wingu\Engine\SDK\Model\Request\Content\Pack\Create as CreatePack;
+use Wingu\Engine\SDK\Model\Request\Content\Pack\Update as UpdatePack;
 use Wingu\Engine\SDK\Model\Request\Content\PrivateContent as RequestContent;
 use Wingu\Engine\SDK\Model\Request\Content\PrivateContentChannels;
+use Wingu\Engine\SDK\Model\Request\Content\Update as UpdateContent;
 use Wingu\Engine\SDK\Model\Response\Content\Pack;
 use Wingu\Engine\SDK\Model\Response\Content\PrivateContent;
 
@@ -48,7 +50,7 @@ final class Content extends Api
         return $this->hydrator->hydrateResponse($response, PrivateContent::class);
     }
 
-    public function createMyPack(RequestPack $pack) : Pack
+    public function createMyPack(CreatePack $pack) : Pack
     {
         $request = $this->createPostRequest('/api/content/my/pack', $pack);
 
@@ -57,10 +59,34 @@ final class Content extends Api
         return $this->hydrator->hydrateResponse($response, Pack::class);
     }
 
+    public function deleteContent(string $id) : void
+    {
+        Assertion::uuid($id);
+        $request = $this->createDeleteRequest('/api/content/' . $id);
+
+        $this->handleRequest($request);
+    }
+
+    public function updateContent(string $id, UpdateContent $content) : void
+    {
+        Assertion::uuid($id);
+        $request = $this->createPatchRequest('/api/content/' . $id, $content);
+
+        $this->handleRequest($request);
+    }
+
     public function deleteMyPack(string $id) : void
     {
         Assertion::uuid($id);
         $request = $this->createDeleteRequest('/api/content/my/pack/' . $id);
+
+        $this->handleRequest($request);
+    }
+
+    public function updateMyPack(string $id, UpdatePack $pack) : void
+    {
+        Assertion::uuid($id);
+        $request = $this->createPatchRequest('/api/content/my/pack/' . $id, $pack);
 
         $this->handleRequest($request);
     }

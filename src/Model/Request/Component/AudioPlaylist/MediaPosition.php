@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Wingu\Engine\SDK\Model\Request\Component\AudioPlaylist;
 
+use Assert\Assert;
 use Wingu\Engine\SDK\Assertion;
 use Wingu\Engine\SDK\Model\Request\Request;
 
@@ -16,9 +17,8 @@ final class MediaPosition implements Request
     public function __construct(array $orderedMedia)
     {
         Assertion::notEmpty($orderedMedia);
-        foreach ($orderedMedia as $media) {
-            Assertion::uuid($media);
-        }
+        Assert::thatAll($orderedMedia)->uuid();
+
         $this->orderedMedia = $orderedMedia;
     }
 

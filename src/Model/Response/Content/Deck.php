@@ -15,7 +15,7 @@ final class Deck
     /** @var string */
     private $title;
 
-    /** @var null|string */
+    /** @var string|null */
     private $description;
 
     /** @var Card[] */

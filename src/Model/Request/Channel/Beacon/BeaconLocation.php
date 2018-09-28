@@ -8,10 +8,10 @@ use Wingu\Engine\SDK\Model\Request\Request;
 
 final class BeaconLocation implements Request
 {
-    /** @var null|Coordinates */
+    /** @var Coordinates|null */
     private $coordinates;
 
-    /** @var null|BeaconAddress */
+    /** @var BeaconAddress|null */
     private $address;
 
     public function __construct(?Coordinates $coordinates, ?BeaconAddress $address)

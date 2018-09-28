@@ -17,9 +17,10 @@ final class Update implements Request
     /** @var string|null */
     private $colorHex;
 
-    public function __construct(?string $type, ?string $colorHex)
+    public function __construct(?string $type = null, ?string $colorHex = null)
     {
-        Assertion::inArray($type, self::TYPES);
+        Assertion::nullOrInArray($type, self::TYPES);
+
         $this->type     = $type;
         $this->colorHex = $colorHex;
     }
@@ -27,9 +28,9 @@ final class Update implements Request
     /** @inheritdoc */
     public function jsonSerialize() : array
     {
-        return [
+        return \array_filter([
             'type' => $this->type,
             'colorHex' => $this->colorHex,
-        ];
+        ]);
     }
 }

@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Wingu\Engine\SDK\Tests\Api\Channel\Beacon;
 
 use GuzzleHttp\Psr7\Response;
-use Http\Message\MessageFactory\GuzzleMessageFactory;
 use Http\Mock\Client as MockClient;
 use Psr\Http\Message\RequestInterface;
 use Speicher210\BusinessHours\BusinessHours;
@@ -14,7 +13,6 @@ use Speicher210\BusinessHours\Day\Day;
 use Speicher210\BusinessHours\Day\Time\TimeInterval;
 use Wingu\Engine\SDK\Api\Channel\Beacon\BeaconApi;
 use Wingu\Engine\SDK\Api\Configuration;
-use Wingu\Engine\SDK\Hydrator\SymfonySerializerHydrator;
 use Wingu\Engine\SDK\Model\Request\BooleanValue;
 use Wingu\Engine\SDK\Model\Request\Channel\Beacon\BeaconAddress as RequestBeaconAddress;
 use Wingu\Engine\SDK\Model\Request\Channel\Beacon\BeaconLocation as RequestBeaconLocation;
@@ -77,8 +75,6 @@ final class BeaconApiTest extends ChannelApiTestCase
     public function testBeaconReturnsPublicBeacon() : void
     {
         $configurationMock = new Configuration();
-        $requestFactory    = new GuzzleMessageFactory();
-        $hydrator          = new SymfonySerializerHydrator();
 
         $httpClient = new MockClient();
         $httpClient->addResponse(
@@ -89,7 +85,7 @@ final class BeaconApiTest extends ChannelApiTestCase
             )
         );
 
-        $winguApi = new BeaconApi($configurationMock, $httpClient, $requestFactory, $hydrator);
+        $winguApi = new BeaconApi($configurationMock, $httpClient);
         $actual   = $winguApi->beacon('02a554ab-34bc-48b7-87ad-754037b8b09b');
 
         $expected = new PublicBeacon(
@@ -339,8 +335,6 @@ final class BeaconApiTest extends ChannelApiTestCase
     public function testMyBeaconReturnsPrivateBeacon() : void
     {
         $configurationMock = new Configuration();
-        $requestFactory    = new GuzzleMessageFactory();
-        $hydrator          = new SymfonySerializerHydrator();
 
         $httpClient = new MockClient();
         $httpClient->addResponse(
@@ -351,7 +345,7 @@ final class BeaconApiTest extends ChannelApiTestCase
             )
         );
 
-        $winguApi = new BeaconApi($configurationMock, $httpClient, $requestFactory, $hydrator);
+        $winguApi = new BeaconApi($configurationMock, $httpClient);
         $actual   = $winguApi->myBeacon('30b30e6b-5bb1-439d-916e-a724cc4268ed');
 
         $expectedFunctioningHours = new BusinessHours(
@@ -682,8 +676,6 @@ final class BeaconApiTest extends ChannelApiTestCase
     public function testEddystoneReturnsBeaconId() : void
     {
         $configurationMock = new Configuration();
-        $requestFactory    = new GuzzleMessageFactory();
-        $hydrator          = new SymfonySerializerHydrator();
 
         $httpClient = new MockClient();
         $httpClient->addResponse(
@@ -694,7 +686,7 @@ final class BeaconApiTest extends ChannelApiTestCase
             )
         );
 
-        $winguApi = new BeaconApi($configurationMock, $httpClient, $requestFactory, $hydrator);
+        $winguApi = new BeaconApi($configurationMock, $httpClient);
         $actual   = $winguApi->eddystone('https://wingu-sdk-test.de/78d9c5a7-18e2-4039-bd58-e8c608c3290a');
 
         self::assertSame('8c798a67-0000-4000-a000-000000000017', $actual);
@@ -703,8 +695,6 @@ final class BeaconApiTest extends ChannelApiTestCase
     public function testMyBeaconsReturnsResult() : void
     {
         $configurationMock = new Configuration();
-        $requestFactory    = new GuzzleMessageFactory();
-        $hydrator          = new SymfonySerializerHydrator();
 
         $httpClient = new MockClient();
         $httpClient->addResponse(
@@ -715,7 +705,7 @@ final class BeaconApiTest extends ChannelApiTestCase
             )
         );
 
-        $beaconApi = new BeaconApi($configurationMock, $httpClient, $requestFactory, $hydrator);
+        $beaconApi = new BeaconApi($configurationMock, $httpClient);
         $actual    = $beaconApi->myBeacons();
 
         $expected = [
@@ -745,8 +735,6 @@ final class BeaconApiTest extends ChannelApiTestCase
     public function testPostBeaconLocationUpdatesPublicBeaconLocation() : void
     {
         $configurationMock = new Configuration();
-        $requestFactory    = new GuzzleMessageFactory();
-        $hydrator          = new SymfonySerializerHydrator();
 
         $httpClient = new MockClient();
         $response   = new Response(
@@ -755,7 +743,7 @@ final class BeaconApiTest extends ChannelApiTestCase
         );
         $httpClient->addResponse($response);
 
-        $winguApi = new BeaconApi($configurationMock, $httpClient, $requestFactory, $hydrator);
+        $winguApi = new BeaconApi($configurationMock, $httpClient);
 
         $winguApi->updateBeaconLocation(
             '14683274-a9f0-46e8-8c04-ebc40e0d52cb',
@@ -777,8 +765,6 @@ final class BeaconApiTest extends ChannelApiTestCase
     public function testPatchMyBeaconUpdatesPrivateBeacon() : void
     {
         $configurationMock = new Configuration();
-        $requestFactory    = new GuzzleMessageFactory();
-        $hydrator          = new SymfonySerializerHydrator();
 
         $httpClient = new MockClient();
         $response   = new Response(
@@ -787,7 +773,7 @@ final class BeaconApiTest extends ChannelApiTestCase
         );
         $httpClient->addResponse($response);
 
-        $winguApi = new BeaconApi($configurationMock, $httpClient, $requestFactory, $hydrator);
+        $winguApi = new BeaconApi($configurationMock, $httpClient);
 
         $winguApi->updateMyBeacon(
             '009b12e0-9426-45fd-9476-561540139ec1',
@@ -812,8 +798,6 @@ final class BeaconApiTest extends ChannelApiTestCase
     public function testPatchMyBeaconWithLocationUpdatesPrivateBeaconLocation() : void
     {
         $configurationMock = new Configuration();
-        $requestFactory    = new GuzzleMessageFactory();
-        $hydrator          = new SymfonySerializerHydrator();
 
         $httpClient = new MockClient();
         $response   = new Response(
@@ -822,7 +806,7 @@ final class BeaconApiTest extends ChannelApiTestCase
         );
         $httpClient->addResponse($response);
 
-        $winguApi = new BeaconApi($configurationMock, $httpClient, $requestFactory, $hydrator);
+        $winguApi = new BeaconApi($configurationMock, $httpClient);
 
         $winguApi->updateMyBeacon(
             '009b12e0-9426-45fd-9476-561540139ec1',
@@ -848,8 +832,6 @@ final class BeaconApiTest extends ChannelApiTestCase
     public function testDeleteMyBeaconRemovesPrivateBeacon() : void
     {
         $configurationMock = new Configuration();
-        $requestFactory    = new GuzzleMessageFactory();
-        $hydrator          = new SymfonySerializerHydrator();
 
         $httpClient = new MockClient();
         $response   = new Response(
@@ -858,7 +840,7 @@ final class BeaconApiTest extends ChannelApiTestCase
         );
         $httpClient->addResponse($response);
 
-        $winguApi = new BeaconApi($configurationMock, $httpClient, $requestFactory, $hydrator);
+        $winguApi = new BeaconApi($configurationMock, $httpClient);
 
         $winguApi->deleteMyBeacon('8c798a67-0000-4000-a000-000000000007');
 

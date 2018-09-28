@@ -5,12 +5,10 @@ declare(strict_types=1);
 namespace Wingu\Engine\SDK\Tests\Api\Component\Location;
 
 use GuzzleHttp\Psr7\Response;
-use Http\Message\MessageFactory\GuzzleMessageFactory;
 use Http\Mock\Client as MockClient;
 use Psr\Http\Message\RequestInterface;
 use Wingu\Engine\SDK\Api\Component\LocationApi;
 use Wingu\Engine\SDK\Api\Configuration;
-use Wingu\Engine\SDK\Hydrator\SymfonySerializerHydrator;
 use Wingu\Engine\SDK\Model\Request\Component\Location\Coordinates as RequestCoordinates;
 use Wingu\Engine\SDK\Model\Request\Component\Location\Create;
 use Wingu\Engine\SDK\Model\Request\Component\Location\Update;
@@ -23,8 +21,6 @@ class LocationApiTest extends ApiTest
     public function testCreateReturnsNewLocationComponent() : void
     {
         $configurationMock = new Configuration();
-        $requestFactory    = new GuzzleMessageFactory();
-        $hydrator          = new SymfonySerializerHydrator();
 
         $httpClient = new MockClient();
         $response   = new Response(
@@ -34,7 +30,7 @@ class LocationApiTest extends ApiTest
         );
         $httpClient->addResponse($response);
 
-        $winguApi = new LocationApi($configurationMock, $httpClient, $requestFactory, $hydrator);
+        $winguApi = new LocationApi($configurationMock, $httpClient);
 
         $actualResponse = $winguApi->create(
             new Create(
@@ -55,8 +51,6 @@ class LocationApiTest extends ApiTest
     public function testUpdatePatchesLocationComponent() : void
     {
         $configurationMock = new Configuration();
-        $requestFactory    = new GuzzleMessageFactory();
-        $hydrator          = new SymfonySerializerHydrator();
 
         $httpClient = new MockClient();
         $response   = new Response(
@@ -65,7 +59,7 @@ class LocationApiTest extends ApiTest
         );
         $httpClient->addResponse($response);
 
-        $winguApi = new LocationApi($configurationMock, $httpClient, $requestFactory, $hydrator);
+        $winguApi = new LocationApi($configurationMock, $httpClient);
 
         $winguApi->update(
             'ef9a3c06-8734-4a51-8205-083fe4e4b1cc',

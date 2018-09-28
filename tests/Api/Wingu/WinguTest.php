@@ -11,7 +11,6 @@ use Wingu\Engine\SDK\Api\Configuration;
 use Wingu\Engine\SDK\Api\Exception\Generic;
 use Wingu\Engine\SDK\Api\Wingu\Wingu;
 use Wingu\Engine\SDK\Hydrator\Hydrator;
-use Wingu\Engine\SDK\Hydrator\SymfonySerializerHydrator;
 use Wingu\Engine\SDK\Model\Response\Wingu\Ping\Cloudinary;
 use Wingu\Engine\SDK\Model\Response\Wingu\Ping\Ping;
 use Wingu\Engine\SDK\Model\Response\Wingu\Ping\Version;
@@ -41,8 +40,6 @@ final class WinguTest extends ApiTest
     public function testPingReturnsResult() : void
     {
         $configurationMock = new Configuration();
-        $requestFactory    = new GuzzleMessageFactory();
-        $hydrator          = new SymfonySerializerHydrator();
 
         $httpClient = new MockClient();
         $httpClient->addResponse(
@@ -53,7 +50,7 @@ final class WinguTest extends ApiTest
             )
         );
 
-        $winguApi = new Wingu($configurationMock, $httpClient, $requestFactory, $hydrator);
+        $winguApi = new Wingu($configurationMock, $httpClient);
         $actual   = $winguApi->ping();
 
         $expected = new Ping(

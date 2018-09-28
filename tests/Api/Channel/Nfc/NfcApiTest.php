@@ -5,12 +5,10 @@ declare(strict_types=1);
 namespace Wingu\Engine\SDK\Tests\Api\Channel\Nfc;
 
 use GuzzleHttp\Psr7\Response;
-use Http\Message\MessageFactory\GuzzleMessageFactory;
 use Http\Mock\Client as MockClient;
 use Psr\Http\Message\RequestInterface;
 use Wingu\Engine\SDK\Api\Channel\Nfc\NfcApi;
 use Wingu\Engine\SDK\Api\Configuration;
-use Wingu\Engine\SDK\Hydrator\SymfonySerializerHydrator;
 use Wingu\Engine\SDK\Model\Request\BooleanValue;
 use Wingu\Engine\SDK\Model\Request\Channel\Nfc\PrivateNfc as RequestNfc;
 use Wingu\Engine\SDK\Model\Request\StringValue;
@@ -64,8 +62,6 @@ final class NfcApiTest extends ChannelApiTestCase
     public function testNfcReturnsPublicNfc() : void
     {
         $configurationMock = new Configuration();
-        $requestFactory    = new GuzzleMessageFactory();
-        $hydrator          = new SymfonySerializerHydrator();
 
         $httpClient = new MockClient();
         $httpClient->addResponse(
@@ -76,7 +72,7 @@ final class NfcApiTest extends ChannelApiTestCase
             )
         );
 
-        $winguApi = new NfcApi($configurationMock, $httpClient, $requestFactory, $hydrator);
+        $winguApi = new NfcApi($configurationMock, $httpClient);
         $actual   = $winguApi->nfc('9a8798c6-0000-4000-a000-000000000001');
 
         $expected = new PublicNfc(
@@ -91,8 +87,6 @@ final class NfcApiTest extends ChannelApiTestCase
     public function testMyNfcReturnsPrivateNfc() : void
     {
         $configurationMock = new Configuration();
-        $requestFactory    = new GuzzleMessageFactory();
-        $hydrator          = new SymfonySerializerHydrator();
 
         $httpClient = new MockClient();
         $httpClient->addResponse(
@@ -103,7 +97,7 @@ final class NfcApiTest extends ChannelApiTestCase
             )
         );
 
-        $winguApi = new NfcApi($configurationMock, $httpClient, $requestFactory, $hydrator);
+        $winguApi = new NfcApi($configurationMock, $httpClient);
         $actual   = $winguApi->myNfc('44da7d7e-0000-4000-a000-000000000001');
 
         $expected = new PrivateNfc(
@@ -252,36 +246,36 @@ final class NfcApiTest extends ChannelApiTestCase
                                         new \DateTime('2018-05-18T08:22:41+0000'),
                                         'Form component survey',
                                         [
-                                        new Input('full_name', 'Your name', true, 'text'),
-                                        new Input('birthday', 'Birthday', false, 'date'),
-                                        new Select(
-                                            'gender',
-                                            'Gender',
-                                            false,
-                                            false,
-                                            [
-                                                new SelectOption('Male', 'm'),
-                                                new SelectOption('Female', 'f'),
-                                            ]
-                                        ),
-                                        new Select(
-                                            'dessert',
-                                            'Dessert',
-                                            true,
-                                            true,
-                                            [
-                                                new SelectOption('Jello', 'jello'),
-                                                new SelectOption('Apple pie', 'apple_pie'),
-                                                new SelectOption('Schnitzel', 'schnitzel'),
-                                            ]
-                                        ),
-                                        new Input('text', 'Element text', false, 'text'),
-                                        new Input('textarea', 'Element textarea', false, 'textarea'),
-                                        new Input('email', 'Element email', false, 'email'),
-                                        new Input('url', 'Element url', false, 'url'),
-                                        new Input('date', 'Element date', false, 'date'),
-                                        new Input('datetime', 'Element datetime', false, 'datetime'),
-                                        new Input('time', 'Element time', false, 'time'),
+                                            new Input('full_name', 'Your name', true, 'text'),
+                                            new Input('birthday', 'Birthday', false, 'date'),
+                                            new Select(
+                                                'gender',
+                                                'Gender',
+                                                false,
+                                                false,
+                                                [
+                                                    new SelectOption('Male', 'm'),
+                                                    new SelectOption('Female', 'f'),
+                                                ]
+                                            ),
+                                            new Select(
+                                                'dessert',
+                                                'Dessert',
+                                                true,
+                                                true,
+                                                [
+                                                    new SelectOption('Jello', 'jello'),
+                                                    new SelectOption('Apple pie', 'apple_pie'),
+                                                    new SelectOption('Schnitzel', 'schnitzel'),
+                                                ]
+                                            ),
+                                            new Input('text', 'Element text', false, 'text'),
+                                            new Input('textarea', 'Element textarea', false, 'textarea'),
+                                            new Input('email', 'Element email', false, 'email'),
+                                            new Input('url', 'Element url', false, 'url'),
+                                            new Input('date', 'Element date', false, 'date'),
+                                            new Input('datetime', 'Element datetime', false, 'datetime'),
+                                            new Input('time', 'Element time', false, 'time'),
                                         ],
                                         [
                                             new Email('test+form-component@wingu.de'),
@@ -415,8 +409,6 @@ final class NfcApiTest extends ChannelApiTestCase
     public function testPayloadReturnsNfcId() : void
     {
         $configurationMock = new Configuration();
-        $requestFactory    = new GuzzleMessageFactory();
-        $hydrator          = new SymfonySerializerHydrator();
 
         $httpClient = new MockClient();
         $httpClient->addResponse(
@@ -427,7 +419,7 @@ final class NfcApiTest extends ChannelApiTestCase
             )
         );
 
-        $winguApi = new NfcApi($configurationMock, $httpClient, $requestFactory, $hydrator);
+        $winguApi = new NfcApi($configurationMock, $httpClient);
         $actual   = $winguApi->payload('https://wingu-sdk-test.de/nfc/7a4b84eb-ae3f-4246-8a67-d16fbdd82595');
 
         self::assertSame('9a8798c6-0000-4000-a000-000000000004', $actual);
@@ -436,8 +428,6 @@ final class NfcApiTest extends ChannelApiTestCase
     public function testMyNfcsReturnsResult() : void
     {
         $configurationMock = new Configuration();
-        $requestFactory    = new GuzzleMessageFactory();
-        $hydrator          = new SymfonySerializerHydrator();
 
         $httpClient = new MockClient();
         $httpClient->addResponse(
@@ -448,7 +438,7 @@ final class NfcApiTest extends ChannelApiTestCase
             )
         );
 
-        $nfcApi = new NfcApi($configurationMock, $httpClient, $requestFactory, $hydrator);
+        $nfcApi = new NfcApi($configurationMock, $httpClient);
         $actual = $nfcApi->myNfcs();
 
         $expected = [
@@ -463,8 +453,6 @@ final class NfcApiTest extends ChannelApiTestCase
     public function testPatchMyNfcUpdatesPrivateNfc() : void
     {
         $configurationMock = new Configuration();
-        $requestFactory    = new GuzzleMessageFactory();
-        $hydrator          = new SymfonySerializerHydrator();
 
         $httpClient = new MockClient();
         $response   = new Response(
@@ -473,7 +461,7 @@ final class NfcApiTest extends ChannelApiTestCase
         );
         $httpClient->addResponse($response);
 
-        $winguApi = new NfcApi($configurationMock, $httpClient, $requestFactory, $hydrator);
+        $winguApi = new NfcApi($configurationMock, $httpClient);
 
         $winguApi->updateMyNfc(
             '44da7d7e-0000-4000-a000-000000000001',
@@ -494,8 +482,6 @@ final class NfcApiTest extends ChannelApiTestCase
     public function testDeleteMyNfcRemovesPrivateNfc() : void
     {
         $configurationMock = new Configuration();
-        $requestFactory    = new GuzzleMessageFactory();
-        $hydrator          = new SymfonySerializerHydrator();
 
         $httpClient = new MockClient();
         $response   = new Response(
@@ -504,7 +490,7 @@ final class NfcApiTest extends ChannelApiTestCase
         );
         $httpClient->addResponse($response);
 
-        $winguApi = new NfcApi($configurationMock, $httpClient, $requestFactory, $hydrator);
+        $winguApi = new NfcApi($configurationMock, $httpClient);
 
         $winguApi->deleteMyNfc('44da7d7e-0000-4000-a000-000000000013');
 

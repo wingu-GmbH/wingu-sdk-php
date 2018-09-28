@@ -8,60 +8,62 @@ use Wingu\Engine\SDK\Assertion;
 use Wingu\Engine\SDK\Model\Request\Component\Contact\Address\Update as Address;
 use Wingu\Engine\SDK\Model\Request\Component\Contact\ExternalLinks\Update as ExternalLinks;
 use Wingu\Engine\SDK\Model\Request\Request;
+use Wingu\Engine\SDK\Model\Request\StringValue;
 
 final class Update implements Request
 {
-    /** @var string|null */
+    /** @var StringValue|null */
     private $companyName;
 
-    /** @var string|null */
+    /** @var StringValue|null */
     private $personalTitle;
 
-    /** @var string|null */
+    /** @var StringValue|null */
     private $firstName;
 
-    /** @var string|null */
+    /** @var StringValue|null */
     private $lastName;
 
-    /** @var string|null */
+    /** @var StringValue|null */
     private $mobile;
 
-    /** @var string|null */
+    /** @var StringValue|null */
     private $phone;
 
-    /** @var string|null */
+    /** @var StringValue|null */
     private $email;
 
-    /** @var string|null */
+    /** @var StringValue|null */
     private $website;
 
-    /** @var Address */
+    /** @var Address|null */
     private $address;
 
-    /** @var string|null */
+    /** @var StringValue|null */
     private $openingHours;
 
-    /** @var ExternalLinks */
+    /** @var ExternalLinks|null */
     private $externalLinks;
 
-    /** @var string|null */
+    /** @var StringValue|null */
     private $extraInfo;
 
     public function __construct(
-        ?string $companyName,
-        ?string $personalTitle,
-        ?string $firstName,
-        ?string $lastName,
-        ?string $mobile,
-        ?string $phone,
-        ?string $email,
-        ?string $website,
-        Address $address,
-        ?string $openingHours,
-        ExternalLinks $externalLinks,
-        ?string $extraInfo
+        ?StringValue $companyName = null,
+        ?StringValue $personalTitle = null,
+        ?StringValue $firstName = null,
+        ?StringValue $lastName = null,
+        ?StringValue $mobile = null,
+        ?StringValue $phone = null,
+        ?StringValue $email = null,
+        ?StringValue $website = null,
+        ?Address $address = null,
+        ?StringValue $openingHours = null,
+        ?ExternalLinks $externalLinks = null,
+        ?StringValue $extraInfo = null
     ) {
         Assertion::nullOrEmail($email);
+
         $this->companyName   = $companyName;
         $this->personalTitle = $personalTitle;
         $this->firstName     = $firstName;
@@ -79,7 +81,7 @@ final class Update implements Request
     /** @inheritdoc */
     public function jsonSerialize() : array
     {
-        return [
+        return \array_filter([
             'companyName' => $this->companyName,
             'personalTitle' => $this->personalTitle,
             'firstName' => $this->firstName,
@@ -92,6 +94,6 @@ final class Update implements Request
             'openingHours' => $this->openingHours,
             'externalLinks' => $this->externalLinks,
             'extraInfo' => $this->extraInfo,
-        ];
+        ]);
     }
 }

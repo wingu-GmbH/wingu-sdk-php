@@ -18,6 +18,7 @@ final class RequestDataManipulator
 
     /**
      * @param mixed[] $data
+     *
      * @return mixed[]
      */
     private static function flattenRequestData(array $data, ?string $parentKey = null) : array

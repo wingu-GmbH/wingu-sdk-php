@@ -5,12 +5,10 @@ declare(strict_types=1);
 namespace Wingu\Engine\SDK\Tests\Api\Component\Files;
 
 use GuzzleHttp\Psr7\Response;
-use Http\Message\MessageFactory\GuzzleMessageFactory;
 use Http\Mock\Client as MockClient;
 use Psr\Http\Message\RequestInterface;
 use Wingu\Engine\SDK\Api\Component\FilesApi;
 use Wingu\Engine\SDK\Api\Configuration;
-use Wingu\Engine\SDK\Hydrator\SymfonySerializerHydrator;
 use Wingu\Engine\SDK\Model\Request\Component\Files\Create;
 use Wingu\Engine\SDK\Model\Request\Component\Files\File\Create as CreateFile;
 use Wingu\Engine\SDK\Model\Request\Component\Files\File\Update as UpdateFile;
@@ -23,8 +21,6 @@ class FilesApiTest extends ApiTest
     public function testCreateReturnsNewFilesComponent() : void
     {
         $configurationMock = new Configuration();
-        $requestFactory    = new GuzzleMessageFactory();
-        $hydrator          = new SymfonySerializerHydrator();
 
         $httpClient = new MockClient();
         $response   = new Response(
@@ -34,7 +30,7 @@ class FilesApiTest extends ApiTest
         );
         $httpClient->addResponse($response);
 
-        $winguApi = new FilesApi($configurationMock, $httpClient, $requestFactory, $hydrator);
+        $winguApi = new FilesApi($configurationMock, $httpClient);
 
         $actualResponse = $winguApi->create(
             new Create()
@@ -52,8 +48,6 @@ class FilesApiTest extends ApiTest
     public function testCreateFileReturnsNewFilesFile() : void
     {
         $configurationMock = new Configuration();
-        $requestFactory    = new GuzzleMessageFactory();
-        $hydrator          = new SymfonySerializerHydrator();
 
         $httpClient = new MockClient();
         $response   = new Response(
@@ -63,7 +57,7 @@ class FilesApiTest extends ApiTest
         );
         $httpClient->addResponse($response);
 
-        $winguApi = new FilesApi($configurationMock, $httpClient, $requestFactory, $hydrator);
+        $winguApi = new FilesApi($configurationMock, $httpClient);
 
         $actualResponse = $winguApi->createFile(
             '55d9a8ec-87dc-41c9-a4fe-1b8d5603e004',
@@ -92,8 +86,6 @@ class FilesApiTest extends ApiTest
     public function testUpdateFilePatchesFilesFile() : void
     {
         $configurationMock = new Configuration();
-        $requestFactory    = new GuzzleMessageFactory();
-        $hydrator          = new SymfonySerializerHydrator();
 
         $httpClient = new MockClient();
         $response   = new Response(
@@ -102,7 +94,7 @@ class FilesApiTest extends ApiTest
         );
         $httpClient->addResponse($response);
 
-        $winguApi = new FilesApi($configurationMock, $httpClient, $requestFactory, $hydrator);
+        $winguApi = new FilesApi($configurationMock, $httpClient);
 
         $winguApi->updateFile(
             'd7709b2e-5c62-4c01-85ed-0885dffa294b',

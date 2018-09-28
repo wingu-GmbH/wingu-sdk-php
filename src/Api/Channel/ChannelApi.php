@@ -80,7 +80,7 @@ final class ChannelApi extends Api
         $data = $this->decodeResponseBody($response);
 
         $embedded = \array_map(
-            function ($data) {
+            static function ($data) {
                 $discriminator         = \key($data);
                 $data                  = \reset($data);
                 $data['discriminator'] = $discriminator;

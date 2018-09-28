@@ -5,12 +5,10 @@ declare(strict_types=1);
 namespace Wingu\Engine\SDK\Tests\Api;
 
 use GuzzleHttp\Psr7\Response;
-use Http\Message\MessageFactory\GuzzleMessageFactory;
 use Http\Mock\Client as MockClient;
 use Wingu\Engine\SDK\Api\Configuration;
 use Wingu\Engine\SDK\Api\Country;
 use Wingu\Engine\SDK\Api\Exception\Generic;
-use Wingu\Engine\SDK\Hydrator\SymfonySerializerHydrator;
 use Wingu\Engine\SDK\Model\Response\Country as CountryModel;
 
 final class CountryTest extends ApiTest
@@ -49,14 +47,12 @@ final class CountryTest extends ApiTest
     private function createCountryService(Response ...$httpClientResponses) : Country
     {
         $configurationMock = new Configuration();
-        $requestFactory    = new GuzzleMessageFactory();
-        $hydrator          = new SymfonySerializerHydrator();
 
         $httpClient = new MockClient();
         foreach ($httpClientResponses as $httpClientResponse) {
             $httpClient->addResponse($httpClientResponse);
         }
 
-        return new Country($configurationMock, $httpClient, $requestFactory, $hydrator);
+        return new Country($configurationMock, $httpClient);
     }
 }

@@ -5,30 +5,31 @@ declare(strict_types=1);
 namespace Wingu\Engine\SDK\Model\Request\Component\Contact\Address;
 
 use Wingu\Engine\SDK\Model\Request\Request;
+use Wingu\Engine\SDK\Model\Request\StringValue;
 
 final class Update implements Request
 {
-    /** @var string|null */
+    /** @var StringValue|null */
     private $country;
 
-    /** @var string|null */
+    /** @var StringValue|null */
     private $city;
 
-    /** @var string|null */
+    /** @var StringValue|null */
     private $zipCode;
 
-    /** @var string|null */
+    /** @var StringValue|null */
     private $street;
 
-    /** @var string|null */
+    /** @var StringValue|null */
     private $streetNumber;
 
     public function __construct(
-        ?string $country,
-        ?string $city,
-        ?string $zipCode,
-        ?string $street,
-        ?string $streetNumber
+        ?StringValue $country = null,
+        ?StringValue $city = null,
+        ?StringValue $zipCode = null,
+        ?StringValue $street = null,
+        ?StringValue $streetNumber = null
     ) {
         $this->country      = $country;
         $this->city         = $city;
@@ -40,12 +41,12 @@ final class Update implements Request
     /** @inheritdoc */
     public function jsonSerialize() : array
     {
-        return [
+        return \array_filter([
             'country' => $this->country,
             'city' => $this->city,
             'zipCode' => $this->zipCode,
             'street' => $this->street,
             'streetNumber' => $this->streetNumber,
-        ];
+        ]);
     }
 }

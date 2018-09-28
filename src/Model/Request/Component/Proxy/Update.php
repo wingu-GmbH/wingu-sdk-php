@@ -11,7 +11,7 @@ final class Update implements Request
     /** @var string|null */
     private $payload;
 
-    public function __construct(?string $payload)
+    public function __construct(?string $payload = null)
     {
         $this->payload = $payload;
     }
@@ -19,8 +19,8 @@ final class Update implements Request
     /** @inheritdoc */
     public function jsonSerialize() : array
     {
-        return [
+        return \array_filter([
             'payload' => $this->payload,
-        ];
+        ]);
     }
 }

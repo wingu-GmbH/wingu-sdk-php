@@ -7,6 +7,7 @@ namespace Wingu\Engine\SDK\Model\Request\Component\BrandBar;
 use Wingu\Engine\SDK\Model\Request\Component\BrandBar\Image\Update as Image;
 use Wingu\Engine\SDK\Model\Request\Component\BrandBar\Text\Update as Text;
 use Wingu\Engine\SDK\Model\Request\MultipartRequest;
+use Wingu\Engine\SDK\Model\Request\StringValue;
 
 final class Update implements MultipartRequest
 {
@@ -16,10 +17,10 @@ final class Update implements MultipartRequest
     /** @var Image|null */
     private $image;
 
-    /** @var string|null */
+    /** @var StringValue|null */
     private $backgroundColor;
 
-    public function __construct(?Text $text, ?Image $image, ?string $backgroundColor)
+    public function __construct(?Text $text = null, ?Image $image = null, ?StringValue $backgroundColor = null)
     {
         $this->text            = $text;
         $this->image           = $image;
@@ -29,11 +30,11 @@ final class Update implements MultipartRequest
     /** @inheritdoc */
     public function jsonSerialize() : array
     {
-        return [
+        return \array_filter([
             'text' => $this->text,
             'image' => $this->image,
             'backgroundColor' => $this->backgroundColor,
-        ];
+        ]);
     }
 
     /**

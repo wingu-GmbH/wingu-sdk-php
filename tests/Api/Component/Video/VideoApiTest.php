@@ -5,14 +5,13 @@ declare(strict_types=1);
 namespace Wingu\Engine\SDK\Tests\Api\Component\Video;
 
 use GuzzleHttp\Psr7\Response;
-use Http\Message\MessageFactory\GuzzleMessageFactory;
 use Http\Mock\Client as MockClient;
 use Psr\Http\Message\RequestInterface;
 use Wingu\Engine\SDK\Api\Component\VideoApi;
 use Wingu\Engine\SDK\Api\Configuration;
-use Wingu\Engine\SDK\Hydrator\SymfonySerializerHydrator;
 use Wingu\Engine\SDK\Model\Request\Component\Video\Create;
 use Wingu\Engine\SDK\Model\Request\Component\Video\Update;
+use Wingu\Engine\SDK\Model\Request\StringValue;
 use Wingu\Engine\SDK\Model\Response\Component\Video;
 use Wingu\Engine\SDK\Tests\Api\ApiTest;
 
@@ -21,8 +20,6 @@ class VideoApiTest extends ApiTest
     public function testCreateReturnsNewVideoComponent() : void
     {
         $configurationMock = new Configuration();
-        $requestFactory    = new GuzzleMessageFactory();
-        $hydrator          = new SymfonySerializerHydrator();
 
         $httpClient = new MockClient();
         $response   = new Response(
@@ -32,7 +29,7 @@ class VideoApiTest extends ApiTest
         );
         $httpClient->addResponse($response);
 
-        $winguApi = new VideoApi($configurationMock, $httpClient, $requestFactory, $hydrator);
+        $winguApi = new VideoApi($configurationMock, $httpClient);
 
         $actualResponse = $winguApi->create(
             new Create(
@@ -54,8 +51,6 @@ class VideoApiTest extends ApiTest
     public function testUpdatePatchesVideoComponent() : void
     {
         $configurationMock = new Configuration();
-        $requestFactory    = new GuzzleMessageFactory();
-        $hydrator          = new SymfonySerializerHydrator();
 
         $httpClient = new MockClient();
         $response   = new Response(
@@ -64,14 +59,14 @@ class VideoApiTest extends ApiTest
         );
         $httpClient->addResponse($response);
 
-        $winguApi = new VideoApi($configurationMock, $httpClient, $requestFactory, $hydrator);
+        $winguApi = new VideoApi($configurationMock, $httpClient);
 
         $winguApi->update(
             '800ff36f-e13b-4711-a413-d6b412875f16',
             new Update(
                 'youtube',
                 'zfQdPcO--DA',
-                'Video description that has been edited'
+                new StringValue('Video description that has been edited')
             )
         );
 

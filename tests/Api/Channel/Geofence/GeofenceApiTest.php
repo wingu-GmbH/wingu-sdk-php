@@ -5,12 +5,10 @@ declare(strict_types=1);
 namespace Wingu\Engine\SDK\Tests\Api\Channel\Geofence;
 
 use GuzzleHttp\Psr7\Response;
-use Http\Message\MessageFactory\GuzzleMessageFactory;
 use Http\Mock\Client as MockClient;
 use Psr\Http\Message\RequestInterface;
 use Wingu\Engine\SDK\Api\Channel\Geofence\GeofenceApi;
 use Wingu\Engine\SDK\Api\Configuration;
-use Wingu\Engine\SDK\Hydrator\SymfonySerializerHydrator;
 use Wingu\Engine\SDK\Model\Request\BooleanValue;
 use Wingu\Engine\SDK\Model\Request\Channel\Geofence\PrivateGeofence as RequestGeofence;
 use Wingu\Engine\SDK\Model\Request\StringValue;
@@ -65,8 +63,6 @@ final class GeofenceApiTest extends ChannelApiTestCase
     public function testGeofenceReturnsPublicGeofence() : void
     {
         $configurationMock = new Configuration();
-        $requestFactory    = new GuzzleMessageFactory();
-        $hydrator          = new SymfonySerializerHydrator();
 
         $httpClient = new MockClient();
         $httpClient->addResponse(
@@ -77,7 +73,7 @@ final class GeofenceApiTest extends ChannelApiTestCase
             )
         );
 
-        $winguApi = new GeofenceApi($configurationMock, $httpClient, $requestFactory, $hydrator);
+        $winguApi = new GeofenceApi($configurationMock, $httpClient);
         $actual   = $winguApi->geofence('0a0b190a-0000-4000-a000-000000000001');
 
         $expected = new PublicGeofence(
@@ -101,8 +97,6 @@ final class GeofenceApiTest extends ChannelApiTestCase
     public function testMyGeofenceReturnsPrivateGeofence() : void
     {
         $configurationMock = new Configuration();
-        $requestFactory    = new GuzzleMessageFactory();
-        $hydrator          = new SymfonySerializerHydrator();
 
         $httpClient = new MockClient();
         $httpClient->addResponse(
@@ -113,7 +107,7 @@ final class GeofenceApiTest extends ChannelApiTestCase
             )
         );
 
-        $winguApi = new GeofenceApi($configurationMock, $httpClient, $requestFactory, $hydrator);
+        $winguApi = new GeofenceApi($configurationMock, $httpClient);
         $actual   = $winguApi->myGeofence('0a0b190a-0000-4000-a000-000000000001');
 
         $expected = new PrivateGeofence(
@@ -436,8 +430,6 @@ final class GeofenceApiTest extends ChannelApiTestCase
     public function testMyGeofencesReturnsResult() : void
     {
         $configurationMock = new Configuration();
-        $requestFactory    = new GuzzleMessageFactory();
-        $hydrator          = new SymfonySerializerHydrator();
 
         $httpClient = new MockClient();
         $httpClient->addResponse(
@@ -448,7 +440,7 @@ final class GeofenceApiTest extends ChannelApiTestCase
             )
         );
 
-        $geofenceApi = new GeofenceApi($configurationMock, $httpClient, $requestFactory, $hydrator);
+        $geofenceApi = new GeofenceApi($configurationMock, $httpClient);
         $actual      = $geofenceApi->myGeofences();
 
         $expected = [
@@ -463,8 +455,6 @@ final class GeofenceApiTest extends ChannelApiTestCase
     public function testPatchMyGeofenceUpdatesPrivateGeofence() : void
     {
         $configurationMock = new Configuration();
-        $requestFactory    = new GuzzleMessageFactory();
-        $hydrator          = new SymfonySerializerHydrator();
 
         $httpClient = new MockClient();
         $response   = new Response(
@@ -473,7 +463,7 @@ final class GeofenceApiTest extends ChannelApiTestCase
         );
         $httpClient->addResponse($response);
 
-        $winguApi = new GeofenceApi($configurationMock, $httpClient, $requestFactory, $hydrator);
+        $winguApi = new GeofenceApi($configurationMock, $httpClient);
 
         $winguApi->updateMyGeofence(
             '0a0b190a-0000-4000-a000-000000000001',
@@ -497,8 +487,6 @@ final class GeofenceApiTest extends ChannelApiTestCase
     public function testDeleteMyGeofenceRemovesPrivateGeofence() : void
     {
         $configurationMock = new Configuration();
-        $requestFactory    = new GuzzleMessageFactory();
-        $hydrator          = new SymfonySerializerHydrator();
 
         $httpClient = new MockClient();
         $response   = new Response(
@@ -507,7 +495,7 @@ final class GeofenceApiTest extends ChannelApiTestCase
         );
         $httpClient->addResponse($response);
 
-        $winguApi = new GeofenceApi($configurationMock, $httpClient, $requestFactory, $hydrator);
+        $winguApi = new GeofenceApi($configurationMock, $httpClient);
 
         $winguApi->deleteMyGeofence('0a0b190a-0000-4000-a000-000000000010');
 
