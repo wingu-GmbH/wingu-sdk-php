@@ -21,4 +21,9 @@ install:
   - travis_retry composer update ${COMPOSER_FLAGS} --prefer-source --no-interaction
 
 script:
-  - composer test
+  - composer cs-check
+  - composer phpstan
+  - vendor/bin/phpunit --coverage-clover=coverage.xml
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
