@@ -1,8 +1,15 @@
 # Wingu PHP SDK
 
 Welcome to Wingu PHP SDK. It will help you connect to the API of Wingu Proximity Platform.  
+Documentation is avaliable at [Wingu Engine API Doc](https://wingu-engine.de/api/doc).
 
 ## Installation
+
+### API key
+
+To use the SDK you need to have valid **Wingu API key**.  
+To obtain one log in to your account on [Wingu Portal](https://wingu-portal.de).  
+Once logged in go to **Settings** section and create your API Key there.
 
 ### Prerequisites
 
@@ -13,7 +20,7 @@ Add the Wingu PHP SDK as a dependency to your `composer.json` file:
 ```json
 {
   "require": {
-    " wingu/wingu-sdk-php": "^1.0"
+    " wingu/wingu-sdk-php": "^0.1"
   }
 }
 ```
