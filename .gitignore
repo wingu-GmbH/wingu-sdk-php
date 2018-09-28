@@ -2,4 +2,5 @@
 /vendor/
 phpunit.xml
 phpcs.xml
+coverage.xml
 composer.lock
