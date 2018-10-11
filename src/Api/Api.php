@@ -129,7 +129,7 @@ abstract class Api
         foreach (RequestDataManipulator::flatten($requestObject) as $name => $stream) {
             $builder->addResource($name, $stream);
         }
-        foreach ($requestObject->files() as $name => $stream) {
+        foreach (RequestDataManipulator::flattenRequestData($requestObject->files()) as $name => $stream) {
             $builder->addResource($name, $stream);
         }
         $multipartStream = $builder->build();
@@ -169,8 +169,8 @@ abstract class Api
         foreach (RequestDataManipulator::flatten($requestObject) as $name => $stream) {
             $builder->addResource($name, $stream);
         }
-        foreach ($requestObject->files() as $name => $stream) {
-            $builder->addResource($name, $stream);
+        foreach (RequestDataManipulator::flattenRequestData($requestObject->files()) as $name => $stream) {
+            $builder->addResource('image[image]', $stream);
         }
         $multipartStream = $builder->build();
         $boundary        = $builder->getBoundary();

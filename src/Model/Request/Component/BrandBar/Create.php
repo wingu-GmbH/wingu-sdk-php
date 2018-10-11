@@ -33,11 +33,11 @@ final class Create implements MultipartRequest
     /** @inheritdoc */
     public function jsonSerialize() : array
     {
-        return [
+        return \array_filter([
             'text' => $this->text,
             'image' => $this->image,
             'backgroundColor' => $this->backgroundColor,
-        ];
+        ]);
     }
 
     /**
@@ -46,7 +46,9 @@ final class Create implements MultipartRequest
     public function files() : array
     {
         if ($this->image !== null) {
-            return $this->image->files();
+            return [
+                'image' => $this->image->files(),
+            ];
         }
 
         return [];

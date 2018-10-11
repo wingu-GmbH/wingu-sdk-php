@@ -22,7 +22,7 @@ use Wingu\Engine\SDK\Model\Response\Component\Image;
 use Wingu\Engine\SDK\Model\Response\Component\ImageMetadata;
 use Wingu\Engine\SDK\Tests\Api\ApiTest;
 
-class BrandBarApiTest extends ApiTest
+final class BrandBarApiTest extends ApiTest
 {
     public function testCreateReturnsNewBrandBarComponent() : void
     {
@@ -59,7 +59,7 @@ class BrandBarApiTest extends ApiTest
         self::assertContains('Content-Disposition: form-data; name="image[alignment]"', $actualRequestBody);
         self::assertContains('Content-Disposition: form-data; name="backgroundColor"', $actualRequestBody);
         self::assertContains(
-            'Content-Disposition: form-data; name="image"; filename="wingu_image.png"',
+            'Content-Disposition: form-data; name="image[image]"; filename="wingu_image.png"',
             $actualRequestBody
         );
         self::assertSame('POST', $actualRequest->getMethod());

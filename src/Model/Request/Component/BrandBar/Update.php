@@ -43,7 +43,9 @@ final class Update implements MultipartRequest
     public function files() : array
     {
         if ($this->image !== null) {
-            return $this->image->files();
+            return [
+                'image' => $this->image->files(),
+            ];
         }
 
         return [];

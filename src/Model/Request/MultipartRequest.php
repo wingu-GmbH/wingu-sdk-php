@@ -9,7 +9,9 @@ use Psr\Http\Message\StreamInterface;
 interface MultipartRequest extends Request
 {
     /**
-     * @return StreamInterface[]
+     * Array containing files to upload. It can be multidimensional.
+     *
+     * @return mixed[]|StreamInterface[]
      */
     public function files() : array;
 }
