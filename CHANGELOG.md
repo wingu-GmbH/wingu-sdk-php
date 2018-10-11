@@ -1,7 +1,7 @@
 Change Log
 ==========
 
-## [0.1.2] - 2018-10-xx
+## [0.1.2] - 2018-10-11
 ### Fixed
 - Uploading images for brand bar component
 - PATCH api requests with files upload

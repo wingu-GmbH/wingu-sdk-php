@@ -13,7 +13,7 @@ Documentation is avaliable at [Wingu Engine API Doc](https://wingu-engine.de/api
 
 ### API key
 
-To use the SDK you need to have valid **Wingu API key**.  
+To use the SDK you need to have valid **Wingu API Key**.  
 To obtain one log in to your account on [Wingu Portal](https://wingu-portal.de).  
 Once logged in go to **Settings** section and create your API Key there.
 
@@ -23,16 +23,15 @@ Once logged in go to **Settings** section and create your API Key there.
 * **curl**, **json** extensions must be enabled
 
 Add the Wingu PHP SDK as a dependency to your `composer.json` file:
-```json
-{
-  "require": {
-    " wingu/wingu-sdk-php": "^0.1"
-  }
-}
+```bash
+composer require wingu/wingu-sdk-php
 ```
 
-Install the Composer dependency:  
-```composer install```
+Provide the implementation for the virtual package `php-http/client-implementation`. 
+It's up to you to decide which specific implementation you want to use. Here is an example with curl client:
+```bash
+composer require php-http/curl-client
+```
 
 ## Usage examples
 
