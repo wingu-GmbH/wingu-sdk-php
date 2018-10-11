@@ -176,10 +176,11 @@ abstract class Api
         $boundary        = $builder->getBoundary();
 
         return $this->requestFactory->createRequest(
-            'PATCH',
+            'POST',
             $uri,
             [
                 $this->configuration->apiKeyHeader() => $this->configuration->apiKey(),
+                'X-Http-Method-Override' => 'PATCH',
                 'Content-Type' => 'multipart/form-data; boundary="' . $boundary . '"',
             ],
             $multipartStream

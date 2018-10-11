@@ -11,9 +11,11 @@ use Wingu\Engine\SDK\Api\Component\BrandBarApi;
 use Wingu\Engine\SDK\Api\Configuration;
 use Wingu\Engine\SDK\Model\Request\Component\BrandBar\Create;
 use Wingu\Engine\SDK\Model\Request\Component\BrandBar\Image\Create as CreateImage;
+use Wingu\Engine\SDK\Model\Request\Component\BrandBar\Image\Update as UpdateImage;
 use Wingu\Engine\SDK\Model\Request\Component\BrandBar\Text\Create as CreateText;
-use Wingu\Engine\SDK\Model\Request\Component\BrandBar\Text\Update as TextUpdate;
+use Wingu\Engine\SDK\Model\Request\Component\BrandBar\Text\Update as UpdateText;
 use Wingu\Engine\SDK\Model\Request\Component\BrandBar\Update;
+use Wingu\Engine\SDK\Model\Request\StringValue;
 use Wingu\Engine\SDK\Model\Response\Component\BrandBar;
 use Wingu\Engine\SDK\Model\Response\Component\BrandBarBackground;
 use Wingu\Engine\SDK\Model\Response\Component\BrandBarImage;
@@ -104,13 +106,41 @@ final class BrandBarApiTest extends ApiTest
 
         $winguApi->update(
             'a65747f7-7093-4bf5-ab2f-5fd0d5699ab5',
-            new Update(new TextUpdate(null, 'center', null), null, null)
+            new Update(new UpdateText(null, 'center', null), null, null)
         );
 
         /** @var RequestInterface $actualRequest */
         $actualRequest = $httpClient->getLastRequest();
         self::assertSame('{"text":{"alignment":"center"}}', $actualRequest->getBody()->getContents());
         self::assertSame('PATCH', $actualRequest->getMethod());
+
+        $winguApi->update(
+            'a65747f7-7093-4bf5-ab2f-5fd0d5699ab5',
+            new Update(
+                new UpdateText(null, 'center', null),
+                new UpdateImage(
+                    'left',
+                    \GuzzleHttp\Psr7\stream_for(\fopen('examples/wingu_image.png', 'rb'))
+                ),
+                new StringValue('f1f1f1')
+            )
+        );
+
+        /** @var RequestInterface $actualRequest */
+        $actualRequest = $httpClient->getLastRequest();
+
+        self::assertStringStartsWith('multipart/form-data; boundary="', $actualRequest->getHeaderLine('Content-Type'));
+        $actualRequestBody = $actualRequest->getBody()->getContents();
+
+        self::assertContains('Content-Disposition: form-data; name="text[alignment]"', $actualRequestBody);
+        self::assertContains('Content-Disposition: form-data; name="image[alignment]"', $actualRequestBody);
+        self::assertContains('Content-Disposition: form-data; name="backgroundColor"', $actualRequestBody);
+        self::assertContains(
+            'Content-Disposition: form-data; name="image[image]"; filename="wingu_image.png"',
+            $actualRequestBody
+        );
+        self::assertSame('POST', $actualRequest->getMethod());
+        self::assertSame('PATCH', $actualRequest->getHeaderLine('X-Http-Method-Override'));
     }
 
     private function getExpectedBrandBar() : BrandBar
