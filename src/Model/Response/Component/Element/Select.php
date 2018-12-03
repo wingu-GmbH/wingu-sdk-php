@@ -18,20 +18,30 @@ final class Select implements Element
     private $required;
 
     /** @var bool */
+    private $persistent;
+
+    /** @var bool */
     private $multiple;
 
     /** @var SelectOption[] */
     private $options;
 
     /** @param SelectOption[] $options */
-    public function __construct(string $name, string $label, bool $required, bool $multiple, array $options)
-    {
+    public function __construct(
+        string $name,
+        string $label,
+        bool $required,
+        bool $persistent,
+        bool $multiple,
+        array $options
+    ) {
         Assertion::allIsInstanceOf($options, SelectOption::class);
-        $this->name     = $name;
-        $this->label    = $label;
-        $this->required = $required;
-        $this->multiple = $multiple;
-        $this->options  = $options;
+        $this->name       = $name;
+        $this->label      = $label;
+        $this->required   = $required;
+        $this->persistent = $persistent;
+        $this->multiple   = $multiple;
+        $this->options    = $options;
     }
 
     public function name() : string
@@ -47,6 +57,11 @@ final class Select implements Element
     public function required() : bool
     {
         return $this->required;
+    }
+
+    public function persistent() : bool
+    {
+        return $this->persistent;
     }
 
     public function multiple() : bool

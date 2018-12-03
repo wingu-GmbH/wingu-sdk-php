@@ -28,9 +28,6 @@ use Wingu\Engine\SDK\Model\Response\Component\ContactAddress;
 use Wingu\Engine\SDK\Model\Response\Component\ContactExternalLinks;
 use Wingu\Engine\SDK\Model\Response\Component\Coupon;
 use Wingu\Engine\SDK\Model\Response\Component\CouponBarcode;
-use Wingu\Engine\SDK\Model\Response\Component\Element\Input;
-use Wingu\Engine\SDK\Model\Response\Component\Element\Select;
-use Wingu\Engine\SDK\Model\Response\Component\Element\SelectOption;
 use Wingu\Engine\SDK\Model\Response\Component\Files;
 use Wingu\Engine\SDK\Model\Response\Component\FilesFile as File;
 use Wingu\Engine\SDK\Model\Response\Component\Image;
@@ -40,12 +37,9 @@ use Wingu\Engine\SDK\Model\Response\Component\ImageGalleryImage as OuterImage;
 use Wingu\Engine\SDK\Model\Response\Component\ImageMetadata;
 use Wingu\Engine\SDK\Model\Response\Component\ImageMetadata as Metadata;
 use Wingu\Engine\SDK\Model\Response\Component\Location;
-use Wingu\Engine\SDK\Model\Response\Component\PrivateForm;
 use Wingu\Engine\SDK\Model\Response\Component\PrivateWebhook;
 use Wingu\Engine\SDK\Model\Response\Component\Rating;
 use Wingu\Engine\SDK\Model\Response\Component\Separator;
-use Wingu\Engine\SDK\Model\Response\Component\SubmitDestination\Email;
-use Wingu\Engine\SDK\Model\Response\Component\SubmitDestination\Endpoint;
 use Wingu\Engine\SDK\Model\Response\Component\SurveyMonkey;
 use Wingu\Engine\SDK\Model\Response\Component\Video;
 use Wingu\Engine\SDK\Model\Response\Content\Deck;
@@ -55,9 +49,12 @@ use Wingu\Engine\SDK\Model\Response\Content\PrivateContent;
 use Wingu\Engine\SDK\Model\Response\Content\PrivateListContent;
 use Wingu\Engine\SDK\Model\Response\Coordinates;
 use Wingu\Engine\SDK\Tests\Api\ChannelApiTestCase;
+use Wingu\Engine\SDK\Tests\Api\Expected\Loader\PrivateComponent;
 
 final class NfcApiTest extends ChannelApiTestCase
 {
+    use PrivateComponent;
+
     public function testNfcReturnsPublicNfc() : void
     {
         $configurationMock = new Configuration();
@@ -242,48 +239,7 @@ final class NfcApiTest extends ChannelApiTestCase
                                 new Card(
                                     '8e895618-4a1f-4bfc-8b5f-af1fa722e228',
                                     new Position(8),
-                                    new PrivateForm(
-                                        'e0910ef7-533f-4472-95b7-1506891bbb33',
-                                        new \DateTime('2018-05-18T08:22:41+0000'),
-                                        'Form component survey',
-                                        [
-                                            new Input('full_name', 'Your name', true, 'text'),
-                                            new Input('birthday', 'Birthday', false, 'date'),
-                                            new Select(
-                                                'gender',
-                                                'Gender',
-                                                false,
-                                                false,
-                                                [
-                                                    new SelectOption('Male', 'm'),
-                                                    new SelectOption('Female', 'f'),
-                                                ]
-                                            ),
-                                            new Select(
-                                                'dessert',
-                                                'Dessert',
-                                                true,
-                                                true,
-                                                [
-                                                    new SelectOption('Jello', 'jello'),
-                                                    new SelectOption('Apple pie', 'apple_pie'),
-                                                    new SelectOption('Schnitzel', 'schnitzel'),
-                                                ]
-                                            ),
-                                            new Input('text', 'Element text', false, 'text'),
-                                            new Input('textarea', 'Element textarea', false, 'textarea'),
-                                            new Input('email', 'Element email', false, 'email'),
-                                            new Input('url', 'Element url', false, 'url'),
-                                            new Input('date', 'Element date', false, 'date'),
-                                            new Input('datetime', 'Element datetime', false, 'datetime'),
-                                            new Input('time', 'Element time', false, 'time'),
-                                        ],
-                                        [
-                                            new Email('test+form-component@wingu.de'),
-                                            new Endpoint('https://httpbin.org/status/200', []),
-                                        ],
-                                        'Thank you for your feedback!'
-                                    )
+                                    $this->getExpectedFormComponent()
                                 ),
                                 new Card(
                                     'e3034969-c23a-482a-90c4-1c02aee3863c',

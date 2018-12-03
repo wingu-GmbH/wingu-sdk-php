@@ -2,6 +2,12 @@ Change Log
 ==========
 
 ## [0.2.0] - 2018-12-xx
+### Added
+- flag `persistent` on `form` component elements 
+
+### Changed
+ - supported wingu API version to `0.13`
+
 ### Removed
 - proxy component
 

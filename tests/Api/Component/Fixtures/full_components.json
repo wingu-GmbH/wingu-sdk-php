@@ -171,13 +171,13 @@
       },
       {
         "component": {
-          "id": "115b9a0c-a068-4505-b0c5-ce36b889a7cc",
+          "id": "a81700f1-83d1-4d1c-be86-37410b6a8d0a",
           "updatedAt": "2018-05-18T08:22:41+0000",
           "files": [
             {
               "position": 0,
               "fileUrl": "http://example.com/files/wingu_presentation.pdf",
-              "id": "2738f50f-7e95-4541-b8b6-9515fceb5a09",
+              "id": "2d6a4c22-32e0-4c0a-bdae-cf0821d6b378",
               "name": "wingu presentation",
               "size": 900641
             }
@@ -195,6 +195,7 @@
               "name": "full_name",
               "label": "Your name",
               "required": true,
+              "persistent": false,
               "type": "text",
               "discriminator": "input"
             },
@@ -202,6 +203,7 @@
               "name": "birthday",
               "label": "Birthday",
               "required": false,
+              "persistent": false,
               "type": "date",
               "discriminator": "input"
             },
@@ -209,6 +211,7 @@
               "name": "gender",
               "label": "Gender",
               "required": false,
+              "persistent": true,
               "multiple": false,
               "options": [
                 {
@@ -226,6 +229,7 @@
               "name": "dessert",
               "label": "Dessert",
               "required": true,
+              "persistent": false,
               "multiple": true,
               "options": [
                 {
@@ -247,6 +251,7 @@
               "name": "text",
               "label": "Element text",
               "required": false,
+              "persistent": false,
               "type": "text",
               "discriminator": "input"
             },
@@ -254,6 +259,7 @@
               "name": "textarea",
               "label": "Element textarea",
               "required": false,
+              "persistent": false,
               "type": "textarea",
               "discriminator": "input"
             },
@@ -261,6 +267,7 @@
               "name": "email",
               "label": "Element email",
               "required": false,
+              "persistent": false,
               "type": "email",
               "discriminator": "input"
             },
@@ -268,6 +275,7 @@
               "name": "url",
               "label": "Element url",
               "required": false,
+              "persistent": false,
               "type": "url",
               "discriminator": "input"
             },
@@ -275,6 +283,7 @@
               "name": "date",
               "label": "Element date",
               "required": false,
+              "persistent": false,
               "type": "date",
               "discriminator": "input"
             },
@@ -282,6 +291,7 @@
               "name": "datetime",
               "label": "Element datetime",
               "required": false,
+              "persistent": false,
               "type": "datetime",
               "discriminator": "input"
             },
@@ -289,6 +299,7 @@
               "name": "time",
               "label": "Element time",
               "required": false,
+              "persistent": false,
               "type": "time",
               "discriminator": "input"
             }
@@ -302,12 +313,25 @@
             {
               "discriminator": "endpoint",
               "url": "https://httpbin.org/status/200",
-              "headers": []
+              "headers": [
+                {
+                  "name": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "name": "Cache-Control",
+                  "value": "max-age=3600, public"
+                },
+                {
+                  "name": "WWW-Authenticate",
+                  "value": "Basic realm=\"Restricted Area\""
+                }
+              ]
             }
           ],
           "resubmit": {
             "allowed": true,
-            "allowedAfterSeconds": null
+            "allowedAfterSeconds": 300
           },
           "discriminator": "form"
         }

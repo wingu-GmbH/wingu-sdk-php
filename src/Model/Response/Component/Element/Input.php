@@ -15,15 +15,19 @@ final class Input implements Element
     /** @var bool */
     private $required;
 
+    /** @var bool */
+    private $persistent;
+
     /** @var string */
     private $type;
 
-    public function __construct(string $name, string $label, bool $required, string $type)
+    public function __construct(string $name, string $label, bool $required, bool $persistent, string $type)
     {
-        $this->name     = $name;
-        $this->label    = $label;
-        $this->required = $required;
-        $this->type     = $type;
+        $this->name       = $name;
+        $this->label      = $label;
+        $this->required   = $required;
+        $this->persistent = $persistent;
+        $this->type       = $type;
     }
 
     public function name() : string
@@ -39,6 +43,11 @@ final class Input implements Element
     public function required() : bool
     {
         return $this->required;
+    }
+
+    public function persistent() : bool
+    {
+        return $this->persistent;
     }
 
     public function type() : string

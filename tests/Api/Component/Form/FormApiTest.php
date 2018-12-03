@@ -18,16 +18,13 @@ use Wingu\Engine\SDK\Model\Request\Component\Form\Resubmit\Update as UpdateResub
 use Wingu\Engine\SDK\Model\Request\Component\Form\SubmitDestination\Email as RequestEmail;
 use Wingu\Engine\SDK\Model\Request\Component\Form\SubmitDestination\Endpoint as RequestEndpoint;
 use Wingu\Engine\SDK\Model\Request\Component\Form\Update;
-use Wingu\Engine\SDK\Model\Response\Component\Element\Input;
-use Wingu\Engine\SDK\Model\Response\Component\Element\Select;
-use Wingu\Engine\SDK\Model\Response\Component\Element\SelectOption;
-use Wingu\Engine\SDK\Model\Response\Component\PrivateForm;
-use Wingu\Engine\SDK\Model\Response\Component\SubmitDestination\Email;
-use Wingu\Engine\SDK\Model\Response\Component\SubmitDestination\Endpoint;
 use Wingu\Engine\SDK\Tests\Api\ApiTest;
+use Wingu\Engine\SDK\Tests\Api\Expected\Loader\PrivateComponent;
 
-class FormApiTest extends ApiTest
+final class FormApiTest extends ApiTest
 {
+    use PrivateComponent;
+
     public function testCreateReturnsNewFormComponent() : void
     {
         $configurationMock = new Configuration();
@@ -76,7 +73,7 @@ class FormApiTest extends ApiTest
         );
         self::assertSame('POST', $actualRequest->getMethod());
 
-        $expectedResponse = $this->getExpectedForm();
+        $expectedResponse = $this->getExpectedFormComponent();
         self::assertEquals($expectedResponse, $actualResponse);
     }
 
@@ -115,51 +112,5 @@ class FormApiTest extends ApiTest
             $actualRequest->getBody()->getContents()
         );
         self::assertSame('PATCH', $actualRequest->getMethod());
-    }
-
-    private function getExpectedForm() : PrivateForm
-    {
-        return new PrivateForm(
-            '05f21ca6-4b65-42a8-aea1-b21346a029a6',
-            new \DateTime('2018-05-18T08:22:41+0000'),
-            'Form component survey',
-            [
-                new Input('full_name', 'Your name', true, 'text'),
-                new Input('birthday', 'Birthday', false, 'date'),
-                new Select(
-                    'gender',
-                    'Gender',
-                    false,
-                    false,
-                    [
-                        new SelectOption('Male', 'm'),
-                        new SelectOption('Female', 'f'),
-                    ]
-                ),
-                new Select(
-                    'dessert',
-                    'Dessert',
-                    true,
-                    true,
-                    [
-                        new SelectOption('Jello', 'jello'),
-                        new SelectOption('Apple pie', 'apple_pie'),
-                        new SelectOption('Schnitzel', 'schnitzel'),
-                    ]
-                ),
-                new Input('text', 'Element text', false, 'text'),
-                new Input('textarea', 'Element textarea', false, 'textarea'),
-                new Input('email', 'Element email', false, 'email'),
-                new Input('url', 'Element url', false, 'url'),
-                new Input('date', 'Element date', false, 'date'),
-                new Input('datetime', 'Element datetime', false, 'datetime'),
-                new Input('time', 'Element time', false, 'time'),
-            ],
-            [
-                new Email('test+form-component@wingu.de'),
-                new Endpoint('https://httpbin.org/status/200', []),
-            ],
-            'Thank you for your feedback!'
-        );
     }
 }

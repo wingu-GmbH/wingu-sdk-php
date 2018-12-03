@@ -30,9 +30,6 @@ use Wingu\Engine\SDK\Model\Response\Component\ContactAddress;
 use Wingu\Engine\SDK\Model\Response\Component\ContactExternalLinks;
 use Wingu\Engine\SDK\Model\Response\Component\Coupon;
 use Wingu\Engine\SDK\Model\Response\Component\CouponBarcode;
-use Wingu\Engine\SDK\Model\Response\Component\Element\Input;
-use Wingu\Engine\SDK\Model\Response\Component\Element\Select;
-use Wingu\Engine\SDK\Model\Response\Component\Element\SelectOption;
 use Wingu\Engine\SDK\Model\Response\Component\Files;
 use Wingu\Engine\SDK\Model\Response\Component\FilesFile;
 use Wingu\Engine\SDK\Model\Response\Component\Image;
@@ -40,21 +37,20 @@ use Wingu\Engine\SDK\Model\Response\Component\ImageGallery;
 use Wingu\Engine\SDK\Model\Response\Component\ImageGalleryImage;
 use Wingu\Engine\SDK\Model\Response\Component\ImageMetadata;
 use Wingu\Engine\SDK\Model\Response\Component\Location;
-use Wingu\Engine\SDK\Model\Response\Component\PrivateForm;
 use Wingu\Engine\SDK\Model\Response\Component\PrivateWebhook;
 use Wingu\Engine\SDK\Model\Response\Component\Rating;
 use Wingu\Engine\SDK\Model\Response\Component\Separator;
-use Wingu\Engine\SDK\Model\Response\Component\SubmitDestination\Email;
-use Wingu\Engine\SDK\Model\Response\Component\SubmitDestination\Endpoint;
-use Wingu\Engine\SDK\Model\Response\Component\SubmitDestination\EndpointHeader;
 use Wingu\Engine\SDK\Model\Response\Component\SurveyMonkey;
 use Wingu\Engine\SDK\Model\Response\Component\Video;
 use Wingu\Engine\SDK\Model\Response\Content\Deck as ResponseDeck;
 use Wingu\Engine\SDK\Model\Response\Coordinates;
 use Wingu\Engine\SDK\Tests\Api\ApiTest;
+use Wingu\Engine\SDK\Tests\Api\Expected\Loader\PrivateComponent;
 
 final class DeckTest extends ApiTest
 {
+    use PrivateComponent;
+
     public function testPostDeckCreatesDeck() : void
     {
         $configurationMock = new Configuration();
@@ -330,54 +326,7 @@ final class DeckTest extends ApiTest
                 new Card(
                     'a76baf51-7b96-4bdb-a9b7-1907543f57b3',
                     new Position(8),
-                    new PrivateForm(
-                        '1cda5ffe-6c20-48c1-af3b-86bd367de143',
-                        new \DateTime('2018-09-20T08:48:30+0000'),
-                        'Form component survey',
-                        [
-                            new Input('full_name', 'Your name', true, 'text'),
-                            new Input('birthday', 'Birthday', false, 'date'),
-                            new Select(
-                                'gender',
-                                'Gender',
-                                false,
-                                false,
-                                [
-                                    new SelectOption('Male', 'm'),
-                                    new SelectOption('Female', 'f'),
-                                ]
-                            ),
-                            new Select(
-                                'dessert',
-                                'Dessert',
-                                true,
-                                true,
-                                [
-                                    new SelectOption('Jello', 'jello'),
-                                    new SelectOption('Apple pie', 'apple_pie'),
-                                    new SelectOption('Schnitzel', 'schnitzel'),
-                                ]
-                            ),
-                            new Input('text', 'Element text', false, 'text'),
-                            new Input('email', 'Element email', false, 'email'),
-                            new Input('url', 'Element url', false, 'url'),
-                            new Input('date', 'Element date', false, 'date'),
-                            new Input('datetime', 'Element datetime', false, 'datetime'),
-                            new Input('time', 'Element time', false, 'time'),
-                        ],
-                        [
-                            new Email('test+form-component@wingu.de'),
-                            new Endpoint(
-                                'https://httpbin.org/status/200',
-                                [
-                                    new EndpointHeader('Connection', 'keep-alive'),
-                                    new EndpointHeader('Cache-Control', 'max-age=3600, public'),
-                                    new EndpointHeader('WWW-Authenticate', 'Basic realm="Restricted Area"'),
-                                ]
-                            ),
-                        ],
-                        'Thank you for your feedback!'
-                    )
+                    $this->getExpectedFormComponent()
                 ),
                 new Card(
                     'c6a3f136-592e-4c58-b290-60aedf6f486d',

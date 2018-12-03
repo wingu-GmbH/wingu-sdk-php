@@ -188,14 +188,15 @@
       },
       "id": "a76baf51-7b96-4bdb-a9b7-1907543f57b3",
       "component": {
-        "id": "1cda5ffe-6c20-48c1-af3b-86bd367de143",
-        "updatedAt": "2018-09-20T08:48:30+0000",
+        "id": "05f21ca6-4b65-42a8-aea1-b21346a029a6",
+        "updatedAt": "2018-05-18T08:22:41+0000",
         "title": "Form component survey",
         "elements": [
           {
             "name": "full_name",
             "label": "Your name",
             "required": true,
+            "persistent": false,
             "type": "text",
             "discriminator": "input"
           },
@@ -203,6 +204,7 @@
             "name": "birthday",
             "label": "Birthday",
             "required": false,
+            "persistent": false,
             "type": "date",
             "discriminator": "input"
           },
@@ -210,6 +212,7 @@
             "name": "gender",
             "label": "Gender",
             "required": false,
+            "persistent": true,
             "multiple": false,
             "options": [
               {
@@ -227,6 +230,7 @@
             "name": "dessert",
             "label": "Dessert",
             "required": true,
+            "persistent": false,
             "multiple": true,
             "options": [
               {
@@ -248,13 +252,23 @@
             "name": "text",
             "label": "Element text",
             "required": false,
+            "persistent": false,
             "type": "text",
+            "discriminator": "input"
+          },
+          {
+            "name": "textarea",
+            "label": "Element textarea",
+            "required": false,
+            "persistent": false,
+            "type": "textarea",
             "discriminator": "input"
           },
           {
             "name": "email",
             "label": "Element email",
             "required": false,
+            "persistent": false,
             "type": "email",
             "discriminator": "input"
           },
@@ -262,6 +276,7 @@
             "name": "url",
             "label": "Element url",
             "required": false,
+            "persistent": false,
             "type": "url",
             "discriminator": "input"
           },
@@ -269,6 +284,7 @@
             "name": "date",
             "label": "Element date",
             "required": false,
+            "persistent": false,
             "type": "date",
             "discriminator": "input"
           },
@@ -276,6 +292,7 @@
             "name": "datetime",
             "label": "Element datetime",
             "required": false,
+            "persistent": false,
             "type": "datetime",
             "discriminator": "input"
           },
@@ -283,6 +300,7 @@
             "name": "time",
             "label": "Element time",
             "required": false,
+            "persistent": false,
             "type": "time",
             "discriminator": "input"
           }

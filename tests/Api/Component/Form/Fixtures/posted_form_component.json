@@ -7,6 +7,7 @@
       "name": "full_name",
       "label": "Your name",
       "required": true,
+      "persistent": false,
       "type": "text",
       "discriminator": "input"
     },
@@ -14,6 +15,7 @@
       "name": "birthday",
       "label": "Birthday",
       "required": false,
+      "persistent": false,
       "type": "date",
       "discriminator": "input"
     },
@@ -21,6 +23,7 @@
       "name": "gender",
       "label": "Gender",
       "required": false,
+      "persistent": true,
       "multiple": false,
       "options": [
         {
@@ -38,6 +41,7 @@
       "name": "dessert",
       "label": "Dessert",
       "required": true,
+      "persistent": false,
       "multiple": true,
       "options": [
         {
@@ -59,6 +63,7 @@
       "name": "text",
       "label": "Element text",
       "required": false,
+      "persistent": false,
       "type": "text",
       "discriminator": "input"
     },
@@ -66,6 +71,7 @@
       "name": "textarea",
       "label": "Element textarea",
       "required": false,
+      "persistent": false,
       "type": "textarea",
       "discriminator": "input"
     },
@@ -73,6 +79,7 @@
       "name": "email",
       "label": "Element email",
       "required": false,
+      "persistent": false,
       "type": "email",
       "discriminator": "input"
     },
@@ -80,6 +87,7 @@
       "name": "url",
       "label": "Element url",
       "required": false,
+      "persistent": false,
       "type": "url",
       "discriminator": "input"
     },
@@ -87,6 +95,7 @@
       "name": "date",
       "label": "Element date",
       "required": false,
+      "persistent": false,
       "type": "date",
       "discriminator": "input"
     },
@@ -94,6 +103,7 @@
       "name": "datetime",
       "label": "Element datetime",
       "required": false,
+      "persistent": false,
       "type": "datetime",
       "discriminator": "input"
     },
@@ -101,10 +111,12 @@
       "name": "time",
       "label": "Element time",
       "required": false,
+      "persistent": false,
       "type": "time",
       "discriminator": "input"
     }
   ],
+  "feedbackSuccessMessage": "Thank you for your feedback!",
   "submitDestinations": [
     {
       "discriminator": "email",
@@ -113,10 +125,22 @@
     {
       "discriminator": "endpoint",
       "url": "https://httpbin.org/status/200",
-      "headers": []
+      "headers": [
+        {
+          "name": "Connection",
+          "value": "keep-alive"
+        },
+        {
+          "name": "Cache-Control",
+          "value": "max-age=3600, public"
+        },
+        {
+          "name": "WWW-Authenticate",
+          "value": "Basic realm=\"Restricted Area\""
+        }
+      ]
     }
   ],
-  "feedbackSuccessMessage": "Thank you for your feedback!",
   "resubmit": {
     "allowed": true,
     "allowedAfterSeconds": null
