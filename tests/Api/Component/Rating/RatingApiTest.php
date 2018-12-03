@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Wingu\Engine\SDK\Tests\Api\Component\Rating;
 
 use GuzzleHttp\Psr7\Response;
-use Http\Mock\Client as MockClient;
 use Psr\Http\Message\RequestInterface;
 use Wingu\Engine\SDK\Api\Component\RatingApi;
 use Wingu\Engine\SDK\Api\Configuration;
@@ -23,7 +22,7 @@ class RatingApiTest extends ApiTest
     {
         $configurationMock = new Configuration();
 
-        $httpClient = new MockClient();
+        $httpClient = self::createClient();
         $response   = new Response(
             201,
             ['Content-Type' => 'application/json'],
@@ -52,7 +51,7 @@ class RatingApiTest extends ApiTest
     {
         $configurationMock = new Configuration();
 
-        $httpClient = new MockClient();
+        $httpClient = self::createClient();
         $response   = new Response(
             204,
             ['Content-Type' => 'application/json']
@@ -78,7 +77,7 @@ class RatingApiTest extends ApiTest
     {
         $configurationMock = new Configuration();
 
-        $httpClient = new MockClient();
+        $httpClient = self::createClient();
         $httpClient->addResponse(
             new Response(
                 200,
@@ -89,7 +88,10 @@ class RatingApiTest extends ApiTest
 
         $winguApi = new RatingApi($configurationMock, $httpClient);
 
-        $actual   = $winguApi->statistic('a81700f1-83d1-4d1c-be86-37410b6a8d0a', new Statistic('8c798a67-0000-4000-a000-000000000001'));
+        $actual   = $winguApi->statistic(
+            'a81700f1-83d1-4d1c-be86-37410b6a8d0a',
+            new Statistic('8c798a67-0000-4000-a000-000000000001')
+        );
         $expected = $this->getExpectedStatistic();
 
         self::assertEquals($expected, $actual);

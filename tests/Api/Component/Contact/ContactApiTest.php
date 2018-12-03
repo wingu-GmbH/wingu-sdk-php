@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Wingu\Engine\SDK\Tests\Api\Component\Contact;
 
 use GuzzleHttp\Psr7\Response;
-use Http\Mock\Client as MockClient;
 use Psr\Http\Message\RequestInterface;
 use Wingu\Engine\SDK\Api\Component\ContactApi;
 use Wingu\Engine\SDK\Api\Configuration;
@@ -27,7 +26,7 @@ class ContactApiTest extends ApiTest
     {
         $configurationMock = new Configuration();
 
-        $httpClient = new MockClient();
+        $httpClient = self::createClient();
         $response   = new Response(
             201,
             ['Content-Type' => 'application/json'],
@@ -67,7 +66,10 @@ class ContactApiTest extends ApiTest
 
         /** @var RequestInterface $actualRequest */
         $actualRequest = $httpClient->getLastRequest();
-        self::assertSame('{"companyName":"Example","personalTitle":"Mr.","firstName":"Benjamin","lastName":"Berg","mobile":"004917225446165","phone":"+49 (0)17 22 544 61","email":"benjamin.berg@example.com","website":"www.example.com","address":{"country":"DE","city":"Oststadt","zipCode":"89081","street":"Kurfuerstendamm","streetNumber":"66"},"openingHours":"Daily, 9:00 - 17:00","externalLinks":{"facebookName":"wingude","twitterName":"wingude","googlePlusName":"+Speicher210","yelpName":"speicher-210-hamburg-2"},"extraInfo":"Some extra info"}', $actualRequest->getBody()->getContents());
+        self::assertSame(
+            '{"companyName":"Example","personalTitle":"Mr.","firstName":"Benjamin","lastName":"Berg","mobile":"004917225446165","phone":"+49 (0)17 22 544 61","email":"benjamin.berg@example.com","website":"www.example.com","address":{"country":"DE","city":"Oststadt","zipCode":"89081","street":"Kurfuerstendamm","streetNumber":"66"},"openingHours":"Daily, 9:00 - 17:00","externalLinks":{"facebookName":"wingude","twitterName":"wingude","googlePlusName":"+Speicher210","yelpName":"speicher-210-hamburg-2"},"extraInfo":"Some extra info"}',
+            $actualRequest->getBody()->getContents()
+        );
         self::assertSame('POST', $actualRequest->getMethod());
 
         $expectedResponse = $this->getExpectedContact();
@@ -78,7 +80,7 @@ class ContactApiTest extends ApiTest
     {
         $configurationMock = new Configuration();
 
-        $httpClient = new MockClient();
+        $httpClient = self::createClient();
         $response   = new Response(
             204,
             ['Content-Type' => 'application/json']
@@ -107,7 +109,10 @@ class ContactApiTest extends ApiTest
 
         /** @var RequestInterface $actualRequest */
         $actualRequest = $httpClient->getLastRequest();
-        self::assertSame('{"companyName":"Wingu","personalTitle":"Sir","website":"https:\/\/www.wingu.de","address":[],"externalLinks":[],"extraInfo":"Edited extra info"}', $actualRequest->getBody()->getContents());
+        self::assertSame(
+            '{"companyName":"Wingu","personalTitle":"Sir","website":"https:\/\/www.wingu.de","address":[],"externalLinks":[],"extraInfo":"Edited extra info"}',
+            $actualRequest->getBody()->getContents()
+        );
         self::assertSame('PATCH', $actualRequest->getMethod());
     }
 

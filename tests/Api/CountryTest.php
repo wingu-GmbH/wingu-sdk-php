@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Wingu\Engine\SDK\Tests\Api;
 
 use GuzzleHttp\Psr7\Response;
-use Http\Mock\Client as MockClient;
 use Wingu\Engine\SDK\Api\Configuration;
 use Wingu\Engine\SDK\Api\Country;
 use Wingu\Engine\SDK\Api\Exception\Generic;
@@ -48,7 +47,7 @@ final class CountryTest extends ApiTest
     {
         $configurationMock = new Configuration();
 
-        $httpClient = new MockClient();
+        $httpClient = self::createClient();
         foreach ($httpClientResponses as $httpClientResponse) {
             $httpClient->addResponse($httpClientResponse);
         }

@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Wingu\Engine\SDK\Tests\Api\Channel\Beacon;
 
 use GuzzleHttp\Psr7\Response;
-use Http\Mock\Client as MockClient;
 use Psr\Http\Message\RequestInterface;
 use Speicher210\BusinessHours\BusinessHours;
 use Speicher210\BusinessHours\Day\AllDay;
@@ -44,12 +43,12 @@ use Wingu\Engine\SDK\Model\Response\Component\Element\Select;
 use Wingu\Engine\SDK\Model\Response\Component\Element\SelectOption;
 use Wingu\Engine\SDK\Model\Response\Component\Files;
 use Wingu\Engine\SDK\Model\Response\Component\FilesFile as File;
-use Wingu\Engine\SDK\Model\Response\Component\Image as InnerImage;
 use Wingu\Engine\SDK\Model\Response\Component\Image;
+use Wingu\Engine\SDK\Model\Response\Component\Image as InnerImage;
 use Wingu\Engine\SDK\Model\Response\Component\ImageGallery;
 use Wingu\Engine\SDK\Model\Response\Component\ImageGalleryImage as OuterImage;
-use Wingu\Engine\SDK\Model\Response\Component\ImageMetadata as Metadata;
 use Wingu\Engine\SDK\Model\Response\Component\ImageMetadata;
+use Wingu\Engine\SDK\Model\Response\Component\ImageMetadata as Metadata;
 use Wingu\Engine\SDK\Model\Response\Component\Location;
 use Wingu\Engine\SDK\Model\Response\Component\PrivateForm;
 use Wingu\Engine\SDK\Model\Response\Component\PrivateWebhook;
@@ -76,7 +75,7 @@ final class BeaconApiTest extends ChannelApiTestCase
     {
         $configurationMock = new Configuration();
 
-        $httpClient = new MockClient();
+        $httpClient = self::createClient();
         $httpClient->addResponse(
             new Response(
                 200,
@@ -338,7 +337,7 @@ final class BeaconApiTest extends ChannelApiTestCase
     {
         $configurationMock = new Configuration();
 
-        $httpClient = new MockClient();
+        $httpClient = self::createClient();
         $httpClient->addResponse(
             new Response(
                 200,
@@ -672,7 +671,7 @@ final class BeaconApiTest extends ChannelApiTestCase
     {
         $configurationMock = new Configuration();
 
-        $httpClient = new MockClient();
+        $httpClient = self::createClient();
         $httpClient->addResponse(
             new Response(
                 200,
@@ -691,7 +690,7 @@ final class BeaconApiTest extends ChannelApiTestCase
     {
         $configurationMock = new Configuration();
 
-        $httpClient = new MockClient();
+        $httpClient = self::createClient();
         $httpClient->addResponse(
             new Response(
                 200,
@@ -731,7 +730,7 @@ final class BeaconApiTest extends ChannelApiTestCase
     {
         $configurationMock = new Configuration();
 
-        $httpClient = new MockClient();
+        $httpClient = self::createClient();
         $response   = new Response(
             204,
             ['Content-Type' => 'application/json']
@@ -761,7 +760,7 @@ final class BeaconApiTest extends ChannelApiTestCase
     {
         $configurationMock = new Configuration();
 
-        $httpClient = new MockClient();
+        $httpClient = self::createClient();
         $response   = new Response(
             204,
             ['Content-Type' => 'application/json']
@@ -794,7 +793,7 @@ final class BeaconApiTest extends ChannelApiTestCase
     {
         $configurationMock = new Configuration();
 
-        $httpClient = new MockClient();
+        $httpClient = self::createClient();
         $response   = new Response(
             204,
             ['Content-Type' => 'application/json']
@@ -828,7 +827,7 @@ final class BeaconApiTest extends ChannelApiTestCase
     {
         $configurationMock = new Configuration();
 
-        $httpClient = new MockClient();
+        $httpClient = self::createClient();
         $response   = new Response(
             204,
             ['Content-Type' => 'application/json']

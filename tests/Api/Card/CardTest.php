@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Wingu\Engine\SDK\Tests\Api\Card;
 
 use GuzzleHttp\Psr7\Response;
-use Http\Mock\Client as MockClient;
 use Psr\Http\Message\RequestInterface;
 use Wingu\Engine\SDK\Api\Card;
 use Wingu\Engine\SDK\Api\Configuration;
@@ -22,7 +21,7 @@ class CardTest extends ApiTest
     {
         $configurationMock = new Configuration();
 
-        $httpClient = new MockClient();
+        $httpClient = self::createClient();
         $response   = new Response(
             201,
             ['Content-Type' => 'application/json'],
@@ -42,7 +41,10 @@ class CardTest extends ApiTest
 
         /** @var RequestInterface $actualRequest */
         $actualRequest = $httpClient->getLastRequest();
-        self::assertSame('{"deck":"ea45b0c8-0000-4000-a000-000000000006","component":"a1a57fee-a9e6-4c32-ad66-da25a5a4382f","positionSort":12}', $actualRequest->getBody()->getContents());
+        self::assertSame(
+            '{"deck":"ea45b0c8-0000-4000-a000-000000000006","component":"a1a57fee-a9e6-4c32-ad66-da25a5a4382f","positionSort":12}',
+            $actualRequest->getBody()->getContents()
+        );
         self::assertSame('POST', $actualRequest->getMethod());
 
         $expectedResponse = $this->getExpectedPostedCard();
@@ -53,7 +55,7 @@ class CardTest extends ApiTest
     {
         $configurationMock = new Configuration();
 
-        $httpClient = new MockClient();
+        $httpClient = self::createClient();
         $response   = new Response(
             204,
             ['Content-Type' => 'application/json']

@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Wingu\Engine\SDK\Tests\Api\Component\Location;
 
 use GuzzleHttp\Psr7\Response;
-use Http\Mock\Client as MockClient;
 use Psr\Http\Message\RequestInterface;
 use Wingu\Engine\SDK\Api\Component\LocationApi;
 use Wingu\Engine\SDK\Api\Configuration;
@@ -22,7 +21,7 @@ class LocationApiTest extends ApiTest
     {
         $configurationMock = new Configuration();
 
-        $httpClient = new MockClient();
+        $httpClient = self::createClient();
         $response   = new Response(
             201,
             ['Content-Type' => 'application/json'],
@@ -41,7 +40,10 @@ class LocationApiTest extends ApiTest
 
         /** @var RequestInterface $actualRequest */
         $actualRequest = $httpClient->getLastRequest();
-        self::assertSame('{"coordinates":{"longitude":10.233362,"latitude":53.614503},"radius":602}', $actualRequest->getBody()->getContents());
+        self::assertSame(
+            '{"coordinates":{"longitude":10.233362,"latitude":53.614503},"radius":602}',
+            $actualRequest->getBody()->getContents()
+        );
         self::assertSame('POST', $actualRequest->getMethod());
 
         $expectedResponse = $this->getExpectedLocation();
@@ -52,7 +54,7 @@ class LocationApiTest extends ApiTest
     {
         $configurationMock = new Configuration();
 
-        $httpClient = new MockClient();
+        $httpClient = self::createClient();
         $response   = new Response(
             204,
             ['Content-Type' => 'application/json']
@@ -71,7 +73,10 @@ class LocationApiTest extends ApiTest
 
         /** @var RequestInterface $actualRequest */
         $actualRequest = $httpClient->getLastRequest();
-        self::assertSame('{"coordinates":{"longitude":10.733362,"latitude":53.114503},"radius":618}', $actualRequest->getBody()->getContents());
+        self::assertSame(
+            '{"coordinates":{"longitude":10.733362,"latitude":53.114503},"radius":618}',
+            $actualRequest->getBody()->getContents()
+        );
         self::assertSame('PATCH', $actualRequest->getMethod());
     }
 

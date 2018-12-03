@@ -4,10 +4,16 @@ declare(strict_types=1);
 
 namespace Wingu\Engine\SDK\Tests\Api;
 
+use Http\Mock\Client as MockClient;
 use PHPUnit\Framework\TestCase;
 
 abstract class ApiTest extends TestCase
 {
+    protected static function createClient() : MockClient
+    {
+        return new MockClient();
+    }
+
     protected function getDataFromFixturesFile(string $fileName) : ?string
     {
         $reflection = new \ReflectionObject($this);

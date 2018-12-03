@@ -5,11 +5,10 @@ declare(strict_types=1);
 namespace Wingu\Engine\SDK\Tests\Api\Deck;
 
 use GuzzleHttp\Psr7\Response;
-use Http\Mock\Client as MockClient;
 use Psr\Http\Message\RequestInterface;
 use Wingu\Engine\SDK\Api\Configuration;
-use Wingu\Engine\SDK\Api\Deck as DeckApi;
 use Wingu\Engine\SDK\Api\Deck;
+use Wingu\Engine\SDK\Api\Deck as DeckApi;
 use Wingu\Engine\SDK\Model\Request\Deck\CardsPosition;
 use Wingu\Engine\SDK\Model\Request\Deck\Create;
 use Wingu\Engine\SDK\Model\Request\Deck\Update;
@@ -60,7 +59,7 @@ final class DeckTest extends ApiTest
     {
         $configurationMock = new Configuration();
 
-        $httpClient = new MockClient();
+        $httpClient = self::createClient();
         $response   = new Response(
             201,
             ['Content-Type' => 'application/json'],
@@ -94,7 +93,7 @@ final class DeckTest extends ApiTest
     {
         $configurationMock = new Configuration();
 
-        $httpClient = new MockClient();
+        $httpClient = self::createClient();
         $response   = new Response(
             204,
             ['Content-Type' => 'application/json']
@@ -115,7 +114,7 @@ final class DeckTest extends ApiTest
     {
         $configurationMock = new Configuration();
 
-        $httpClient = new MockClient();
+        $httpClient = self::createClient();
         $response   = new Response(
             204,
             ['Content-Type' => 'application/json']
@@ -140,7 +139,7 @@ final class DeckTest extends ApiTest
     {
         $configurationMock = new Configuration();
 
-        $httpClient = new MockClient();
+        $httpClient = self::createClient();
         $httpClient->addResponse(
             new Response(
                 200,
@@ -161,7 +160,7 @@ final class DeckTest extends ApiTest
     {
         $configurationMock = new Configuration();
 
-        $httpClient = new MockClient();
+        $httpClient = self::createClient();
         $response   = new Response(
             204,
             ['Content-Type' => 'application/json']

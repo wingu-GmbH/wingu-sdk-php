@@ -6,7 +6,6 @@ namespace Wingu\Engine\SDK\Tests\Api\Wingu;
 
 use GuzzleHttp\Psr7\Response;
 use Http\Message\MessageFactory\GuzzleMessageFactory;
-use Http\Mock\Client as MockClient;
 use Wingu\Engine\SDK\Api\Configuration;
 use Wingu\Engine\SDK\Api\Exception\Generic;
 use Wingu\Engine\SDK\Api\Wingu\Wingu;
@@ -24,7 +23,7 @@ final class WinguTest extends ApiTest
         $requestFactory    = new GuzzleMessageFactory();
         $hydrator          = $this->createMock(Hydrator::class);
 
-        $httpClient = new MockClient();
+        $httpClient = self::createClient();
         $httpClient->addResponse(
             new Response(500, ['Content-Type' => 'application/json'], '{"code": 500, "errors": []}')
         );
@@ -41,7 +40,7 @@ final class WinguTest extends ApiTest
     {
         $configurationMock = new Configuration();
 
-        $httpClient = new MockClient();
+        $httpClient = self::createClient();
         $httpClient->addResponse(
             new Response(
                 200,

@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Wingu\Engine\SDK\Tests\Api\Component\AudioPlaylist;
 
 use GuzzleHttp\Psr7\Response;
-use Http\Mock\Client as MockClient;
 use Psr\Http\Message\RequestInterface;
 use Wingu\Engine\SDK\Api\Component\AudioPlaylistApi;
 use Wingu\Engine\SDK\Api\Configuration;
@@ -25,7 +24,7 @@ class AudioPlaylistApiTest extends ApiTest
     {
         $configurationMock = new Configuration();
 
-        $httpClient = new MockClient();
+        $httpClient = self::createClient();
         $response   = new Response(
             201,
             ['Content-Type' => 'application/json'],
@@ -54,7 +53,7 @@ class AudioPlaylistApiTest extends ApiTest
     {
         $configurationMock = new Configuration();
 
-        $httpClient = new MockClient();
+        $httpClient = self::createClient();
         $response   = new Response(
             204,
             ['Content-Type' => 'application/json']
@@ -80,7 +79,7 @@ class AudioPlaylistApiTest extends ApiTest
     {
         $configurationMock = new Configuration();
 
-        $httpClient = new MockClient();
+        $httpClient = self::createClient();
         $response   = new Response(
             201,
             ['Content-Type' => 'application/json'],
@@ -107,14 +106,17 @@ class AudioPlaylistApiTest extends ApiTest
 
         $expectedResponse = $this->getExpectedAudioPlaylistMedia();
         self::assertEquals($expectedResponse, $actualResponse);
-        self::assertSame('http://example.com/wingu-dev-components/audioplaylist/audio_media.mp3', $expectedResponse->fileUrl());
+        self::assertSame(
+            'http://example.com/wingu-dev-components/audioplaylist/audio_media.mp3',
+            $expectedResponse->fileUrl()
+        );
     }
 
     public function testUpdateMediaPatchesAudioPlaylistMedia() : void
     {
         $configurationMock = new Configuration();
 
-        $httpClient = new MockClient();
+        $httpClient = self::createClient();
         $response   = new Response(
             204,
             ['Content-Type' => 'application/json']
@@ -141,7 +143,7 @@ class AudioPlaylistApiTest extends ApiTest
     {
         $configurationMock = new Configuration();
 
-        $httpClient = new MockClient();
+        $httpClient = self::createClient();
         $response   = new Response(
             204,
             ['Content-Type' => 'application/json']
@@ -171,7 +173,7 @@ class AudioPlaylistApiTest extends ApiTest
     {
         $configurationMock = new Configuration();
 
-        $httpClient = new MockClient();
+        $httpClient = self::createClient();
         $response   = new Response(
             204,
             ['Content-Type' => 'application/json']

@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Wingu\Engine\SDK\Tests\Api\Channel;
 
 use GuzzleHttp\Psr7\Response;
-use Http\Mock\Client as MockClient;
 use Wingu\Engine\SDK\Api\Channel\ChannelApi;
 use Wingu\Engine\SDK\Api\Configuration;
 use Wingu\Engine\SDK\Api\Exception\HttpClient\NotFound;
@@ -31,7 +30,7 @@ final class ChannelApiTest extends ChannelApiTestCase
     {
         $configurationMock = new Configuration();
 
-        $httpClient = new MockClient();
+        $httpClient = self::createClient();
         $httpClient->addResponse(
             new Response(
                 200,
@@ -52,7 +51,7 @@ final class ChannelApiTest extends ChannelApiTestCase
     {
         $configurationMock = new Configuration();
 
-        $httpClient = new MockClient();
+        $httpClient = self::createClient();
         $httpClient->addResponse(
             new Response(
                 200,
@@ -73,7 +72,7 @@ final class ChannelApiTest extends ChannelApiTestCase
     {
         $configurationMock = new Configuration();
 
-        $httpClient = new MockClient();
+        $httpClient = self::createClient();
         $httpClient->addResponse(
             new Response(
                 200,
@@ -94,7 +93,7 @@ final class ChannelApiTest extends ChannelApiTestCase
     {
         $configurationMock = new Configuration();
 
-        $httpClient = new MockClient();
+        $httpClient = self::createClient();
         $httpClient->addResponse(
             new Response(
                 200,
@@ -115,7 +114,7 @@ final class ChannelApiTest extends ChannelApiTestCase
     {
         $configurationMock = new Configuration();
 
-        $httpClient = new MockClient();
+        $httpClient = self::createClient();
         $httpClient->addResponse(
             new Response(
                 200,
@@ -142,7 +141,7 @@ final class ChannelApiTest extends ChannelApiTestCase
     {
         $configurationMock = new Configuration();
 
-        $httpClient = new MockClient();
+        $httpClient = self::createClient();
         $httpClient->addResponse(
             new Response(
                 200,
@@ -190,7 +189,7 @@ final class ChannelApiTest extends ChannelApiTestCase
     {
         $configurationMock = new Configuration();
 
-        $httpClient = new MockClient();
+        $httpClient = self::createClient();
         $httpClient->addResponse(
             new Response(
                 200,
@@ -217,7 +216,7 @@ final class ChannelApiTest extends ChannelApiTestCase
     {
         $configurationMock = new Configuration();
 
-        $httpClient = new MockClient();
+        $httpClient = self::createClient();
         $httpClient->addResponse(
             new Response(
                 200,
@@ -243,7 +242,7 @@ final class ChannelApiTest extends ChannelApiTestCase
     {
         $configurationMock = new Configuration();
 
-        $httpClient = new MockClient();
+        $httpClient = self::createClient();
         $httpClient->addResponse(
             new Response(
                 200,
@@ -278,7 +277,7 @@ final class ChannelApiTest extends ChannelApiTestCase
     {
         $configurationMock = new Configuration();
 
-        $httpClient = new MockClient();
+        $httpClient = self::createClient();
         $httpClient->addResponse(
             new Response(
                 200,
@@ -316,7 +315,7 @@ final class ChannelApiTest extends ChannelApiTestCase
     {
         $configurationMock = new Configuration();
 
-        $httpClient = new MockClient();
+        $httpClient = self::createClient();
         $httpClient->addResponse(
             new Response(
                 200,
@@ -355,7 +354,7 @@ final class ChannelApiTest extends ChannelApiTestCase
     {
         $configurationMock = new Configuration();
 
-        $httpClient = new MockClient();
+        $httpClient = self::createClient();
         $httpClient->addResponse(new Response(
             404
         ));

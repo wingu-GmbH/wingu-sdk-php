@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Wingu\Engine\SDK\Tests\Api\Component\SurveyMonkey;
 
 use GuzzleHttp\Psr7\Response;
-use Http\Mock\Client as MockClient;
 use Psr\Http\Message\RequestInterface;
 use Wingu\Engine\SDK\Api\Component\SurveyMonkeyApi;
 use Wingu\Engine\SDK\Api\Configuration;
@@ -21,7 +20,7 @@ class SurveyMonkeyApiTest extends ApiTest
     {
         $configurationMock = new Configuration();
 
-        $httpClient = new MockClient();
+        $httpClient = self::createClient();
         $response   = new Response(
             201,
             ['Content-Type' => 'application/json'],
@@ -41,7 +40,10 @@ class SurveyMonkeyApiTest extends ApiTest
 
         /** @var RequestInterface $actualRequest */
         $actualRequest = $httpClient->getLastRequest();
-        self::assertSame('{"title":"Take the IQ survey","description":"You will probably fail","surveyURL":"https:\/\/de.surveymonkey.com\/r\/5FBK8Z3"}', $actualRequest->getBody()->getContents());
+        self::assertSame(
+            '{"title":"Take the IQ survey","description":"You will probably fail","surveyURL":"https:\/\/de.surveymonkey.com\/r\/5FBK8Z3"}',
+            $actualRequest->getBody()->getContents()
+        );
         self::assertSame('POST', $actualRequest->getMethod());
 
         $expectedResponse = $this->getExpectedSurveyMonkey();
@@ -52,7 +54,7 @@ class SurveyMonkeyApiTest extends ApiTest
     {
         $configurationMock = new Configuration();
 
-        $httpClient = new MockClient();
+        $httpClient = self::createClient();
         $response   = new Response(
             204,
             ['Content-Type' => 'application/json']

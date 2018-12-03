@@ -41,8 +41,10 @@ final class PrivateChannelDenormalizerTest extends TestCase
     /**
      * @dataProvider dataProviderTestDenormalizeCallsSerializerDenormalizeWithCorrectType
      */
-    public function testDenormalizeCallsSerializerDenormalizeWithCorrectType(string $discriminator, string $class) : void
-    {
+    public function testDenormalizeCallsSerializerDenormalizeWithCorrectType(
+        string $discriminator,
+        string $class
+    ) : void {
         $data = ['discriminator' => $discriminator];
 
         $serializerMock = $this->createMock(Serializer::class);

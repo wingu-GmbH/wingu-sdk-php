@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Wingu\Engine\SDK\Tests\Api\Channel\QrCode;
 
 use GuzzleHttp\Psr7\Response;
-use Http\Mock\Client as MockClient;
 use Psr\Http\Message\RequestInterface;
 use Wingu\Engine\SDK\Api\Channel\QrCode\QrCodeApi;
 use Wingu\Engine\SDK\Api\Configuration;
@@ -63,7 +62,7 @@ final class QrCodeApiTest extends ChannelApiTestCase
     {
         $configurationMock = new Configuration();
 
-        $httpClient = new MockClient();
+        $httpClient = self::createClient();
         $httpClient->addResponse(
             new Response(
                 200,
@@ -88,7 +87,7 @@ final class QrCodeApiTest extends ChannelApiTestCase
     {
         $configurationMock = new Configuration();
 
-        $httpClient = new MockClient();
+        $httpClient = self::createClient();
         $httpClient->addResponse(
             new Response(
                 200,
@@ -403,7 +402,7 @@ final class QrCodeApiTest extends ChannelApiTestCase
     {
         $configurationMock = new Configuration();
 
-        $httpClient = new MockClient();
+        $httpClient = self::createClient();
         $httpClient->addResponse(
             new Response(
                 200,
@@ -422,7 +421,7 @@ final class QrCodeApiTest extends ChannelApiTestCase
     {
         $configurationMock = new Configuration();
 
-        $httpClient = new MockClient();
+        $httpClient = self::createClient();
         $httpClient->addResponse(
             new Response(
                 200,
@@ -447,7 +446,7 @@ final class QrCodeApiTest extends ChannelApiTestCase
     {
         $configurationMock = new Configuration();
 
-        $httpClient = new MockClient();
+        $httpClient = self::createClient();
         $response   = new Response(
             204,
             ['Content-Type' => 'application/json']
@@ -479,7 +478,7 @@ final class QrCodeApiTest extends ChannelApiTestCase
     {
         $configurationMock = new Configuration();
 
-        $httpClient = new MockClient();
+        $httpClient = self::createClient();
         $response   = new Response(
             204,
             ['Content-Type' => 'application/json']

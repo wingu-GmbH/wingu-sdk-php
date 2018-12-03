@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Wingu\Engine\SDK\Tests\Api\Component\Video;
 
 use GuzzleHttp\Psr7\Response;
-use Http\Mock\Client as MockClient;
 use Psr\Http\Message\RequestInterface;
 use Wingu\Engine\SDK\Api\Component\VideoApi;
 use Wingu\Engine\SDK\Api\Configuration;
@@ -21,7 +20,7 @@ class VideoApiTest extends ApiTest
     {
         $configurationMock = new Configuration();
 
-        $httpClient = new MockClient();
+        $httpClient = self::createClient();
         $response   = new Response(
             201,
             ['Content-Type' => 'application/json'],
@@ -41,7 +40,10 @@ class VideoApiTest extends ApiTest
 
         /** @var RequestInterface $actualRequest */
         $actualRequest = $httpClient->getLastRequest();
-        self::assertSame('{"type":"youtube","payload":"zfQdPcO--DA","description":"Video description"}', $actualRequest->getBody()->getContents());
+        self::assertSame(
+            '{"type":"youtube","payload":"zfQdPcO--DA","description":"Video description"}',
+            $actualRequest->getBody()->getContents()
+        );
         self::assertSame('POST', $actualRequest->getMethod());
 
         $expectedResponse = $this->getExpectedVideo();
@@ -52,7 +54,7 @@ class VideoApiTest extends ApiTest
     {
         $configurationMock = new Configuration();
 
-        $httpClient = new MockClient();
+        $httpClient = self::createClient();
         $response   = new Response(
             204,
             ['Content-Type' => 'application/json']
@@ -72,7 +74,10 @@ class VideoApiTest extends ApiTest
 
         /** @var RequestInterface $actualRequest */
         $actualRequest = $httpClient->getLastRequest();
-        self::assertSame('{"type":"youtube","payload":"zfQdPcO--DA","description":"Video description that has been edited"}', $actualRequest->getBody()->getContents());
+        self::assertSame(
+            '{"type":"youtube","payload":"zfQdPcO--DA","description":"Video description that has been edited"}',
+            $actualRequest->getBody()->getContents()
+        );
         self::assertSame('PATCH', $actualRequest->getMethod());
     }
 
