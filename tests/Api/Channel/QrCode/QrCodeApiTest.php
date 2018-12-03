@@ -33,16 +33,15 @@ use Wingu\Engine\SDK\Model\Response\Component\Element\Select;
 use Wingu\Engine\SDK\Model\Response\Component\Element\SelectOption;
 use Wingu\Engine\SDK\Model\Response\Component\Files;
 use Wingu\Engine\SDK\Model\Response\Component\FilesFile as File;
-use Wingu\Engine\SDK\Model\Response\Component\Image as InnerImage;
 use Wingu\Engine\SDK\Model\Response\Component\Image;
+use Wingu\Engine\SDK\Model\Response\Component\Image as InnerImage;
 use Wingu\Engine\SDK\Model\Response\Component\ImageGallery;
 use Wingu\Engine\SDK\Model\Response\Component\ImageGalleryImage as OuterImage;
-use Wingu\Engine\SDK\Model\Response\Component\ImageMetadata as Metadata;
 use Wingu\Engine\SDK\Model\Response\Component\ImageMetadata;
+use Wingu\Engine\SDK\Model\Response\Component\ImageMetadata as Metadata;
 use Wingu\Engine\SDK\Model\Response\Component\Location;
 use Wingu\Engine\SDK\Model\Response\Component\PrivateForm;
 use Wingu\Engine\SDK\Model\Response\Component\PrivateWebhook;
-use Wingu\Engine\SDK\Model\Response\Component\Proxy;
 use Wingu\Engine\SDK\Model\Response\Component\Rating;
 use Wingu\Engine\SDK\Model\Response\Component\Separator;
 use Wingu\Engine\SDK\Model\Response\Component\SubmitDestination\Email;
@@ -295,17 +294,8 @@ final class QrCodeApiTest extends ChannelApiTestCase
                                     )
                                 ),
                                 new Card(
-                                    '27934ce2-8c67-404b-b834-d54b83d112e4',
-                                    new Position(10),
-                                    new Proxy(
-                                        '5e9551fb-417b-49fe-b2b6-9d2e6f090db5',
-                                        new \DateTime('2018-05-18T08:22:41+0000'),
-                                        'Proxy payload'
-                                    )
-                                ),
-                                new Card(
                                     '872430e3-f7c5-4363-bcce-da201d82d7b1',
-                                    new Position(11),
+                                    new Position(10),
                                     new AudioPlaylist(
                                         'bb6a0c4b-7128-474a-a35d-d8066a070ca4',
                                         new \DateTime('2018-05-18T08:22:41+0000'),
@@ -332,7 +322,7 @@ final class QrCodeApiTest extends ChannelApiTestCase
                                 ),
                                 new Card(
                                     'bcfaf8e4-a657-4d02-ac18-7c02015c7cf6',
-                                    new Position(12),
+                                    new Position(11),
                                     new Action(
                                         'b7e35787-5292-405e-84ae-6290d9e2fbe6',
                                         new \DateTime('2018-05-18T08:22:41+0000'),
@@ -343,7 +333,7 @@ final class QrCodeApiTest extends ChannelApiTestCase
                                 ),
                                 new Card(
                                     'b6491acb-8ff2-47bf-9da8-48ac806fde54',
-                                    new Position(13),
+                                    new Position(12),
                                     new Separator(
                                         '8e18da4f-20e9-4f72-986f-1333f98df8d6',
                                         new \DateTime('2018-05-18T08:22:41+0000'),
@@ -353,7 +343,7 @@ final class QrCodeApiTest extends ChannelApiTestCase
                                 ),
                                 new Card(
                                     '9a2c97f2-6d3c-4152-9faa-c1c72441bf37',
-                                    new Position(14),
+                                    new Position(13),
                                     new Rating(
                                         '887b1614-03e1-49e2-8e13-857906f861cd',
                                         new \DateTime('2018-05-18T08:22:41+0000'),
@@ -362,7 +352,7 @@ final class QrCodeApiTest extends ChannelApiTestCase
                                 ),
                                 new Card(
                                     '4eb436a4-066e-4750-b7d3-e98decba8581',
-                                    new Position(15),
+                                    new Position(14),
                                     new PrivateWebhook(
                                         '957cbafc-928c-4ac7-af6a-a732bab4b22d',
                                         new \DateTime('2018-05-18T08:22:41+0000'),
@@ -373,7 +363,7 @@ final class QrCodeApiTest extends ChannelApiTestCase
                                 ),
                                 new Card(
                                     '5e169e2e-11f4-49f8-b5e0-6d51fd96c042',
-                                    new Position(16),
+                                    new Position(15),
                                     new Files(
                                         'a17222d6-2518-4838-9446-4a607ba13212',
                                         new \DateTime('2018-05-18T08:22:41+0000'),
@@ -475,7 +465,10 @@ final class QrCodeApiTest extends ChannelApiTestCase
 
         /** @var RequestInterface $actualRequest */
         $actualRequest = $httpClient->getLastRequest();
-        self::assertSame('{"content":null,"name":"New QrCode name","published":"0"}', $actualRequest->getBody()->getContents());
+        self::assertSame(
+            '{"content":null,"name":"New QrCode name","published":"0"}',
+            $actualRequest->getBody()->getContents()
+        );
         self::assertSame('PATCH', $actualRequest->getMethod());
     }
 

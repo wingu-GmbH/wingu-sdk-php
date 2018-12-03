@@ -42,7 +42,6 @@ use Wingu\Engine\SDK\Model\Response\Component\ImageMetadata;
 use Wingu\Engine\SDK\Model\Response\Component\Location;
 use Wingu\Engine\SDK\Model\Response\Component\PrivateForm;
 use Wingu\Engine\SDK\Model\Response\Component\PrivateWebhook;
-use Wingu\Engine\SDK\Model\Response\Component\Proxy;
 use Wingu\Engine\SDK\Model\Response\Component\Rating;
 use Wingu\Engine\SDK\Model\Response\Component\Separator;
 use Wingu\Engine\SDK\Model\Response\Component\SubmitDestination\Email;
@@ -385,17 +384,8 @@ final class DeckTest extends ApiTest
                     )
                 ),
                 new Card(
-                    '8bc02fce-fc41-4f42-b12f-b0ebe0c9d64b',
-                    new Position(10),
-                    new Proxy(
-                        'c2382c58-83da-4588-b8fa-31ea3211d3b4',
-                        new \DateTime('2018-09-20T08:48:30+0000'),
-                        'Proxy payload'
-                    )
-                ),
-                new Card(
                     '99017c2a-3644-4407-93dc-59b2222156bd',
-                    new Position(11),
+                    new Position(10),
                     new AudioPlaylist(
                         '99492915-9dd3-44cc-a0c2-d18b33a06b28',
                         new \DateTime('2018-09-20T08:48:30+0000'),
@@ -444,7 +434,7 @@ final class DeckTest extends ApiTest
                 ),
                 new Card(
                     '99be68b0-1996-432f-8ee8-53c59023fb00',
-                    new Position(12),
+                    new Position(11),
                     new Action(
                         '3e7e275e-793e-428c-91e4-431396e1f18a',
                         new \DateTime('2018-09-20T08:48:30+0000'),
@@ -455,7 +445,7 @@ final class DeckTest extends ApiTest
                 ),
                 new Card(
                     'c96c4bbe-1993-4ad5-995c-c289c60d84f4',
-                    new Position(13),
+                    new Position(12),
                     new Separator(
                         '74e61a2a-6d9d-4efc-9879-4fd4eef126f7',
                         new \DateTime('2018-09-20T08:48:30+0000'),
@@ -465,7 +455,7 @@ final class DeckTest extends ApiTest
                 ),
                 new Card(
                     '53575c25-209e-45b9-aa9a-d5c14b871abd',
-                    new Position(14),
+                    new Position(13),
                     new Rating(
                         'a9500c8f-8580-45d3-bc9e-d6755122af2e',
                         new \DateTime('2018-09-20T08:48:30+0000'),
@@ -474,7 +464,7 @@ final class DeckTest extends ApiTest
                 ),
                 new Card(
                     '5a1202bd-e9db-4345-a28e-fa0fa64f54ec',
-                    new Position(15),
+                    new Position(14),
                     new PrivateWebhook(
                         'ce3685e1-1ef4-4227-9a31-99c19e555473',
                         new \DateTime('2018-09-20T08:48:30+0000'),
@@ -485,7 +475,7 @@ final class DeckTest extends ApiTest
                 ),
                 new Card(
                     '2dad3977-4083-4c52-9856-75fe7c0b015f',
-                    new Position(16),
+                    new Position(15),
                     new Files(
                         'b211c30f-5dc5-4b14-8eb3-9487f209d511',
                         new \DateTime('2018-09-20T08:48:30+0000'),

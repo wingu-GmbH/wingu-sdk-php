@@ -39,7 +39,6 @@ use Wingu\Engine\SDK\Model\Response\Component\ImageMetadata;
 use Wingu\Engine\SDK\Model\Response\Component\Location;
 use Wingu\Engine\SDK\Model\Response\Component\PrivateForm;
 use Wingu\Engine\SDK\Model\Response\Component\PrivateWebhook;
-use Wingu\Engine\SDK\Model\Response\Component\Proxy;
 use Wingu\Engine\SDK\Model\Response\Component\Rating;
 use Wingu\Engine\SDK\Model\Response\Component\Separator;
 use Wingu\Engine\SDK\Model\Response\Component\SubmitDestination\Email;
@@ -99,7 +98,6 @@ class ComponentApiTest extends ApiTest
             $this->getExpectedForm(),
             $this->getExpectedImageGallery(),
             $this->getExpectedLocation(),
-            $this->getExpectedProxy(),
             $this->getExpectedRating(),
             $this->getExpectedSeparator(),
             $this->getExpectedSurveyMonkey(),
@@ -107,7 +105,7 @@ class ComponentApiTest extends ApiTest
             $this->getExpectedWebhook(),
         ];
 
-        self::assertCount(16, $actual);
+        self::assertCount(15, $actual);
         self::assertEquals($expected, \iterator_to_array($actual));
     }
 
@@ -384,15 +382,6 @@ class ComponentApiTest extends ApiTest
             new \DateTime('2018-05-18T08:22:41+0000'),
             new Coordinates(10.233362, 53.614503),
             602
-        );
-    }
-
-    private function getExpectedProxy() : Component
-    {
-        return new Proxy(
-            '12f2b044-7e62-4bdd-8f71-a6a23c302f6e',
-            new \DateTime('2018-05-18T08:22:41+0000'),
-            'Proxy payload'
         );
     }
 

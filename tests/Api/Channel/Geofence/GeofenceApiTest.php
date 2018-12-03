@@ -43,7 +43,6 @@ use Wingu\Engine\SDK\Model\Response\Component\ImageMetadata;
 use Wingu\Engine\SDK\Model\Response\Component\Location;
 use Wingu\Engine\SDK\Model\Response\Component\PrivateForm;
 use Wingu\Engine\SDK\Model\Response\Component\PrivateWebhook;
-use Wingu\Engine\SDK\Model\Response\Component\Proxy;
 use Wingu\Engine\SDK\Model\Response\Component\Rating;
 use Wingu\Engine\SDK\Model\Response\Component\Separator;
 use Wingu\Engine\SDK\Model\Response\Component\SubmitDestination\Email;
@@ -305,17 +304,8 @@ final class GeofenceApiTest extends ChannelApiTestCase
                                     )
                                 ),
                                 new Card(
-                                    'b39157d8-0378-4917-845f-01621f946279',
-                                    new Position(10),
-                                    new Proxy(
-                                        '51b3df98-dd0b-419c-9c8a-7d2cbc3f7291',
-                                        new \DateTime('2018-05-18T08:22:41+0000'),
-                                        'Proxy payload'
-                                    )
-                                ),
-                                new Card(
                                     '6a0defc4-8ec1-46b4-bbc3-bf6ec114afaa',
-                                    new Position(11),
+                                    new Position(10),
                                     new AudioPlaylist(
                                         'be7b6c5b-fdcd-4f00-aff6-497808d1c72d',
                                         new \DateTime('2018-05-18T08:22:41+0000'),
@@ -342,7 +332,7 @@ final class GeofenceApiTest extends ChannelApiTestCase
                                 ),
                                 new Card(
                                     'b8f95469-aec4-40f8-9595-2bf366cd9b65',
-                                    new Position(12),
+                                    new Position(11),
                                     new Action(
                                         '22b18f4d-73b2-47ec-ae10-31b3ea46936a',
                                         new \DateTime('2018-05-18T08:22:41+0000'),
@@ -353,7 +343,7 @@ final class GeofenceApiTest extends ChannelApiTestCase
                                 ),
                                 new Card(
                                     'c30c5cbf-6eb4-48a9-8bcd-52d49ac88726',
-                                    new Position(13),
+                                    new Position(12),
                                     new Separator(
                                         '596d6441-2cd4-41fa-8887-9da4d52b196c',
                                         new \DateTime('2018-05-18T08:22:41+0000'),
@@ -363,7 +353,7 @@ final class GeofenceApiTest extends ChannelApiTestCase
                                 ),
                                 new Card(
                                     '6875e224-c95b-4858-9c6a-dd68c8f9f915',
-                                    new Position(14),
+                                    new Position(13),
                                     new Rating(
                                         '9c0051b0-af76-40a4-a1fd-807ee693954e',
                                         new \DateTime('2018-05-18T08:22:41+0000'),
@@ -372,7 +362,7 @@ final class GeofenceApiTest extends ChannelApiTestCase
                                 ),
                                 new Card(
                                     '7531b557-d9fe-4cb7-9a4d-d714f6e9c132',
-                                    new Position(15),
+                                    new Position(14),
                                     new PrivateWebhook(
                                         '21bc8695-1480-4dcb-afed-36e11baee3ec',
                                         new \DateTime('2018-05-18T08:22:41+0000'),
@@ -383,7 +373,7 @@ final class GeofenceApiTest extends ChannelApiTestCase
                                 ),
                                 new Card(
                                     '96a691af-cec7-4adf-afce-d91fe4d6ef86',
-                                    new Position(16),
+                                    new Position(15),
                                     new Files(
                                         '87e8f3a0-d210-4045-b1f9-1883de47317c',
                                         new \DateTime('2018-05-18T08:22:41+0000'),

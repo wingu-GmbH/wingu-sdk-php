@@ -319,18 +319,6 @@
             "position": {
               "sort": 10
             },
-            "id": "27934ce2-8c67-404b-b834-d54b83d112e4",
-            "component": {
-              "id": "5e9551fb-417b-49fe-b2b6-9d2e6f090db5",
-              "updatedAt": "2018-05-18T08:22:41+0000",
-              "payload": "Proxy payload",
-              "discriminator": "proxy"
-            }
-          },
-          {
-            "position": {
-              "sort": 11
-            },
             "id": "872430e3-f7c5-4363-bcce-da201d82d7b1",
             "component": {
               "id": "bb6a0c4b-7128-474a-a35d-d8066a070ca4",
@@ -359,7 +347,7 @@
           },
           {
             "position": {
-              "sort": 12
+              "sort": 11
             },
             "id": "bcfaf8e4-a657-4d02-ac18-7c02015c7cf6",
             "component": {
@@ -373,7 +361,7 @@
           },
           {
             "position": {
-              "sort": 13
+              "sort": 12
             },
             "id": "b6491acb-8ff2-47bf-9da8-48ac806fde54",
             "component": {
@@ -386,7 +374,7 @@
           },
           {
             "position": {
-              "sort": 14
+              "sort": 13
             },
             "id": "9a2c97f2-6d3c-4152-9faa-c1c72441bf37",
             "component": {
@@ -398,7 +386,7 @@
           },
           {
             "position": {
-              "sort": 15
+              "sort": 14
             },
             "id": "4eb436a4-066e-4750-b7d3-e98decba8581",
             "component": {
@@ -410,7 +398,7 @@
           },
           {
             "position": {
-              "sort": 16
+              "sort": 15
             },
             "id": "5e169e2e-11f4-49f8-b5e0-6d51fd96c042",
             "component": {

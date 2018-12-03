@@ -52,7 +52,6 @@ use Wingu\Engine\SDK\Model\Response\Component\ImageMetadata;
 use Wingu\Engine\SDK\Model\Response\Component\Location;
 use Wingu\Engine\SDK\Model\Response\Component\PrivateForm;
 use Wingu\Engine\SDK\Model\Response\Component\PrivateWebhook;
-use Wingu\Engine\SDK\Model\Response\Component\Proxy;
 use Wingu\Engine\SDK\Model\Response\Component\PublicForm;
 use Wingu\Engine\SDK\Model\Response\Component\PublicWebhook;
 use Wingu\Engine\SDK\Model\Response\Component\Rating;
@@ -558,17 +557,8 @@ final class BeaconApiTest extends ChannelApiTestCase
                                     )
                                 ),
                                 new Card(
-                                    '8c852591-a163-4578-b0e4-72bae031da04',
-                                    new Position(10),
-                                    new Proxy(
-                                        '606d905a-df17-40cb-811e-ab4d4840d5ce',
-                                        new \DateTime('2018-05-18T08:22:41+0000'),
-                                        'Proxy payload'
-                                    )
-                                ),
-                                new Card(
                                     '73218a3e-d2ec-487a-89e8-7f2258efde2c',
-                                    new Position(11),
+                                    new Position(10),
                                     new AudioPlaylist(
                                         '997ea7b2-09c1-4329-92bf-9ff2f41aaebe',
                                         new \DateTime('2018-05-18T08:22:41+0000'),
@@ -595,7 +585,7 @@ final class BeaconApiTest extends ChannelApiTestCase
                                 ),
                                 new Card(
                                     '251dda04-292b-411a-8508-e17268d11791',
-                                    new Position(12),
+                                    new Position(11),
                                     new Action(
                                         'df021dfd-6bb6-41d6-afbb-c00da97c885d',
                                         new \DateTime('2018-05-18T08:22:41+0000'),
@@ -606,7 +596,7 @@ final class BeaconApiTest extends ChannelApiTestCase
                                 ),
                                 new Card(
                                     '0bacfa03-c556-40b4-b659-ec6ebb9ce638',
-                                    new Position(13),
+                                    new Position(12),
                                     new Separator(
                                         '172350a7-898f-4522-8220-553328f97374',
                                         new \DateTime('2018-05-18T08:22:41+0000'),
@@ -616,7 +606,7 @@ final class BeaconApiTest extends ChannelApiTestCase
                                 ),
                                 new Card(
                                     '49402427-cdd2-4efe-a56c-2f8f4514bca7',
-                                    new Position(14),
+                                    new Position(13),
                                     new Rating(
                                         '165ff344-07c9-49cc-befa-96848b339c7f',
                                         new \DateTime('2018-05-18T08:22:41+0000'),
@@ -625,7 +615,7 @@ final class BeaconApiTest extends ChannelApiTestCase
                                 ),
                                 new Card(
                                     'b0921b7d-95f3-4b07-a82f-600afbb38472',
-                                    new Position(15),
+                                    new Position(14),
                                     new PrivateWebhook(
                                         'fd1f7130-bcb3-4b1c-b162-91469cf598a1',
                                         new \DateTime('2018-05-18T08:22:41+0000'),
@@ -636,7 +626,7 @@ final class BeaconApiTest extends ChannelApiTestCase
                                 ),
                                 new Card(
                                     '7dde0b47-f484-408c-be35-06d11e05322d',
-                                    new Position(16),
+                                    new Position(15),
                                     new Files(
                                         '115b9a0c-a068-4505-b0c5-ce36b889a7cc',
                                         new \DateTime('2018-05-18T08:22:41+0000'),

@@ -1,17 +1,17 @@
 {
   "page": 1,
-  "limit": 16,
+  "limit": 15,
   "pages": 1,
-  "total": 16,
+  "total": 15,
   "_links": {
     "self": {
-      "href": "/api/component/my?page=1&limit=16"
+      "href": "/api/component/my?page=1&limit=15"
     },
     "first": {
-      "href": "/api/component/my?page=1&limit=16"
+      "href": "/api/component/my?page=1&limit=15"
     },
     "last": {
-      "href": "/api/component/my?page=1&limit=16"
+      "href": "/api/component/my?page=1&limit=15"
     }
   },
   "_embedded": {
@@ -337,14 +337,6 @@
           },
           "radius": 602,
           "discriminator": "location"
-        }
-      },
-      {
-        "component": {
-          "id": "12f2b044-7e62-4bdd-8f71-a6a23c302f6e",
-          "updatedAt": "2018-05-18T08:22:41+0000",
-          "payload": "Proxy payload",
-          "discriminator": "proxy"
         }
       },
       {

@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-$apiKey = '7f094101-5348-4d4e-8356-388c794f5455'; // Change this to your API key.
+$apiKey = 'your-api-key'; // Change this to your API key.
 
-$configuration = new \Wingu\Engine\SDK\Api\Configuration($apiKey, 'http://wingu');
+$configuration = new \Wingu\Engine\SDK\Api\Configuration($apiKey);
 $winguApi      = new \Wingu\Engine\SDK\Api\WinguApi($configuration);
 
 $imageToUpload = \GuzzleHttp\Psr7\stream_for(\fopen(__DIR__ . '/small_image.jpg', 'rb'));

@@ -132,11 +132,6 @@ final class ComponentApi extends Api
         return $this->getService(LocationApi::class);
     }
 
-    public function proxy() : ProxyApi
-    {
-        return $this->getService(ProxyApi::class);
-    }
-
     public function rating() : RatingApi
     {
         return $this->getService(RatingApi::class);

@@ -21,7 +21,6 @@ use Wingu\Engine\SDK\Model\Response\Component\ImageGallery;
 use Wingu\Engine\SDK\Model\Response\Component\Location;
 use Wingu\Engine\SDK\Model\Response\Component\PrivateForm;
 use Wingu\Engine\SDK\Model\Response\Component\PrivateWebhook;
-use Wingu\Engine\SDK\Model\Response\Component\Proxy;
 use Wingu\Engine\SDK\Model\Response\Component\PublicForm;
 use Wingu\Engine\SDK\Model\Response\Component\PublicWebhook;
 use Wingu\Engine\SDK\Model\Response\Component\Rating;
@@ -63,8 +62,6 @@ final class ComponentDenormalizer implements DenormalizerInterface, SerializerAw
                 return $this->serializer->denormalize($data, ImageGallery::class, $format, $context);
             case 'location':
                 return $this->serializer->denormalize($data, Location::class, $format, $context);
-            case 'proxy':
-                return $this->serializer->denormalize($data, Proxy::class, $format, $context);
             case 'rating':
                 return $this->serializer->denormalize($data, Rating::class, $format, $context);
             case 'separator':

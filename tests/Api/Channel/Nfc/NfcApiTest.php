@@ -42,7 +42,6 @@ use Wingu\Engine\SDK\Model\Response\Component\ImageMetadata;
 use Wingu\Engine\SDK\Model\Response\Component\Location;
 use Wingu\Engine\SDK\Model\Response\Component\PrivateForm;
 use Wingu\Engine\SDK\Model\Response\Component\PrivateWebhook;
-use Wingu\Engine\SDK\Model\Response\Component\Proxy;
 use Wingu\Engine\SDK\Model\Response\Component\Rating;
 use Wingu\Engine\SDK\Model\Response\Component\Separator;
 use Wingu\Engine\SDK\Model\Response\Component\SubmitDestination\Email;
@@ -295,17 +294,8 @@ final class NfcApiTest extends ChannelApiTestCase
                                     )
                                 ),
                                 new Card(
-                                    '5a1c0447-8beb-44a0-9da6-d3bf3d583740',
-                                    new Position(10),
-                                    new Proxy(
-                                        '1f5607c9-c70a-47ff-9a4e-ac161539d928',
-                                        new \DateTime('2018-05-18T08:22:41+0000'),
-                                        'Proxy payload'
-                                    )
-                                ),
-                                new Card(
                                     'd19f1f08-0754-4d49-b18f-dc3005d7218c',
-                                    new Position(11),
+                                    new Position(10),
                                     new AudioPlaylist(
                                         '7ff353a4-4b3e-4246-9e37-5f70c6f7d781',
                                         new \DateTime('2018-05-18T08:22:41+0000'),
@@ -332,7 +322,7 @@ final class NfcApiTest extends ChannelApiTestCase
                                 ),
                                 new Card(
                                     '8200fecb-05eb-4ffd-8a17-25f9862dd4d3',
-                                    new Position(12),
+                                    new Position(11),
                                     new Action(
                                         '4c370fe8-cc14-4593-bb8f-d8bef8264afe',
                                         new \DateTime('2018-05-18T08:22:41+0000'),
@@ -343,7 +333,7 @@ final class NfcApiTest extends ChannelApiTestCase
                                 ),
                                 new Card(
                                     'f8cca409-1e25-475e-a69a-fffe9c92f6ce',
-                                    new Position(13),
+                                    new Position(12),
                                     new Separator(
                                         'e5bebec7-7d71-4e4d-9e7b-ac83bc87ae3e',
                                         new \DateTime('2018-05-18T08:22:41+0000'),
@@ -353,7 +343,7 @@ final class NfcApiTest extends ChannelApiTestCase
                                 ),
                                 new Card(
                                     '04096fc4-a8b2-46d9-936c-617824ebccd6',
-                                    new Position(14),
+                                    new Position(13),
                                     new Rating(
                                         'b7dc7594-e5db-4f0c-ac1a-234d1127cb57',
                                         new \DateTime('2018-05-18T08:22:41+0000'),
@@ -362,7 +352,7 @@ final class NfcApiTest extends ChannelApiTestCase
                                 ),
                                 new Card(
                                     'a78bde18-786a-42df-89be-f73a48715299',
-                                    new Position(15),
+                                    new Position(14),
                                     new PrivateWebhook(
                                         '296c7079-0539-4de1-b98f-85c9fe811c88',
                                         new \DateTime('2018-05-18T08:22:41+0000'),
@@ -373,7 +363,7 @@ final class NfcApiTest extends ChannelApiTestCase
                                 ),
                                 new Card(
                                     '79cf3230-8658-4b85-b8d9-a3a8caac7e7f',
-                                    new Position(16),
+                                    new Position(15),
                                     new Files(
                                         'a81700f1-83d1-4d1c-be86-37410b6a8d0a',
                                         new \DateTime('2018-05-18T08:22:41+0000'),
