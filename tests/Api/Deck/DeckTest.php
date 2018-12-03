@@ -30,6 +30,7 @@ use Wingu\Engine\SDK\Model\Response\Component\Contact;
 use Wingu\Engine\SDK\Model\Response\Component\ContactAddress;
 use Wingu\Engine\SDK\Model\Response\Component\ContactExternalLinks;
 use Wingu\Engine\SDK\Model\Response\Component\Coupon;
+use Wingu\Engine\SDK\Model\Response\Component\CouponBarcode;
 use Wingu\Engine\SDK\Model\Response\Component\Element\Input;
 use Wingu\Engine\SDK\Model\Response\Component\Element\Select;
 use Wingu\Engine\SDK\Model\Response\Component\Element\SelectOption;
@@ -318,7 +319,13 @@ final class DeckTest extends ApiTest
                         new \DateTime('2018-09-20T08:48:30+0000'),
                         '-20 %',
                         'Get you cheap stuff here !',
-                        'Disclaimer'
+                        'Disclaimer',
+                        new CouponBarcode('EAN_13', '4000161100348'),
+                        new Image(
+                            new ImageMetadata('jpg', 32, 32),
+                            'sampleimageid',
+                            'cloudinary'
+                        )
                     )
                 ),
                 new Card(

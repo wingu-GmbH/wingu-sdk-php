@@ -15,9 +15,12 @@ use Wingu\Engine\SDK\Model\Request\Component\Coupon\Create;
 use Wingu\Engine\SDK\Model\Request\Component\Coupon\Update;
 use Wingu\Engine\SDK\Model\Request\StringValue;
 use Wingu\Engine\SDK\Model\Response\Component\Coupon;
+use Wingu\Engine\SDK\Model\Response\Component\CouponBarcode;
+use Wingu\Engine\SDK\Model\Response\Component\Image;
+use Wingu\Engine\SDK\Model\Response\Component\ImageMetadata;
 use Wingu\Engine\SDK\Tests\Api\ApiTest;
 
-class CouponApiTest extends ApiTest
+final class CouponApiTest extends ApiTest
 {
     public function testCreateReturnsNewCouponComponent() : void
     {
@@ -89,7 +92,10 @@ class CouponApiTest extends ApiTest
 
         /** @var RequestInterface $actualRequest */
         $actualRequest = $httpClient->getLastRequest();
-        self::assertSame('{"header":"updated Coupon","description":"Get your edited stuff here!","barcode":{"type":"EAN_13","description":"edited"}}', $actualRequest->getBody()->getContents());
+        self::assertSame(
+            '{"header":"updated Coupon","description":"Get your edited stuff here!","barcode":{"type":"EAN_13","description":"edited"}}',
+            $actualRequest->getBody()->getContents()
+        );
         self::assertSame('PATCH', $actualRequest->getMethod());
     }
 
@@ -100,7 +106,13 @@ class CouponApiTest extends ApiTest
             new \DateTime('2018-09-07T11:17:46+0000'),
             '-20 %',
             'Get you cheap stuff here!',
-            'Disclaimer'
+            'Disclaimer',
+            new CouponBarcode('EAN_13', '4000161100348'),
+            new Image(
+                new ImageMetadata('jpg', 100, 50),
+                'cloudinary_public_id',
+                'cloudinary'
+            )
         );
     }
 }

@@ -156,7 +156,15 @@
             "type": "EAN_13",
             "value": "4000161100348"
           },
-          "backgroundImage": null,
+          "backgroundImage": {
+            "metadata": {
+              "format": "jpg",
+              "width": 100,
+              "height": 50
+            },
+            "cloudinaryId": "cloudinary_public_id",
+            "type": "cloudinary"
+          },
           "disclaimer": "Disclaimer",
           "discriminator": "coupon"
         }

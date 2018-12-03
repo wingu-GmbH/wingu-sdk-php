@@ -28,6 +28,7 @@ use Wingu\Engine\SDK\Model\Response\Component\Contact;
 use Wingu\Engine\SDK\Model\Response\Component\ContactAddress;
 use Wingu\Engine\SDK\Model\Response\Component\ContactExternalLinks;
 use Wingu\Engine\SDK\Model\Response\Component\Coupon;
+use Wingu\Engine\SDK\Model\Response\Component\CouponBarcode;
 use Wingu\Engine\SDK\Model\Response\Component\Element\Input;
 use Wingu\Engine\SDK\Model\Response\Component\Element\Select;
 use Wingu\Engine\SDK\Model\Response\Component\Element\SelectOption;
@@ -234,7 +235,9 @@ final class QrCodeApiTest extends ChannelApiTestCase
                                         new \DateTime('2018-05-18T08:22:41+0000'),
                                         '-20 %',
                                         'Get you cheap stuff here !',
-                                        'Disclaimer'
+                                        'Disclaimer',
+                                        new CouponBarcode('EAN_13', '4000161100348'),
+                                        null
                                     )
                                 ),
                                 new Card(

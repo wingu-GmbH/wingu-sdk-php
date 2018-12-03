@@ -5,6 +5,9 @@ Change Log
 ### Removed
 - proxy component
 
+### Fixed
+- serialization of `backgroundImage` and `barcode` in `coupon` component 
+
 ## [0.1.2] - 2018-10-11
 ### Fixed
 - Uploading images for brand bar component

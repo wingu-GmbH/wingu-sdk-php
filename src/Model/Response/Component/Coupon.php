@@ -28,13 +28,17 @@ class Coupon implements Component
         \DateTime $updatedAt,
         ?string $header,
         string $description,
-        ?string $disclaimer
+        ?string $disclaimer,
+        ?CouponBarcode $barcode,
+        ?Image $backgroundImage
     ) {
-        $this->id          = $id;
-        $this->updatedAt   = $updatedAt;
-        $this->header      = $header;
-        $this->description = $description;
-        $this->disclaimer  = $disclaimer;
+        $this->id              = $id;
+        $this->updatedAt       = $updatedAt;
+        $this->header          = $header;
+        $this->description     = $description;
+        $this->disclaimer      = $disclaimer;
+        $this->barcode         = $barcode;
+        $this->backgroundImage = $backgroundImage;
     }
 
     public function header() : ?string
