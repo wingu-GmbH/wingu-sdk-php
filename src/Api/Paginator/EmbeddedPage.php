@@ -9,11 +9,13 @@ final class EmbeddedPage
     /** @var PageInfo */
     private $pageInfo;
 
-    /** @var mixed */
+    /** @var mixed[] */
     private $embedded;
 
-    /** @param mixed $embedded */
-    public function __construct(PageInfo $pageInfo, $embedded)
+    /**
+     * @param mixed[] $embedded
+     */
+    public function __construct(PageInfo $pageInfo, array $embedded)
     {
         $this->pageInfo = $pageInfo;
         $this->embedded = $embedded;
@@ -24,8 +26,10 @@ final class EmbeddedPage
         return $this->pageInfo;
     }
 
-    /** @return mixed */
-    public function embedded()
+    /**
+     * @return mixed[]
+     */
+    public function embedded() : array
     {
         return $this->embedded;
     }

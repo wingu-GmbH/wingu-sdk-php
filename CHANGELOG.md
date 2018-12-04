@@ -13,6 +13,7 @@ Change Log
 
 ### Fixed
 - serialization of `backgroundImage` and `barcode` in `coupon` component 
+- iteration over list of components with more than 10 items
 
 ## [0.1.2] - 2018-10-11
 ### Fixed

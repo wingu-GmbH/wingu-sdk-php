@@ -40,8 +40,8 @@ final class ComponentApi extends Api
         return new PaginatedResponseIterator(
             $page->pageInfo(),
             $page->embedded(),
-            function () {
-                return $this->getEmbeddedPage('/api/component/my.json');
+            function (string $href) : EmbeddedPage {
+                return $this->getEmbeddedPage($href);
             }
         );
     }

@@ -49,6 +49,13 @@ final class ComponentApiTest extends ApiTest
                 $this->getDataFromFixturesFile('full_components.json')
             )
         );
+        $httpClient->addResponse(
+            new Response(
+                200,
+                ['Content-Type' => 'application/json'],
+                $this->getDataFromFixturesFile('full_components-2.json')
+            )
+        );
 
         $componentApi = new ComponentApi($configurationMock, $httpClient);
         $actual       = $componentApi->myComponents();
@@ -57,6 +64,7 @@ final class ComponentApiTest extends ApiTest
             $this->getExpectedActionComponent(),
             $this->getExpectedAudioPlaylistComponent(),
             $this->getExpectedBrandBarComponent(),
+            $this->getExpectedCmsComponent(),
             $this->getExpectedHtmlComponent(),
             $this->getExpectedContactComponent(),
             $this->getExpectedCouponComponent(),

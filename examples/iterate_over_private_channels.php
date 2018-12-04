@@ -17,8 +17,8 @@ while ($channels->valid()) {
     /** @var \Wingu\Engine\SDK\Model\Response\Channel\PrivateChannel $channel */
     $channel = $channels->current();
 
-    $id = $channels->current()->id();
-    $name = $channels->current()->name();
+    $id = $channel->id();
+    $name = $channel->name();
 
     /** do anything else with PrivateChannel */
 

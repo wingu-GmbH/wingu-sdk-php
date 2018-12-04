@@ -1,17 +1,20 @@
 {
   "page": 1,
-  "limit": 15,
-  "pages": 1,
-  "total": 15,
+  "limit": 10,
+  "pages": 2,
+  "total": 16,
   "_links": {
     "self": {
-      "href": "/api/component/my?page=1&limit=15"
+      "href": "/api/component/my?page=1&limit=10"
     },
     "first": {
-      "href": "/api/component/my?page=1&limit=15"
+      "href": "/api/component/my?page=1&limit=10"
     },
     "last": {
-      "href": "/api/component/my?page=1&limit=15"
+      "href": "/api/component/my?page=2&limit=10"
+    },
+    "next":{
+      "href": "/api/component/my?page=2&limit=10"
     }
   },
   "_embedded": {
@@ -99,6 +102,15 @@
             "alignment": "left"
           },
           "discriminator": "brand_bar"
+        }
+      },
+      {
+        "component": {
+          "id": "0e90af06-35bb-4297-9098-b209ffaeb826",
+          "updatedAt": "2018-05-18T08:22:41+0000",
+          "content": "# Welcome!\n_Welcome in our coffee._\n## Website\nCheck out our [website](https://www.wingu.de)!  \n### Congratulations!\nYou won a **free** coffee! You can choose between:  \n1.  Gold  \n2.  Space Gray\n3.  Silver.\n\nIf you prefer you can even choose from an unordered list:\n\n*   Gold\n*   Space Gray\n*   Silver",
+          "type": "markdown",
+          "discriminator": "cms"
         }
       },
       {
@@ -357,65 +369,6 @@
             }
           ],
           "discriminator": "image_gallery"
-        }
-      },
-      {
-        "component": {
-          "id": "f2d9c2e9-be24-48c5-8177-958b6e31edad",
-          "updatedAt": "2018-05-18T08:22:41+0000",
-          "coordinates": {
-            "longitude": 10.233362,
-            "latitude": 53.614503
-          },
-          "radius": 602,
-          "discriminator": "location"
-        }
-      },
-      {
-        "component": {
-          "id": "165ff344-07c9-49cc-befa-96848b339c7f",
-          "updatedAt": "2018-05-18T08:22:41+0000",
-          "title": "Rate me !",
-          "discriminator": "rating"
-        }
-      },
-      {
-        "component": {
-          "id": "172350a7-898f-4522-8220-553328f97374",
-          "updatedAt": "2018-05-18T08:22:41+0000",
-          "colorHex": "04b1f0",
-          "type": "wave",
-          "discriminator": "separator"
-        }
-      },
-      {
-        "component": {
-          "id": "256f1058-438d-42cf-8fc8-554319627206",
-          "updatedAt": "2018-05-18T08:22:41+0000",
-          "title": "Take the IQ survey",
-          "description": "You will probably fail",
-          "surveyURL": "https://de.surveymonkey.com/r/5FBK8Z3",
-          "discriminator": "survey_monkey"
-        }
-      },
-      {
-        "component": {
-          "id": "016c48a2-b4c4-46ad-904d-0b0b41de10ee",
-          "updatedAt": "2018-05-18T08:22:41+0000",
-          "type": "youtube",
-          "payload": "zfQdPcO--DA",
-          "description": "Video description",
-          "discriminator": "video"
-        }
-      },
-      {
-        "component": {
-          "id": "16b5e1da-fc5a-4833-8eeb-fba8bfcb94bc",
-          "updatedAt": "2018-05-18T08:22:41+0000",
-          "buttonCaption": "Trigger me",
-          "url": "https://httpbin.org/status/200",
-          "feedbackSuccessMessage": "Success message!",
-          "discriminator": "webhook"
         }
       }
     ]
