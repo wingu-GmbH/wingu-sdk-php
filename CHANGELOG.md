@@ -1,6 +1,10 @@
 Change Log
 ==========
 
+## [0.2.1] - 2018-12-10
+### Fixed
+- api key header should not created in request if it is null
+
 ## [0.2.0] - 2018-12-10
 ### Added
 - flag `persistent` on `form` component elements 

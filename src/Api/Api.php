@@ -89,9 +89,7 @@ abstract class Api
         return $this->requestFactory->createRequest(
             'GET',
             $uri,
-            [
-                $this->configuration->apiKeyHeader() => $this->configuration->apiKey(),
-            ]
+            $this->getDefaultHeaders()
         );
     }
 
@@ -113,10 +111,10 @@ abstract class Api
         return $this->requestFactory->createRequest(
             'POST',
             $uri,
-            [
-                $this->configuration->apiKeyHeader() => $this->configuration->apiKey(),
-                'Content-Type' => 'application/json',
-            ],
+            \array_merge(
+                $this->getDefaultHeaders(),
+                ['Content-Type' => 'application/json']
+            ),
             (string) \json_encode($requestObject)
         );
     }
@@ -138,10 +136,12 @@ abstract class Api
         return $this->requestFactory->createRequest(
             'POST',
             $uri,
-            [
-                $this->configuration->apiKeyHeader() => $this->configuration->apiKey(),
-                'Content-Type' => 'multipart/form-data; boundary="' . $boundary . '"',
-            ],
+            \array_merge(
+                $this->getDefaultHeaders(),
+                [
+                    'Content-Type' => 'multipart/form-data; boundary="' . $boundary . '"',
+                ]
+            ),
             $multipartStream
         );
     }
@@ -153,10 +153,10 @@ abstract class Api
         return $this->requestFactory->createRequest(
             'PATCH',
             $uri,
-            [
-                $this->configuration->apiKeyHeader() => $this->configuration->apiKey(),
-                'Content-Type' => 'application/json',
-            ],
+            \array_merge(
+                $this->getDefaultHeaders(),
+                ['Content-Type' => 'application/json']
+            ),
             (string) \json_encode($requestObject)
         );
     }
@@ -178,11 +178,13 @@ abstract class Api
         return $this->requestFactory->createRequest(
             'POST',
             $uri,
-            [
-                $this->configuration->apiKeyHeader() => $this->configuration->apiKey(),
-                'X-Http-Method-Override' => 'PATCH',
-                'Content-Type' => 'multipart/form-data; boundary="' . $boundary . '"',
-            ],
+            \array_merge(
+                $this->getDefaultHeaders(),
+                [
+                    'X-Http-Method-Override' => 'PATCH',
+                    'Content-Type' => 'multipart/form-data; boundary="' . $boundary . '"',
+                ]
+            ),
             $multipartStream
         );
     }
@@ -194,10 +196,10 @@ abstract class Api
         return $this->requestFactory->createRequest(
             'PUT',
             $uri,
-            [
-                $this->configuration->apiKeyHeader() => $this->configuration->apiKey(),
-                'Content-Type' => 'application/json',
-            ],
+            \array_merge(
+                $this->getDefaultHeaders(),
+                ['Content-Type' => 'application/json']
+            ),
             (string) \json_encode($requestObject)
         );
     }
@@ -209,10 +211,23 @@ abstract class Api
         return $this->requestFactory->createRequest(
             'DELETE',
             $uri,
-            [
-                $this->configuration->apiKeyHeader() => $this->configuration->apiKey(),
-                'Content-Type' => 'application/json',
-            ]
+            \array_merge(
+                $this->getDefaultHeaders(),
+                ['Content-Type' => 'application/json']
+            )
         );
+    }
+
+    /**
+     * @return string[]
+     */
+    private function getDefaultHeaders() : array
+    {
+        $headers = [];
+        if ($this->configuration->apiKey() !== null) {
+            $headers[$this->configuration->apiKeyHeader()] = $this->configuration->apiKey();
+        }
+
+        return $headers;
     }
 }
