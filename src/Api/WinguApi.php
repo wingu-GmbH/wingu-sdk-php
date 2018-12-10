@@ -39,12 +39,12 @@ final class WinguApi
     private $services = [];
 
     public function __construct(
-        Configuration $configuration,
+        ?Configuration $configuration = null,
         ?HttpClient $httpClient = null,
         ?RequestFactory $requestFactory = null,
         ?Hydrator $hydrator = null
     ) {
-        $this->configuration  = $configuration;
+        $this->configuration  = $configuration ?: new Configuration();
         $this->httpClient     = $httpClient ?: HttpClientDiscovery::find();
         $this->requestFactory = $requestFactory ?: MessageFactoryDiscovery::find();
         $this->hydrator       = $hydrator ?: new SymfonySerializerHydrator();

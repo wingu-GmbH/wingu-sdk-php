@@ -1,9 +1,10 @@
 Change Log
 ==========
 
-## [0.2.0] - 2018-12-xx
+## [0.2.0] - 2018-12-10
 ### Added
 - flag `persistent` on `form` component elements 
+- option to instantiate API with default configuration
 
 ### Changed
  - supported wingu API version to `0.13`
