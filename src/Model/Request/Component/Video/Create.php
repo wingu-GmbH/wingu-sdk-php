@@ -9,7 +9,7 @@ use Wingu\Engine\SDK\Model\Request\Request;
 
 final class Create implements Request
 {
-    private const TYPES = ['vimeo', 'youtube'];
+    private const TYPES = ['youtube'];
 
     /** @var string */
     private $type;

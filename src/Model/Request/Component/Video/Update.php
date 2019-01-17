@@ -10,7 +10,7 @@ use Wingu\Engine\SDK\Model\Request\StringValue;
 
 final class Update implements Request
 {
-    private const TYPES = ['vimeo', 'youtube'];
+    private const TYPES = ['youtube'];
 
     /** @var string|null */
     private $type;

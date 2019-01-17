@@ -1,6 +1,10 @@
 Change Log
 ==========
 
+## [0.2.2] - 2019-01-17
+### Removed
+- support for vimeo type in video component
+
 ## [0.2.1] - 2018-12-10
 ### Fixed
 - api key header should not created in request if it is null
