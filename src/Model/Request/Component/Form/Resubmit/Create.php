@@ -21,7 +21,9 @@ final class Create implements Request
         $this->allowedAfterSeconds = $allowedAfterSeconds;
     }
 
-    /** @inheritdoc */
+    /**
+     * {@inheritdoc}
+     */
     public function jsonSerialize() : array
     {
         return [

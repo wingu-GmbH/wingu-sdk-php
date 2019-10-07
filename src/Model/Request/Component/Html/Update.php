@@ -2,18 +2,18 @@
 
 declare(strict_types=1);
 
-namespace Wingu\Engine\SDK\Model\Request\Component\Rating;
+namespace Wingu\Engine\SDK\Model\Request\Component\Html;
 
 use Wingu\Engine\SDK\Model\Request\Request;
 
 final class Update implements Request
 {
     /** @var string|null */
-    private $title;
+    private $content;
 
-    public function __construct(?string $title = null)
+    public function __construct(?string $content = null)
     {
-        $this->title = $title;
+        $this->content = $content;
     }
 
     /**
@@ -22,7 +22,7 @@ final class Update implements Request
     public function jsonSerialize() : array
     {
         return \array_filter([
-            'title' => $this->title,
+            'content' => $this->content,
         ]);
     }
 }

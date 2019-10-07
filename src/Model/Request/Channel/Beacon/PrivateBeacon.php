@@ -24,7 +24,9 @@ final class PrivateBeacon extends Channel
         $this->location = $location;
     }
 
-    /** @inheritdoc */
+    /**
+     * {@inheritdoc}
+     */
     public function jsonSerialize() : array
     {
         return \array_merge(

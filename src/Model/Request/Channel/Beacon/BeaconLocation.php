@@ -20,7 +20,9 @@ final class BeaconLocation implements Request
         $this->address     = $address;
     }
 
-    /** @inheritdoc */
+    /**
+     * {@inheritdoc}
+     */
     public function jsonSerialize() : array
     {
         return [

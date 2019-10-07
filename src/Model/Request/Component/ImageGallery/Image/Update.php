@@ -21,7 +21,9 @@ final class Update implements Request
         $this->caption      = $caption;
     }
 
-    /** @inheritdoc */
+    /**
+     * {@inheritdoc}
+     */
     public function jsonSerialize() : array
     {
         return \array_filter([

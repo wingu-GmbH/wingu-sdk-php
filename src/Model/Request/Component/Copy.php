@@ -24,7 +24,9 @@ class Copy implements Request
         $this->decks = $decks;
     }
 
-    /** @inheritdoc */
+    /**
+     * {@inheritdoc}
+     */
     public function jsonSerialize() : array
     {
         return [

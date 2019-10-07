@@ -97,11 +97,6 @@ final class ComponentApi extends Api
         return $this->getService(BrandBarApi::class);
     }
 
-    public function cms() : CMSApi
-    {
-        return $this->getService(CMSApi::class);
-    }
-
     public function contact() : ContactApi
     {
         return $this->getService(ContactApi::class);
@@ -120,6 +115,11 @@ final class ComponentApi extends Api
     public function form() : FormApi
     {
         return $this->getService(FormApi::class);
+    }
+
+    public function html() : HtmlApi
+    {
+        return $this->getService(HtmlApi::class);
     }
 
     public function imageGallery() : ImageGalleryApi
@@ -145,6 +145,11 @@ final class ComponentApi extends Api
     public function surveyMonkey() : SurveyMonkeyApi
     {
         return $this->getService(SurveyMonkeyApi::class);
+    }
+
+    public function text() : TextApi
+    {
+        return $this->getService(TextApi::class);
     }
 
     public function video() : VideoApi

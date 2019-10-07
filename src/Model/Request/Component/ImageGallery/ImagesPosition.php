@@ -22,7 +22,9 @@ final class ImagesPosition implements Request
         $this->orderedImages = $orderedImages;
     }
 
-    /** @inheritdoc */
+    /**
+     * {@inheritdoc}
+     */
     public function jsonSerialize() : array
     {
         return [

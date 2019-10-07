@@ -22,7 +22,9 @@ final class MediaPosition implements Request
         $this->orderedMedia = $orderedMedia;
     }
 
-    /** @inheritdoc */
+    /**
+     * {@inheritdoc}
+     */
     public function jsonSerialize() : array
     {
         return [

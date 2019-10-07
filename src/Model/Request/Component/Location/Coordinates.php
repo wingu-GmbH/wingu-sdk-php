@@ -20,7 +20,9 @@ final class Coordinates implements Request
         $this->latitude  = $latitude;
     }
 
-    /** @inheritdoc */
+    /**
+     * {@inheritdoc}
+     */
     public function jsonSerialize() : array
     {
         return [

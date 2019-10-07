@@ -16,7 +16,9 @@ final class BeaconAddress implements Request
         $this->formattedAddress = $formattedAddress;
     }
 
-    /** @inheritdoc */
+    /**
+     * {@inheritdoc}
+     */
     public function jsonSerialize() : array
     {
         return [

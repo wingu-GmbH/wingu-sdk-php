@@ -21,7 +21,9 @@ final class Create implements MultipartRequest
         $this->name  = $name;
     }
 
-    /** @inheritdoc */
+    /**
+     * {@inheritdoc}
+     */
     public function jsonSerialize() : array
     {
         return [

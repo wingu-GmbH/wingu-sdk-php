@@ -50,7 +50,7 @@
               "updatedAt": "2018-05-18T08:22:46+0000",
               "content": "# Welcome!\n_Welcome in our coffee._\n## Website\nCheck out our [website](https://www.wingu.de)!  \n### Congratulations!\nYou won a **free** coffee! You can choose between:  \n1.  Gold  \n2.  Space Gray\n3.  Silver.\n\nIf you prefer you can even choose from an unordered list:\n\n*   Gold\n*   Space Gray\n*   Silver",
               "type": "markdown",
-              "discriminator": "cms"
+              "discriminator": "text"
             }
           },
           {

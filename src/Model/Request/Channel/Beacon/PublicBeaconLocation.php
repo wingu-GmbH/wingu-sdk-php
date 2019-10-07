@@ -20,7 +20,9 @@ final class PublicBeaconLocation implements Request
         $this->locationAcquiredDateTime = $locationAcquiredDateTime;
     }
 
-    /** @inheritdoc */
+    /**
+     * {@inheritdoc}
+     */
     public function jsonSerialize() : array
     {
         return [

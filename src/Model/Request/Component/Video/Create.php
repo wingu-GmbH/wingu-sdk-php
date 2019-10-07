@@ -29,7 +29,9 @@ final class Create implements Request
         $this->description = $description;
     }
 
-    /** @inheritdoc */
+    /**
+     * {@inheritdoc}
+     */
     public function jsonSerialize() : array
     {
         return [

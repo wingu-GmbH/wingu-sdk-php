@@ -24,7 +24,9 @@ final class Create implements Request
         $this->surveyURL   = $surveyURL;
     }
 
-    /** @inheritdoc */
+    /**
+     * {@inheritdoc}
+     */
     public function jsonSerialize() : array
     {
         return [

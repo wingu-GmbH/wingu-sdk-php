@@ -2,27 +2,27 @@
 
 declare(strict_types=1);
 
-namespace Wingu\Engine\SDK\Model\Request\Component\Rating;
+namespace Wingu\Engine\SDK\Model\Request\Component\Html;
 
 use Wingu\Engine\SDK\Model\Request\Request;
 
 final class Create implements Request
 {
     /** @var string */
-    private $title;
+    private $content;
 
-    public function __construct(string $title)
+    public function __construct(string $content)
     {
-        $this->title = $title;
+        $this->content = $content;
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function jsonSerialize() : array
     {
         return [
-            'title' => $this->title,
+            'content' => $this->content,
         ];
     }
 }

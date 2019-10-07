@@ -16,7 +16,9 @@ final class Create implements Request
         $this->name = $name;
     }
 
-    /** @inheritdoc */
+    /**
+     * {@inheritdoc}
+     */
     public function jsonSerialize() : array
     {
         return [

@@ -2,6 +2,12 @@ Change Log
 ==========
 
 ## [0.3.0] - 2019-xx-xx
+### Added
+- support for Text and Html component in favour of CMS component
+
+### Changed
+- supported wingu API version to `0.14`
+
 ### Removed
 - serializer property from API class
 
@@ -37,4 +43,5 @@ Change Log
 ### Added
 - Initial release with support for wingu API version `0.12`
 
+[0.2.0]: https://github.com/wingu-GmbH/wingu-sdk-php/releases/tag/0.2.0
 [0.1.0]: https://github.com/wingu-GmbH/wingu-sdk-php/releases/tag/0.1.0

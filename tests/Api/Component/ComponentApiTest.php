@@ -64,7 +64,7 @@ final class ComponentApiTest extends ApiTest
             $this->getExpectedActionComponent(),
             $this->getExpectedAudioPlaylistComponent(),
             $this->getExpectedBrandBarComponent(),
-            $this->getExpectedCmsComponent(),
+            $this->getExpectedTextComponent(),
             $this->getExpectedHtmlComponent(),
             $this->getExpectedContactComponent(),
             $this->getExpectedCouponComponent(),

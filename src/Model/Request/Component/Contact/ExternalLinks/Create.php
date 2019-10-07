@@ -28,7 +28,9 @@ final class Create implements Request
         $this->yelpName       = $yelpName;
     }
 
-    /** @inheritdoc */
+    /**
+     * {@inheritdoc}
+     */
     public function jsonSerialize() : array
     {
         return [

@@ -21,7 +21,9 @@ final class CardsPosition implements Request
 
         $this->orderedCards = $orderedCards;
     }
-    /** @inheritdoc */
+    /**
+     * {@inheritdoc}
+     */
     public function jsonSerialize() : array
     {
         return [

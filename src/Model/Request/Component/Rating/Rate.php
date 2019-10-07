@@ -37,7 +37,9 @@ final class Rate implements Request
         $this->rating  = $rating;
     }
 
-    /** @inheritdoc */
+    /**
+     * {@inheritdoc}
+     */
     public function jsonSerialize() : array
     {
         return [

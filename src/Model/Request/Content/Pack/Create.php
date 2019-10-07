@@ -31,7 +31,9 @@ final class Create implements Request
         $this->locale  = $locale;
     }
 
-    /** @inheritdoc */
+    /**
+     * {@inheritdoc}
+     */
     public function jsonSerialize() : array
     {
         return [

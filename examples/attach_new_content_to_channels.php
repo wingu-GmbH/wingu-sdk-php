@@ -9,10 +9,10 @@ $apiKey = 'your-api-key'; // Change this to your API key.
 $configuration  = new \Wingu\Engine\SDK\Api\Configuration($apiKey);
 $winguApi       = new \Wingu\Engine\SDK\Api\WinguApi($configuration);
 
-// Create new CMS component with your content, it can also be Markdown, if so - pass 'markdown' as 2nd parameter
-$createdComponent = $winguApi->component()->cms()->create(new \Wingu\Engine\SDK\Model\Request\Component\CMS\Create('<p>html content</p>', 'html'));
+// Create new html component with your content
+$createdComponent = $winguApi->component()->html()->create(new \Wingu\Engine\SDK\Model\Request\Component\Html\Create('<p>html content</p>'));
 
-// Create new Deck that will later on hold CMS component, optionally you can add description and legal note to it
+// Create new Deck that will later on hold html component, optionally you can add description and legal note to it
 $createdDeck      = $winguApi->deck()->createDeck(new \Wingu\Engine\SDK\Model\Request\Deck\Create('Deck title', 'Short description', 'Some legal note'));
 
 // Fetch first available template and store its ID
@@ -21,7 +21,7 @@ $template         = $winguApi->contentTemplate()->templates()->current()->id();
 // Use template above to create new Content
 $createdContent   = $winguApi->content()->createContent(new \Wingu\Engine\SDK\Model\Request\Content\PrivateContent($template));
 
-// Attach CMS Component to Deck you created before
+// Attach html Component to Deck you created before
 $winguApi->card()->addCardToDeck(new \Wingu\Engine\SDK\Model\Request\Card($createdDeck->id(), $createdComponent->id(), 0));
 
 // Create new Content Pack, english in this case

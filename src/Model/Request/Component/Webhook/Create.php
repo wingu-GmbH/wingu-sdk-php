@@ -27,7 +27,9 @@ final class Create implements Request
         $this->url                    = $url;
     }
 
-    /** @inheritdoc */
+    /**
+     * {@inheritdoc}
+     */
     public function jsonSerialize() : array
     {
         return [

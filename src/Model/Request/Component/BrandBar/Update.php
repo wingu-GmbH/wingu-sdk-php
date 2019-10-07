@@ -27,7 +27,9 @@ final class Update implements MultipartRequest
         $this->backgroundColor = $backgroundColor;
     }
 
-    /** @inheritdoc */
+    /**
+     * {@inheritdoc}
+     */
     public function jsonSerialize() : array
     {
         return \array_filter([

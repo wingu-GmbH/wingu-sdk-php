@@ -37,7 +37,9 @@ final class Create implements Request
         $this->streetNumber = $streetNumber;
     }
 
-    /** @inheritdoc */
+    /**
+     * {@inheritdoc}
+     */
     public function jsonSerialize() : array
     {
         return [

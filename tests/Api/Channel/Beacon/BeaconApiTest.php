@@ -32,7 +32,6 @@ use Wingu\Engine\SDK\Model\Response\Component\BrandBar;
 use Wingu\Engine\SDK\Model\Response\Component\BrandBarBackground;
 use Wingu\Engine\SDK\Model\Response\Component\BrandBarImage;
 use Wingu\Engine\SDK\Model\Response\Component\BrandBarText;
-use Wingu\Engine\SDK\Model\Response\Component\CMS;
 use Wingu\Engine\SDK\Model\Response\Component\Contact;
 use Wingu\Engine\SDK\Model\Response\Component\ContactAddress;
 use Wingu\Engine\SDK\Model\Response\Component\ContactExternalLinks;
@@ -52,6 +51,7 @@ use Wingu\Engine\SDK\Model\Response\Component\PublicWebhook;
 use Wingu\Engine\SDK\Model\Response\Component\Rating;
 use Wingu\Engine\SDK\Model\Response\Component\Separator;
 use Wingu\Engine\SDK\Model\Response\Component\SurveyMonkey;
+use Wingu\Engine\SDK\Model\Response\Component\Text;
 use Wingu\Engine\SDK\Model\Response\Component\Video;
 use Wingu\Engine\SDK\Model\Response\Content\Deck;
 use Wingu\Engine\SDK\Model\Response\Content\Locale;
@@ -119,7 +119,7 @@ final class BeaconApiTest extends ChannelApiTestCase
                             new Card(
                                 '4906e40b-03fb-416f-bd67-79b8eb67580b',
                                 new Position(1),
-                                new CMS(
+                                new Text(
                                     '38f76932-7727-462a-bc3d-48f05f8ef99b',
                                     new \DateTime('2018-05-18T08:22:46+0000'),
                                     "# Welcome!\n_Welcome in our coffee._\n## Website\nCheck out our [website](https://www.wingu.de)!  \n### Congratulations!\nYou won a **free** coffee! You can choose between:  \n1.  Gold  \n2.  Space Gray\n3.  Silver.\n\nIf you prefer you can even choose from an unordered list:\n\n*   Gold\n*   Space Gray\n*   Silver",
@@ -382,7 +382,7 @@ final class BeaconApiTest extends ChannelApiTestCase
                                 new Card(
                                     'f0c1f2aa-83fd-4304-a285-f603a6bd6db3',
                                     new Position(1),
-                                    $this->getExpectedCmsComponent()
+                                    $this->getExpectedTextComponent()
                                 ),
                                 new Card(
                                     '2250cddf-95b7-49b9-b580-28818fd92ef5',

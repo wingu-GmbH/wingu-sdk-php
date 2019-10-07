@@ -28,7 +28,9 @@ final class Update implements Request
         $this->color     = $color;
     }
 
-    /** @inheritdoc */
+    /**
+     * {@inheritdoc}
+     */
     public function jsonSerialize() : array
     {
         return \array_filter([

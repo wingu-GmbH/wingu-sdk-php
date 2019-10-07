@@ -2,6 +2,6 @@
   "id": "261a7aab-4b03-4817-b471-060c2e046826",
   "updatedAt": "2018-06-05T13:08:11+0000",
   "content": "just test",
-  "type": "html",
-  "discriminator": "cms"
+  "type": "markdown",
+  "discriminator": "text"
 }

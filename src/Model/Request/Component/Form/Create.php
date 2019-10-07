@@ -50,7 +50,9 @@ final class Create implements Request
         $this->resubmit               = $resubmit;
     }
 
-    /** @inheritdoc */
+    /**
+     * {@inheritdoc}
+     */
     public function jsonSerialize() : array
     {
         return [

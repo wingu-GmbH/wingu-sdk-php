@@ -76,7 +76,9 @@ final class Create implements Request
         $this->extraInfo     = $extraInfo;
     }
 
-    /** @inheritdoc */
+    /**
+     * {@inheritdoc}
+     */
     public function jsonSerialize() : array
     {
         return [

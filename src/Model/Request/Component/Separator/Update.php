@@ -25,7 +25,9 @@ final class Update implements Request
         $this->colorHex = $colorHex;
     }
 
-    /** @inheritdoc */
+    /**
+     * {@inheritdoc}
+     */
     public function jsonSerialize() : array
     {
         return \array_filter([

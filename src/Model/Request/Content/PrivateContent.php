@@ -18,7 +18,9 @@ final class PrivateContent implements Request
         $this->template = $template;
     }
 
-    /** @inheritdoc */
+    /**
+     * {@inheritdoc}
+     */
     public function jsonSerialize() : array
     {
         return [

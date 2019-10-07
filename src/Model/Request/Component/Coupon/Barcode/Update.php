@@ -24,7 +24,9 @@ final class Update implements Request
         $this->description = $description;
     }
 
-    /** @inheritdoc */
+    /**
+     * {@inheritdoc}
+     */
     public function jsonSerialize() : array
     {
         return [

@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace Wingu\Engine\SDK\Model\Response\Component;
 
-final class CMS implements Component
+final class Text implements Component
 {
     use ComponentTrait;
 
-    private const TYPE_HTML = 'html';
-
     private const TYPE_MARKDOWN = 'markdown';
+
+    private const TYPE_PLAINTEXT = 'plaintext';
 
     /** @var string */
     private $content;
@@ -40,13 +40,13 @@ final class CMS implements Component
         return $this->type;
     }
 
-    public function isHtml() : bool
-    {
-        return $this->type === self::TYPE_HTML;
-    }
-
     public function isMarkdown() : bool
     {
         return $this->type === self::TYPE_MARKDOWN;
+    }
+
+    public function isPlaintext() : bool
+    {
+        return $this->type === self::TYPE_PLAINTEXT;
     }
 }

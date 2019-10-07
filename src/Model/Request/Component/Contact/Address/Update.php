@@ -38,7 +38,9 @@ final class Update implements Request
         $this->streetNumber = $streetNumber;
     }
 
-    /** @inheritdoc */
+    /**
+     * {@inheritdoc}
+     */
     public function jsonSerialize() : array
     {
         return \array_filter([

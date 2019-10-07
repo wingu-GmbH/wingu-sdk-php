@@ -33,7 +33,9 @@ final class Update implements Request
         $this->actionPayload = $actionPayload;
     }
 
-    /** @inheritdoc */
+    /**
+     * {@inheritdoc}
+     */
     public function jsonSerialize() : array
     {
         return \array_filter([

@@ -24,7 +24,9 @@ final class Create implements Request
         $this->legalNote   = $legalNote;
     }
 
-    /** @inheritdoc */
+    /**
+     * {@inheritdoc}
+     */
     public function jsonSerialize() : array
     {
         return [

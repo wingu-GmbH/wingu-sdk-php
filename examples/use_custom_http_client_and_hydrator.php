@@ -18,13 +18,13 @@ $winguApi       = new \Wingu\Engine\SDK\Api\WinguApi($configuration, $httpClient
 
 $componentApi = $winguApi->component();
 
-/** @var \Wingu\Engine\SDK\Model\Response\Component\CMS $cms */
-$cms = $componentApi->myComponent('98ba7df5-a1f1-49ee-a005-842897b91a1a');
+/** @var \Wingu\Engine\SDK\Model\Response\Component\Text $text */
+$text = $componentApi->myComponent('98ba7df5-a1f1-49ee-a005-842897b91a1a');
 
-$content = $cms->content();
+$content = $text->content();
 
-if ($cms->isMarkdown()) {
+if ($text->isMarkdown()) {
     /** Parse and do other things to Markdown $content you retrieved */
 } else {
-    /** Content must be HTML, treat it differently */
+    /** Content must be plaintext, treat it differently */
 }

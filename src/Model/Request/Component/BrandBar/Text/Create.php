@@ -28,7 +28,9 @@ final class Create implements Request
         $this->color     = $color;
     }
 
-    /** @inheritdoc */
+    /**
+     * {@inheritdoc}
+     */
     public function jsonSerialize() : array
     {
         return [
