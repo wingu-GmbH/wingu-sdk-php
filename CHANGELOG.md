@@ -4,6 +4,7 @@ Change Log
 ## [0.3.0] - 2019-xx-xx
 ### Added
 - support for Text and Html component in favour of CMS component
+- more language codes available in content locale
 
 ### Changed
 - supported wingu API version to `0.14`
