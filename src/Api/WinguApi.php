@@ -115,7 +115,9 @@ final class WinguApi
         return $this->getService(Card::class);
     }
 
-    /** @return mixed */
+    /**
+     * @return mixed
+     */
     private function getService(string $class)
     {
         if (! isset($this->services[$class])) {

@@ -60,15 +60,6 @@ final class WinguApiTest extends ApiTest
             $requestFactoryMock
         );
 
-        $httpClient = self::createClient();
-        $httpClient->addResponse(
-            new Response(
-                200,
-                ['Content-Type' => 'application/json'],
-                '{"cloudinary":{"cloudName":"abcdefgh"},"version":{"current":"0.10"}}'
-            )
-        );
-
         $winguApi->wingu()->ping();
     }
 }

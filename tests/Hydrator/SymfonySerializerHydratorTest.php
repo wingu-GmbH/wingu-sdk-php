@@ -16,7 +16,6 @@ final class SymfonySerializerHydratorTest extends TestCase
     {
         $response = $this->createMock(ResponseInterface::class);
         $response
-            ->expects(self::any())
             ->method('getHeaderLine')
             ->with('Content-Type')
             ->willReturn('text/html');

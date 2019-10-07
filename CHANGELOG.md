@@ -1,13 +1,17 @@
 Change Log
 ==========
 
+## [0.3.0] - 2019-xx-xx
+### Removed
+- serializer property from API class
+
 ## [0.2.2] - 2019-01-17
 ### Removed
 - support for vimeo type in video component
 
 ## [0.2.1] - 2018-12-10
 ### Fixed
-- api key header should not created in request if it is null
+- api key header should not be created in request if it is null
 
 ## [0.2.0] - 2018-12-10
 ### Added

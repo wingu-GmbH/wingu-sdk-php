@@ -12,9 +12,6 @@ use Http\Message\MultipartStream\MultipartStreamBuilder;
 use Http\Message\RequestFactory;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
-use Symfony\Component\Serializer\Encoder\JsonEncoder;
-use Symfony\Component\Serializer\Normalizer\JsonSerializableNormalizer;
-use Symfony\Component\Serializer\Serializer;
 use Wingu\Engine\SDK\Api\Exception\Generic;
 use Wingu\Engine\SDK\Hydrator\Hydrator;
 use Wingu\Engine\SDK\Hydrator\SymfonySerializerHydrator;
@@ -36,9 +33,6 @@ abstract class Api
     /** @var Hydrator */
     protected $hydrator;
 
-    /** @var Serializer */
-    protected $serializer;
-
     public function __construct(
         Configuration $configuration,
         ?HttpClient $httpClient = null,
@@ -49,7 +43,6 @@ abstract class Api
         $this->httpClient     = $httpClient ?: HttpClientDiscovery::find();
         $this->requestFactory = $requestFactory ?: MessageFactoryDiscovery::find();
         $this->hydrator       = $hydrator ?: new SymfonySerializerHydrator();
-        $this->serializer     = new Serializer([new JsonSerializableNormalizer()], [new JsonEncoder()]);
     }
 
     protected function handleRequest(RequestInterface $request) : ResponseInterface
