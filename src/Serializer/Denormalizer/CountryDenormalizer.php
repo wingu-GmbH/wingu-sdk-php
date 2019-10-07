@@ -14,7 +14,7 @@ final class CountryDenormalizer implements DenormalizerInterface
     /**
      * {@inheritdoc}
      */
-    public function denormalize($data, $class, $format = null, array $context = [])
+    public function denormalize($data, $type, $format = null, array $context = [])
     {
         if (! \is_array($data)) {
             throw new InvalidArgumentException(\sprintf('Data expected to be an array, %s given.', \gettype($data)));

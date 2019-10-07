@@ -20,7 +20,7 @@ final class PrivateContentDenormalizer implements DenormalizerInterface, Seriali
     /**
      * {@inheritdoc}
      */
-    public function denormalize($data, $class, $format = null, array $context = []) : ?Content
+    public function denormalize($data, $type, $format = null, array $context = []) : ?Content
     {
         if ($data === null) {
             return null;
@@ -34,6 +34,7 @@ final class PrivateContentDenormalizer implements DenormalizerInterface, Seriali
 
         /** @var Content $content */
         $content = $this->serializer->denormalize($data, PrivateListContent::class, $format, $context);
+
         return $content;
     }
 

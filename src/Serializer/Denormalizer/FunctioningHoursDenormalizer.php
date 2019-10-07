@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Wingu\Engine\SDK\Serializer\Denormalizer;
 
+use Speicher210\BusinessHours\BusinessHours;
 use Speicher210\BusinessHours\BusinessHoursBuilder;
 use Speicher210\BusinessHours\BusinessHoursInterface;
 use Symfony\Component\Serializer\Exception\NotNormalizableValueException;
@@ -12,14 +13,9 @@ use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 final class FunctioningHoursDenormalizer implements DenormalizerInterface
 {
     /**
-     * @param mixed    $data    Data to restore
-     * @param string   $class   The expected class to instantiate
-     * @param string   $format  Format the given data was extracted from
-     * @param string[] $context Options available to the denormalizer
-     *
-     * @return mixed
+     * {@inheritdoc}
      */
-    public function denormalize($data, $class, $format = null, array $context = [])
+    public function denormalize($data, $type, $format = null, array $context = []) : ?BusinessHours
     {
         if ($data === null) {
             return null;

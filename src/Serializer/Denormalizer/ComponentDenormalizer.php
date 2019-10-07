@@ -37,7 +37,7 @@ final class ComponentDenormalizer implements DenormalizerInterface, SerializerAw
     /**
      * {@inheritdoc}
      */
-    public function denormalize($data, $class, $format = null, array $context = [])
+    public function denormalize($data, $type, $format = null, array $context = [])
     {
         switch ($data['discriminator']) {
             case 'action':

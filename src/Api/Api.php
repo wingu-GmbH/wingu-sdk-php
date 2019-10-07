@@ -12,6 +12,7 @@ use Http\Message\MultipartStream\MultipartStreamBuilder;
 use Http\Message\RequestFactory;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\StreamFactoryInterface;
 use Wingu\Engine\SDK\Api\Exception\Generic;
 use Wingu\Engine\SDK\Hydrator\Hydrator;
 use Wingu\Engine\SDK\Hydrator\SymfonySerializerHydrator;
@@ -116,7 +117,9 @@ abstract class Api
     {
         $uri = $this->configuration->backendUrl() . $path;
 
-        $builder = new MultipartStreamBuilder(StreamFactoryDiscovery::find());
+        /** @var StreamFactoryInterface $streamFactory */
+        $streamFactory = StreamFactoryDiscovery::find();
+        $builder       = new MultipartStreamBuilder($streamFactory);
         foreach (RequestDataManipulator::flatten($requestObject) as $name => $stream) {
             $builder->addResource($name, $stream);
         }
@@ -158,7 +161,9 @@ abstract class Api
     {
         $uri = $this->configuration->backendUrl() . $path;
 
-        $builder = new MultipartStreamBuilder(StreamFactoryDiscovery::find());
+        /** @var StreamFactoryInterface $streamFactory */
+        $streamFactory = StreamFactoryDiscovery::find();
+        $builder       = new MultipartStreamBuilder($streamFactory);
         foreach (RequestDataManipulator::flatten($requestObject) as $name => $stream) {
             $builder->addResource($name, $stream);
         }
