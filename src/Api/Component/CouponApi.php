@@ -15,9 +15,9 @@ final class CouponApi extends Api
     public function create(Create $coupon) : Coupon
     {
         if ($coupon->files() === []) {
-            $request = $this->createPostRequest('/api/component/coupon', $coupon);
+            $request = $this->createPostRequest('/api/component/my/coupon', $coupon);
         } else {
-            $request = $this->createMultipartPostRequest('/api/component/coupon', $coupon);
+            $request = $this->createMultipartPostRequest('/api/component/my/coupon', $coupon);
         }
 
         $response = $this->handleRequest($request);
@@ -30,9 +30,9 @@ final class CouponApi extends Api
         Assertion::uuid($id);
 
         if ($coupon->files() === []) {
-            $request = $this->createPatchRequest('/api/component/coupon/' . $id, $coupon);
+            $request = $this->createPatchRequest('/api/component/my/coupon/' . $id, $coupon);
         } else {
-            $request = $this->createMultipartPatchRequest('/api/component/coupon/' . $id, $coupon);
+            $request = $this->createMultipartPatchRequest('/api/component/my/coupon/' . $id, $coupon);
         }
 
         $this->handleRequest($request);

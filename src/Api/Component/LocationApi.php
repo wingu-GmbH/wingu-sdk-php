@@ -14,7 +14,7 @@ final class LocationApi extends Api
 {
     public function create(Create $location) : Location
     {
-        $request = $this->createPostRequest('/api/component/location', $location);
+        $request = $this->createPostRequest('/api/component/my/location', $location);
 
         $response = $this->handleRequest($request);
 
@@ -24,7 +24,7 @@ final class LocationApi extends Api
     public function update(string $id, Update $location) : void
     {
         Assertion::uuid($id);
-        $request = $this->createPatchRequest('/api/component/location/' . $id, $location);
+        $request = $this->createPatchRequest('/api/component/my/location/' . $id, $location);
 
         $this->handleRequest($request);
     }

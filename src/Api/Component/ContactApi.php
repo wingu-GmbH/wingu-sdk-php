@@ -14,7 +14,7 @@ final class ContactApi extends Api
 {
     public function create(Create $contact) : Contact
     {
-        $request = $this->createPostRequest('/api/component/contact', $contact);
+        $request = $this->createPostRequest('/api/component/my/contact', $contact);
 
         $response = $this->handleRequest($request);
 
@@ -24,7 +24,7 @@ final class ContactApi extends Api
     public function update(string $id, Update $contact) : void
     {
         Assertion::uuid($id);
-        $request = $this->createPatchRequest('/api/component/contact/' . $id, $contact);
+        $request = $this->createPatchRequest('/api/component/my/contact/' . $id, $contact);
 
         $this->handleRequest($request);
     }

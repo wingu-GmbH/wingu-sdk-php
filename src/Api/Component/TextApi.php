@@ -14,7 +14,7 @@ final class TextApi extends Api
 {
     public function create(Create $text) : Text
     {
-        $request = $this->createPostRequest('/api/component/text', $text);
+        $request = $this->createPostRequest('/api/component/my/text', $text);
 
         $response = $this->handleRequest($request);
 
@@ -24,7 +24,7 @@ final class TextApi extends Api
     public function update(string $id, Update $text) : void
     {
         Assertion::uuid($id);
-        $request = $this->createPatchRequest('/api/component/text/' . $id, $text);
+        $request = $this->createPatchRequest('/api/component/my/text/' . $id, $text);
 
         $this->handleRequest($request);
     }

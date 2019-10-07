@@ -14,7 +14,7 @@ final class HtmlApi extends Api
 {
     public function create(Create $html) : Html
     {
-        $request = $this->createPostRequest('/api/component/html', $html);
+        $request = $this->createPostRequest('/api/component/my/html', $html);
 
         $response = $this->handleRequest($request);
 
@@ -24,7 +24,7 @@ final class HtmlApi extends Api
     public function update(string $id, Update $html) : void
     {
         Assertion::uuid($id);
-        $request = $this->createPatchRequest('/api/component/html/' . $id, $html);
+        $request = $this->createPatchRequest('/api/component/my/html/' . $id, $html);
 
         $this->handleRequest($request);
     }

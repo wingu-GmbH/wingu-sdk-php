@@ -14,7 +14,7 @@ final class SeparatorApi extends Api
 {
     public function create(Create $separator) : Separator
     {
-        $request = $this->createPostRequest('/api/component/separator', $separator);
+        $request = $this->createPostRequest('/api/component/my/separator', $separator);
 
         $response = $this->handleRequest($request);
 
@@ -24,7 +24,7 @@ final class SeparatorApi extends Api
     public function update(string $id, Update $separator) : void
     {
         Assertion::uuid($id);
-        $request = $this->createPatchRequest('/api/component/separator/' . $id, $separator);
+        $request = $this->createPatchRequest('/api/component/my/separator/' . $id, $separator);
 
         $this->handleRequest($request);
     }

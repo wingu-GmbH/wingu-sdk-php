@@ -18,7 +18,7 @@ final class AudioPlaylistApi extends Api
 {
     public function create(Create $audioPlaylist) : AudioPlaylist
     {
-        $request = $this->createPostRequest('/api/component/audio_playlist', $audioPlaylist);
+        $request = $this->createPostRequest('/api/component/my/audio_playlist', $audioPlaylist);
 
         $response = $this->handleRequest($request);
 
@@ -28,7 +28,7 @@ final class AudioPlaylistApi extends Api
     public function update(string $id, Update $audioPlaylist) : void
     {
         Assertion::uuid($id);
-        $request = $this->createPatchRequest('/api/component/audio_playlist/' . $id, $audioPlaylist);
+        $request = $this->createPatchRequest('/api/component/my/audio_playlist/' . $id, $audioPlaylist);
 
         $this->handleRequest($request);
     }
@@ -36,7 +36,7 @@ final class AudioPlaylistApi extends Api
     public function createMedia(string $id, CreateMedia $media) : AudioPlaylistMedia
     {
         Assertion::uuid($id);
-        $request = $this->createMultipartPostRequest('/api/component/audio_playlist/' . $id . '/media', $media);
+        $request = $this->createMultipartPostRequest('/api/component/my/audio_playlist/' . $id . '/media', $media);
 
         $response = $this->handleRequest($request);
 
@@ -46,7 +46,7 @@ final class AudioPlaylistApi extends Api
     public function updateMedia(string $id, UpdateMedia $media) : void
     {
         Assertion::uuid($id);
-        $request = $this->createPatchRequest('/api/component/audio_playlist/media/' . $id, $media);
+        $request = $this->createPatchRequest('/api/component/my/audio_playlist/media/' . $id, $media);
 
         $this->handleRequest($request);
     }
@@ -54,7 +54,7 @@ final class AudioPlaylistApi extends Api
     public function updateMediaPosition(string $id, MediaPosition $mediaPosition) : void
     {
         Assertion::uuid($id);
-        $request = $this->createPutRequest('/api/component/audio_playlist/' . $id . '/media_position', $mediaPosition);
+        $request = $this->createPutRequest('/api/component/my/audio_playlist/' . $id . '/media_position', $mediaPosition);
 
         $this->handleRequest($request);
     }
@@ -62,7 +62,7 @@ final class AudioPlaylistApi extends Api
     public function deleteMedia(string $id) : void
     {
         Assertion::uuid($id);
-        $request = $this->createDeleteRequest('/api/component/audio_playlist/media/' . $id);
+        $request = $this->createDeleteRequest('/api/component/my/audio_playlist/media/' . $id);
 
         $this->handleRequest($request);
     }

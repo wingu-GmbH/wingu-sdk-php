@@ -17,7 +17,7 @@ final class ImageGalleryApi extends Api
 {
     public function create(Create $imageGallery) : ImageGallery
     {
-        $request = $this->createPostRequest('/api/component/image_gallery', $imageGallery);
+        $request = $this->createPostRequest('/api/component/my/image_gallery', $imageGallery);
 
         $response = $this->handleRequest($request);
 
@@ -27,7 +27,7 @@ final class ImageGalleryApi extends Api
     public function createImage(string $id, CreateImageRequest $image) : ImageGalleryImage
     {
         Assertion::uuid($id);
-        $request = $this->createMultipartPostRequest('/api/component/image_gallery/' . $id . '/image', $image);
+        $request = $this->createMultipartPostRequest('/api/component/my/image_gallery/' . $id . '/image', $image);
 
         $response = $this->handleRequest($request);
 
@@ -37,7 +37,7 @@ final class ImageGalleryApi extends Api
     public function updateImage(string $id, UpdateImageRequest $image) : void
     {
         Assertion::uuid($id);
-        $request = $this->createPatchRequest('/api/component/image_gallery/image/' . $id, $image);
+        $request = $this->createPatchRequest('/api/component/my/image_gallery/image/' . $id, $image);
 
         $this->handleRequest($request);
     }
@@ -45,7 +45,7 @@ final class ImageGalleryApi extends Api
     public function updateImagesPosition(string $id, ImagesPosition $imagesPosition) : void
     {
         Assertion::uuid($id);
-        $request = $this->createPutRequest('/api/component/image_gallery/' . $id . '/images_position', $imagesPosition);
+        $request = $this->createPutRequest('/api/component/my/image_gallery/' . $id . '/images_position', $imagesPosition);
 
         $this->handleRequest($request);
     }
@@ -53,7 +53,7 @@ final class ImageGalleryApi extends Api
     public function deleteImage(string $id) : void
     {
         Assertion::uuid($id);
-        $request = $this->createDeleteRequest('/api/component/image_gallery/image/' . $id);
+        $request = $this->createDeleteRequest('/api/component/my/image_gallery/image/' . $id);
 
         $this->handleRequest($request);
     }

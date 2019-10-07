@@ -14,7 +14,7 @@ final class Deck extends Api
 {
     public function createDeck(Create $deck) : ResponseDeck
     {
-        $request = $this->createPostRequest('/api/deck', $deck);
+        $request = $this->createPostRequest('/api/deck/my', $deck);
 
         $response = $this->handleRequest($request);
 

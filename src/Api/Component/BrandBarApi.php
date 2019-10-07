@@ -14,7 +14,7 @@ final class BrandBarApi extends Api
 {
     public function create(Create $brandBar) : BrandBar
     {
-        $request = $this->createMultipartPostRequest('/api/component/brand_bar', $brandBar);
+        $request = $this->createMultipartPostRequest('/api/component/my/brand_bar', $brandBar);
 
         $response = $this->handleRequest($request);
 
@@ -26,9 +26,9 @@ final class BrandBarApi extends Api
         Assertion::uuid($id);
 
         if ($brandBar->files() === []) {
-            $request = $this->createPatchRequest('/api/component/brand_bar/' . $id, $brandBar);
+            $request = $this->createPatchRequest('/api/component/my/brand_bar/' . $id, $brandBar);
         } else {
-            $request = $this->createMultipartPatchRequest('/api/component/brand_bar/' . $id, $brandBar);
+            $request = $this->createMultipartPatchRequest('/api/component/my/brand_bar/' . $id, $brandBar);
         }
 
         $this->handleRequest($request);

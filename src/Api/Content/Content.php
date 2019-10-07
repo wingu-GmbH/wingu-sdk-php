@@ -43,7 +43,7 @@ final class Content extends Api
 
     public function createContent(RequestContent $content) : PrivateContent
     {
-        $request = $this->createPostRequest('/api/content', $content);
+        $request = $this->createPostRequest('/api/content/my', $content);
 
         $response = $this->handleRequest($request);
 
@@ -62,7 +62,7 @@ final class Content extends Api
     public function deleteContent(string $id) : void
     {
         Assertion::uuid($id);
-        $request = $this->createDeleteRequest('/api/content/' . $id);
+        $request = $this->createDeleteRequest('/api/content/my/' . $id);
 
         $this->handleRequest($request);
     }
@@ -70,7 +70,7 @@ final class Content extends Api
     public function updateContent(string $id, UpdateContent $content) : void
     {
         Assertion::uuid($id);
-        $request = $this->createPatchRequest('/api/content/' . $id, $content);
+        $request = $this->createPatchRequest('/api/content/my/' . $id, $content);
 
         $this->handleRequest($request);
     }

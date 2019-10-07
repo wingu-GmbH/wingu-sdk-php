@@ -8,6 +8,7 @@ Change Log
 
 ### Changed
 - supported wingu API version to `0.14`
+- updated API routes
 
 ### Removed
 - serializer property from API class

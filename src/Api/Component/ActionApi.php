@@ -14,7 +14,7 @@ final class ActionApi extends Api
 {
     public function create(Create $action) : Action
     {
-        $request = $this->createPostRequest('/api/component/action', $action);
+        $request = $this->createPostRequest('/api/component/my/action', $action);
 
         $response = $this->handleRequest($request);
 
@@ -24,7 +24,7 @@ final class ActionApi extends Api
     public function update(string $id, Update $action) : void
     {
         Assertion::uuid($id);
-        $request = $this->createPatchRequest('/api/component/action/' . $id, $action);
+        $request = $this->createPatchRequest('/api/component/my/action/' . $id, $action);
 
         $this->handleRequest($request);
     }

@@ -14,7 +14,7 @@ final class FormApi extends Api
 {
     public function create(Create $form) : PrivateForm
     {
-        $request = $this->createPostRequest('/api/component/form', $form);
+        $request = $this->createPostRequest('/api/component/my/form', $form);
 
         $response = $this->handleRequest($request);
 
@@ -24,7 +24,7 @@ final class FormApi extends Api
     public function update(string $id, Update $form) : void
     {
         Assertion::uuid($id);
-        $request = $this->createPatchRequest('/api/component/form/' . $id, $form);
+        $request = $this->createPatchRequest('/api/component/my/form/' . $id, $form);
 
         $this->handleRequest($request);
     }

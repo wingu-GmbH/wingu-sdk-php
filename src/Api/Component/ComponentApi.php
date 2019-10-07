@@ -19,7 +19,7 @@ final class ComponentApi extends Api
 
     public function myComponent(string $id) : Component
     {
-        $request = $this->createGetRequest('/api/component/' . $id . '.json');
+        $request = $this->createGetRequest('/api/component/my/' . $id . '.json');
 
         $response = $this->handleRequest($request);
 
@@ -28,7 +28,7 @@ final class ComponentApi extends Api
 
     public function copyMyComponent(string $id, Copy $component) : void
     {
-        $request = $this->createPutRequest('/api/component/' . $id . '/copy', $component);
+        $request = $this->createPutRequest('/api/component/my/' . $id . '/copy', $component);
 
         $this->handleRequest($request);
     }
@@ -49,7 +49,7 @@ final class ComponentApi extends Api
     public function deleteMyComponent(string $id) : void
     {
         Assertion::uuid($id);
-        $request = $this->createDeleteRequest('/api/component/' . $id);
+        $request = $this->createDeleteRequest('/api/component/my/' . $id);
 
         $this->handleRequest($request);
     }

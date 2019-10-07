@@ -15,7 +15,7 @@ final class WebhookApi extends Api
 {
     public function create(Create $webhook) : PrivateWebhook
     {
-        $request = $this->createPostRequest('/api/component/webhook', $webhook);
+        $request = $this->createPostRequest('/api/component/my/webhook', $webhook);
 
         $response = $this->handleRequest($request);
 
@@ -25,7 +25,7 @@ final class WebhookApi extends Api
     public function update(string $id, Update $webhook) : void
     {
         Assertion::uuid($id);
-        $request = $this->createPatchRequest('/api/component/webhook/' . $id, $webhook);
+        $request = $this->createPatchRequest('/api/component/my/webhook/' . $id, $webhook);
 
         $this->handleRequest($request);
     }

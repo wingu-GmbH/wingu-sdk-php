@@ -14,7 +14,7 @@ final class SurveyMonkeyApi extends Api
 {
     public function create(Create $surveyMonkey) : SurveyMonkey
     {
-        $request = $this->createPostRequest('/api/component/survey_monkey', $surveyMonkey);
+        $request = $this->createPostRequest('/api/component/my/survey_monkey', $surveyMonkey);
 
         $response = $this->handleRequest($request);
 
@@ -24,7 +24,7 @@ final class SurveyMonkeyApi extends Api
     public function update(string $id, Update $surveyMonkey) : void
     {
         Assertion::uuid($id);
-        $request = $this->createPatchRequest('/api/component/survey_monkey/' . $id, $surveyMonkey);
+        $request = $this->createPatchRequest('/api/component/my/survey_monkey/' . $id, $surveyMonkey);
 
         $this->handleRequest($request);
     }

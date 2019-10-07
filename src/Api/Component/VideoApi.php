@@ -14,7 +14,7 @@ final class VideoApi extends Api
 {
     public function create(Create $video) : Video
     {
-        $request = $this->createPostRequest('/api/component/video', $video);
+        $request = $this->createPostRequest('/api/component/my/video', $video);
 
         $response = $this->handleRequest($request);
 
@@ -24,7 +24,7 @@ final class VideoApi extends Api
     public function update(string $id, Update $video) : void
     {
         Assertion::uuid($id);
-        $request = $this->createPatchRequest('/api/component/video/' . $id, $video);
+        $request = $this->createPatchRequest('/api/component/my/video/' . $id, $video);
 
         $this->handleRequest($request);
     }

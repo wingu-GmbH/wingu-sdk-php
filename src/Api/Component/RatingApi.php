@@ -17,7 +17,7 @@ final class RatingApi extends Api
 {
     public function create(Create $rating) : Rating
     {
-        $request = $this->createPostRequest('/api/component/rating', $rating);
+        $request = $this->createPostRequest('/api/component/my/rating', $rating);
 
         $response = $this->handleRequest($request);
 
@@ -27,7 +27,7 @@ final class RatingApi extends Api
     public function update(string $id, Update $rating) : void
     {
         Assertion::uuid($id);
-        $request = $this->createPatchRequest('/api/component/rating/' . $id, $rating);
+        $request = $this->createPatchRequest('/api/component/my/rating/' . $id, $rating);
 
         $this->handleRequest($request);
     }
@@ -42,7 +42,7 @@ final class RatingApi extends Api
 
     public function statistic(string $id, Statistic $statistic) : RatingStatistic
     {
-        $request = $this->createGetRequest('/api/component/rating/' . $id . '/statistic', $statistic->toArray());
+        $request = $this->createGetRequest('/api/component/my/rating/' . $id . '/statistic', $statistic->toArray());
 
         $response = $this->handleRequest($request);
 

@@ -16,7 +16,7 @@ final class FilesApi extends Api
 {
     public function create(Create $files) : Files
     {
-        $request = $this->createPostRequest('/api/component/files', $files);
+        $request = $this->createPostRequest('/api/component/my/files', $files);
 
         $response = $this->handleRequest($request);
 
@@ -26,7 +26,7 @@ final class FilesApi extends Api
     public function createFile(string $id, CreateFile $file) : FilesFile
     {
         Assertion::uuid($id);
-        $request = $this->createMultipartPostRequest('/api/component/files/' . $id . '/file', $file);
+        $request = $this->createMultipartPostRequest('/api/component/my/files/' . $id . '/file', $file);
 
         $response = $this->handleRequest($request);
 
@@ -36,7 +36,7 @@ final class FilesApi extends Api
     public function updateFile(string $id, UpdateFile $file) : void
     {
         Assertion::uuid($id);
-        $request = $this->createPatchRequest('/api/component/files/file/' . $id, $file);
+        $request = $this->createPatchRequest('/api/component/my/files/file/' . $id, $file);
 
         $this->handleRequest($request);
     }

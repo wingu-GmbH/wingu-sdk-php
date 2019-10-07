@@ -12,7 +12,7 @@ final class Card extends Api
 {
     public function addCardToDeck(RequestCard $card) : ResponseCard
     {
-        $request = $this->createPostRequest('/api/card', $card);
+        $request = $this->createPostRequest('/api/card/my', $card);
 
         $response = $this->handleRequest($request);
 
@@ -22,7 +22,7 @@ final class Card extends Api
     public function deleteMyCard(string $id) : void
     {
         Assertion::uuid($id);
-        $request = $this->createDeleteRequest('/api/card/' . $id);
+        $request = $this->createDeleteRequest('/api/card/my/' . $id);
 
         $this->handleRequest($request);
     }
