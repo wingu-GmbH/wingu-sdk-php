@@ -1,7 +1,7 @@
 Change Log
 ==========
 
-## [0.3.0] - 2019-xx-xx
+## [0.3.0] - 2019-10-08
 ### Added
 - support for Text and Html component in favour of CMS component
 - more language codes available in content locale
