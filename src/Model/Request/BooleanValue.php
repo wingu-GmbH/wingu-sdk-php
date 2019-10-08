@@ -21,14 +21,13 @@ final class BooleanValue implements \JsonSerializable
 
     public function jsonSerialize() : ?string
     {
-        {
         if ($this->value === true) {
             return '1';
         }
         if ($this->value === false) {
             return '0';
         }
-            return null;
-        }
+
+        return null;
     }
 }

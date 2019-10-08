@@ -19,7 +19,7 @@ final class FormSubmitDestinationDenormalizer implements DenormalizerInterface, 
     private $serializer;
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function denormalize($data, $type, $format = null, array $context = [])
     {

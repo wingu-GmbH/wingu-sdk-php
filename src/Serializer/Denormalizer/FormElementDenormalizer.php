@@ -19,7 +19,7 @@ final class FormElementDenormalizer implements DenormalizerInterface, Serializer
     private $serializer;
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function denormalize($data, $type, $format = null, array $context = [])
     {

@@ -81,6 +81,7 @@ final class PrivateChannelsFilter implements RequestParameters
         if ($key === false) {
             return '0';
         }
+
         return null;
     }
 }

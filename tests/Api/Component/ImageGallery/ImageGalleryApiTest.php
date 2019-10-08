@@ -159,7 +159,6 @@ final class ImageGalleryApiTest extends ApiTest
         self::assertSame('DELETE', $actualRequest->getMethod());
     }
 
-
     private function getExpectedImageGallery() : ImageGallery
     {
         return new ImageGallery(

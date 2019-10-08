@@ -35,7 +35,7 @@ final class ComponentDenormalizer implements DenormalizerInterface, SerializerAw
     private $serializer;
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function denormalize($data, $type, $format = null, array $context = [])
     {
@@ -56,6 +56,7 @@ final class ComponentDenormalizer implements DenormalizerInterface, SerializerAw
                 if (isset($data['feedbackSuccessMessage'])) {
                     return $this->serializer->denormalize($data, PrivateForm::class, $format, $context);
                 }
+
                 return $this->serializer->denormalize($data, PublicForm::class, $format, $context);
             case 'html':
                 return $this->serializer->denormalize($data, Html::class, $format, $context);
@@ -77,6 +78,7 @@ final class ComponentDenormalizer implements DenormalizerInterface, SerializerAw
                 if (isset($data['feedbackSuccessMessage'])) {
                     return $this->serializer->denormalize($data, PrivateWebhook::class, $format, $context);
                 }
+
                 return $this->serializer->denormalize($data, PublicWebhook::class, $format, $context);
             default:
                 throw new UnexpectedValueException(\sprintf('Unknown component type "%s".', $data['discriminator']));

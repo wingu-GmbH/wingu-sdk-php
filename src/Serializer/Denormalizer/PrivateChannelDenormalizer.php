@@ -21,7 +21,7 @@ final class PrivateChannelDenormalizer implements DenormalizerInterface, Seriali
     private $serializer;
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function denormalize($data, $type, $format = null, array $context = [])
     {

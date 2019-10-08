@@ -12,7 +12,7 @@ use Wingu\Engine\SDK\Model\Response\Country as CountryModel;
 final class CountryDenormalizer implements DenormalizerInterface
 {
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function denormalize($data, $type, $format = null, array $context = [])
     {

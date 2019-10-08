@@ -21,6 +21,7 @@ final class CardsPosition implements Request
 
         $this->orderedCards = $orderedCards;
     }
+
     /**
      * {@inheritdoc}
      */

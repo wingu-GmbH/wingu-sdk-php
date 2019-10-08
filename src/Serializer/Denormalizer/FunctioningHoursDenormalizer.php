@@ -13,7 +13,7 @@ use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 final class FunctioningHoursDenormalizer implements DenormalizerInterface
 {
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function denormalize($data, $type, $format = null, array $context = []) : ?BusinessHours
     {
